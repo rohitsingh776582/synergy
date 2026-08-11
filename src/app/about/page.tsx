@@ -83,6 +83,7 @@ export default function AboutPage() {
           </Container>
         </section>
 
+
         {/* Mission & Vision */}
         <section className="py-20 bg-[#f4f4f7]">
           <Container>
