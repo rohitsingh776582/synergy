@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  /* All non-heading text: Inter Light (300) */
+  body,
+  p,
+  span,
+  a,
+  button,
+  div,
+  li,
+  label,
+  input,
+  textarea,
+  select,
+  small,
+  b,
+  strong {
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    font-weight: 300 !important;
+  }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  body {
+    background-color: #ffffff;
+    color: #1e293b;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* All headings: Inter Regular (400) */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    font-weight: 400 !important;
   }
 }
 
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #5b176e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #461056;
+}
+
+
+:root {
+  --font-inter: "Inter", sans-serif;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: var(--font-inter), sans-serif;
+}
+
+body {
+  background: white;
+  color: #111827;
 }
