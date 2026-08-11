@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import TopBar from "@/components/TopBar";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import Image from "next/image";
@@ -159,8 +157,6 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans selection:bg-[#5b176e] selection:text-white">
       {/* Top Header & Navigation */}
-      <TopBar />
-      <Navbar />
 
       <main className="flex-1">
         {/* HERO SECTION */}

@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
 const subscribeReducedMotion = (callback: () => void) => {
@@ -37,7 +35,7 @@ const rows = [
   {
     title: (
       <>
-        Pan India Presence and 
+        Pan India Presence and
         <br />
         strong network
       </>
@@ -52,7 +50,7 @@ const rows = [
       <>
         Pan India Presence and
         <br />
-         strong network
+        strong network
       </>
     ),
     description:
@@ -63,69 +61,14 @@ const rows = [
 ] as const;
 
 export default function WhyChooseUs() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   const isReducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotionSnapshot,
     getReducedMotionServerSnapshot
   );
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    if (isReducedMotion) return;
-
-    const section = sectionRef.current;
-    const stackRows = rowRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (!section || stackRows.length < 2) return;
-
-    const getNavOffset = () => {
-      const header = document.querySelector("header");
-      return header instanceof HTMLElement ? Math.ceil(header.getBoundingClientRect().height) : 0;
-    };
-
-    const ctx = gsap.context(() => {
-      stackRows.forEach((row, index) => {
-        // Last row scrolls normally; earlier rows stay pinned while the next covers them
-        if (index === stackRows.length - 1) return;
-
-        ScrollTrigger.create({
-          trigger: row,
-          start: () => `top ${getNavOffset()}px`,
-          endTrigger: stackRows[index + 1],
-          end: () => `top ${getNavOffset()}px`,
-          pin: true,
-          pinSpacing: false,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        });
-      });
-    }, section);
-
-    const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("load", refresh);
-
-    const images = section.querySelectorAll("img");
-    images.forEach((img) => {
-      if (!img.complete) img.addEventListener("load", refresh, { once: true });
-    });
-
-    // Recalculate after layout/fonts settle
-    const raf = requestAnimationFrame(refresh);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("load", refresh);
-      ctx.revert();
-    };
-  }, [isReducedMotion]);
-
   return (
-    <section ref={sectionRef} className="relative z-10 w-full bg-white">
+    <section className="relative z-10 w-full bg-white">
       <Container>
         {/* Main Title — stays outside the stacked panels */}
         <div className="py-10">
@@ -137,17 +80,20 @@ export default function WhyChooseUs() {
         {/* Divider */}
         <div className="h-[1px] w-full bg-[#9c84a7]" />
 
-        {/* Stacked rows */}
+        {/* Stacked rows — CSS sticky avoids GSAP pin / React DOM conflicts */}
         <div className="relative">
           {rows.map((row, index) => (
             <div
               key={index}
-              ref={(el) => {
-                rowRefs.current[index] = el;
-              }}
               data-stack-row
-              className="relative border-b border-[#9c84a7] bg-white py-12"
-              style={{ zIndex: index + 1 }}
+              className="border-b border-[#9c84a7] bg-white py-12"
+              style={{
+                position: isReducedMotion ? "relative" : "sticky",
+                top: isReducedMotion
+                  ? undefined
+                  : "var(--site-header-height, 7rem)",
+                zIndex: index + 1,
+              }}
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left Title */}

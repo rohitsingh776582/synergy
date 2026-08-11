@@ -5,152 +5,82 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
   {
-    targetVal: 500,
+    title: "Launched Projects",
+    target: 75,
     suffix: "+",
-    label: "PROJECTS\nCOMPLETED",
-    offset: false,
+    description: (
+      <>
+        Projects were
+        <br />
+        launched successful
+        <br />
+        since 2008.
+      </>
+    ),
   },
   {
-    targetVal: 98,
+    title: "Client Satisfaction",
+    target: 98,
     suffix: "%",
-    label: "CLIENT\nRETENTION\nRATE",
-    offset: true,
+    description: (
+      <>
+        Percentage of our fully
+        <br />
+        satisfied clients.
+      </>
+    ),
   },
-  {
-    targetVal: 12,
-    suffix: "+",
-    label: "YEARS\nOF\nTRUST",
-    offset: false,
-  },
-  {
-    targetVal: 28,
-    suffix: "+",
-    label: "STATES\nSERVED",
-    offset: true,
-  },
-];
+] as const;
+
+const numberClass =
+  "stat-number text-[42px] leading-none tracking-[-3px] text-black sm:text-[56px] lg:text-[64px]";
 
 export default function Stats() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const valueRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const valueRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const yearRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const totalCards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
-    if (totalCards.length === 0) return;
+    const counters = [
+      { el: valueRefs.current[0], from: 1, to: 75 },
+      { el: valueRefs.current[1], from: 1, to: 98 },
+      { el: yearRef.current, from: 2001, to: 2008 },
+    ];
 
     const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-
-      // Function to attach counter animations to a timeline (fast count-up)
-      const attachCounters = (tl: gsap.core.Timeline) => {
-        totalCards.forEach((_, idx) => {
-          const stat = stats[idx];
-          const valEl = valueRefs.current[idx];
-          if (!stat || !valEl) return;
-
-          const counterObj = { val: 0 };
-
-          tl.to(
-            counterObj,
-            {
-              val: stat.targetVal,
-              duration: 0.35,
-              ease: "power2.out",
-              onUpdate: () => {
-                if (valEl) {
-                  valEl.textContent = `${Math.floor(counterObj.val)}${stat.suffix}`;
-                }
-              },
-            },
-            0
-          );
-        });
-      };
-
-      // Desktop animation setup
-      mm.add("(min-width: 768px)", () => {
-        const row1 = totalCards.length >= 8 ? totalCards.slice(0, 4) : totalCards;
-        const row2 = totalCards.length >= 8 ? totalCards.slice(4, 8) : [];
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top 85%",
-            end: "top 25%",
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        // Row 1: animate from RIGHT (+120px) to normal position (0px)
-        if (row1.length > 0) {
-          tl.fromTo(
-            row1,
-            { x: 120, opacity: 0 },
-            { x: 0, opacity: 1, stagger: 0.12, ease: "power2.out" },
-            0
-          );
-        }
-
-        // Row 2: animate from LEFT (-120px) to normal position (0px)
-        if (row2.length > 0) {
-          tl.fromTo(
-            row2,
-            { x: -120, opacity: 0 },
-            { x: 0, opacity: 1, stagger: 0.12, ease: "power2.out" },
-            0
-          );
-        }
-
-        // Synchronize numbers counter with scroll timeline
-        attachCounters(tl);
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          end: "center 40%",
+          scrub: 0.6,
+          invalidateOnRefresh: true,
+        },
       });
 
-      // Mobile animation setup
-      mm.add("(max-width: 767px)", () => {
-        const half = Math.ceil(totalCards.length / 2);
-        const row1 = totalCards.slice(0, half);
-        const row2 = totalCards.slice(half);
+      counters.forEach(({ el, from, to }) => {
+        if (!el) return;
+        const obj = { val: from };
+        el.textContent = `${from}`;
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top 85%",
-            end: "top 35%",
-            scrub: 1,
-            invalidateOnRefresh: true,
+        tl.to(
+          obj,
+          {
+            val: to,
+            ease: "none",
+            onUpdate: () => {
+              el.textContent = `${Math.round(obj.val)}`;
+            },
           },
-        });
-
-        if (row1.length > 0) {
-          tl.fromTo(
-            row1,
-            { x: 40, opacity: 0 },
-            { x: 0, opacity: 1, stagger: 0.1, ease: "power2.out" },
-            0
-          );
-        }
-
-        if (row2.length > 0) {
-          tl.fromTo(
-            row2,
-            { x: -40, opacity: 0 },
-            { x: 0, opacity: 1, stagger: 0.1, ease: "power2.out" },
-            0
-          );
-        }
-
-        attachCounters(tl);
+          0
+        );
       });
     }, sectionRef);
 
@@ -160,37 +90,85 @@ export default function Stats() {
   return (
     <section
       ref={sectionRef}
-      className="bg-white w-full py-16 sm:py-24 overflow-hidden"
+      className="w-full bg-white py-16 sm:py-20 lg:py-24"
     >
       <Container>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 items-start pb-12 md:pb-16">
-          {stats.map((stat, idx) => (
-            <div
-              key={idx}
-              ref={(el) => {
-                cardsRef.current[idx] = el;
-              }}
-              className={`aspect-square bg-[#e6e6e8] p-6 flex flex-col justify-center items-center text-center ${
-                stat.offset ? "md:translate-y-12" : "md:translate-y-0"
-              }`}
-            >
-              <div
-                ref={(el) => {
-                  valueRefs.current[idx] = el;
-                }}
-                className="text-2xl sm:text-3xl md:text-4xl font-normal text-gray-900 tracking-wide mb-3"
-              >
-                0{stat.suffix}
+        <div className="mx-auto grid w-full max-w-[1420px] grid-cols-1 gap-10 lg:grid-cols-[32%_68%] lg:gap-0">
+          {/* Left decorative area */}
+          <div className="flex items-start gap-3 pt-2 text-[#c9c9c9] lg:pt-6">
+            <span className="text-2xl leading-none" aria-hidden>
+              ✦
+            </span>
+            <span className="text-2xl leading-none" aria-hidden>
+              ✦
+            </span>
+          </div>
+
+          {/* Right content */}
+          <div className="grid grid-cols-1 gap-y-[58px] sm:grid-cols-2 sm:gap-x-[28px]">
+            {stats.map((stat, idx) => (
+              <div key={stat.title} className="flex flex-col">
+                <h3 className="text-base font-normal text-gray-900 sm:text-lg">
+                  {stat.title}
+                </h3>
+
+                <div className="mt-4 h-[2px] w-full bg-[#c9c9c9]" />
+
+                <div className="mt-6 grid grid-cols-1 items-end gap-4 sm:grid-cols-2 sm:gap-6">
+                  <div className={`${numberClass} inline-flex items-start`}>
+                    <span
+                      ref={(el) => {
+                        valueRefs.current[idx] = el;
+                      }}
+                    >
+                      1
+                    </span>
+                    <span className="ml-0.5 mt-[0.08em] text-[0.38em] leading-none">
+                      {stat.suffix}
+                    </span>
+                  </div>
+
+                  <p className="pb-1 text-sm font-light leading-relaxed text-gray-600 sm:text-base">
+                    {stat.description}
+                  </p>
+                </div>
               </div>
-              <div className="text-[11px] sm:text-xs font-normal uppercase tracking-[0.15em] text-gray-600 leading-snug whitespace-pre-line max-w-[130px]">
-                {stat.label}
+            ))}
+
+            {/* Year of Establishment — full width */}
+            <div className="flex flex-col sm:col-span-2">
+              <h3 className="text-base font-normal text-gray-900 sm:text-lg">
+                Year of Establishment
+              </h3>
+
+              <div className="mt-4 h-[2px] w-full bg-[#c9c9c9]" />
+
+              <div className="mt-6 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+                <p className="text-sm font-light leading-relaxed text-gray-600 sm:text-base">
+                  The year the two founders
+                  <br />
+                  launched a first project:
+                  <br />
+                  &quot;Sonora&quot; website for IT
+                  <br />
+                  startup.
+                </p>
+
+                <div className="flex flex-col items-start gap-4 sm:items-end">
+                  <div className={numberClass}>
+                    <span ref={yearRef}>2001</span>
+                  </div>
+
+                  <div className="flex items-center -space-x-2">
+                    <div className="h-10 w-10 rounded-full border-2 border-white bg-[#d9d9d9]" />
+                    <div className="h-10 w-10 rounded-full border-2 border-white bg-[#bdbdbd]" />
+                  </div>
+                </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </Container>
     </section>
   );
 }
-
-

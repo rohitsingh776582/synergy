@@ -5,7 +5,10 @@ import Container from "./Container";
 
 export default function TopBar() {
   return (
-    <div className="bg-[#58166f] text-white py-2 text-xs sm:text-sm font-medium">
+    <div
+      data-topbar
+      className="fixed top-0 left-0 right-0 z-[10000] bg-[#58166f] text-white py-2 text-xs sm:text-sm font-medium"
+    >
       <Container className="flex flex-col sm:flex-row justify-between sm:justify-end items-center gap-3 relative">
         
         {/* Announcement Text in Center */}

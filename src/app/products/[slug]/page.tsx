@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import TopBar from "@/components/TopBar";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import Container from "@/components/Container";
@@ -44,8 +42,6 @@ export default async function ProductDetailPage({ params }: Props) {
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans">
-      <TopBar />
-      <Navbar />
 
       <main className="flex-1">
         {/* Breadcrumb & Hero */}

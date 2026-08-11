@@ -1,42 +1,92 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Lenis from "lenis";
-import "lenis/dist/lenis.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * Site-wide premium smooth scroll (Lenis) + ScrollTrigger sync.
+ * Uses window scrolling (no transform wrapper) so position:fixed /
+ * sticky (Navbar, TopBar, WhyChooseUs) keep working.
+ * Mobile / reduced-motion → native scroll.
+ */
+export default function SmoothScroll({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const lenisRef = useRef<Lenis | null>(null);
+  const tickRef = useRef<((time: number) => void) | null>(null);
+
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (prefersReducedMotion) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 1.2,
-    });
-
-    lenis.on("scroll", ScrollTrigger.update);
-
-    const update = (time: number) => {
-      lenis.raf(time * 1000);
+    const teardown = () => {
+      if (tickRef.current) {
+        gsap.ticker.remove(tickRef.current);
+        tickRef.current = null;
+      }
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+      }
+      document.documentElement.classList.remove("lenis", "lenis-smooth");
     };
 
-    gsap.ticker.add(update);
-    gsap.ticker.lagSmoothing(0);
+    const setup = () => {
+      teardown();
+
+      if (reducedMotion.matches || mobileQuery.matches) {
+        ScrollTrigger.refresh();
+        return;
+      }
+
+      const lenis = new Lenis({
+        // Default wrapper = window → fixed/sticky stay correct
+        lerp: 0.085,
+        smoothWheel: true,
+        syncTouch: false,
+        wheelMultiplier: 0.92,
+        touchMultiplier: 1.2,
+        autoRaf: false,
+        anchors: true,
+      });
+
+      lenisRef.current = lenis;
+      document.documentElement.classList.add("lenis", "lenis-smooth");
+
+      lenis.on("scroll", ScrollTrigger.update);
+
+      const onTick = (time: number) => {
+        lenis.raf(time * 1000);
+      };
+      tickRef.current = onTick;
+      gsap.ticker.add(onTick);
+      gsap.ticker.lagSmoothing(0);
+
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    };
+
+    setup();
+
+    const onMediaChange = () => setup();
+    reducedMotion.addEventListener("change", onMediaChange);
+    mobileQuery.addEventListener("change", onMediaChange);
+
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", onResize);
 
     return () => {
-      gsap.ticker.remove(update);
-      lenis.destroy();
+      reducedMotion.removeEventListener("change", onMediaChange);
+      mobileQuery.removeEventListener("change", onMediaChange);
+      window.removeEventListener("resize", onResize);
+      teardown();
+      gsap.ticker.lagSmoothing(500);
+      ScrollTrigger.refresh();
     };
   }, []);
 

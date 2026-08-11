@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import TopBar from "@/components/TopBar";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import SectionHeading from "@/components/SectionHeading";
@@ -15,8 +13,6 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans">
-      <TopBar />
-      <Navbar />
 
       <main className="flex-1">
         {/* Hero */}

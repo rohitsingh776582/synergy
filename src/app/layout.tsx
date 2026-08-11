@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import SmoothScroll from "@/components/SmoothScroll";
+import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
 const inter = localFont({
@@ -13,6 +14,16 @@ const inter = localFont({
     {
       path: "../../Fonts/Inter_18pt-Regular.ttf",
       weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../Fonts/Inter-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../Fonts/Inter-Black.woff2",
+      weight: "900",
       style: "normal",
     },
   ],
@@ -35,10 +46,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} ${inter.className} h-full antialiased`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-white text-gray-900 font-sans">
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <SiteHeader />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

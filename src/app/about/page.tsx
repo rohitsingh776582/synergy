@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import TopBar from "@/components/TopBar";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Stats from "@/components/Stats";
 import CTASection from "@/components/CTASection";
@@ -18,13 +16,21 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans">
-      <TopBar />
-      <Navbar />
 
       <main className="flex-1">
 
         {/* Page Hero */}
-        <section className="bg-white pt-14 pb-10 md:pt-20 md:pb-12 border-b border-purple-100/80">
+        <section className="relative overflow-hidden pt-14 pb-10 md:pt-20 md:pb-12 border-b border-purple-100/80">
+          <div className="absolute inset-0 -z-10">
+            <Image
+              src="/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[center_12%] scale-[1.22] origin-top"
+            />
+          </div>
           <Container>
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 md:gap-10">
               <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] lg:text-6xl font-semibold text-black tracking-tight leading-[1.15] max-w-2xl">

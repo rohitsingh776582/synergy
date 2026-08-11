@@ -13,13 +13,13 @@ export default function IndustryShowcase() {
         </h2>
 
         {/* Large Image Frame */}
-        <div className="mt-12 mx-auto max-w-4xl overflow-hidden">
+        <div className="mt-12 mx-auto max-w-3xl overflow-hidden">
           <div className="relative aspect-[16/9] w-full overflow-hidden">
             <Image
               src="/cold_storage.png"
               alt="Insulation for every industry showcase"
               fill
-              sizes="(max-width: 1024px) 100vw, 85vw"
+              sizes="(max-width: 768px) 100vw, 700px"
               className="object-cover"
             />
           </div>
