@@ -4,122 +4,117 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { products } from "@/data/products";
 import Container from "./Container";
 
-export default function PanelRequirements() {
-  const [activeTab, setActiveTab] =
-    useState<"PUF Panels" | "Other Panels">("PUF Panels");
+type PanelType = "roof" | "wall";
 
-  const displayPanels =
-    activeTab === "PUF Panels"
-      ? products.slice(0, 3)
-      : products.slice(2, 5);
+const panelCards: Record<
+  PanelType,
+  {
+    slug: string;
+    name: string;
+    category: string;
+    shortDescription: string;
+    image: string;
+  }[]
+> = {
+  roof: [
+    {
+      slug: "puf-roof-panels",
+      name: "Insulated PUF Roofing Panels",
+      category: "Roofing Panels",
+      shortDescription:
+        "Trapezoidal metallic roofing panels with continuous PUF foam core for leak-proof weather protection.",
+      image: "/images/products/roof_panel_hero.png",
+    },
+    {
+      slug: "puf-roof-panels",
+      name: "Industrial Roof Sandwich Panels",
+      category: "Roofing Panels",
+      shortDescription:
+        "High load-bearing roof panels engineered for warehouses, factories, and large-span commercial structures.",
+      image: "/images/products/puf_roof_panel.png",
+    },
+    {
+      slug: "puf-roof-panels",
+      name: "Weather-Tight Roof Systems",
+      category: "Roofing Panels",
+      shortDescription:
+        "Overlapping rib joint roof panels that drain rainwater efficiently while cutting HVAC energy costs.",
+      image: "/images/products/puf_roof_panel_1786340661690.png",
+    },
+  ],
+  wall: [
+    {
+      slug: "puf-wall-panels",
+      name: "PUF Wall Panels",
+      category: "Wall Panels",
+      shortDescription:
+        "High-density polyurethane insulated wall panels with tongue-and-groove joint design for optimal thermal performance.",
+      image: "/images/products/wall_panel_hero.png",
+    },
+    {
+      slug: "puf-wall-panels",
+      name: "Modular Wall Enclosures",
+      category: "Wall Panels",
+      shortDescription:
+        "Precision-engineered sandwich wall panels for industrial factories, cleanrooms, and commercial cladding.",
+      image: "/images/products/puf_panel_stack_1786340168248.png",
+    },
+    {
+      slug: "puf-wall-panels",
+      name: "Insulated Exterior Walls",
+      category: "Wall Panels",
+      shortDescription:
+        "Pre-finished wall panels with superior insulation, fast interlocking assembly, and lasting durability.",
+      image: "/images/products/cleanroom_panel.png",
+    },
+  ],
+};
+
+export default function PanelRequirements() {
+  const [activePanel, setActivePanel] = useState<PanelType>("roof");
+  const cards = panelCards[activePanel];
 
   return (
     <section className="w-full bg-white">
       <Container>
-
         {/* =========================
             HEADER
         ========================== */}
         <div className="pt-16">
-
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-
-            {/* LEFT CONTENT */}
-            <div className="max-w-[680px]">
-
-              <h2
-                className="
-                  text-3xl
-                  sm:text-4xl
-                  lg:text-5xl
-                  font-normal
-                  text-[#111827]
-                  leading-[1.15]
-                  tracking-[-0.02em]
-                "
-              >
-                One partner for every panel
-                <br />
-                requirement.
-              </h2>
-
-              <p
-                className="
-                  mt-6
-                  max-w-[650px]
-                  text-sm
-                  sm:text-base
-                  font-light
-                  text-[#64748b]
-                  leading-[1.9]
-                "
-              >
-                From cold rooms to clean rooms, warehouse roofing to modular
-                cabins, Synergy PUF delivers high-performance insulation
-                tailored to your exact specifications.
-              </p>
-
-            </div>
-
-            {/* =========================
-                CATEGORY TABS
-            ========================== */}
-            <div
+          <div className="max-w-[680px]">
+            <h2
               className="
-                flex
-                items-center
-                gap-2
-                p-1.5
-                bg-white
-                border
-                border-gray-200
-                shadow-sm
-                shrink-0
+                text-3xl
+                sm:text-4xl
+                lg:text-5xl
+                font-normal
+                text-[#111827]
+                leading-[1.15]
+                tracking-[-0.02em]
               "
             >
+              One partner for every panel
+              <br />
+              requirement.
+            </h2>
 
-              <button
-                type="button"
-                onClick={() => setActiveTab("PUF Panels")}
-                className={`
-                  px-7
-                  py-3
-                  text-sm
-                  whitespace-nowrap
-                  transition-all
-                  ${
-                    activeTab === "PUF Panels"
-                      ? "bg-[#5b176e] text-white shadow-md font-normal"
-                      : "text-gray-600 font-light hover:text-gray-900"
-                  }
-                `}
-              >
-                PUF Panels
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab("Other Panels")}
-                className={`
-                  px-7
-                  py-3
-                  text-sm
-                  whitespace-nowrap
-                  transition-all
-                  ${
-                    activeTab === "Other Panels"
-                      ? "bg-[#5b176e] text-white shadow-md font-normal"
-                      : "text-gray-600 font-light hover:text-gray-900"
-                  }
-                `}
-              >
-                Other Panels
-              </button>
-
-            </div>
+            <p
+              className="
+                mt-6
+                max-w-[650px]
+                text-sm
+                sm:text-base
+                font-light
+                text-[#64748b]
+                leading-[1.9]
+              "
+            >
+              From cold rooms to clean rooms, warehouse roofing to modular
+              cabins, Synergy PUF delivers high-performance insulation
+              tailored to your exact specifications.
+            </p>
           </div>
         </div>
 
@@ -129,9 +124,10 @@ export default function PanelRequirements() {
         <div className="mt-10 h-[1px] w-full bg-[#9c84a7]" />
 
         {/* =========================
-            PRODUCT CARDS
+            PRODUCT CARDS — always 3
         ========================== */}
         <div
+          key={activePanel}
           className="
             mt-12
             grid
@@ -141,9 +137,9 @@ export default function PanelRequirements() {
             gap-8
           "
         >
-          {displayPanels.map((item, idx) => (
+          {cards.map((item, idx) => (
             <div
-              key={`${item.slug}-${idx}`}
+              key={`${activePanel}-${idx}`}
               className="
                 group
                 overflow-hidden
@@ -159,19 +155,8 @@ export default function PanelRequirements() {
                 justify-between
               "
             >
-
-              {/* =========================
-                  IMAGE
-              ========================== */}
-              <div
-                className="
-                  relative
-                  aspect-[16/10]
-                  w-full
-                  bg-gray-100
-                  overflow-hidden
-                "
-              >
+              {/* IMAGE */}
+              <div className="relative aspect-[16/10] w-full bg-gray-100 overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -191,13 +176,9 @@ export default function PanelRequirements() {
                 />
               </div>
 
-              {/* =========================
-                  PRODUCT CONTENT
-              ========================== */}
+              {/* PRODUCT CONTENT */}
               <div className="flex flex-1 flex-col justify-between">
-
                 <div className="p-6">
-
                   <span
                     className="
                       text-xs
@@ -235,14 +216,9 @@ export default function PanelRequirements() {
                   >
                     {item.shortDescription}
                   </p>
-
                 </div>
 
-                {/* =========================
-                    EXPLORE PRODUCT
-                ========================== */}
                 <div className="px-6 pb-6">
-
                   <Link
                     href={`/products/${item.slug}`}
                     className="
@@ -257,19 +233,16 @@ export default function PanelRequirements() {
                     "
                   >
                     <span>Explore Product</span>
-
                     <ArrowRight className="w-4 h-4" />
                   </Link>
-
                 </div>
-
               </div>
             </div>
           ))}
         </div>
 
         {/* =========================
-            CTA BUTTONS
+            PANEL TYPE BUTTONS
         ========================== */}
         <div
           className="
@@ -283,44 +256,46 @@ export default function PanelRequirements() {
             gap-4
           "
         >
-
-          <Link
-            href="/quote"
-            className="
-              bg-[#5b176e]
+          <button
+            type="button"
+            onClick={() => setActivePanel("roof")}
+            className={`
               px-8
               py-3.5
               text-base
               font-light
-              text-white
-              shadow-lg
               transition-all
               duration-300
-              hover:bg-[#461056]
-            "
+              ${
+                activePanel === "roof"
+                  ? "bg-[#5b176e] text-white shadow-lg hover:bg-[#461056]"
+                  : "border border-gray-400 text-gray-800 hover:bg-gray-200"
+              }
+            `}
           >
-            Get Quote
-          </Link>
+            Roof Panels
+          </button>
 
-          <Link
-            href="/products"
-            className="
-              border
-              border-gray-400
-              px-6
+          <button
+            type="button"
+            onClick={() => setActivePanel("wall")}
+            className={`
+              px-8
               py-3.5
               text-base
               font-light
-              text-gray-800
               transition-all
-              hover:bg-gray-200
-            "
+              duration-300
+              ${
+                activePanel === "wall"
+                  ? "bg-[#5b176e] text-white shadow-lg hover:bg-[#461056]"
+                  : "border border-gray-400 text-gray-800 hover:bg-gray-200"
+              }
+            `}
           >
-            Explore All Products
-          </Link>
-
+            Wall Panels
+          </button>
         </div>
-
       </Container>
     </section>
   );

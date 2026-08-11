@@ -1,11 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, ArrowUpRight } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import Container from "./Container";
+
+const emptySubscribe = () => () => {};
+const getMountedSnapshot = () => true;
+const getMountedServerSnapshot = () => false;
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -18,45 +23,31 @@ const navItems = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(emptySubscribe, getMountedSnapshot, getMountedServerSnapshot);
   const rawPathname = usePathname();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const pathname = mounted ? rawPathname : "";
 
   return (
-    <header className="w-full bg-white border-b border-gray-200">
-      <nav className="w-full h-[97px] bg-white">
-        <Container className="flex h-full items-center justify-between">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100">
+      <nav className="w-full bg-white py-3">
+        <Container className="flex items-center justify-between">
         {/* =========================
             LOGO
         ========================== */}
         <Link
           href="/"
-          className="flex items-center gap-3 shrink-0"
+          className="relative shrink-0 inline-flex items-center"
+          aria-label="Synergy PUF Home"
         >
-          {/* 3 Horizontal Bar Emblem */}
-          <div className="flex flex-col gap-1 shrink-0">
-            <span className="block h-[5px] w-10 bg-[#5b176e] rounded-xs" />
-            <span className="block h-[5px] w-10 bg-[#888888] rounded-xs" />
-            <span className="block h-[5px] w-10 bg-[#5b176e] rounded-xs" />
-          </div>
-
-          {/* Logo Text */}
-          <div className="leading-none">
-            <div className="text-xl font-bold tracking-wider text-[#5b176e]">
-              SYNERGY
-            </div>
-
-            <div className="mt-1 flex items-center justify-between gap-1 text-[10px] font-semibold text-gray-500 tracking-[3px]">
-              <span className="h-[1px] w-3 bg-[#5b176e]" />
-              <span>PUF</span>
-              <span className="h-[1px] w-3 bg-[#5b176e]" />
-            </div>
-          </div>
+          <Image
+            src="/images/logo/puf-logo.png"
+            alt="Synergy PUF"
+            width={140}
+            height={40}
+            priority
+            className="h-7 sm:h-8 w-auto object-contain"
+          />
         </Link>
 
         {/* =========================
@@ -70,7 +61,9 @@ export default function Navbar() {
     h-[60px]
     bg-white
     rounded-[4px]
-    p-[5px]
+    py-[5px]
+    pl-[5px]
+    pr-0
   "
         >
           {/* Navigation Links */}
@@ -124,12 +117,11 @@ export default function Navbar() {
             href="/quote"
             className="
       ml-[8px]
-      h-[54px]
-      min-w-[269px]
-      px-[27px]
+      h-[44px]
+      px-5
       flex
       items-center
-      justify-between
+      gap-2
       rounded-[5px]
       bg-[#3E0F4D]
       text-white
@@ -143,7 +135,7 @@ export default function Navbar() {
             <span>Start your quote</span>
 
             <ArrowUpRight
-              size={27}
+              size={20}
               strokeWidth={1.8}
             />
           </Link>
