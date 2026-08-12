@@ -4,7 +4,7 @@ import Container from "./Container";
 
 export default function BuildProjectCTA() {
   return (
-    <section className="w-full border-t border-gray-100 bg-white py-14 md:py-16">
+    <section className="w-full bg-white py-12 md:py-14">
       <Container>
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-[#f3e8f7] px-4 py-1.5 text-xs font-medium text-[#5b176e] sm:text-sm">
@@ -17,12 +17,12 @@ export default function BuildProjectCTA() {
             <span className="text-[#5b176e]">Synergy PUF.</span>
           </h2>
 
-          <p className="mt-4 max-w-xl text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+          <p className="mt-3 max-w-xl text-sm font-light leading-relaxed text-gray-500 sm:text-base">
             High-performance insulated panel solutions delivered on time,
             every time — across India.
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/quote"
               className="inline-flex items-center gap-2 bg-[#5b176e] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#461056]"

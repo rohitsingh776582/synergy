@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import Footer from "@/components/Footer";
 import BuildProjectCTA from "@/components/BuildProjectCTA";
 import AchievementCards from "@/components/AchievementCards";
 import FeatureHighlightCards from "@/components/FeatureHighlightCards";
+import AboutHero from "@/components/AboutHero";
 import Container from "@/components/Container";
 import { Target, Eye, Award } from "lucide-react";
 
@@ -17,40 +17,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans">
+      
       <main className="flex-1">
-        {/* Hero */}
-        <section className="relative overflow-hidden border-b border-purple-100/80 pt-12 pb-10 md:pt-16 md:pb-12">
-          <div className="absolute inset-0 -z-10">
-            <Image
-              src="/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg"
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-[center_12%] scale-[1.22] origin-top"
-            />
-          </div>
-          <Container>
-            <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between md:gap-10">
-              <h1 className="max-w-2xl text-4xl font-semibold leading-[1.12] tracking-tight text-black sm:text-5xl md:text-[3.25rem]">
-                India&apos;s most trusted
-                <br />
-                panel manufacturer.
-              </h1>
-              <Link
-                href="/projects"
-                className="shrink-0 self-start bg-[#5b176e] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#461056]"
-              >
-                View Projects
-              </Link>
-            </div>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-black/90 sm:text-lg md:text-xl">
-              From PUF and PIR to Rockwool panels, we don&apos;t just
-              manufacture insulated panels — we engineer building envelopes that
-              perform for decades.
-            </p>
-          </Container>
-        </section>
+        <AboutHero />
 
         <AchievementCards />
 
@@ -154,8 +123,8 @@ export default function AboutPage() {
 
         <BuildProjectCTA />
       </main>
-      <FeatureHighlightCards />
 
+      <FeatureHighlightCards />
       <Footer />
     </div>
   );

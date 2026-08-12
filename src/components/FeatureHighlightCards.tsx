@@ -21,22 +21,22 @@ const features = [
 
 export default function FeatureHighlightCards() {
   return (
-    <section className="w-full bg-white py-12 md:py-14">
+    <section className="w-full border-t border-gray-200/80 bg-[#f7f5f8] py-8 md:py-10">
       <Container>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
           {features.map(({ icon: Icon, title, subtitle }) => (
             <div
               key={title}
-              className="flex items-center gap-4 bg-[#f3eaf7] px-5 py-4"
+              className="flex items-center gap-3.5 bg-[#efe6f4] px-4 py-3.5 md:px-5 md:py-4"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-white text-[#5b176e]">
                 <Icon className="h-5 w-5 stroke-[1.5]" aria-hidden />
               </div>
               <div className="min-w-0">
-                <h3 className="text-sm font-semibold text-[#2d1b3d] sm:text-[15px]">
+                <h3 className="text-sm font-semibold text-[#2d1b3d]">
                   {title}
                 </h3>
-                <p className="mt-0.5 text-xs font-light text-[#7a6b88] sm:text-sm">
+                <p className="mt-0.5 text-xs font-light leading-snug text-[#7a6b88]">
                   {subtitle}
                 </p>
               </div>

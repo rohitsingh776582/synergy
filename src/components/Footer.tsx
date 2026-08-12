@@ -7,7 +7,7 @@ import Container from "./Container";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#e6e6e8] pt-16 text-gray-700 font-sans">
+    <footer className="bg-[#e6e6e8] pt-12 text-gray-700 font-sans md:pt-14">
       <Container>
         {/* Upper Footer Grid (4 Columns) */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-16">
