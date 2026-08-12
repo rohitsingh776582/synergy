@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import TrustedBy from "@/components/TrustedBy";
 import Stats from "@/components/Stats";
 import PanelRequirements from "@/components/PanelRequirements";
 import IndustryShowcase from "@/components/IndustryShowcase";
 import Testimonials from "@/components/Testimonials";
-import CTASection from "@/components/CTASection";
+import BuildNextProject from "@/components/BuildNextProject";
 import Footer from "@/components/Footer";
 
 const HERO_BG = "/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg";
@@ -28,10 +29,10 @@ export default function Home() {
           />
         </div>
 
-        <div className="flex min-h-[90dvh] flex-col">
+        <div className="flex min-h-[88dvh] flex-col">
           <div
             id="home-hero"
-            className="flex flex-1 flex-col justify-center py-10 sm:py-14"
+            className="flex flex-1 flex-col justify-center py-9 sm:py-12"
           >
             <Hero />
           </div>
@@ -39,11 +40,12 @@ export default function Home() {
 
         <main className="relative z-10 -mt-4 bg-white sm:-mt-6">
           <WhyChooseUs />
+          {/* <TrustedBy /> */}
           <Stats />
           <PanelRequirements />
           <IndustryShowcase />
           <Testimonials />
-          <CTASection />
+          <BuildNextProject />
         </main>
 
         <Footer />

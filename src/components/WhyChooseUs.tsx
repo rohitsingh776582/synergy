@@ -71,7 +71,7 @@ export default function WhyChooseUs() {
     <section className="relative z-10 w-full bg-white">
       <Container>
         {/* Main Title — stays outside the stacked panels */}
-        <div className="py-10">
+        <div className="pb-10 pt-20 sm:pb-10 sm:pt-24">
           <h2 className="text-3xl sm:text-4xl font-normal text-gray-900">
             Why Choose Us?
           </h2>
@@ -86,7 +86,9 @@ export default function WhyChooseUs() {
             <div
               key={index}
               data-stack-row
-              className="border-b border-[#9c84a7] bg-white py-12"
+              className={`bg-white py-12 ${
+                index === rows.length - 1 ? "" : "border-b border-[#9c84a7]"
+              }`}
               style={{
                 position: isReducedMotion ? "relative" : "sticky",
                 top: isReducedMotion

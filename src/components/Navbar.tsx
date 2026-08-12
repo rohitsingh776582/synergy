@@ -95,10 +95,8 @@ export default function Navbar() {
       <header
         ref={navRef}
         data-site-header
-        className={`fixed left-0 right-0 z-[9999] w-full border-b transition-[background-color,border-color,box-shadow] duration-300 ${
-          light
-            ? "bg-white border-gray-100 shadow-sm"
-            : "bg-transparent border-transparent shadow-none"
+        className={`fixed left-0 right-0 z-[9999] w-full transition-[background-color] duration-300 ${
+          light ? "bg-white" : "bg-transparent"
         }`}
         style={{ top: topOffset }}
       >

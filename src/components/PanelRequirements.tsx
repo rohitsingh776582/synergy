@@ -146,8 +146,6 @@ export default function PanelRequirements() {
                 bg-white
                 border
                 border-gray-200
-                shadow-md
-                hover:shadow-xl
                 transition-all
                 duration-300
                 flex
@@ -268,7 +266,7 @@ export default function PanelRequirements() {
               duration-300
               ${
                 activePanel === "roof"
-                  ? "bg-[#5b176e] text-white shadow-lg hover:bg-[#461056]"
+                  ? "bg-[#5b176e] text-white hover:bg-[#461056]"
                   : "border border-gray-400 text-gray-800 hover:bg-gray-200"
               }
             `}
@@ -288,7 +286,7 @@ export default function PanelRequirements() {
               duration-300
               ${
                 activePanel === "wall"
-                  ? "bg-[#5b176e] text-white shadow-lg hover:bg-[#461056]"
+                  ? "bg-[#5b176e] text-white hover:bg-[#461056]"
                   : "border border-gray-400 text-gray-800 hover:bg-gray-200"
               }
             `}
