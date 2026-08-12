@@ -72,7 +72,7 @@ export default function WhyChooseUs() {
       <Container>
         {/* Main Title — stays outside the stacked panels */}
         <div className="pb-10 pt-20 sm:pb-10 sm:pt-24">
-          <h2 className="text-3xl sm:text-4xl font-normal text-gray-900">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 leading-[1.15] tracking-[-0.02em]">
             Why Choose Us?
           </h2>
         </div>

@@ -37,7 +37,8 @@ export default function Navbar() {
     const update = () => {
       const topbar = document.querySelector<HTMLElement>("[data-topbar]");
       const topbarH = topbar ? topbar.offsetHeight : 0;
-      const navH = navRef.current ? navRef.current.offsetHeight : 72;
+      // Keep navbar height stable across pages (logo must not stretch the bar)
+      const navH = 72;
       setTopOffset(topbarH);
       setHeaderHeight(topbarH + navH);
       document.documentElement.style.setProperty(
@@ -51,7 +52,6 @@ export default function Navbar() {
     const ro = new ResizeObserver(update);
     const topbar = document.querySelector("[data-topbar]");
     if (topbar) ro.observe(topbar);
-    if (navRef.current) ro.observe(navRef.current);
 
     return () => {
       window.removeEventListener("resize", update);
@@ -95,25 +95,29 @@ export default function Navbar() {
       <header
         ref={navRef}
         data-site-header
-        className={`fixed left-0 right-0 z-[9999] w-full transition-[background-color] duration-300 ${
+        className={`fixed left-0 right-0 z-[9999] h-[72px] w-full overflow-hidden transition-[background-color] duration-300 ${
           light ? "bg-white" : "bg-transparent"
         }`}
         style={{ top: topOffset }}
       >
-        <nav className="w-full bg-transparent py-3">
-          <Container className="flex items-center justify-between">
+        <nav className="flex h-full w-full items-center bg-transparent">
+          <Container className="flex h-full items-center justify-between">
             <Link
               href="/"
-              className="relative shrink-0 inline-flex items-center"
+              className="relative z-10 flex h-10 w-[148px] shrink-0 items-center overflow-hidden sm:h-11 sm:w-[168px]"
               aria-label="Synergy PUF Home"
             >
               <Image
-                src="/images/logo/puf-logo.png"
+                src={
+                  light
+                    ? "/images/logo/puf-logo.png"
+                    : "/images/logo/synergy%20white%20logo.png"
+                }
                 alt="Synergy PUF"
-                width={140}
-                height={40}
+                width={320}
+                height={96}
                 priority
-                className="h-7 sm:h-8 w-auto object-contain"
+                className="h-full w-full object-contain object-left"
               />
             </Link>
 

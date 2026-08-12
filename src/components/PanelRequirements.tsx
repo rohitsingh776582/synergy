@@ -119,17 +119,12 @@ export default function PanelRequirements() {
         </div>
 
         {/* =========================
-            DIVIDER
-        ========================== */}
-        <div className="mt-10 h-[1px] w-full bg-[#9c84a7]" />
-
-        {/* =========================
             PRODUCT CARDS — always 3
         ========================== */}
         <div
           key={activePanel}
           className="
-            mt-12
+            mt-10
             grid
             grid-cols-1
             md:grid-cols-2

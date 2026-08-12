@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const stats = [
   {
     title: "Launched Projects",
-    target: 75,
+    target: 28,
     suffix: "+",
     description: (
       <>
@@ -43,32 +43,67 @@ export default function Stats() {
   const sectionRef = useRef<HTMLElement>(null);
   const valueRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const yearRef = useRef<HTMLSpanElement | null>(null);
+  const numberWrapRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const yearWrapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
     const counters = [
-      { el: valueRefs.current[0], from: 1, to: 75 },
-      { el: valueRefs.current[1], from: 1, to: 98 },
-      { el: yearRef.current, from: 2001, to: 2008 },
+      {
+        el: valueRefs.current[0],
+        wrap: numberWrapRefs.current[0],
+        from: 1,
+        to: stats[0].target,
+      },
+      {
+        el: valueRefs.current[1],
+        wrap: numberWrapRefs.current[1],
+        from: 1,
+        to: stats[1].target,
+      },
+      {
+        el: yearRef.current,
+        wrap: yearWrapRef.current,
+        from: 2001,
+        to: 2008,
+      },
     ];
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "center 40%",
-          scrub: 0.6,
-          invalidateOnRefresh: true,
-        },
-      });
+      counters.forEach(({ el, wrap, from, to }) => {
+        if (!el || !wrap) return;
 
-      counters.forEach(({ el, from, to }) => {
-        if (!el) return;
         const obj = { val: from };
         el.textContent = `${from}`;
+
+        gsap.set(wrap, {
+          yPercent: -110,
+          opacity: 0,
+          transformOrigin: "top center",
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: wrap.parentElement ?? wrap,
+            start: "top 90%",
+            end: "top 45%",
+            scrub: 0.85,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Border se nikal kar niche fit
+        tl.to(
+          wrap,
+          {
+            yPercent: 0,
+            opacity: 1,
+            ease: "none",
+          },
+          0
+        );
 
         tl.to(
           obj,
@@ -95,13 +130,12 @@ export default function Stats() {
       <Container>
         <div className="mx-auto grid w-full max-w-[1420px] grid-cols-1 gap-10 lg:grid-cols-[32%_68%] lg:gap-0">
           {/* Left decorative area */}
-          <div className="flex items-start gap-3 pt-2 text-[#c9c9c9] lg:pt-6">
-            <span className="text-2xl leading-none" aria-hidden>
-              ✦
-            </span>
-            <span className="text-2xl leading-none" aria-hidden>
-              ✦
-            </span>
+          <div
+            className="flex items-start gap-3 pt-2 text-[#c9c9c9] opacity-0 lg:pt-6"
+            aria-hidden
+          >
+            <span className="text-2xl leading-none">✦</span>
+            <span className="text-2xl leading-none">✦</span>
           </div>
 
           {/* Right content */}
@@ -114,21 +148,28 @@ export default function Stats() {
 
                 <div className="mt-4 h-[2px] w-full bg-[#c9c9c9]" />
 
-                <div className="mt-6 grid grid-cols-1 items-end gap-4 sm:grid-cols-2 sm:gap-6">
-                  <div className={`${numberClass} inline-flex items-start`}>
-                    <span
+                <div className="grid grid-cols-1 items-end gap-4 sm:grid-cols-2 sm:gap-6">
+                  <div className="overflow-hidden">
+                    <div
                       ref={(el) => {
-                        valueRefs.current[idx] = el;
+                        numberWrapRefs.current[idx] = el;
                       }}
+                      className={`${numberClass} mt-6 inline-flex origin-top items-start will-change-transform`}
                     >
-                      1
-                    </span>
-                    <span className="ml-0.5 mt-[0.08em] text-[0.38em] leading-none">
-                      {stat.suffix}
-                    </span>
+                      <span
+                        ref={(el) => {
+                          valueRefs.current[idx] = el;
+                        }}
+                      >
+                        1
+                      </span>
+                      <span className="ml-0.5 mt-[0.08em] text-[0.38em] leading-none">
+                        {stat.suffix}
+                      </span>
+                    </div>
                   </div>
 
-                  <p className="pb-1 text-sm font-light leading-relaxed text-gray-600 sm:text-base">
+                  <p className="pb-1 pt-6 text-sm font-light leading-relaxed text-gray-600 sm:text-base">
                     {stat.description}
                   </p>
                 </div>
@@ -143,8 +184,8 @@ export default function Stats() {
 
               <div className="mt-4 h-[2px] w-full bg-[#c9c9c9]" />
 
-              <div className="mt-6 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-                <p className="text-sm font-light leading-relaxed text-gray-600 sm:text-base">
+              <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+                <p className="pt-6 text-sm font-light leading-relaxed text-gray-600 sm:text-base">
                   The year the two founders
                   <br />
                   launched a first project:
@@ -155,8 +196,13 @@ export default function Stats() {
                 </p>
 
                 <div className="flex flex-col items-start gap-4 sm:items-end">
-                  <div className={numberClass}>
-                    <span ref={yearRef}>2001</span>
+                  <div className="overflow-hidden">
+                    <div
+                      ref={yearWrapRef}
+                      className={`${numberClass} mt-6 origin-top will-change-transform`}
+                    >
+                      <span ref={yearRef}>2001</span>
+                    </div>
                   </div>
 
                   <div className="flex items-center -space-x-2">

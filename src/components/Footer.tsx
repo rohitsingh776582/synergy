@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Container from "./Container";
@@ -152,22 +153,14 @@ export default function Footer() {
         <div className="py-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-gray-300/80">
           
           {/* Logo Mark */}
-          <div className="md:col-span-4 flex items-center gap-3">
-            <div className="flex flex-col gap-[5px]">
-              <span className="block h-[6px] w-[50px] bg-[#5b176e] rounded-sm" />
-              <span className="block h-[6px] w-[50px] bg-gray-400 rounded-sm" />
-              <span className="block h-[6px] w-[50px] bg-[#5b176e] rounded-sm" />
-            </div>
-            <div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#5b176e] tracking-wider">
-                SYNERGY
-              </div>
-              <div className="mt-1 flex items-center gap-1.5 text-xs font-bold text-gray-500 tracking-[0.25em]">
-                <span className="h-[1.5px] w-6 bg-[#5b176e]" />
-                <span>PUF</span>
-                <span className="h-[1.5px] w-6 bg-[#5b176e]" />
-              </div>
-            </div>
+          <div className="md:col-span-4 flex items-center">
+            <Image
+              src="/images/logo/PUF-Logo%201.png"
+              alt="Synergy PUF"
+              width={220}
+              height={66}
+              className="h-12 w-auto object-contain object-left sm:h-14"
+            />
           </div>
 
           {/* Corporate Office */}
