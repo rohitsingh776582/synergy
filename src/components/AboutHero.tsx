@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useSyncExternalStore } from "react";
+import { useLayoutEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
@@ -20,6 +20,22 @@ const getReducedMotionSnapshot = () => {
 
 const getReducedMotionServerSnapshot = () => false;
 
+function RevealLine({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <span className={`block overflow-hidden ${className}`}>
+      <span data-reveal-line className="block will-change-transform">
+        {children}
+      </span>
+    </span>
+  );
+}
+
 export default function AboutHero() {
   const sectionRef = useRef<HTMLElement>(null);
   const isReducedMotion = useSyncExternalStore(
@@ -32,27 +48,29 @@ export default function AboutHero() {
     const section = sectionRef.current;
     if (!section) return;
 
-    const items = section.querySelectorAll<HTMLElement>("[data-about-hero]");
-    if (!items.length) return;
+    const lines = gsap.utils.toArray<HTMLElement>(
+      section.querySelectorAll("[data-reveal-line]")
+    );
+    if (!lines.length) return;
 
-    if (isReducedMotion) {
-      gsap.set(items, { y: 0, opacity: 1 });
-      return;
-    }
+    if (isReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        items,
-        { y: 64, opacity: 0 },
+      // Video-style masked rise: each line comes from below the clip edge
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.fromTo(
+        lines,
+        { yPercent: 120, opacity: 0 },
         {
-          y: 0,
+          yPercent: 0,
           opacity: 1,
-          duration: 0.9,
+          duration: 1.15,
           stagger: 0.14,
-          ease: "power3.out",
-        }
+        },
+        0.15
       );
-    }, sectionRef);
+    }, section);
 
     return () => ctx.revert();
   }, [isReducedMotion]);
@@ -72,32 +90,39 @@ export default function AboutHero() {
           className="object-cover object-[center_12%] scale-[1.22] origin-top"
         />
       </div>
+
       <Container>
         <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between md:gap-10">
-          <h1
-            data-about-hero
-            className="max-w-2xl text-4xl font-semibold leading-[1.12] tracking-tight text-black opacity-0 sm:text-5xl md:text-[3.25rem]"
-          >
-            India&apos;s most trusted
-            <br />
-            panel manufacturer.
+          <h1 className="max-w-2xl text-4xl font-semibold leading-[1.15] tracking-tight text-black sm:text-5xl md:text-[3.25rem]">
+            <RevealLine className="pb-[0.06em]">
+              India&apos;s most trusted
+            </RevealLine>
+            <RevealLine className="pb-[0.06em]">
+              panel <span className="font-bold">manufacturer.</span>
+            </RevealLine>
           </h1>
-          <Link
-            data-about-hero
-            href="/projects"
-            className="shrink-0 self-start bg-[#5b176e] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white opacity-0 transition-colors hover:bg-[#461056]"
-          >
-            View Projects
-          </Link>
+
+          <div className="shrink-0 self-start">
+            <RevealLine>
+              <Link
+                href="/projects"
+                className="inline-block bg-[#5b176e] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#461056]"
+              >
+                View Projects
+              </Link>
+            </RevealLine>
+          </div>
         </div>
-        <p
-          data-about-hero
-          className="mt-6 max-w-2xl text-base leading-relaxed text-black/90 opacity-0 sm:text-lg md:text-xl"
-        >
-          From PUF and PIR to Rockwool panels, we don&apos;t just manufacture
-          insulated panels — we engineer building envelopes that perform for
-          decades.
-        </p>
+
+        <div className="mt-6 max-w-2xl">
+          <RevealLine>
+            <p className="text-base leading-relaxed text-black/90 sm:text-lg md:text-xl">
+              From PUF and PIR to Rockwool panels, we don&apos;t just manufacture
+              insulated panels — we engineer building envelopes that perform for
+              decades.
+            </p>
+          </RevealLine>
+        </div>
       </Container>
     </section>
   );
