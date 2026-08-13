@@ -18,7 +18,7 @@ export default function ContactPage() {
         {/* Hero */}
         <section className="bg-gradient-to-b from-purple-50/60 via-white to-gray-50 py-16 text-center border-b border-gray-100">
           <Container>
-            <span className="rounded-full bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
+            <span className="rounded-none bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
               Connect With Us
             </span>
             <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
@@ -40,8 +40,8 @@ export default function ContactPage() {
               <div className="lg:col-span-5 space-y-8">
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900">Head Office</h3>
-                  <div className="mt-4 flex items-start gap-4 p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                    <div className="p-3 rounded-xl bg-purple-100 text-[#5b176e] shrink-0">
+                  <div className="mt-4 flex items-start gap-4 p-5 rounded-none bg-white border border-gray-200">
+                    <div className="p-3 rounded-none bg-purple-100 text-[#5b176e] shrink-0">
                       <Building2 className="w-6 h-6" />
                     </div>
                     <div className="text-sm">
@@ -53,8 +53,8 @@ export default function ContactPage() {
 
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900">Factory & Works</h3>
-                  <div className="mt-4 flex items-start gap-4 p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                    <div className="p-3 rounded-xl bg-purple-100 text-[#5b176e] shrink-0">
+                  <div className="mt-4 flex items-start gap-4 p-5 rounded-none bg-white border border-gray-200">
+                    <div className="p-3 rounded-none bg-purple-100 text-[#5b176e] shrink-0">
                       <Factory className="w-6 h-6" />
                     </div>
                     <div className="text-sm">
@@ -65,7 +65,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Direct Contact */}
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-[#5b176e] to-[#461056] text-white space-y-4 shadow-xl">
+                <div className="p-6 rounded-none bg-gradient-to-br from-[#5b176e] to-[#461056] text-white space-y-4">
                   <h4 className="text-lg font-bold">Direct Channels</h4>
                   <div className="flex items-center gap-3 text-sm">
                     <Phone className="w-5 h-5 text-purple-300" />
@@ -82,7 +82,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Google Maps Placeholder */}
-                <div className="rounded-2xl bg-gray-200 h-48 w-full flex items-center justify-center text-gray-500 font-semibold text-sm border border-gray-300">
+                <div className="rounded-none bg-gray-200 h-48 w-full flex items-center justify-center text-gray-500 font-semibold text-sm border border-gray-300">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-[#5b176e]" />
                     <span>Interactive Map Location (IMT Manesar Works)</span>
@@ -92,7 +92,7 @@ export default function ContactPage() {
 
               {/* Right Column: Contact Form */}
               <div className="lg:col-span-7">
-                <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 shadow-xl">
+                <div className="bg-white p-8 md:p-10 rounded-none border border-gray-200">
                   <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Direct Message</h3>
                   <ContactForm />
                 </div>

@@ -23,7 +23,7 @@ export default function Button({
   className = "",
 }: ButtonProps) {
   const baseClasses =
-    "inline-flex items-center justify-center font-bold rounded-full transition-all duration-300 shadow-sm active:scale-95";
+    "inline-flex items-center justify-center font-bold rounded-none transition-all duration-300 shadow-sm active:scale-95";
 
   const sizeClasses = {
     sm: "px-4 py-2 text-xs",

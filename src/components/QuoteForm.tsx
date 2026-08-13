@@ -23,8 +23,8 @@ export default function QuoteForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-3xl bg-purple-50 p-8 md:p-12 text-center border border-purple-200">
-        <div className="mx-auto w-14 h-14 rounded-full bg-[#5b176e] text-white flex items-center justify-center mb-4">
+      <div className="rounded-none bg-purple-50 p-8 md:p-12 text-center border border-purple-200">
+        <div className="mx-auto w-14 h-14 rounded-none bg-[#5b176e] text-white flex items-center justify-center mb-4">
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <h3 className="text-2xl font-bold text-gray-900">Quote Request Submitted!</h3>
@@ -33,7 +33,7 @@ export default function QuoteForm() {
         </p>
         <button
           onClick={() => setSubmitted(false)}
-          className="mt-6 rounded-full bg-[#5b176e] px-6 py-2.5 text-sm font-bold text-white hover:bg-[#461056] transition-colors"
+          className="mt-6 rounded-none bg-[#5b176e] px-6 py-2.5 text-sm font-bold text-white hover:bg-[#461056] transition-colors"
         >
           Submit Another Request
         </button>
@@ -42,9 +42,9 @@ export default function QuoteForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 md:p-10 rounded-3xl border border-gray-200 shadow-xl">
+    <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 md:p-10 rounded-none border border-gray-200">
       <div className="flex items-center gap-3 pb-6 border-b border-gray-100">
-        <div className="p-2.5 rounded-xl bg-purple-100/70 text-[#5b176e]">
+        <div className="p-2.5 rounded-none bg-purple-100/70 text-[#5b176e]">
           <FileText className="w-6 h-6" />
         </div>
         <div>
@@ -64,7 +64,7 @@ export default function QuoteForm() {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="Rajesh Kumar"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
+            className="w-full rounded-none border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
           />
         </div>
         <div>
@@ -77,7 +77,7 @@ export default function QuoteForm() {
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
             placeholder="Apex Cold Chain Pvt Ltd"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
+            className="w-full rounded-none border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
           />
         </div>
       </div>
@@ -93,7 +93,7 @@ export default function QuoteForm() {
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+91 98765 43210"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
+            className="w-full rounded-none border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
           />
         </div>
         <div>
@@ -106,7 +106,7 @@ export default function QuoteForm() {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="rajesh@apexcold.com"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
+            className="w-full rounded-none border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
           />
         </div>
       </div>
@@ -119,7 +119,7 @@ export default function QuoteForm() {
           <select
             value={formData.product}
             onChange={(e) => setFormData({ ...formData, product: e.target.value })}
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
+            className="w-full rounded-none border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
           >
             <option value="PUF Wall Panels">PUF Wall Panels</option>
             <option value="Insulated PUF Roofing Panels">Insulated PUF Roofing Panels</option>
@@ -138,7 +138,7 @@ export default function QuoteForm() {
             value={formData.quantity}
             onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
             placeholder="e.g. 25,000 Sq. Ft. / 100 Panels"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
+            className="w-full rounded-none border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
           />
         </div>
       </div>
@@ -153,7 +153,7 @@ export default function QuoteForm() {
           value={formData.location}
           onChange={(e) => setFormData({ ...formData, location: e.target.value })}
           placeholder="e.g. Noida, Uttar Pradesh"
-          className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
+          className="w-full rounded-none border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
         />
       </div>
 
@@ -166,13 +166,13 @@ export default function QuoteForm() {
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder="Specify thickness (e.g., 100mm), temperature requirement (-20°C), delivery timeline..."
-          className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
+          className="w-full rounded-none border border-gray-300 px-4 py-3 text-sm focus:border-[#5b176e] focus:outline-none focus:ring-2 focus:ring-purple-100"
         />
       </div>
 
       <button
         type="submit"
-        className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#5b176e] py-4 text-base font-bold text-white hover:bg-[#461056] transition-colors shadow-lg shadow-purple-900/20"
+        className="w-full inline-flex items-center justify-center gap-2 rounded-none bg-[#5b176e] py-4 text-base font-bold text-white hover:bg-[#461056] transition-colors"
       >
         <span>Request Quote Now</span>
         <Send className="w-4 h-4" />
