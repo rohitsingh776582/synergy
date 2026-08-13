@@ -57,7 +57,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-6">
-                <span className="rounded-full bg-purple-100 px-3.5 py-1 text-xs font-bold text-[#5b176e]">
+                <span className="bg-purple-100 px-3.5 py-1 text-xs font-bold text-[#5b176e]">
                   {product.category}
                 </span>
                 <h1 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
@@ -70,14 +70,14 @@ export default async function ProductDetailPage({ params }: Props) {
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link
                     href="/quote"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white shadow-lg hover:bg-[#461056] transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white shadow-lg hover:bg-[#461056] transition-all hover:scale-105"
                   >
                     <span>Get Instant Quote</span>
                     <ArrowRight className="w-5 h-5" />
                   </Link>
                   <a
                     href="tel:+919876543210"
-                    className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-6 py-3.5 text-base font-semibold text-gray-800 hover:bg-gray-100 transition-colors"
+                    className="inline-flex items-center gap-2 border border-gray-300 px-6 py-3.5 text-base font-semibold text-gray-800 hover:bg-gray-100 transition-colors"
                   >
                     <span>Speak to Product Specialist</span>
                   </a>
@@ -85,7 +85,7 @@ export default async function ProductDetailPage({ params }: Props) {
               </div>
 
               <div className="lg:col-span-6">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-gray-900 shadow-2xl border border-gray-200">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-900 shadow-2xl border border-gray-200">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -106,9 +106,9 @@ export default async function ProductDetailPage({ params }: Props) {
               
               {/* Left Column: Tech Specs */}
               <div className="lg:col-span-6">
-                <div className="rounded-3xl bg-[#f8f8fa] p-8 border border-gray-200 shadow-sm">
+                <div className="bg-[#f8f8fa] p-8 border border-gray-200 shadow-sm">
                   <div className="flex items-center gap-3 pb-6 border-b border-gray-200">
-                    <div className="p-2.5 rounded-xl bg-purple-100 text-[#5b176e]">
+                    <div className="p-2.5 bg-purple-100 text-[#5b176e]">
                       <FileText className="w-6 h-6" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900">Technical Specifications</h3>
@@ -150,7 +150,7 @@ export default async function ProductDetailPage({ params }: Props) {
                   <div className="space-y-3">
                     {product.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start gap-3">
-                        <div className="p-1 rounded-full bg-purple-100 text-[#5b176e] mt-0.5">
+                        <div className="p-1 bg-purple-100 text-[#5b176e] mt-0.5">
                           <Check className="w-4 h-4" />
                         </div>
                         <span className="text-gray-700 text-sm md:text-base font-medium">{feature}</span>
@@ -165,7 +165,7 @@ export default async function ProductDetailPage({ params }: Props) {
                     {product.applications.map((app, idx) => (
                       <span
                         key={idx}
-                        className="rounded-full bg-gray-100 border border-gray-200 px-4 py-2 text-xs font-bold text-gray-800"
+                        className="bg-gray-100 border border-gray-200 px-4 py-2 text-xs font-bold text-gray-800"
                       >
                         {app}
                       </span>

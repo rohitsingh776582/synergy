@@ -144,7 +144,7 @@ export default function BuildNextProject() {
               {badges.map((badge) => (
                 <span
                   key={badge}
-                  className="rounded-full border border-gray-300 px-3.5 py-1.5 text-xs sm:text-sm font-light text-gray-800"
+                  className=" border border-gray-300 px-3.5 py-1.5 text-xs sm:text-sm font-light text-gray-800"
                 >
                   {badge}
                 </span>

@@ -33,8 +33,8 @@ function ProjectShowcase({ project }: { project: Project }) {
   return (
     <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2 lg:gap-10">
       <div>
-        {/* Main Showcase Image with Ultra-Smooth & Slow Crossfade */}
-        <div className="relative aspect-[16/9.5] overflow-hidden rounded-2xl bg-gray-200 shadow-md">
+        {/* Main Showcase Image */}
+        <div className="relative aspect-[16/9.5] overflow-hidden bg-gray-200 shadow-md">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeImage}
@@ -55,17 +55,17 @@ function ProjectShowcase({ project }: { project: Project }) {
             </motion.div>
           </AnimatePresence>
 
-          <span className="absolute left-4 top-4 z-10 rounded-full bg-black/55 px-3 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+          <span className="absolute left-4 top-4 z-10 bg-black/55 px-3 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
             {project.completionYear} • {project.location}
           </span>
 
           {/* Auto-Slide Progress Dots */}
           {gallery.length > 1 && (
-            <div className="absolute right-4 bottom-4 z-10 flex gap-1.5 items-center rounded-full bg-black/40 px-2.5 py-1 backdrop-blur-sm">
+            <div className="absolute right-4 bottom-4 z-10 flex gap-1.5 items-center bg-black/40 px-2.5 py-1 backdrop-blur-sm">
               {gallery.map((_, idx) => (
                 <span
                   key={idx}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                  className={`h-1.5 transition-all duration-500 ${
                     active === idx ? "w-4 bg-white" : "w-1.5 bg-white/50"
                   }`}
                 />
@@ -83,7 +83,7 @@ function ProjectShowcase({ project }: { project: Project }) {
                 type="button"
                 onClick={() => setActive(index)}
                 aria-label={`View photo ${index + 1} of ${project.name}`}
-                className={`relative h-16 w-24 overflow-hidden rounded-xl sm:h-20 sm:w-30 transition-all ${
+                className={`relative h-16 w-24 overflow-hidden sm:h-20 sm:w-30 transition-all ${
                   active === index
                     ? "ring-2 ring-[#5b176e] ring-offset-2 ring-offset-[#F8F8FA] scale-[1.02]"
                     : "opacity-75 hover:opacity-100"
@@ -103,8 +103,8 @@ function ProjectShowcase({ project }: { project: Project }) {
       </div>
 
       <div className="flex flex-col">
-        <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#5b176e]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5b176e]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#5b176e]" />
+        <span className="inline-flex w-fit items-center gap-2 bg-[#5b176e]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5b176e]">
+          <span className="h-1.5 w-1.5 bg-[#5b176e]" />
           {project.productBadge}
         </span>
 
@@ -125,7 +125,7 @@ function ProjectShowcase({ project }: { project: Project }) {
           {specs.map((spec) => (
             <div
               key={spec.label}
-              className="rounded-xl bg-[#ececf1] px-3.5 py-3 sm:px-4 sm:py-3.5"
+              className="bg-[#ececf1] px-3.5 py-3 sm:px-4 sm:py-3.5"
             >
               <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-500">
                 {spec.label}
