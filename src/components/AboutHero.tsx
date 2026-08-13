@@ -56,7 +56,7 @@ function SidePreviewSlider() {
   return (
     <div
       ref={viewportRef}
-      className="relative h-36 w-full shrink-0 overflow-hidden rounded-2xl border border-gray-200 shadow-lg sm:h-auto sm:w-36 sm:self-stretch"
+      className="relative h-36 w-full shrink-0 overflow-hidden  border border-gray-200 shadow-lg sm:h-auto sm:w-36 sm:self-stretch"
     >
       <div ref={trackRef} className="flex h-full will-change-transform">
         {previewImages.map((img) => (
@@ -80,7 +80,7 @@ function SidePreviewSlider() {
 gsap.registerPlugin(ScrollTrigger);
 
 const subscribeReducedMotion = (callback: () => void) => {
-  if (typeof window === "undefined") return () => {};
+  if (typeof window === "undefined") return () => { };
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   mediaQuery.addEventListener("change", callback);
   return () => mediaQuery.removeEventListener("change", callback);
@@ -258,15 +258,13 @@ export default function AboutHero() {
         data-hero-element="watermark"
         className="absolute top-2 left-1/2 z-10 w-full -translate-x-1/2 overflow-hidden text-center select-none pointer-events-none opacity-0"
       >
-        <span className="text-[12vw] leading-none font-serif uppercase tracking-[0.08em] text-white whitespace-nowrap inline-block">
-          INNOVATE
-        </span>
+    
       </div>
 
       {/* Foreground Content */}
       <Container className="relative z-20 my-auto w-full h-full flex flex-col justify-between pt-12 md:pt-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-end lg:gap-8">
-          
+
           {/* Bottom Left Content */}
           <div className="lg:col-span-6 flex flex-col items-start gap-6 pt-12 md:pt-20">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-serif leading-[1.1] text-white tracking-tight">
@@ -287,7 +285,7 @@ export default function AboutHero() {
               <div data-hero-element="cta" className="will-change-transform">
                 <Link
                   href="/projects"
-                  className="inline-flex items-center gap-2 bg-[#58166A] hover:bg-[#461056] text-white px-8 py-4 rounded-[5px] text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-2 bg-[#58166A] hover:bg-[#461056] text-white px-8 py-4  text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95"
                 >
                   View Projects
                 </Link>
@@ -299,7 +297,7 @@ export default function AboutHero() {
           <div className="lg:col-span-6 lg:justify-self-end w-full max-w-lg">
             <div
               data-hero-element="card"
-              className="will-change-transform relative flex flex-col sm:flex-row items-stretch bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/40 text-gray-900 gap-6"
+              className="will-change-transform relative flex flex-col sm:flex-row items-stretch bg-white/95 backdrop-blur-md  p-6 sm:p-7 shadow-2xl border border-white/40 text-gray-900 gap-6"
             >
               {/* Card Text & Tags */}
               <div className="flex-1 flex flex-col justify-between gap-4">
@@ -324,7 +322,7 @@ export default function AboutHero() {
                   <p className="mt-1.5 text-xs sm:text-sm font-light leading-relaxed text-gray-600">
                     From PUF and PIR to Rockwool panels, we engineer building envelopes that perform for decades.
                   </p>
-                </div>  
+                </div>
 
                 {/* Bottom Avatar / Stat Badge */}
                 <div className="flex items-center gap-3 pt-2 border-t border-gray-100">

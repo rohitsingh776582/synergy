@@ -146,7 +146,7 @@ export default function ProjectGalleryCta() {
           </div>
 
           {/* Pill Badge */}
-          <div className="inline-flex items-center rounded-full bg-[#EEEEF1] border border-gray-200/90 px-4 py-1.5 text-xs font-medium text-gray-700 shadow-sm mb-4">
+          <div className="inline-flex items-center  bg-[#EEEEF1] border border-gray-200/90 px-4 py-1.5 text-xs font-medium text-gray-700 shadow-sm mb-4">
             Join over 100,000 happy clients
           </div>
 

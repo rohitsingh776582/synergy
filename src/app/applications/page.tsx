@@ -17,7 +17,7 @@ export default function ApplicationsPage() {
         {/* Hero */}
         <section className="bg-gradient-to-b from-purple-50/60 via-white to-gray-50 py-16 text-center border-b border-gray-100">
           <Container>
-            <span className="rounded-full bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
+            <span className=" bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
               Sector Applications
             </span>
             <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
@@ -36,7 +36,7 @@ export default function ApplicationsPage() {
         {/* Industries We Serve Interactive Section */}
         <IndustriesWeServeSection />
 
-      
+
       </main>
 
       <Footer />

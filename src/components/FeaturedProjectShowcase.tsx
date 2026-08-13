@@ -139,7 +139,7 @@ function ProjectShowcase({ project }: { project: Project }) {
 
         <Link
           href="/quote"
-          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#5b176e] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(91,23,110,0.25)] transition-colors hover:bg-[#461056]"
+          className="mt-4 inline-flex w-full items-center justify-center gap-2  bg-[#5b176e] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(91,23,110,0.25)] transition-colors hover:bg-[#461056]"
         >
           Build something similar
           <ArrowRight className="h-4 w-4" />

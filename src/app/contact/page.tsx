@@ -35,7 +35,7 @@ export default function ContactPage() {
         <section className="py-20 bg-[#f8f8fa]">
           <Container>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              
+
               {/* Left Column: Office details */}
               <div className="lg:col-span-5 space-y-8">
                 <div>

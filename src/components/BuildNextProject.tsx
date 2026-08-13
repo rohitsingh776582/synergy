@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
@@ -157,7 +157,7 @@ export default function BuildNextProject() {
             >
               <Link
                 href="/quote"
-                className="inline-flex items-center justify-between gap-4 rounded-lg bg-[#511663] px-5 py-3.5 text-sm font-normal text-white transition-colors hover:bg-[#3e0f4d] sm:min-w-[200px]"
+                className="inline-flex items-center justify-between gap-4 rounded-none bg-[#511663] px-5 py-3.5 text-sm font-normal text-white transition-colors hover:bg-[#3e0f4d] sm:min-w-[200px]"
               >
                 <span>Get instant quote</span>
                 <ArrowUpRight size={18} strokeWidth={1.8} />
@@ -169,7 +169,7 @@ export default function BuildNextProject() {
                   e.preventDefault();
                   alert("Downloading Synergy PUF Product Catalog PDF...");
                 }}
-                className="inline-flex items-center justify-between gap-4 rounded-lg bg-[#e8dff0] px-5 py-3.5 text-sm font-normal text-[#511663] transition-colors hover:bg-[#ddd0e8] sm:min-w-[200px]"
+                className="inline-flex items-center justify-between gap-4 rounded-none bg-[#e8dff0] px-5 py-3.5 text-sm font-normal text-[#511663] transition-colors hover:bg-[#ddd0e8] sm:min-w-[200px]"
               >
                 <span>Download brochure</span>
                 <ArrowUpRight size={18} strokeWidth={1.8} />

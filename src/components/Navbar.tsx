@@ -180,7 +180,7 @@ export default function Navbar() {
                   flex
                   items-center
                   gap-2
-                  rounded-[5px]
+                
                   text-[15px]
                   font-medium
                   whitespace-nowrap

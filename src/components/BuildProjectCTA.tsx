@@ -7,8 +7,8 @@ export default function BuildProjectCTA() {
     <section className="w-full bg-white py-8 md:py-10">
       <Container>
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-[#f3e8f7] px-4 py-1.5 text-xs font-medium text-[#5b176e] sm:text-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#5b176e]" aria-hidden />
+          <span className="inline-flex items-center gap-2  bg-[#f3e8f7] px-4 py-1.5 text-xs font-medium text-[#5b176e] sm:text-sm">
+            <span className="h-1.5 w-1.5  bg-[#5b176e]" aria-hidden />
             Even impossible is possible
           </span>
 

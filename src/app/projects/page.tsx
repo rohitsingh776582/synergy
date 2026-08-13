@@ -22,7 +22,7 @@ export default function ProjectsPage() {
         <ProjectGalleryCta />
       </main>
       <BuildProjectCTA />
-      
+
       <FeatureHighlightCards />
 
       <Footer />
