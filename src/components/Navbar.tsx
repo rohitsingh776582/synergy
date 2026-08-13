@@ -95,8 +95,8 @@ export default function Navbar() {
       <header
         ref={navRef}
         data-site-header
-        className={`fixed left-0 right-0 z-[9999] h-[72px] w-full overflow-hidden transition-[background-color] duration-300 ${
-          light ? "bg-white" : "bg-transparent"
+        className={`fixed left-0 right-0 z-[9999] h-[72px] w-full transition-[background-color] duration-300 ${
+          light ? "overflow-hidden bg-white" : "overflow-visible bg-transparent"
         }`}
         style={{ top: topOffset }}
       >
@@ -104,7 +104,11 @@ export default function Navbar() {
           <Container className="flex h-full items-center justify-between">
             <Link
               href="/"
-              className="relative z-10 flex h-10 w-[148px] shrink-0 items-center overflow-hidden sm:h-11 sm:w-[168px]"
+              className={`relative z-10 flex shrink-0 items-center ${
+                light
+                  ? "h-10 w-[148px] overflow-hidden sm:h-11 sm:w-[168px]"
+                  : "h-11 w-[200px] overflow-visible sm:w-[230px]"
+              }`}
               aria-label="Synergy PUF Home"
             >
               <Image
@@ -114,10 +118,14 @@ export default function Navbar() {
                     : "/images/logo/synergy%20white%20logo.png"
                 }
                 alt="Synergy PUF"
-                width={320}
-                height={96}
+                width={400}
+                height={120}
                 priority
-                className="h-full w-full object-contain object-left"
+                className={
+                  light
+                    ? "h-full w-full object-contain object-left"
+                    : "absolute left-0 top-1/2 h-[calc(4.75rem-55px)] w-auto max-w-none -translate-y-1/2 object-contain object-left sm:h-[calc(5.5rem-55px)]"
+                }
               />
             </Link>
 
