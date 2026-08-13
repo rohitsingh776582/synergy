@@ -1,66 +1,266 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import Container from "./Container";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValue,
+  useAnimationFrame,
+  MotionValue,
+} from "framer-motion";
 
-const photos = [
+interface GalleryCard {
+  id: number;
+  baseOffset: number; // Base horizontal position offset along the track
+  title: string;
+  category: string;
+  src: string;
+  isCenter?: boolean;
+}
+
+const galleryCards: GalleryCard[] = [
   {
-    src: "/puf_factory.png",
-    alt: "Synergy PUF industrial facility cladding",
+    id: 1,
+    baseOffset: -600,
+    title: "PUF Industrial Facility",
+    category: "Factory Cladding",
+    src: "/images/applications/puf_factory_1786340180982.png",
   },
   {
-    src: "/cold_storage.png",
-    alt: "Completed PUF warehouse installation",
+    id: 2,
+    baseOffset: -400,
+    title: "Pharma Cleanroom Unit",
+    category: "Controlled Atmosphere",
+    src: "/images/applications/cleanroom_panel_1786340678778.png",
   },
-] as const;
+  {
+    id: 3,
+    baseOffset: -200,
+    title: "Cold Chain Logistics",
+    category: "Cold Storage",
+    src: "/images/hero/cold_storage.png",
+  },
+  {
+    id: 4,
+    baseOffset: 0,
+    title: "Futuristic Facility",
+    category: "Industrial Architecture",
+    src: "/hero_futuristic_architecture.png",
+    isCenter: true,
+  },
+  {
+    id: 5,
+    baseOffset: 200,
+    title: "Automated PUF Line",
+    category: "Manufacturing Unit",
+    src: "/images/hero/puf_factory.png",
+  },
+  {
+    id: 6,
+    baseOffset: 400,
+    title: "Aerial Project Site",
+    category: "Large Industrial Complex",
+    src: "/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg",
+  },
+  {
+    id: 7,
+    baseOffset: 600,
+    title: "Wall Insulation System",
+    category: "Sandwich Panels",
+    src: "/images/products/wall_panel_hero.png",
+  },
+  {
+    id: 8,
+    baseOffset: 800,
+    title: "Roof Panel Cladding",
+    category: "Thermal Cladding",
+    src: "/images/applications/puf_roof_panel_1786340661690.png",
+  },
+];
 
 export default function ProjectGalleryCta() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const autoDrift = useMotionValue(0);
+
+  // Continuous subtle auto-drift (Right to Left horizontal flow: -18px per second)
+  useAnimationFrame((_, delta) => {
+    const current = autoDrift.get();
+    autoDrift.set(current - (delta / 1000) * 24);
+  });
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 50,
+    damping: 18,
+    mass: 0.5,
+    restDelta: 0.0001,
+  });
+
+  // Scroll down maps from +500px (Right) to -500px (Left)
+  const scrollFlowX = useTransform(smoothProgress, [0, 1], [450, -450]);
+
+  // Combine auto-drift and scroll-driven Right-to-Left movement
+  const totalFlowX = useTransform(
+    [autoDrift, scrollFlowX],
+    ([drift, scrollX]) => (drift as number) + (scrollX as number)
+  );
+
   return (
-    <section className="bg-[#F8F8FA] pb-20 pt-4 md:pb-24">
-      <Container>
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#5b176e]">
-            All Photos
-          </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-black md:text-4xl">
-            Every project, captured.
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-gray-600 sm:text-base">
-            Real installations — real performance. Each image shot on-site at
-            project completion.
-          </p>
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-4 md:mt-12 md:grid-cols-2 md:gap-6">
-          {photos.map((photo) => (
-            <div
-              key={photo.src}
-              className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-gray-200"
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
+    <section
+      ref={sectionRef}
+      className="bg-[#FAF8F5] py-8 sm:py-12 md:py-16 px-3 sm:px-6 md:px-8 font-sans overflow-hidden"
+    >
+      {/* Outer Container */}
+      <div className="mx-auto max-w-7xl relative bg-[#FAF8F5] overflow-hidden">
+        
+        {/* Hero Section Container inside Frame */}
+        <div className="relative pt-4 sm:pt-6 pb-6 sm:pb-8 px-4 sm:px-8 text-center">
+          
+          {/* Hand-drawn SVG Curved Arrow Annotation */}
+          <div className="hidden lg:block absolute right-16 top-16 pointer-events-none z-30">
+            <div className="relative">
+              <span className="text-xs font-serif italic text-gray-600 tracking-wide block -rotate-6">
+                Elevate your brand
+              </span>
+              <svg
+                className="w-16 h-12 text-gray-400 -mt-1 ml-4"
+                viewBox="0 0 100 60"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <path d="M10,10 Q60,5 85,45" />
+                <path d="M75,40 L85,45 L88,32" />
+              </svg>
             </div>
-          ))}
+          </div>
+
+          {/* Pill Badge */}
+          <div className="inline-flex items-center rounded-full bg-[#EEEEF1] border border-gray-200/90 px-4 py-1.5 text-xs font-medium text-gray-700 shadow-sm mb-4">
+            Join over 100,000 happy clients
+          </div>
+
+          {/* Main Heading */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.12] max-w-3xl mx-auto">
+            Proven installations
+            <span className="block text-gray-400 font-semibold mt-1">
+              across diverse industries
+            </span>
+          </h2>
+
+          {/* Subtitle */}
+          <p className="mt-4 text-sm sm:text-base text-gray-500 max-w-lg mx-auto leading-relaxed">
+            Explore our pan-India installations — cold storage logistics, pharma cleanrooms, food processing plants & manufacturing facilities.
+          </p>
+
+          {/* 3D Arc Right-to-Left Moving Stage */}
+          <div
+            style={{ perspective: "1300px", perspectiveOrigin: "50% 50%" }}
+            className="relative z-10 flex justify-center items-center h-[340px] sm:h-[400px] md:h-[430px] overflow-hidden my-4"
+          >
+            {/* Render Cards moving Right to Left */}
+            <div
+              style={{ transformStyle: "preserve-3d" }}
+              className="relative w-full h-full flex justify-center items-center transform-gpu"
+            >
+              {galleryCards.map((card) => (
+                <FlowingRightToLeftCard
+                  key={card.id}
+                  card={card}
+                  totalFlowX={totalFlowX}
+                />
+              ))}
+            </div>
+          </div>
+
         </div>
 
-        <div className="mt-14 flex flex-col items-center text-center md:mt-16">
-          <p className="text-sm text-gray-600 sm:text-base">
-            Ready to add your facility to this portfolio?
-          </p>
-          <Link
-            href="/quote"
-            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-[#5b176e] px-7 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(91,23,110,0.28)] transition-colors hover:bg-[#461056]"
-          >
-            Start your project
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </Container>
+      </div>
     </section>
   );
 }
+
+function FlowingRightToLeftCard({
+  card,
+  totalFlowX,
+}: {
+  card: GalleryCard;
+  totalFlowX: MotionValue<number>;
+}) {
+  // Wrap position horizontally within a 1600px track so cards loop endlessly from Right to Left
+  const x = useTransform(totalFlowX, (flow) => {
+    const rawX = card.baseOffset + flow;
+    // Loop modulo around -800px to +800px
+    const wrappedX = ((((rawX + 800) % 1600) + 1600) % 1600) - 800;
+    return wrappedX;
+  });
+
+  // Calculate 3D rotateY based on current horizontal X position (Right = tilt right, Left = tilt left)
+  const rotateY = useTransform(x, (posX) => (posX / 600) * 24);
+
+  // Dynamic scale: Center card is largest (1.08), outer cards taper down
+  const scale = useTransform(x, (posX) => {
+    const absX = Math.abs(posX);
+    return Math.max(0.82, 1.08 - (absX / 800) * 0.3);
+  });
+
+  // Dynamic opacity: Fade smoothly at edges when exiting left / entering right
+  const opacity = useTransform(x, (posX) => {
+    const absX = Math.abs(posX);
+    if (absX > 650) return Math.max(0, 1 - (absX - 650) / 150);
+    return 1;
+  });
+
+  return (
+    <motion.div
+      style={{
+        x,
+        rotateY,
+        z: useTransform(x, (posX) => 50 - Math.abs(posX) * 0.12),
+        scale,
+        opacity,
+        transformStyle: "preserve-3d",
+        backfaceVisibility: "hidden",
+      }}
+      className="absolute aspect-[3/4] w-[130px] sm:w-[170px] md:w-[200px] lg:w-[230px] overflow-hidden rounded-[22px] sm:rounded-[26px] bg-gray-900 border border-gray-200/80 shadow-[0_20px_45px_rgba(0,0,0,0.18)] will-change-transform transform-gpu group"
+    >
+      <Image
+        src={card.src}
+        alt={card.title}
+        fill
+        unoptimized
+        className="object-cover transition-transform duration-500 group-hover:scale-110"
+      />
+      {/* Card Overlay Details */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 p-3 sm:p-4 flex flex-col justify-end text-left">
+        <span className="text-[10px] sm:text-xs font-semibold text-white truncate">
+          {card.title}
+        </span>
+        <span className="text-[9px] sm:text-[10px] text-gray-300 truncate">
+          {card.category}
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+

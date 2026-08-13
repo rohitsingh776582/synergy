@@ -19,7 +19,7 @@ export default function Home() {
           className="pointer-events-none fixed inset-0 -z-10 h-dvh w-full"
           aria-hidden
         >
-            <Image
+          <Image
             src={HERO_BG}
             alt=""
             fill

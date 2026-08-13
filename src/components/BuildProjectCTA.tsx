@@ -4,7 +4,7 @@ import Container from "./Container";
 
 export default function BuildProjectCTA() {
   return (
-    <section className="w-full bg-white py-12 md:py-14">
+    <section className="w-full bg-white py-8 md:py-10">
       <Container>
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-[#f3e8f7] px-4 py-1.5 text-xs font-medium text-[#5b176e] sm:text-sm">

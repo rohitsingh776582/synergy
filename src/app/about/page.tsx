@@ -29,6 +29,7 @@ export default function AboutPage() {
       </main>
 
       <FeatureHighlightCards />
+
       <Footer />
     </div>
   );

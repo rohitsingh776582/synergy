@@ -1,3 +1,8 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+
 function WireframeShapes() {
   return (
     <div
@@ -77,55 +82,74 @@ const stats = [
 ] as const;
 
 export default function ProjectsHero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 70,
+    damping: 24,
+    mass: 0.5,
+    restDelta: 0.0001,
+  });
+
+  // Text scales down backwards, tilts back in 3D perspective, and gracefully fades
+  const scale = useTransform(smoothProgress, [0, 1], [1, 0.78]);
+  const opacity = useTransform(smoothProgress, [0, 0.85], [1, 0.15]);
+  const rotateX = useTransform(smoothProgress, [0, 1], [0, 18]);
+  const y = useTransform(smoothProgress, [0, 1], [0, -40]);
+
   return (
     <section
+      ref={containerRef}
       id="projects-hero"
-      className="relative flex min-h-screen w-full flex-col overflow-hidden bg-[#F8F8FA] text-black"
+      style={{ perspective: "1200px" }}
+      className="relative flex w-full flex-col overflow-hidden bg-[#F8F8FA] text-black pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-10"
     >
       <WireframeShapes />
 
-      <div
-        className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 text-center md:px-10 lg:px-[50px]"
-        style={{ paddingTop: "var(--site-header-height, 7rem)" }}
+      <motion.div
+        style={{
+          scale,
+          opacity,
+          rotateX,
+          y,
+          transformStyle: "preserve-3d",
+        }}
+        className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 text-center md:px-10 lg:px-[50px] transform-gpu origin-top"
       >
         <p className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.22em] text-black sm:text-xs">
           <span className="h-px w-8 bg-black/50 sm:w-10" />
           Our Portfolio · Real Builds · Real Impact
         </p>
 
-        <h1 className="mt-6 font-sans text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem]">
+        <h1 className="mt-4 font-sans text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-[4rem]">
           <span className="block text-black">Built across India.</span>
           <span className="mt-1 block text-black">Proven in the field.</span>
         </h1>
 
-        <p className="mt-6 max-w-xl text-sm leading-relaxed text-gray-700 sm:text-base md:text-lg">
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-gray-700 sm:text-base md:text-lg">
           Real industrial projects — engineered with Synergy PUF panels for
           performance, speed, and longevity.
         </p>
 
-        <div className="mt-14 grid w-full max-w-3xl grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6">
+        <div className="mt-8 grid w-full max-w-3xl grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-4">
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center">
               <p className="text-3xl font-extrabold tracking-tight text-black md:text-4xl">
                 {stat.value}
               </p>
-              <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.18em] text-gray-600">
+              <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-gray-600">
                 {stat.label}
               </p>
             </div>
           ))}
         </div>
-      </div>
-
-      <a
-        href="#featured-projects"
-        className="relative z-10 mb-8 flex flex-col items-center gap-2 text-[10px] font-medium uppercase tracking-[0.28em] text-gray-600 transition-colors hover:text-black"
-      >
-        Scroll
-        <span className="flex h-9 w-5 items-start justify-center rounded-full border border-black/40 pt-1.5">
-          <span className="h-1.5 w-1 rounded-full bg-black" />
-        </span>
-      </a>
+      </motion.div>
     </section>
   );
 }
+

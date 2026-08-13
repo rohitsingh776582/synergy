@@ -9,7 +9,7 @@ interface ApplicationCardProps {
 
 export default function ApplicationCard({ application }: ApplicationCardProps) {
   return (
-    <div className="group flex flex-col justify-between overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300">
+    <div className="group flex flex-col justify-between overflow-hidden rounded-none bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300">
       <div>
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-900">
           <Image
