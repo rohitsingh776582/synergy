@@ -238,7 +238,7 @@ export default function ProductsHero({
           engineered to perform.
         </h1>
         <p className="mt-4 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto font-light">
-          PUF – fit and crafted for all roofings and walling – premium quality, custom configurations.
+          PUF fit and crafted for all roofings and walling premium quality, custom configurations.
         </p>
       </Container>
 

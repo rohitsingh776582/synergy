@@ -122,7 +122,7 @@ export default function ProjectsHero() {
         className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 text-center md:px-10 lg:px-[50px] transform-gpu origin-top"
       >
         <p className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.22em] text-black sm:text-xs">
-          <span className="h-px w-8 bg-black/50 sm:w-10" />
+          
           Our Portfolio · Real Builds · Real Impact
         </p>
 
@@ -132,7 +132,7 @@ export default function ProjectsHero() {
         </h1>
 
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-gray-700 sm:text-base md:text-lg">
-          Real industrial projects — engineered with Synergy PUF panels for
+          Real industrial projects,engineered with Synergy PUF panels for
           performance, speed, and longevity.
         </p>
 

@@ -22,7 +22,7 @@ export default function BuildProjectCTA() {
           </h2>
 
           <p className="text-[#686563] text-sm sm:text-base max-w-md leading-relaxed">
-            High-performance insulated panel solutions delivered on time, every time — across India.
+            High-performance insulated panel solutions delivered on time, every time, across India.
           </p>
         </div>
 

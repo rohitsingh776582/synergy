@@ -8,17 +8,17 @@ const items = [
   {
     title: "Our Mission",
     icon: Target,
-    body: "To engineer world-class, energy-efficient PUF insulation systems that empower businesses to optimize thermal control, reduce carbon footprint, and lower operational energy expenses across India and global markets.",
+    body: "To engineer energy-efficient PUF insulation systems that help businesses reduce thermal loss, lower carbon footprint, and cut operational energy costs across India.",
   },
   {
     title: "Our Vision",
     icon: Eye,
-    body: "To be the undisputed leader and most trusted brand in thermal insulation and modular panel engineering, known for zero-defect quality, rapid dispatch capabilities, and continuous innovation.",
+    body: "To be the most trusted name in thermal insulation and modular panel engineering, built on zero-defect manufacturing and dispatch you can set a schedule around.",
   },
   {
     title: "Our Promise",
     icon: Award,
-    body: "Consistent quality, on-time delivery, and engineering support that keeps every project insulated, efficient, and built to last.",
+    body: "To deliver consistent quality, on-time delivery, and engineering support on every project, insulated, efficient, built to last.",
   },
 ] as const;
 

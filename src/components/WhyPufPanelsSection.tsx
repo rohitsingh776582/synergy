@@ -104,11 +104,9 @@ export default function WhyPufPanelsSection() {
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#5b176e]">
               Why PUF Panels
             </span>
-            <h2 className="mt-3 text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight leading-[1.08]">
-              <span className="block text-gray-900">Smarter Panels.</span>
-              <span className="block text-gray-900">
-                Stronger Future.
-              </span>
+            <h2 className="mt-3 text-4xl sm:text-5xl lg:text-[3.25rem] font-normal tracking-tight leading-[1.1] text-gray-900">
+              <span className="block">Smarter Panels.</span>
+              <span className="block">Stronger Future.</span>
             </h2>
           </div>
           <div className="lg:col-span-5">
