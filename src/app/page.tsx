@@ -25,7 +25,7 @@ export default function Home() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_12%] scale-[1.22] origin-top"
+            className="object-cover object-bottom scale-100 origin-bottom"
           />
         </div>
 
