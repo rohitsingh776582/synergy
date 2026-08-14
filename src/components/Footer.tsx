@@ -16,15 +16,15 @@ export default function Footer() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 24,
+    stiffness: 75,
+    damping: 25,
     mass: 0.2,
     restDelta: 0.001,
   });
 
-  // Subtle upward parallax shift as footer gets unmasked by main page content
+  // Parallax upward shift & continuous scroll-driven text opacity (transparent -> 100% visible)
   const y = useTransform(smoothProgress, [0, 1], ["-15%", "0%"]);
-  const opacity = useTransform(smoothProgress, [0, 0.3, 1], [0.6, 0.95, 1]);
+  const opacity = useTransform(smoothProgress, [0, 0.1, 1], [0, 0.1, 1]);
 
   return (
     <motion.footer
