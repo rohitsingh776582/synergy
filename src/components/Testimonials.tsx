@@ -1,7 +1,6 @@
 "use client";
 
 import { useLayoutEffect, useRef, useSyncExternalStore } from "react";
-import Image from "next/image";
 import { Star } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,7 +9,7 @@ import Container from "./Container";
 gsap.registerPlugin(ScrollTrigger);
 
 const subscribeReducedMotion = (callback: () => void) => {
-  if (typeof window === "undefined") return () => {};
+  if (typeof window === "undefined") return () => { };
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   mediaQuery.addEventListener("change", callback);
   return () => mediaQuery.removeEventListener("change", callback);
@@ -126,23 +125,13 @@ export default function Testimonials() {
               ref={(el) => {
                 cardRefs.current[idx] = el;
               }}
-              className="relative flex h-full w-full flex-col pt-12 will-change-transform"
+              className="relative flex h-full w-full flex-col will-change-transform"
               style={{
                 zIndex: testimonials.length - idx,
                 transformStyle: "preserve-3d",
               }}
             >
-              <div className="absolute left-1/2 top-0 z-10 h-[96px] w-[96px] -translate-x-1/2 overflow-hidden rounded-full border-2 border-white/25 shadow-xl lg:h-[108px] lg:w-[108px]">
-                <Image
-                  src={item.image}
-                  alt={item.client}
-                  fill
-                  sizes="108px"
-                  className="object-cover grayscale"
-                />
-              </div>
-
-              <div className="relative flex h-full min-h-[280px] w-full flex-1 flex-col rounded-[22px] bg-[rgba(28,28,28,0.88)] px-6 pb-7 pt-16 shadow-[0_16px_40px_rgba(0,0,0,0.22)] backdrop-blur-md sm:min-h-[300px] sm:px-8 sm:pt-[4.5rem]">
+              <div className="relative flex h-full min-h-[220px] w-full flex-1 flex-col  bg-[rgba(28,28,28,0.88)] p-6 sm:p-8  backdrop-blur-md">
                 <div className="relative z-[1] flex h-full flex-1 flex-col">
                   <p className="text-[13px] font-light leading-relaxed text-white/90 sm:text-sm">
                     {item.quote}
@@ -161,6 +150,7 @@ export default function Testimonials() {
               </div>
             </div>
           ))}
+
         </div>
       </Container>
     </section>

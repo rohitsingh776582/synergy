@@ -204,11 +204,6 @@ export default function Stats() {
                       <span ref={yearRef}>2001</span>
                     </div>
                   </div>
-
-                  <div className="flex items-center -space-x-2">
-                    <div className="h-10 w-10 rounded-full border-2 border-white bg-[#d9d9d9]" />
-                    <div className="h-10 w-10 rounded-full border-2 border-white bg-[#bdbdbd]" />
-                  </div>
                 </div>
               </div>
             </div>
