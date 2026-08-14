@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 import Container from "./Container";
 
 const StackedDiamondIcon = () => (
@@ -20,16 +21,88 @@ const StackedDiamondIcon = () => (
 );
 
 export const jointProfiles = [
-  { id: "roof-joint", title: "Roof Joint", col: "sm:col-start-1", row: "sm:row-start-1" },
-  { id: "hidden-tongue", title: "Hidden Tongue\n& Groove", col: "sm:col-start-2", row: "sm:row-start-2" },
-  { id: "single-tongue", title: "Single Tongue\n& Groove", col: "sm:col-start-3", row: "sm:row-start-1" },
-  { id: "m-section", title: "M-Section", col: "sm:col-start-4", row: "sm:row-start-2" },
-  { id: "double-tongue", title: "Double Tongue\n& Groove", col: "sm:col-start-5", row: "sm:row-start-1" },
+  {
+    id: "roof-joint",
+    title: "Roof Joint",
+    col: "sm:col-start-1",
+    row: "sm:row-start-1",
+    initialX: -65,
+    initialY: 0,
+  },
+  {
+    id: "hidden-tongue",
+    title: "Hidden Tongue\n& Groove",
+    col: "sm:col-start-2",
+    row: "sm:row-start-2",
+    initialX: 0,
+    initialY: 65,
+  },
+  {
+    id: "single-tongue",
+    title: "Single Tongue\n& Groove",
+    col: "sm:col-start-3",
+    row: "sm:row-start-1",
+    initialX: 0,
+    initialY: -65,
+  },
+  {
+    id: "m-section",
+    title: "M-Section",
+    col: "sm:col-start-4",
+    row: "sm:row-start-2",
+    initialX: 0,
+    initialY: 65,
+  },
+  {
+    id: "double-tongue",
+    title: "Double Tongue\n& Groove",
+    col: "sm:col-start-5",
+    row: "sm:row-start-1",
+    initialX: 65,
+    initialY: 0,
+  },
 ];
 
-export default function AvailablePanelJointsSection() {
+function JointBoxItem({
+  joint,
+  progress,
+}: {
+  joint: (typeof jointProfiles)[number];
+  progress: MotionValue<number>;
+}) {
+  const x = useTransform(progress, [0, 1], [joint.initialX, 0]);
+  const y = useTransform(progress, [0, 1], [joint.initialY, 0]);
+  const opacity = useTransform(progress, [0, 0.6], [0, 1]);
+
   return (
-    <section className="py-20 bg-[#e6e6e8]">
+    <motion.div
+      style={{ x, y, opacity }}
+      className={`${joint.col} ${joint.row} bg-black aspect-square p-4 sm:p-6 flex flex-col items-center justify-center text-center border border-black shadow-md transition-transform duration-300 hover:z-10 hover:scale-105`}
+    >
+      <StackedDiamondIcon />
+      <h3 className="text-xs sm:text-sm md:text-base font-normal text-white leading-snug whitespace-pre-line">
+        {joint.title}
+      </h3>
+    </motion.div>
+  );
+}
+
+export default function AvailablePanelJointsSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 85%", "center 45%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 20,
+    mass: 0.3,
+  });
+
+  return (
+    <section ref={sectionRef} className="py-20 bg-[#e6e6e8] overflow-hidden">
       <Container className="text-center">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 tracking-tight">
           Available Panel Joints.
@@ -42,15 +115,11 @@ export default function AvailablePanelJointsSection() {
         <div className="mt-14 max-w-5xl mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-0 max-w-4xl mx-auto">
             {jointProfiles.map((joint) => (
-              <div
+              <JointBoxItem
                 key={joint.id}
-                className={`${joint.col} ${joint.row} bg-black aspect-square p-4 sm:p-6 flex flex-col items-center justify-center text-center border border-black shadow-md transition-transform duration-300 hover:z-10 hover:scale-105`}
-              >
-                <StackedDiamondIcon />
-                <h3 className="text-xs sm:text-sm md:text-base font-normal text-white leading-snug whitespace-pre-line">
-                  {joint.title}
-                </h3>
-              </div>
+                joint={joint}
+                progress={smoothProgress}
+              />
             ))}
           </div>
         </div>
@@ -58,3 +127,5 @@ export default function AvailablePanelJointsSection() {
     </section>
   );
 }
+
+

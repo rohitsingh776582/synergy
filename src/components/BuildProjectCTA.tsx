@@ -1,47 +1,83 @@
+import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Download } from "lucide-react";
 import Container from "./Container";
 
 export default function BuildProjectCTA() {
   return (
-    <section className="w-full bg-white py-8 md:py-10">
-      <Container>
-        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <span className="inline-flex items-center gap-2  bg-[#f3e8f7] px-4 py-1.5 text-xs font-medium text-[#5b176e] sm:text-sm">
-            <span className="h-1.5 w-1.5  bg-[#5b176e]" aria-hidden />
+    <section className="w-full bg-[#f8f6f9] py-16 md:py-20">
+      <Container className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Left Column: Heading and Subtext */}
+        <div className="flex flex-col space-y-6">
+          <span className="inline-flex items-center gap-2 self-start bg-[#f3e8f7] px-4 py-1.5 text-xs font-medium text-[#5b176e] sm:text-sm">
+            <span className="h-1.5 w-1.5 bg-[#5b176e]" aria-hidden />
             Even impossible is possible
           </span>
 
-          <h2 className="mt-5 text-3xl font-semibold leading-[1.15] tracking-tight text-[#111827] sm:text-4xl md:text-[2.75rem]">
-            Build your next project with{" "}
-            <span className="text-[#5b176e]">Synergy PUF.</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-normal text-[#1c1917] tracking-tight leading-[1.15]">
+            Build your next <br />
+            project with <br />
+            <span className="font-semibold text-[#5b176e]">Synergy PUF.</span>
           </h2>
 
-          <p className="mt-3 max-w-xl text-sm font-light leading-relaxed text-gray-500 sm:text-base">
-            High-performance insulated panel solutions delivered on time,
-            every time — across India.
+          <p className="text-[#686563] text-sm sm:text-base max-w-md leading-relaxed">
+            High-performance insulated panel solutions delivered on time, every time — across India.
           </p>
+        </div>
 
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/quote"
-              className="inline-flex items-center gap-2 bg-[#5b176e] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#461056]"
-            >
-              Get Instant Quote
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+        {/* Right Column: Staggered Grid & Action Buttons */}
+        <div className="flex justify-center lg:justify-end">
+          <div className="grid grid-cols-2 gap-4 w-full max-w-[460px]">
+            {/* Top-Left Image: PUF Wall Panel */}
+            <div className="relative aspect-square w-full overflow-hidden bg-white border border-purple-100 p-3 group transition-all duration-300">
+              <Image
+                src="/images/products/wall_panel_hero.png"
+                alt="Synergy PUF Wall Panel"
+                fill
+                className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+            </div>
 
-            <a
-              href="/brochure.pdf"
-              download
-              className="inline-flex items-center gap-2 border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-gray-800 transition-colors hover:border-gray-400 hover:bg-gray-50"
-            >
-              <Download className="h-4 w-4" />
-              Download Brochure
-            </a>
+            {/* Top-Right Empty Space */}
+            <div />
+
+            {/* Bottom-Left Action Buttons */}
+            <div className="flex flex-col justify-center gap-3">
+              <Link
+                href="/quote"
+                className="inline-flex items-center justify-between gap-2 bg-[#532247] hover:bg-[#431b38] text-white px-5 py-3.5 text-sm font-medium transition-colors"
+              >
+                <span>Get Instant Quote</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+
+              <a
+                href="/brochure.pdf"
+                download
+                className="inline-flex items-center justify-between gap-2 bg-[#ab98a7] hover:bg-[#9c8798] text-[#2c1b29] px-5 py-3.5 text-sm font-medium transition-colors"
+              >
+                <span>Download Brochure</span>
+                <Download className="w-4 h-4 ml-1" />
+              </a>
+            </div>
+
+            {/* Bottom-Right Image: PUF Roof Panel */}
+            <div className="relative aspect-square w-full overflow-hidden bg-white border border-purple-100 p-3 group transition-all duration-300">
+              <Image
+                src="/images/products/roof_panel_hero.png"
+                alt="Synergy PUF Roof Panel"
+                fill
+                className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+            </div>
           </div>
         </div>
       </Container>
     </section>
   );
 }
+
+
