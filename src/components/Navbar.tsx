@@ -32,6 +32,8 @@ export default function Navbar() {
 
   const pathname = mounted ? rawPathname : "";
   const isHome = rawPathname === "/";
+  const isAbout = rawPathname === "/about";
+  const isHeroPage = isHome || isAbout;
 
   useLayoutEffect(() => {
     const update = () => {
@@ -59,16 +61,20 @@ export default function Navbar() {
     };
   }, []);
 
-  // Home hero image => white text; white page sections => black text
+  // Home & About hero images => white text; white page sections => black text
   useLayoutEffect(() => {
-    if (!isHome) {
+    if (!isHeroPage) {
       setOnWhiteBg(true);
       return;
     }
 
     setOnWhiteBg(false);
 
-    const hero = document.getElementById("home-hero");
+    const hero = isHome
+      ? document.getElementById("home-hero")
+      : isAbout
+      ? document.getElementById("about-hero") || document.querySelector("section")
+      : document.querySelector("section");
     if (!hero) return;
 
     const update = () => {
@@ -86,9 +92,9 @@ export default function Navbar() {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, [isHome, headerHeight]);
+  }, [isHeroPage, isHome, isAbout, headerHeight]);
 
-  const light = !isHome || onWhiteBg;
+  const light = !isHeroPage || onWhiteBg;
 
   return (
     <>
@@ -226,7 +232,7 @@ export default function Navbar() {
         />
       </header>
 
-      <div className="w-full shrink-0" style={{ height: headerHeight }} aria-hidden />
+      {!isAbout && <div className="w-full shrink-0" style={{ height: headerHeight }} aria-hidden />}
     </>
   );
 }

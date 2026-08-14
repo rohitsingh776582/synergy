@@ -234,6 +234,7 @@ export default function AboutHero() {
 
   return (
     <section
+      id="about-hero"
       ref={sectionRef}
       className="relative min-h-[640px] md:min-h-[720px] lg:min-h-[780px] w-full overflow-hidden bg-gray-950 text-white flex flex-col justify-between py-10 md:py-16"
     >
