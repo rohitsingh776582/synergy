@@ -8,7 +8,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Container from "./Container";
 
 export default function Footer() {
-  const footerRef = useRef<HTMLElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: footerRef,
@@ -27,11 +27,11 @@ export default function Footer() {
   const opacity = useTransform(smoothProgress, [0, 0.1, 1], [0, 0.1, 1]);
 
   return (
-    <motion.footer
-      ref={footerRef}
-      style={{ y, opacity }}
-      className="bg-[#e6e6e8] pt-12 text-gray-700 font-sans md:pt-14 will-change-transform transform-gpu"
-    >
+    <div ref={footerRef} className="relative w-full overflow-hidden bg-[#e6e6e8] mt-16 sm:mt-24 lg:mt-32">
+      <motion.footer
+        style={{ y, opacity }}
+        className="bg-[#e6e6e8] pt-12 text-gray-700 font-sans md:pt-14 will-change-transform transform-gpu"
+      >
       <Container>
         {/* Upper Footer Grid (4 Columns) */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-16">
@@ -231,6 +231,7 @@ export default function Footer() {
           </div>
         </Container>
       </div>
-    </motion.footer>
+      </motion.footer>
+    </div>
   );
 }
