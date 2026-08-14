@@ -174,12 +174,12 @@ export default function IndustriesWeServeSection() {
       <Container>
         {/* Section Header */}
         <div className="max-w-3xl mb-10 sm:mb-12">
-          <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#5b176e]">
-            Industries We Serve
-          </span>
+
+          
+
           <h2 className="mt-3 text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-[#18181b]">
-            Services tailored to{" "}
-            <span className="text-[#5b176e]">every sector.</span>
+            Services tailored to every sector{" "}
+            
           </h2>
           <p className="mt-3.5 text-base sm:text-lg text-gray-500 leading-relaxed">
             Select an industry below to explore how our PUF panels are

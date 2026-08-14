@@ -24,9 +24,11 @@ export default function IndustryShowcase() {
       className="relative bg-white py-16 sm:py-24 font-sans overflow-hidden"
     >
       <div className="text-center px-4 mb-10 sm:mb-14 max-w-4xl mx-auto">
+        
         <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#5b176e]">
           Versatile Sector Protection
         </span>
+
         <h2 className="mt-3 text-3xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.08]">
           Insulation for <br className="hidden sm:inline" />
           every industry.

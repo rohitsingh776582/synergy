@@ -7,6 +7,8 @@ import ProductSeriesSpecifications from "@/components/ProductSeriesSpecification
 import AvailablePanelJointsSection from "@/components/AvailablePanelJointsSection";
 import ManufacturingThatDeliversSection from "@/components/ManufacturingThatDeliversSection";
 import SynergyHeroComponent from "@/components/SynergyHeroComponent";
+import FeatureHighlightCards from "@/components/FeatureHighlightCards";
+
 
 export default function ProductsPage() {
   const [activeTab, setActiveTab] = useState("puf");
@@ -55,7 +57,10 @@ export default function ProductsPage() {
           <ManufacturingThatDeliversSection />
 
           {/* BUILD YOUR NEXT PROJECT CTA SECTION */}
-          <SynergyHeroComponent />
+          <SynergyHeroComponent />  
+           
+           
+          
         </main>
       </div>
 

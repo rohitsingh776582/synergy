@@ -106,7 +106,7 @@ export default function WhyPufPanelsSection() {
             </span>
             <h2 className="mt-3 text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight leading-[1.08]">
               <span className="block text-gray-900">Smarter Panels.</span>
-              <span className="block bg-gradient-to-r from-[#5b176e] via-[#7d2297] to-[#9b3fb6] bg-clip-text text-transparent">
+              <span className="block text-gray-900">
                 Stronger Future.
               </span>
             </h2>

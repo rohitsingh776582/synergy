@@ -24,7 +24,7 @@ export default function ContactPage() {
               </span>
               <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
                 Contact Synergy PUF <br />
-                <span className="text-[#5b176e]">Engineering Team</span>
+                Engineering Team
               </h1>
               <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
                 Have a technical query or require site inspection? Our insulation specialists are ready to assist you.

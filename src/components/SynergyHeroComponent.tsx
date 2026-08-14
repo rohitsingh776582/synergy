@@ -14,7 +14,7 @@ export default function SynergyHeroComponent() {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-normal text-[#1c1917] tracking-tight leading-[1.15]">
             Build your next <br />
             project with <br />
-            <span className="font-semibold text-[#5b176e]">Synergy PUF.</span>
+            Synergy PUF.
           </h2>
           <p className="text-[#686563] text-sm sm:text-base max-w-md leading-relaxed">
             High-performance insulated panel solutions delivered on time, every time — across India.
@@ -69,4 +69,4 @@ export default function SynergyHeroComponent() {
       </Container>
     </section>
   );
-}
+}

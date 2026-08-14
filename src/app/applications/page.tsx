@@ -24,7 +24,7 @@ export default function ApplicationsPage() {
               </span>
               <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
                 Insulation Tailored for <br />
-                <span className="text-[#5b176e]">Every Industry Vertical</span>
+                Every Industry Vertical
               </h1>
               <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
                 From food safety to sterile pharmaceuticals, Synergy PUF paneling meets rigid international standards for temperature, hygiene, and energy isolation.
