@@ -27,7 +27,7 @@ export default function Footer() {
   const opacity = useTransform(smoothProgress, [0, 0.1, 1], [0, 0.1, 1]);
 
   return (
-    <div ref={footerRef} className="relative w-full overflow-hidden bg-[#e6e6e8] mt-16 sm:mt-24 lg:mt-32">
+    <div ref={footerRef} className="relative w-full overflow-hidden bg-[#e6e6e8] pt-16 sm:pt-24 lg:pt-32">
       <motion.footer
         style={{ y, opacity }}
         className="bg-[#e6e6e8] pt-12 text-gray-700 font-sans md:pt-14 will-change-transform transform-gpu"
