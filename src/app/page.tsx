@@ -16,7 +16,7 @@ export default function Home() {
     <div className="relative bg-white font-sans text-gray-900 antialiased selection:bg-[#5b176e] selection:text-white">
       <div className="relative z-0">
         <div
-          className="pointer-events-none fixed inset-0 -z-10 h-dvh w-full"
+          className="pointer-events-none fixed inset-0 -z-10 h-full w-full"
           aria-hidden
         >
           <Image
@@ -24,8 +24,10 @@ export default function Home() {
             alt=""
             fill
             priority
+            unoptimized
             sizes="100vw"
-            className="object-cover object-bottom scale-100 origin-bottom"
+            className="object-cover"
+            style={{ objectFit: "cover", objectPosition: "center bottom" }}
           />
         </div>
 
