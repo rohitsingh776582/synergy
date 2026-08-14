@@ -123,7 +123,7 @@ export default function AchievementCards() {
                 className="h-7 w-7 text-[#5b176e] stroke-[1.5]"
                 aria-hidden
               />
-              <p className="mt-4 text-3xl font-semibold tracking-tight text-[#5b176e] sm:text-[2rem]">
+              <p className="stat-number mt-4 text-3xl font-bold tracking-tight text-black sm:text-[2rem]">
                 <span
                   ref={(el) => {
                     valueRefs.current[idx] = el;
