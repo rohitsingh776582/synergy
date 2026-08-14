@@ -191,7 +191,7 @@ export default function Footer() {
     <ul className="space-y-2 text-xs sm:text-sm font-medium text-gray-600">
       <li>
         <a href="#" className="hover:text-[#5b176e]">
-          Energy Thrislington
+          Synergy Thrislington
         </a>
       </li>
 
@@ -223,28 +223,13 @@ export default function Footer() {
         A VENTURE BY
       </h3>
 
-      <div className="flex items-center gap-2.5">
-        <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white font-extrabold text-lg shadow-sm">
-          <svg
-            className="w-6 h-6 fill-current text-white"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm4 8h-2v-4h2v4zm0-6h-2V7h2v2z" />
-          </svg>
-        </div>
-
-        <div className="leading-none">
-          <div className="text-xl font-extrabold tracking-wider text-gray-900">
-            SYNERGY
-          </div>
-
-          <div className="mt-1 flex items-center gap-1 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">
-            <span className="h-[1px] w-4 bg-gray-400" />
-            <span>GROUP</span>
-            <span className="h-[1px] w-4 bg-gray-400" />
-          </div>
-        </div>
-      </div>
+      <Image
+        src="/images/logo/Group-Logo.png"
+        alt="Synergy Group"
+        width={180}
+        height={50}
+        className="h-10 w-auto object-contain object-left md:object-right"
+      />
 
     </div>
   </div>

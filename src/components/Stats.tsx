@@ -14,11 +14,9 @@ const stats = [
     suffix: "+",
     description: (
       <>
-        Projects were
+        Projects launched
         <br />
-        launched successful
-        <br />
-        since 2008.
+        successfully since 2008.
       </>
     ),
   },

@@ -135,7 +135,7 @@ export default function BuildNextProject() {
               className="relative mt-4 text-sm sm:text-base font-light text-gray-600 leading-relaxed will-change-transform"
             >
               BIS certified. FM approved. Delivered pan-India in{" "}
-              <span className="stat-number font-bold text-black">30 days</span>.
+              30 days
             </p>
 
             <div
