@@ -15,22 +15,28 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans">
-      <main className="flex-1">
-        <AboutHero />
+    <div className="relative min-h-screen bg-white font-sans text-gray-900 overflow-x-clip">
+      {/* Main page content layer - covers footer while scrolling top/middle */}
+      <div className="relative z-10 bg-white shadow-2xl">
+        <main className="flex-1">
+          <AboutHero />
 
-        <AchievementCards />
+          <AchievementCards />
 
-        <CompanyStory />
+          <CompanyStory />
 
-        <MissionVisionPromise />
+          <MissionVisionPromise />
 
-        <BuildProjectCTA />
-      </main>
+          <BuildProjectCTA />
+        </main>
 
-      <FeatureHighlightCards />
+        <FeatureHighlightCards />
+      </div>
 
-      <Footer />
+      {/* Sticky footer reveal layer - unmasks smoothly as page end is reached */}
+      <div className="sticky bottom-0 z-0">
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -12,34 +12,38 @@ export const metadata: Metadata = {
 
 export default function ApplicationsPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans">
-      <main className="flex-1">
-        {/* Hero */}
-        <section className="bg-gradient-to-b from-purple-50/60 via-white to-gray-50 py-16 text-center border-b border-gray-100">
-          <Container>
-            <span className=" bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
-              Sector Applications
-            </span>
-            <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
-              Insulation Tailored for <br />
-              <span className="text-[#5b176e]">Every Industry Vertical</span>
-            </h1>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-              From food safety to sterile pharmaceuticals, Synergy PUF paneling meets rigid international standards for temperature, hygiene, and energy isolation.
-            </p>
-          </Container>
-        </section>
+    <div className="relative min-h-screen bg-white font-sans text-gray-900 overflow-x-clip">
+      {/* Main page content layer - covers footer while scrolling top/middle */}
+      <div className="relative z-10 bg-white shadow-2xl">
+        <main className="flex-1">
+          {/* Hero */}
+          <section className="bg-gradient-to-b from-purple-50/60 via-white to-gray-50 py-16 text-center border-b border-gray-100">
+            <Container>
+              <span className=" bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
+                Sector Applications
+              </span>
+              <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
+                Insulation Tailored for <br />
+                <span className="text-[#5b176e]">Every Industry Vertical</span>
+              </h1>
+              <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                From food safety to sterile pharmaceuticals, Synergy PUF paneling meets rigid international standards for temperature, hygiene, and energy isolation.
+              </p>
+            </Container>
+          </section>
 
-        {/* Why PUF Panels Feature Section */}
-        <WhyPufPanelsSection />
+          {/* Why PUF Panels Feature Section */}
+          <WhyPufPanelsSection />
 
-        {/* Industries We Serve Interactive Section */}
-        <IndustriesWeServeSection />
+          {/* Industries We Serve Interactive Section */}
+          <IndustriesWeServeSection />
+        </main>
+      </div>
 
-
-      </main>
-
-      <Footer />
+      {/* Sticky footer reveal layer - unmasks smoothly as page end is reached */}
+      <div className="sticky bottom-0 z-0">
+        <Footer />
+      </div>
     </div>
   );
 }

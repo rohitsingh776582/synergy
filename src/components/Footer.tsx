@@ -1,17 +1,41 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Container from "./Container";
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: footerRef,
+    offset: ["start end", "end end"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 70,
+    damping: 24,
+    mass: 0.2,
+    restDelta: 0.001,
+  });
+
+  // Subtle upward parallax shift as footer gets unmasked by main page content
+  const y = useTransform(smoothProgress, [0, 1], ["-15%", "0%"]);
+  const opacity = useTransform(smoothProgress, [0, 0.3, 1], [0.6, 0.95, 1]);
+
   return (
-    <footer className="bg-[#e6e6e8] pt-12 text-gray-700 font-sans md:pt-14">
+    <motion.footer
+      ref={footerRef}
+      style={{ y, opacity }}
+      className="bg-[#e6e6e8] pt-12 text-gray-700 font-sans md:pt-14 will-change-transform transform-gpu"
+    >
       <Container>
         {/* Upper Footer Grid (4 Columns) */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-16">
-          
+
           {/* Column 1: Contact Details & Socials */}
           <div className="space-y-4">
             {/* Email link */}
@@ -131,7 +155,7 @@ export default function Footer() {
               {/* Orange Emblem */}
               <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white font-extrabold text-lg shadow-sm">
                 <svg className="w-6 h-6 fill-current text-white" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm4 8h-2v-4h2v4zm0-6h-2V7h2v2z"/>
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm4 8h-2v-4h2v4zm0-6h-2V7h2v2z" />
                 </svg>
               </div>
               <div className="leading-none">
@@ -151,7 +175,7 @@ export default function Footer() {
 
         {/* Middle Footer: Brand and Office Locations */}
         <div className="py-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-gray-300/80">
-          
+
           {/* Logo Mark */}
           <div className="md:col-span-4 flex items-center">
             <Image
@@ -207,6 +231,6 @@ export default function Footer() {
           </div>
         </Container>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

@@ -29,35 +29,40 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans selection:bg-[#5b176e] selection:text-white">
-      <main className="flex-1">
-        {/* HERO SECTION */}
-        <ProductsHero
-          activeTab={activeTab}
-          activeSlide={activeSlide}
-          onTabChange={handleTabChange}
-          onPrevSlide={handlePrevSlide}
-          onNextSlide={handleNextSlide}
-          onSlideSelect={setActiveSlide}
-          currentProduct={currentProduct}
-          currentProducts={currentProducts}
-        />
+    <div className="relative min-h-screen bg-white text-gray-900 font-sans selection:bg-[#5b176e] selection:text-white overflow-x-clip">
+      {/* Main page content layer - covers footer while scrolling top/middle */}
+      <div className="relative z-10 bg-white shadow-2xl">
+        <main className="flex-1">
+          {/* HERO SECTION */}
+          <ProductsHero
+            activeTab={activeTab}
+            activeSlide={activeSlide}
+            onTabChange={handleTabChange}
+            onPrevSlide={handlePrevSlide}
+            onNextSlide={handleNextSlide}
+            onSlideSelect={setActiveSlide}
+            currentProduct={currentProduct}
+            currentProducts={currentProducts}
+          />
 
-        {/* PRODUCT SERIES SPECIFICATIONS */}
-        <ProductSeriesSpecifications currentProduct={currentProduct} />
+          {/* PRODUCT SERIES SPECIFICATIONS */}
+          <ProductSeriesSpecifications currentProduct={currentProduct} />
 
-        {/* AVAILABLE PANEL JOINTS SECTION */}
-        <AvailablePanelJointsSection />
+          {/* AVAILABLE PANEL JOINTS SECTION */}
+          <AvailablePanelJointsSection />
 
-        {/* MANUFACTURING THAT DELIVERS SECTION */}
-        <ManufacturingThatDeliversSection />
+          {/* MANUFACTURING THAT DELIVERS SECTION */}
+          <ManufacturingThatDeliversSection />
 
-        {/* BUILD YOUR NEXT PROJECT CTA SECTION */}
-        <SynergyHeroComponent />
-      </main>
+          {/* BUILD YOUR NEXT PROJECT CTA SECTION */}
+          <SynergyHeroComponent />
+        </main>
+      </div>
 
-      {/* Footer Component */}
-      <Footer />
+      {/* Sticky footer reveal layer - unmasks smoothly as page end is reached */}
+      <div className="sticky bottom-0 z-0">
+        <Footer />
+      </div>
     </div>
   );
 }
