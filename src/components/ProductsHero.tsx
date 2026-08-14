@@ -7,6 +7,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "./Container";
 
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
+
 export interface ProductItem {
   id: string;
   name: string;
@@ -16,6 +21,7 @@ export interface ProductItem {
   thickness: string;
   density: string;
   facing: string;
+  specs?: ProductSpec[];
 }
 
 export const categoryTabs = [
@@ -33,8 +39,16 @@ export const panelProducts: Record<string, ProductItem[]> = {
       series: "PUF Series",
       types: "PUF Wall / Roof",
       thickness: "50–200mm",
-      density: "40 kg/m³",
+      density: "40–45 kg/m³",
       facing: "Pre-painted steel sheet",
+      specs: [
+        { label: "Core Density", value: "40–45 kg/m³" },
+        { label: "Thermal Conductivity", value: "0.0214 W/m·K" },
+        { label: "Temperature Range", value: "−20°C to +110°C" },
+        { label: "Water Absorption", value: "≤ 0.2%" },
+        { label: "Water Vapour Permeability", value: "0.11 gm/hr/m²" },
+        { label: "Fire Performance", value: "Self-extinguishing" },
+      ],
     },
     {
       id: "02",
@@ -43,8 +57,16 @@ export const panelProducts: Record<string, ProductItem[]> = {
       series: "PUF Series",
       types: "Tongue & Groove Wall",
       thickness: "30–150mm",
-      density: "40 kg/m³",
+      density: "40–45 kg/m³",
       facing: "PPGI / Stainless Steel",
+      specs: [
+        { label: "Core Density", value: "40–45 kg/m³" },
+        { label: "Thermal Conductivity", value: "0.0214 W/m·K" },
+        { label: "Temperature Range", value: "−20°C to +110°C" },
+        { label: "Water Absorption", value: "≤ 0.2%" },
+        { label: "Water Vapour Permeability", value: "0.11 gm/hr/m²" },
+        { label: "Fire Performance", value: "Self-extinguishing" },
+      ],
     },
     {
       id: "03",
@@ -53,11 +75,18 @@ export const panelProducts: Record<string, ProductItem[]> = {
       series: "PUF Series",
       types: "Cam-lock Interlocking",
       thickness: "80–200mm",
-      density: "42 kg/m³",
+      density: "40–45 kg/m³",
       facing: "Pre-painted Galvanized Steel",
+      specs: [
+        { label: "Core Density", value: "40–45 kg/m³" },
+        { label: "Thermal Conductivity", value: "0.0214 W/m·K" },
+        { label: "Temperature Range", value: "−20°C to +110°C" },
+        { label: "Water Absorption", value: "≤ 0.2%" },
+        { label: "Water Vapour Permeability", value: "0.11 gm/hr/m²" },
+        { label: "Fire Performance", value: "Self-extinguishing" },
+      ],
     },
   ],
-
   pir: [
     {
       id: "01",
@@ -65,9 +94,17 @@ export const panelProducts: Record<string, ProductItem[]> = {
       image: "/puf_panel_stack.png",
       series: "PIR Series",
       types: "Fire-Resistant PIR",
-      thickness: "50–150mm",
-      density: "45 kg/m³",
+      thickness: "30–200mm",
+      density: "40–45 kg/m³",
       facing: "High Durability Steel",
+      specs: [
+        { label: "Core Density", value: "40–45 kg/m³" },
+        { label: "Thermal Conductivity", value: "≤ 0.022 W/m·K" },
+        { label: "Temperature Range", value: "-40°C to +120°C" },
+        { label: "Fire Performance", value: "FM / EN standard" },
+        { label: "Compressive Strength", value: "≥ 150 kPa" },
+        { label: "Closed Cell Content", value: "≥ 90%" },
+      ],
     },
     {
       id: "02",
@@ -75,32 +112,55 @@ export const panelProducts: Record<string, ProductItem[]> = {
       image: "/puf_roof_panel.png",
       series: "PIR Series",
       types: "Ribbed Roof Profile",
-      thickness: "60–200mm",
-      density: "45 kg/m³",
+      thickness: "30–200mm",
+      density: "40–45 kg/m³",
       facing: "Alu-Zinc Coated Sheet",
+      specs: [
+        { label: "Core Density", value: "40–45 kg/m³" },
+        { label: "Thermal Conductivity", value: "≤ 0.022 W/m·K" },
+        { label: "Temperature Range", value: "-40°C to +120°C" },
+        { label: "Fire Performance", value: "FM / EN standard" },
+        { label: "Compressive Strength", value: "≥ 150 kPa" },
+        { label: "Closed Cell Content", value: "≥ 90%" },
+      ],
     },
   ],
-
   specialty: [
     {
       id: "01",
       name: "Cleanroom Modular Panel",
       image: "/cleanroom_panel.png",
-      series: "Specialty Series",
+      series: "Rockwool Series",
       types: "Hygienic Sealed Joint",
-      thickness: "50–100mm",
-      density: "40 kg/m³",
+      thickness: "50–200mm",
+      density: "100–120 kg/m³",
       facing: "Anti-Bacterial Coated Steel",
+      specs: [
+        { label: "Core Density", value: "100–120 kg/m³" },
+        { label: "Thermal Conductivity", value: "0.040–0.045 W/m·K" },
+        { label: "Temperature Resistance", value: "Up to 750°C" },
+        { label: "Reaction to Fire", value: "Non-combustible (Euroclass A1)" },
+        { label: "Fire Rating", value: "Up to 4 Hours" },
+        { label: "Sound Reduction", value: "Up to 35 dB" },
+      ],
     },
     {
       id: "02",
       name: "Acoustic Insulation Panel",
       image: "/puf_factory.png",
-      series: "Specialty Series",
+      series: "Rockwool Series",
       types: "Perforated Soundproof",
-      thickness: "80–150mm",
-      density: "48 kg/m³",
+      thickness: "50–200mm",
+      density: "100–120 kg/m³",
       facing: "Perforated Steel & Mesh",
+      specs: [
+        { label: "Core Density", value: "100–120 kg/m³" },
+        { label: "Thermal Conductivity", value: "0.040–0.045 W/m·K" },
+        { label: "Temperature Resistance", value: "Up to 750°C" },
+        { label: "Reaction to Fire", value: "Non-combustible (Euroclass A1)" },
+        { label: "Fire Rating", value: "Up to 4 Hours" },
+        { label: "Sound Reduction", value: "Up to 35 dB" },
+      ],
     },
   ],
 };
@@ -190,11 +250,10 @@ export default function ProductsHero({
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className={`px-6 py-2.5 text-sm font-semibold transition-all duration-300 ${
-                isActive
-                  ? "bg-[#5b176e] text-white "
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200/60"
-              }`}
+              className={`px-6 py-2.5 text-sm font-semibold transition-all duration-300 ${isActive
+                ? "bg-[#5b176e] text-white "
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200/60"
+                }`}
             >
               {tab.label}
             </button>
@@ -205,7 +264,7 @@ export default function ProductsHero({
       {/* Product Carousel Showcase */}
       <div className="mt-12 relative max-w-5xl mx-auto px-4">
         <div className="flex items-center justify-center gap-4 sm:gap-8 py-4 relative min-h-[460px] sm:min-h-[500px]">
-          
+
           {/* Left Preview Card */}
           <motion.div
             key={`left-${prevProduct.id}-${activeSlide}`}
@@ -226,7 +285,7 @@ export default function ProductsHero({
 
           {/* Main Active Card with Slide Shift Animation */}
           <div className="w-full max-w-md sm:max-w-xl bg-white p-4 sm:p-6  border border-gray-200 flex flex-col items-center text-center relative group z-10 overflow-hidden">
-            
+
 
 
 
@@ -271,9 +330,8 @@ export default function ProductsHero({
                     onSlideSelect(idx);
                   }}
                   aria-label={`Go to slide ${idx + 1}`}
-                  className={`h-3 transition-all duration-300 ${
-                    idx === activeSlide ? "w-8 bg-[#5b176e]" : "w-3 bg-gray-300 hover:bg-gray-400"
-                  }`}
+                  className={`h-3 transition-all duration-300 ${idx === activeSlide ? "w-8 bg-[#5b176e]" : "w-3 bg-gray-300 hover:bg-gray-400"
+                    }`}
                 />
               ))}
             </div>
