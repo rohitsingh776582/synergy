@@ -31,7 +31,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="flex min-h-[88dvh] flex-col">
+        <div className="flex min-h-[96dvh] flex-col">
           <div
             id="home-hero"
             className="flex flex-1 flex-col justify-center py-9 sm:py-12"
