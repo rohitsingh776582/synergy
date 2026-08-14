@@ -21,7 +21,7 @@ export interface ProductItem {
 export const categoryTabs = [
   { id: "puf", label: "PUF Panels" },
   { id: "pir", label: "PIR Panels" },
-  { id: "specialty", label: "Specialty Panels" },
+  { id: "specialty", label: "Rockwool Panels" },
 ];
 
 export const panelProducts: Record<string, ProductItem[]> = {
@@ -57,6 +57,7 @@ export const panelProducts: Record<string, ProductItem[]> = {
       facing: "Pre-painted Galvanized Steel",
     },
   ],
+
   pir: [
     {
       id: "01",
@@ -79,6 +80,7 @@ export const panelProducts: Record<string, ProductItem[]> = {
       facing: "Alu-Zinc Coated Sheet",
     },
   ],
+
   specialty: [
     {
       id: "01",
@@ -190,7 +192,7 @@ export default function ProductsHero({
               onClick={() => onTabChange(tab.id)}
               className={`px-6 py-2.5 text-sm font-semibold transition-all duration-300 ${
                 isActive
-                  ? "bg-[#5b176e] text-white shadow-md"
+                  ? "bg-[#5b176e] text-white "
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200/60"
               }`}
             >
@@ -212,7 +214,7 @@ export default function ProductsHero({
             exit={{ opacity: 0, x: -100, scale: 0.7 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             onClick={handlePrev}
-            className="hidden md:block w-48 lg:w-64 h-64 shrink-0 bg-black overflow-hidden relative cursor-pointer hover:opacity-75 transition-opacity border border-gray-800 shadow-lg z-0"
+            className="hidden md:block w-48 lg:w-64 h-64 shrink-0 bg-black overflow-hidden relative cursor-pointer hover:opacity-75 transition-opacity border border-gray-800  z-0"
           >
             <Image
               src={prevProduct.image}
@@ -223,7 +225,7 @@ export default function ProductsHero({
           </motion.div>
 
           {/* Main Active Card with Slide Shift Animation */}
-          <div className="w-full max-w-md sm:max-w-xl bg-white p-4 sm:p-6 shadow-2xl border border-gray-200 flex flex-col items-center text-center relative group z-10 overflow-hidden">
+          <div className="w-full max-w-md sm:max-w-xl bg-white p-4 sm:p-6  border border-gray-200 flex flex-col items-center text-center relative group z-10 overflow-hidden">
             
 
 
@@ -242,7 +244,7 @@ export default function ProductsHero({
                 className="w-full flex flex-col items-center"
               >
                 {/* Product Image Frame */}
-                <div className="w-full h-56 sm:h-72 bg-black overflow-hidden relative shadow-inner">
+                <div className="w-full h-56 sm:h-72 bg-black overflow-hidden relative ">
                   <Image
                     src={currentProduct.image}
                     alt={currentProduct.name}
@@ -280,7 +282,7 @@ export default function ProductsHero({
             <div className="mt-6 relative z-20">
               <Link
                 href="/quote"
-                className="inline-flex items-center justify-center bg-[#5b176e] px-7 py-3 text-sm font-bold text-white shadow-lg hover:bg-[#461056] transition-all"
+                className="inline-flex items-center justify-center bg-[#5b176e] px-7 py-3 text-sm font-bold text-white hover:bg-[#461056] transition-all"
               >
                 Get A Quote
               </Link>
@@ -295,7 +297,7 @@ export default function ProductsHero({
             exit={{ opacity: 0, x: 100, scale: 0.7 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             onClick={handleNext}
-            className="hidden md:block w-48 lg:w-64 h-64 shrink-0 bg-black overflow-hidden relative cursor-pointer hover:opacity-75 transition-opacity border border-gray-800 shadow-lg z-0"
+            className="hidden md:block w-48 lg:w-64 h-64 shrink-0 bg-black overflow-hidden relative cursor-pointer hover:opacity-75 transition-opacity border border-gray-800  z-0"
           >
             <Image
               src={nextProduct.image}
