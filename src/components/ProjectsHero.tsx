@@ -139,7 +139,7 @@ export default function ProjectsHero() {
         <div className="mt-8 grid w-full max-w-3xl grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-4">
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center">
-              <p className="text-3xl font-extrabold tracking-tight text-black md:text-4xl">
+              <p className="stat-number text-3xl font-bold tracking-tight text-black md:text-4xl">
                 {stat.value}
               </p>
               <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-gray-600">

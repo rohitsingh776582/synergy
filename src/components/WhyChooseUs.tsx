@@ -41,20 +41,21 @@ const rows = [
       </>
     ),
     description:
-      "From insulated wall and roof panels to specialized cold storage applications, Synergy PUF offers a complete range of high-performance sandwich panels engineered for every industrial, commercial, and infrastructure requirement.",
+      "From Kashmir to Kanyakumari our distribution and installation network covers every corner of India, backed by regional warehouses and a dedicated project execution team.",
     image: "/puf_factory.png",
     alt: "Pan India Presence and strong network",
   },
   {
     title: (
       <>
-        Pan India Presence and
-        <br />
+        Unmatched Speed & Timely <br />
+         Delivery
+       
         strong network
       </>
     ),
     description:
-      "From insulated wall and roof panels to specialized cold storage applications, Synergy PUF offers a complete range of high-performance sandwich panels engineered for every industrial, commercial, and infrastructure requirement.",
+      "A 48-hour record on dispatch because a delayed panel means a delayed project. Speed built into every order, from factory floor to site, pan-India.",
     image: "/puf_factory.png",
     alt: "Pan India Presence and strong network",
   },

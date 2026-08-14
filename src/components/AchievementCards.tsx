@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const achievements = [
   {
     icon: Trophy,
-    target: 10000,
+    target: 500,
     suffix: "+",
     format: "en-IN" as const,
     label: "Projects Completed",
@@ -32,10 +32,10 @@ const achievements = [
   },
   {
     icon: CalendarDays,
-    target: 4,
+    target: 12,
     suffix: "+",
     format: "en-IN" as const,
-    label: "Decades of Trust &\nExperience",
+    label: "Years of Trust &\nExperience",
   },
 ] as const;
 

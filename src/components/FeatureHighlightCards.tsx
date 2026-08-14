@@ -37,7 +37,16 @@ export default function FeatureHighlightCards() {
                   {title}
                 </h3>
                 <p className="mt-0.5 text-xs font-light leading-snug text-[#7a6b88]">
-                  {subtitle}
+                  {title === "Pan-India Dispatch" ? (
+                    <>
+                      Delivered to your site in{" "}
+                      <span className="stat-number font-bold text-black">
+                        30 days
+                      </span>
+                    </>
+                  ) : (
+                    subtitle
+                  )}
                 </p>
               </div>
             </div>

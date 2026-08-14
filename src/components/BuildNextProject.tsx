@@ -134,7 +134,8 @@ export default function BuildNextProject() {
               data-reveal
               className="relative mt-4 text-sm sm:text-base font-light text-gray-600 leading-relaxed will-change-transform"
             >
-              BIS certified. FM approved. Delivered pan-India in 30 days.
+              BIS certified. FM approved. Delivered pan-India in{" "}
+              <span className="stat-number font-bold text-black">30 days</span>.
             </p>
 
             <div
@@ -183,7 +184,7 @@ export default function BuildNextProject() {
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6">
                 {stats.map((stat, idx) => (
                   <div key={stat.label}>
-                    <p className="text-2xl sm:text-3xl font-normal tracking-tight text-black">
+                    <p className="stat-number text-2xl sm:text-3xl font-bold tracking-tight text-black">
                       <span
                         ref={(el) => {
                           valueRefs.current[idx] = el;

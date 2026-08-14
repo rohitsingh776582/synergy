@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const stats = [
   {
     title: "Launched Projects",
-    target: 28,
+    target: 500,
     suffix: "+",
     description: (
       <>
