@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const subscribeReducedMotion = (callback: () => void) => {
-  if (typeof window === "undefined") return () => {};
+  if (typeof window === "undefined") return () => { };
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   mediaQuery.addEventListener("change", callback);
   return () => mediaQuery.removeEventListener("change", callback);
@@ -45,7 +45,7 @@ export default function Hero() {
       const line2 = triggerEl.querySelector('[data-element="headline-line-2"]');
       const heroPin = document.getElementById("home-hero") ?? sectionRef.current;
 
-      gsap.set([line1, line2], { opacity: 0 });
+      gsap.set([line1, line2], { y: "110%", opacity: 0 });
       gsap.set(scrollLayer, {
         y: 0,
         opacity: 1,
@@ -54,11 +54,11 @@ export default function Hero() {
         force3D: true,
       });
 
-      // Soft entrance — independent of scroll scrub
-      const headlineTl = gsap.timeline({ defaults: { ease: "power2.out" } });
+      // Smooth upward slide-reveal entrance on home page load
+      const headlineTl = gsap.timeline({ defaults: { ease: "power4.out" } });
       headlineTl
-        .to(line1, { opacity: 1, duration: 0.7 }, 0.1)
-        .to(line2, { opacity: 1, duration: 0.7 }, 0.25);
+        .to(line1, { y: "0%", opacity: 1, duration: 1.25 }, 0.1)
+        .to(line2, { y: "0%", opacity: 1, duration: 1.25 }, 0.22);
 
       // Scroll-linked exit — progress drives motion both ways
       const mm = gsap.matchMedia();
@@ -72,25 +72,54 @@ export default function Hero() {
         (context) => {
           const { isDesktop, isTablet } = context.conditions ?? {};
 
-          const yTravel = isDesktop ? -110 : isTablet ? -72 : -44;
-          const fadeTo = isDesktop ? 0.12 : isTablet ? 0.2 : 0.28;
-          const scaleTo = isDesktop ? 0.97 : 0.985;
-          const scrub = isDesktop ? 1.15 : isTablet ? 1 : 0.85;
+          const xDist = isDesktop ? 135 : isTablet ? 85 : 45;
+          const yTravel = isDesktop ? -95 : isTablet ? -65 : -40;
+          const fadeTo = isDesktop ? 0.12 : isTablet ? 0.18 : 0.25;
+          const scrub = 0.15; // Instantaneous pixel-perfect scroll response
 
-          gsap.to(scrollLayer, {
-            y: yTravel,
-            opacity: fadeTo,
-            scale: scaleTo,
-            ease: "none",
-            force3D: true,
+          const scrollTl = gsap.timeline({
             scrollTrigger: {
               trigger: heroPin,
               start: "top top",
-              end: "bottom top+=10%",
+              end: "bottom top+=20%",
               scrub,
               invalidateOnRefresh: true,
             },
           });
+
+          // Engineering slides right towards center to meet Insulation
+          scrollTl.to(
+            line1,
+            {
+              x: xDist,
+              ease: "none",
+              force3D: true,
+            },
+            0
+          );
+
+          // Insulation slides left towards center to meet Engineering
+          scrollTl.to(
+            line2,
+            {
+              x: -xDist,
+              ease: "none",
+              force3D: true,
+            },
+            0
+          );
+
+          // Whole hero container lifts & fades out smoothly
+          scrollTl.to(
+            scrollLayer,
+            {
+              y: yTravel,
+              opacity: fadeTo,
+              ease: "none",
+              force3D: true,
+            },
+            0
+          );
         }
       );
     }, sectionRef);
@@ -112,18 +141,22 @@ export default function Hero() {
             className="will-change-transform flex flex-col justify-start text-left"
             style={{ backfaceVisibility: "hidden" }}
           >
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-normal tracking-tight text-white leading-[1.1] max-w-4xl">
-              <span
-                data-element="headline-line-1"
-                className={`block ${isReducedMotion ? "" : "opacity-0"}`}
-              >
-                Engineering
+            <h1 className="flex flex-col gap-2 sm:gap-3 text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-normal tracking-tight text-white leading-[1.1] w-full">
+              <span className="block overflow-hidden pb-[0.3em] pt-[0.05em] -mb-[0.22em]">
+                <span
+                  data-element="headline-line-1"
+                  className="block will-change-transform"
+                >
+                  Engineering
+                </span>
               </span>
-              <span
-                data-element="headline-line-2"
-                className={`block ${isReducedMotion ? "" : "opacity-0"}`}
-              >
-                Insulation Solutions
+              <span className="block overflow-hidden pb-[0.3em] pt-[0.05em] -mb-[0.22em] text-right w-full">
+                <span
+                  data-element="headline-line-2"
+                  className="block will-change-transform text-right ml-auto"
+                >
+                  Insulation
+                </span>
               </span>
             </h1>
           </div>

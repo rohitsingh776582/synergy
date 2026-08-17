@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type PanelType = "roof" | "wall";
 
@@ -76,14 +80,75 @@ export default function PanelRequirements() {
   const [activePanel, setActivePanel] = useState<PanelType>("roof");
   const cards = panelCards[activePanel];
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const header = headerRef.current;
+    const grid = gridRef.current;
+    if (!section || !header || !grid) return;
+
+    const ctx = gsap.context(() => {
+      const headerElements = header.children;
+      const gridElements = grid.children;
+
+      gsap.set([headerElements, gridElements], { opacity: 0, y: 35 });
+
+      let maxProgress = 0;
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(
+        headerElements,
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "none",
+        },
+        0
+      );
+
+      tl.to(
+        gridElements,
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 1,
+          ease: "none",
+        },
+        0.15
+      );
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 90%",
+        end: "top 45%",
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (self.progress > maxProgress) {
+            maxProgress = self.progress;
+            tl.progress(maxProgress);
+          }
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, [activePanel]);
+
   return (
-    <section className="w-full bg-white">
+    <section ref={sectionRef} className="w-full bg-white">
       <Container>
         {/* =========================
             HEADER
         ========================== */}
         <div className="pt-16">
-          <div className="max-w-[680px]">
+          <div ref={headerRef} className="max-w-[680px]">
             <h2
               className="
                 text-3xl
@@ -122,6 +187,7 @@ export default function PanelRequirements() {
             PRODUCT CARDS — always 3
         ========================== */}
         <div
+          ref={gridRef}
           key={activePanel}
           className="
             mt-10

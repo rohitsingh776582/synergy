@@ -55,31 +55,25 @@ export default function AchievementCards() {
     const ctx = gsap.context(() => {
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
-      gsap.set(cards, { x: -80, opacity: 0 });
+      gsap.set(cards, { y: 35, opacity: 0 });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          end: "top 35%",
-          scrub: 0.7,
-          invalidateOnRefresh: true,
-        },
-      });
+      let maxProgress = 0;
+      const tl = gsap.timeline({ paused: true });
 
-      // Cards: left se aate hue
+      // Cards: Smooth fade-in + upward movement
       tl.to(
         cards,
         {
-          x: 0,
+          y: 0,
           opacity: 1,
-          stagger: 0.08,
+          stagger: 0.1,
+          duration: 1,
           ease: "none",
         },
         0
       );
 
-      // Numbers: 1 se target tak scroll ke saath
+      // Numbers: 1 to target count-up animation
       achievements.forEach((item, idx) => {
         const el = valueRefs.current[idx];
         if (!el) return;
@@ -91,6 +85,7 @@ export default function AchievementCards() {
           obj,
           {
             val: item.target,
+            duration: 1,
             ease: "none",
             onUpdate: () => {
               el.textContent = `${formatNumber(obj.val, item.format)}${item.suffix}`;
@@ -98,6 +93,20 @@ export default function AchievementCards() {
           },
           0
         );
+      });
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 90%",
+        end: "top 45%",
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (self.progress > maxProgress) {
+            maxProgress = self.progress;
+            tl.progress(maxProgress);
+          }
+        },
       });
     }, section);
 

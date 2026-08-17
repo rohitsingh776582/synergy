@@ -75,7 +75,10 @@ export default function BuildNextProject() {
         transformOrigin: "center bottom",
       });
 
-      gsap.to(items, {
+      let maxProgress = 0;
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(items, {
         y: 0,
         z: 0,
         zIndex: 20,
@@ -83,12 +86,19 @@ export default function BuildNextProject() {
         ease: "none",
         stagger: 0.08,
         force3D: true,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          end: "top 35%",
-          scrub: 1.2,
-          invalidateOnRefresh: true,
+      });
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 85%",
+        end: "top 35%",
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (self.progress > maxProgress) {
+            maxProgress = self.progress;
+            tl.progress(maxProgress);
+          }
         },
       });
 

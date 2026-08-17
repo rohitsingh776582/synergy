@@ -120,7 +120,7 @@ export default function AboutHero() {
       const cta = section.querySelector('[data-hero-element="cta"]');
       const floatCard = section.querySelector('[data-hero-element="card"]');
 
-      // Initial state setup for smooth reveal
+      // Initial state setup for smooth reveal on page load
       if (bgImage) {
         gsap.set(bgImage, {
           scale: 1.08,
@@ -134,7 +134,7 @@ export default function AboutHero() {
         gsap.set(watermark, { opacity: 0, y: -20 });
       }
       if (headingLines.length) {
-        gsap.set(headingLines, { y: 45, opacity: 0, force3D: true });
+        gsap.set(headingLines, { y: "100%", opacity: 0, force3D: true });
       }
       if (cta) {
         gsap.set(cta, { y: 40, opacity: 0, force3D: true });
@@ -143,16 +143,11 @@ export default function AboutHero() {
         gsap.set(floatCard, { y: 50, scale: 0.95, opacity: 0, force3D: true });
       }
 
+      // Page load entrance timeline: triggers automatically on page open
       const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-          invalidateOnRefresh: true,
-        },
         defaults: {
-          ease: "power3.out",
-          duration: 1.1,
+          ease: "power4.out",
+          duration: 1.25,
         },
       });
 
@@ -184,18 +179,18 @@ export default function AboutHero() {
         );
       }
 
-      // 3. Main heading lines upward stagger
+      // 3. Main heading lines upward reveal ("Engineering Insulation Solutions")
       if (headingLines.length) {
         tl.to(
           headingLines,
           {
-            y: 0,
+            y: "0%",
             opacity: 1,
-            stagger: 0.12,
-            duration: 1.05,
+            stagger: 0.15,
+            duration: 1.2,
             ease: "power4.out",
           },
-          0.2
+          0.15
         );
       }
 
@@ -209,7 +204,7 @@ export default function AboutHero() {
             duration: 0.95,
             ease: "power3.out",
           },
-          0.42
+          0.45
         );
       }
 
@@ -268,15 +263,15 @@ export default function AboutHero() {
 
           {/* Bottom Left Content */}
           <div className="lg:col-span-6 flex flex-col items-start gap-6 pt-12 md:pt-20">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-serif leading-[1.1] text-white tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-serif leading-[1.1] text-white tracking-tight">
               <span className="block overflow-hidden pb-[0.06em]">
                 <span data-hero-element="heading" className="block will-change-transform">
-                  India&apos;s most trusted
+                  Engineering
                 </span>
               </span>
               <span className="block overflow-hidden pb-[0.06em]">
-                <span data-hero-element="heading" className="block italic font-light will-change-transform">
-                  panel <span className="font-semibold not-italic">manufacturer.</span>
+                <span data-hero-element="heading" className="block will-change-transform">
+                  Insulation Solutions
                 </span>
               </span>
             </h1>
@@ -317,7 +312,7 @@ export default function AboutHero() {
 
                 {/* Card Title & Description */}
                 <div>
-                  <h3 className="text-xl font-serif font-bold text-gray-900 leading-snug">
+                  <h3 className="text-xl font-serif font-normal text-gray-900 leading-snug">
                     Crafted with Precision
                   </h3>
                   <p className="mt-1.5 text-xs sm:text-sm font-light leading-relaxed text-gray-600">

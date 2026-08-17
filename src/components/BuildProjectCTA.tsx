@@ -1,15 +1,82 @@
-import React from "react";
+"use client";
+
+import React, { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Download } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function BuildProjectCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const rightGridRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const leftCol = leftColRef.current;
+    const rightGrid = rightGridRef.current;
+    if (!section || !leftCol || !rightGrid) return;
+
+    const ctx = gsap.context(() => {
+      const leftElements = leftCol.querySelectorAll("span, h2, p");
+      const rightElements = rightGrid.children;
+
+      gsap.set([leftElements, rightElements], { opacity: 0, y: 35 });
+
+      let maxProgress = 0;
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(
+        leftElements,
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 1,
+          ease: "none",
+        },
+        0
+      );
+
+      tl.to(
+        rightElements,
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 1,
+          ease: "none",
+        },
+        0.15
+      );
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 90%",
+        end: "top 45%",
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (self.progress > maxProgress) {
+            maxProgress = self.progress;
+            tl.progress(maxProgress);
+          }
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="w-full bg-[#f8f6f9] py-16 md:py-20">
+    <section ref={sectionRef} className="w-full bg-[#f8f6f9] py-16 md:py-20">
       <Container className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left Column: Heading and Subtext */}
-        <div className="flex flex-col space-y-6">
+        <div ref={leftColRef} className="flex flex-col space-y-6">
           <span className="inline-flex items-center gap-2 self-start bg-[#f3e8f7] px-4 py-1.5 text-xs font-medium text-[#5b176e] sm:text-sm">
             <span className="h-1.5 w-1.5 bg-[#5b176e]" aria-hidden />
             Even impossible is possible
@@ -28,7 +95,7 @@ export default function BuildProjectCTA() {
 
         {/* Right Column: Staggered Grid & Action Buttons */}
         <div className="flex justify-center lg:justify-end">
-          <div className="grid grid-cols-2 gap-4 w-full max-w-[460px]">
+          <div ref={rightGridRef} className="grid grid-cols-2 gap-4 w-full max-w-[460px]">
             {/* Top-Left Image: PUF Wall Panel */}
             <div className="relative aspect-square w-full overflow-hidden bg-white border border-purple-100 p-3 group transition-all duration-300">
               <Image

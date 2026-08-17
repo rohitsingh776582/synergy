@@ -1,8 +1,12 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useLayoutEffect, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const subscribeReducedMotion = (callback: () => void) => {
   if (typeof window === "undefined") return () => {};
@@ -23,7 +27,7 @@ const rows = [
     title: (
       <>
         40+ years old
-        
+        <br />
         credible excellence
       </>
     ),
@@ -49,8 +53,8 @@ const rows = [
     title: (
       <>
         Unmatched Speed & Timely <br />
-         Delivery
-       
+        Delivery
+        <br />
         strong network
       </>
     ),
@@ -62,18 +66,75 @@ const rows = [
 ] as const;
 
 export default function WhyChooseUs() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   const isReducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotionSnapshot,
     getReducedMotionServerSnapshot
   );
 
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const heading = headingRef.current;
+    if (!section || isReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      const activeRows = rowRefs.current.filter(Boolean) as HTMLDivElement[];
+
+      if (heading) gsap.set(heading, { opacity: 0, y: 35 });
+      if (activeRows.length) gsap.set(activeRows, { opacity: 0, y: 35 });
+
+      let maxProgress = 0;
+      const tl = gsap.timeline({ paused: true });
+
+      if (heading) {
+        tl.to(heading, { opacity: 1, y: 0, duration: 0.8, ease: "none" }, 0);
+      }
+
+      if (activeRows.length) {
+        tl.to(
+          activeRows,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.12,
+            duration: 1,
+            ease: "none",
+          },
+          0.15
+        );
+      }
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 90%",
+        end: "top 45%",
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (self.progress > maxProgress) {
+            maxProgress = self.progress;
+            tl.progress(maxProgress);
+          }
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, [isReducedMotion]);
+
   return (
-    <section className="relative z-10 w-full bg-white">
+    <section ref={sectionRef} className="relative z-10 w-full bg-white">
       <Container>
         {/* Main Title — stays outside the stacked panels */}
         <div className="pb-10 pt-20 sm:pb-10 sm:pt-24">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 leading-[1.15] tracking-[-0.02em]">
+          <h2
+            ref={headingRef}
+            className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 leading-[1.15] tracking-[-0.02em] will-change-transform"
+          >
             Why Choose Us?
           </h2>
         </div>
@@ -86,8 +147,11 @@ export default function WhyChooseUs() {
           {rows.map((row, index) => (
             <div
               key={index}
+              ref={(el) => {
+                rowRefs.current[index] = el;
+              }}
               data-stack-row
-              className={`bg-white py-12 ${
+              className={`bg-white py-12 will-change-transform ${
                 index === rows.length - 1 ? "" : "border-b border-[#9c84a7]"
               }`}
               style={{

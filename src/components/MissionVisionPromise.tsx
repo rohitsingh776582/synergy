@@ -1,8 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Target, Eye, Award } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const items = [
   {
@@ -24,9 +28,49 @@ const items = [
 
 export default function MissionVisionPromise() {
   const [hovered, setHovered] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+
+      gsap.set(cards, { opacity: 0, y: 35 });
+
+      let maxProgress = 0;
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(cards, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.12,
+        duration: 1,
+        ease: "none",
+      });
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 90%",
+        end: "top 45%",
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (self.progress > maxProgress) {
+            maxProgress = self.progress;
+            tl.progress(maxProgress);
+          }
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="bg-[#f4f4f7] py-14 md:py-16">
+    <section ref={sectionRef} className="bg-[#f4f4f7] py-14 md:py-16">
       <Container>
         <div
           className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5"
@@ -39,6 +83,9 @@ export default function MissionVisionPromise() {
             return (
               <div
                 key={title}
+                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
                 className={`relative border border-gray-200 bg-white p-6 transition-[transform,box-shadow] duration-300 ease-out will-change-transform ${
