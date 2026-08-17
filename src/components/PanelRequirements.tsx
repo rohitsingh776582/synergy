@@ -39,6 +39,22 @@ const panelCards: Record<PanelType, CardItem[]> = {
         "High load-bearing roof panels engineered for warehouses, factories, and large-span commercial structures.",
       isTextOnly: true,
     },
+    {
+      slug: "puf-roof-panels",
+      name: "Weather-Tight Roof Systems",
+      category: "Roofing Panels",
+      shortDescription:
+        "Overlapping rib joint roof panels that drain rainwater efficiently while cutting HVAC energy costs.",
+      image: "/images/products/puf_roof_panel_1786340661690.png",
+    },
+    {
+      slug: "puf-roof-panels",
+      name: "Commercial Roof Cladding Systems",
+      category: "Roofing Panels",
+      shortDescription:
+        "Engineered insulated roof cladding designed for commercial facilities and large industrial spans.",
+      isTextOnly: true,
+    },
   ],
   wall: [
     {
@@ -55,6 +71,22 @@ const panelCards: Record<PanelType, CardItem[]> = {
       category: "Wall Panels",
       shortDescription:
         "Precision-engineered sandwich wall panels for industrial factories, cleanrooms, and commercial cladding.",
+      isTextOnly: true,
+    },
+    {
+      slug: "puf-wall-panels",
+      name: "Cleanroom Insulated Walls",
+      category: "Wall Panels",
+      shortDescription:
+        "Hygienic flush wall panels engineered for pharmaceutical cleanrooms and food processing plants.",
+      image: "/images/products/cleanroom_panel.png",
+    },
+    {
+      slug: "puf-wall-panels",
+      name: "Cold Storage Wall Partition",
+      category: "Wall Panels",
+      shortDescription:
+        "Ultra-low thermal conductivity wall panels designed for cold storage rooms and freezer facilities.",
       isTextOnly: true,
     },
   ],
@@ -91,15 +123,28 @@ export default function PanelRequirements() {
         }
       );
 
-      const slideTween = gsap.to(track, {
-        xPercent: -50,
-        ease: "none",
-        duration: 20,
-        repeat: -1,
-      });
+      // 100% Seamless Infinite Step-and-Pause Carousel
+      const numSets = 3;
+      const totalCards = cards.length * numSets;
+      const oneCardStepPercent = -100 / totalCards;
 
-      const handleMouseEnter = () => slideTween.pause();
-      const handleMouseLeave = () => slideTween.play();
+      const slideTl = gsap.timeline({ repeat: -1 });
+
+      for (let i = 1; i <= cards.length; i++) {
+        slideTl
+          .to(track, {
+            xPercent: oneCardStepPercent * i,
+            duration: 0.65,
+            ease: "power3.inOut",
+          })
+          .to({}, { duration: 1.4 }); // Fast, punchy pause duration
+      }
+
+      // Instant seamless reset to 0% after 1 full set cycle (0ms jump, 0 blank space)
+      slideTl.set(track, { xPercent: 0 });
+
+      const handleMouseEnter = () => slideTl.pause();
+      const handleMouseLeave = () => slideTl.play();
 
       track.addEventListener("mouseenter", handleMouseEnter);
       track.addEventListener("mouseleave", handleMouseLeave);
@@ -113,7 +158,8 @@ export default function PanelRequirements() {
     return () => ctx.revert();
   }, [activePanel]);
 
-  const displayCards = [...cards, ...cards];
+  // Triple cards array to ensure continuous fill with zero empty space
+  const displayCards = [...cards, ...cards, ...cards];
 
   return (
     <section
@@ -190,10 +236,7 @@ export default function PanelRequirements() {
                     relative
                     aspect-[16/10]
                     w-full
-                    bg-gradient-to-br
-                    from-[#461056]
-                    via-[#5b176e]
-                    to-[#7b3f8f]
+                    bg-white
                     p-6
                     sm:p-8
                     flex
@@ -204,18 +247,34 @@ export default function PanelRequirements() {
                     overflow-hidden
                   "
                 >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_70%)] pointer-events-none" />
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-3 backdrop-blur-sm">
-                    <Layers className="w-5 h-5 text-purple-200" />
+                  <div className="w-10 h-10 rounded-full bg-[#5b176e]/10 flex items-center justify-center mb-3">
+                    <Layers className="w-5 h-5 text-[#5b176e]" />
                   </div>
 
-                  <span className="text-xs uppercase tracking-[2px] text-purple-200 font-light mb-2">
+                  <span className="text-xs uppercase tracking-[2px] text-[#7b3f8f] font-light mb-2">
                     {item.category}
                   </span>
 
-                  <h3 className="text-xl sm:text-2xl font-normal text-white leading-tight">
+                  <h3 className="text-xl sm:text-2xl font-normal text-[#111827] leading-tight mb-4">
                     {item.name}
                   </h3>
+
+                  <Link
+                    href={`/products/${item.slug}`}
+                    className="
+                      inline-flex
+                      items-center
+                      gap-2
+                      text-sm
+                      font-light
+                      text-[#5b176e]
+                      transition-colors
+                      hover:text-[#461056]
+                    "
+                  >
+                    <span>Explore Product</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               ) : (
                 <div className="relative aspect-[16/10] w-full bg-gray-100 overflow-hidden">
@@ -236,37 +295,6 @@ export default function PanelRequirements() {
                   )}
                 </div>
               )}
-
-              <div className="flex flex-1 flex-col justify-between p-6">
-                <div>
-                  <span className="text-xs font-light uppercase tracking-[1.5px] text-[#7b3f8f]">
-                    {item.category}
-                  </span>
-
-                  <h3 className="mt-2 text-xl font-normal text-[#111827] transition-colors group-hover:text-[#5b176e]">
-                    {item.name}
-                  </h3>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-gray-100">
-                  <Link
-                    href={`/products/${item.slug}`}
-                    className="
-                      inline-flex
-                      items-center
-                      gap-2
-                      text-sm
-                      font-light
-                      text-[#5b176e]
-                      transition-colors
-                      hover:text-[#461056]
-                    "
-                  >
-                    <span>Explore Product</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
             </div>
           ))}
         </div>

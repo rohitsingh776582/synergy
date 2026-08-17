@@ -8,6 +8,8 @@ import Container from "@/components/Container";
 import { products } from "@/data/products";
 import { Check, ArrowRight, ShieldCheck, Zap, Award, FileText } from "lucide-react";
 
+import BackButton from "@/components/BackButton";
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -47,6 +49,9 @@ export default async function ProductDetailPage({ params }: Props) {
         {/* Breadcrumb & Hero */}
         <section className="bg-gradient-to-b from-purple-50/60 via-white to-gray-50 py-12 border-b border-gray-100">
           <Container>
+            {/* Back Button with Left Arrow */}
+            <BackButton />
+
             <div className="flex items-center gap-2 text-xs font-semibold text-gray-500 mb-4">
               <Link href="/" className="hover:text-[#5b176e]">Home</Link>
               <span>/</span>

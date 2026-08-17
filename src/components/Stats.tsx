@@ -77,28 +77,28 @@ export default function Stats() {
         el.textContent = `${from}`;
 
         gsap.set(wrap, {
-          yPercent: -110,
+          y: 160,
           opacity: 0,
-          transformOrigin: "top center",
+          force3D: true,
         });
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: wrap.parentElement ?? wrap,
-            start: "top 90%",
-            end: "top 45%",
-            scrub: 0.85,
+            start: "top 95%",
+            end: "top 30%",
+            scrub: 0.8,
             invalidateOnRefresh: true,
           },
         });
 
-        // Border se nikal kar niche fit
+        // Smooth bottom-to-top text reveal
         tl.to(
           wrap,
           {
-            yPercent: 0,
+            y: 0,
             opacity: 1,
-            ease: "none",
+            ease: "power2.out",
           },
           0
         );
@@ -107,7 +107,8 @@ export default function Stats() {
           obj,
           {
             val: to,
-            ease: "none",
+            duration: 1.2,
+            ease: "power2.out",
             onUpdate: () => {
               el.textContent = `${Math.round(obj.val)}`;
             },

@@ -84,14 +84,21 @@ export default function WhyChooseUs() {
     const ctx = gsap.context(() => {
       const activeRows = rowRefs.current.filter(Boolean) as HTMLDivElement[];
 
-      if (heading) gsap.set(heading, { opacity: 0, y: 35 });
-      if (activeRows.length) gsap.set(activeRows, { opacity: 0, y: 35 });
+      if (heading) gsap.set(heading, { opacity: 0, y: 160, force3D: true });
+      if (activeRows.length) gsap.set(activeRows, { opacity: 0, y: 160, force3D: true });
 
-      let maxProgress = 0;
-      const tl = gsap.timeline({ paused: true });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 95%",
+          end: "top 28%",
+          scrub: 0.8,
+          invalidateOnRefresh: true,
+        },
+      });
 
       if (heading) {
-        tl.to(heading, { opacity: 1, y: 0, duration: 0.8, ease: "none" }, 0);
+        tl.to(heading, { opacity: 1, y: 0, ease: "power2.out" }, 0);
       }
 
       if (activeRows.length) {
@@ -100,27 +107,12 @@ export default function WhyChooseUs() {
           {
             opacity: 1,
             y: 0,
-            stagger: 0.12,
-            duration: 1,
-            ease: "none",
+            stagger: 0.1,
+            ease: "power2.out",
           },
-          0.15
+          0.08
         );
       }
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 90%",
-        end: "top 45%",
-        scrub: 0.6,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          if (self.progress > maxProgress) {
-            maxProgress = self.progress;
-            tl.progress(maxProgress);
-          }
-        },
-      });
     }, section);
 
     return () => ctx.revert();

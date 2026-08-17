@@ -1,11 +1,42 @@
 "use client";
 
-import { useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function IndustryShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const textHeaderRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const textHeader = textHeaderRef.current;
+    if (!textHeader) return;
+
+    const ctx = gsap.context(() => {
+      const children = textHeader.children;
+      gsap.set(children, { opacity: 0, y: 160, force3D: true });
+
+      gsap.to(children, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: textHeader,
+          start: "top 95%",
+          end: "top 30%",
+          scrub: 0.8,
+          invalidateOnRefresh: true,
+        },
+      });
+    }, textHeader);
+
+    return () => ctx.revert();
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -23,7 +54,7 @@ export default function IndustryShowcase() {
       ref={containerRef}
       className="relative bg-white py-16 sm:py-24 font-sans overflow-hidden"
     >
-      <div className="text-center px-4 mb-10 sm:mb-14 max-w-4xl mx-auto">
+      <div ref={textHeaderRef} className="text-center px-4 mb-10 sm:mb-14 max-w-4xl mx-auto">
         <h2 className="mt-3 text-3xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.08]">
           Insulation for <br className="hidden sm:inline" />
           every industry.

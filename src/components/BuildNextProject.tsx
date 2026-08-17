@@ -64,41 +64,24 @@ export default function BuildNextProject() {
         content.querySelectorAll("[data-reveal]")
       );
 
-      // Pehle z- (peeche), scroll pe saamne (z+) aate hain
-      gsap.set(content, { perspective: 1000 });
       gsap.set(items, {
-        y: 80,
-        z: -120,
-        zIndex: -1,
+        y: 160,
         opacity: 0,
         force3D: true,
-        transformOrigin: "center bottom",
       });
 
-      let maxProgress = 0;
-      const tl = gsap.timeline({ paused: true });
-
-      tl.to(items, {
+      gsap.to(items, {
         y: 0,
-        z: 0,
-        zIndex: 20,
         opacity: 1,
-        ease: "none",
-        stagger: 0.08,
-        force3D: true,
-      });
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 85%",
-        end: "top 35%",
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          if (self.progress > maxProgress) {
-            maxProgress = self.progress;
-            tl.progress(maxProgress);
-          }
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 95%",
+          end: "top 30%",
+          scrub: 0.8,
+          invalidateOnRefresh: true,
+          onEnter: () => playCountAnimation(),
         },
       });
 

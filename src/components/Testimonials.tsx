@@ -54,18 +54,41 @@ export default function Testimonials() {
     getReducedMotionServerSnapshot
   );
 
+  const headerRef = useRef<HTMLDivElement>(null);
+
   useLayoutEffect(() => {
     if (isReducedMotion) return;
 
     const section = sectionRef.current;
     const stage = stageRef.current;
+    const header = headerRef.current;
     const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
     if (!section || !stage || cards.length === 0) return;
 
     const ctx = gsap.context(() => {
+      // Header text bottom-to-top reveal animation
+      if (header) {
+        const headerChildren = header.children;
+        gsap.set(headerChildren, { opacity: 0, y: 160, force3D: true });
+
+        gsap.to(headerChildren, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: header,
+            start: "top 95%",
+            end: "top 30%",
+            scrub: 0.8,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
+
       gsap.set(stage, { perspective: 1400, transformStyle: "preserve-3d" });
 
-      // Start in front (samne), scroll → move back (peeche)
+      // Start in front (samne), scroll -> move back (peeche)
       gsap.set(cards, {
         z: 160,
         y: 48,
@@ -102,7 +125,7 @@ export default function Testimonials() {
       className="relative z-0 overflow-hidden bg-[#e9e9ed] py-20 font-sans"
     >
       <Container className="text-center">
-        <div className="mx-auto max-w-3xl text-center">
+        <div ref={headerRef} className="mx-auto max-w-3xl text-center">
           <p className="font-sans text-xs font-normal uppercase tracking-[0.2em] text-[#5b176e] sm:text-sm">
             Testimonials
           </p>

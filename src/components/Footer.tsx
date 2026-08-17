@@ -226,9 +226,9 @@ export default function Footer() {
       <Image
         src="/images/logo/Group-Logo.png"
         alt="Synergy Group"
-        width={180}
-        height={50}
-        className="h-10 w-auto object-contain object-left md:object-right"
+        width={140}
+        height={40}
+        className="h-7 w-auto object-contain object-left md:object-right sm:h-8"
       />
 
     </div>
@@ -245,9 +245,9 @@ export default function Footer() {
               <Image
                 src="/images/logo/PUF-Logo%201.png"
                 alt="Synergy PUF"
-                width={220}
-                height={66}
-                className="h-12 w-auto object-contain object-left sm:h-14"
+                width={150}
+                height={45}
+                className="h-8 w-auto object-contain object-left sm:h-9 md:h-10"
               />
             </div>
 
