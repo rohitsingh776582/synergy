@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
-import Container from "@/components/Container";
-import WhyPufPanelsSection from "@/components/WhyPufPanelsSection";
+import ApplicationsImageSlider from "@/components/ApplicationsImageSlider";
 import IndustriesWeServeSection from "@/components/IndustriesWeServeSection";
-
 
 export const metadata: Metadata = {
   title: "Industry Applications | Synergy PUF Insulation Solutions",
@@ -14,30 +12,16 @@ export default function ApplicationsPage() {
   return (
     <div className="relative min-h-screen bg-white font-sans text-gray-900 overflow-x-clip">
       {/* Main page content layer - covers footer while scrolling top/middle */}
-      <div className="relative z-10 bg-white shadow-2xl">
+      <div className="relative z-10 bg-white">
         <main className="flex-1">
-          {/* Hero */}
-          <section className="bg-gradient-to-b from-purple-50/60 via-white to-gray-50 py-16 text-center border-b border-gray-100">
-            <Container>
-              <span className=" bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
-                Sector Applications
-              </span>
-              <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
-                PUF Panels. Engineered for Every Industry.
-              </h1>
-              <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                From cold storage to sterile cleanrooms, PUF insulation panels engineered for precise thermal control.
-              </p>
-            </Container>
-          </section>
-
-          {/* Why PUF Panels Feature Section */}
-          <WhyPufPanelsSection />
+          {/* Applications 4-Image Slider Component */}
+          <ApplicationsImageSlider />
 
           {/* Industries We Serve Interactive Section */}
           <IndustriesWeServeSection />
         </main>
       </div>
+
 
       {/* Sticky footer reveal layer - unmasks smoothly as page end is reached */}
       <div className="sticky bottom-0 z-0">

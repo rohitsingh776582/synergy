@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Factory,
   Snowflake,
@@ -12,7 +13,6 @@ import {
   Zap,
   Building2,
   Landmark,
-  Check,
   ArrowRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -24,6 +24,7 @@ interface IndustryItem {
   icon: typeof Factory;
   description: string;
   useCases: string[];
+  imageSrc: string;
 }
 
 const industriesData: IndustryItem[] = [
@@ -31,6 +32,7 @@ const industriesData: IndustryItem[] = [
     id: "industrial",
     name: "Industrial & Manufacturing",
     icon: Factory,
+    imageSrc: "/images/Servicestailored/Industrial & Manufacturing.jpg",
     description:
       "Extreme thermal control for high-output facilities where temperature precision directly impacts product quality and energy efficiency across the production line.",
     useCases: [
@@ -46,6 +48,7 @@ const industriesData: IndustryItem[] = [
     id: "cold-chain",
     name: "Cold Chain & Food Processing",
     icon: Snowflake,
+    imageSrc: "/images/Servicestailored/Cold Chain & Food Processing.jpg",
     description:
       "Strict temperature preservation down to -35°C for blast freezers, dairy processing, and perishable food logistics compliant with food-safety norms.",
     useCases: [
@@ -61,6 +64,7 @@ const industriesData: IndustryItem[] = [
     id: "pharma",
     name: "Healthcare & Pharmaceuticals",
     icon: FlaskConical,
+    imageSrc: "/images/Servicestailored/Healthcare & Pharmaceuticals.jpg",
     description:
       "Modular, dust-free cleanroom panel solutions engineered for US-FDA and WHO-GMP sterile drug manufacturing and biosafety spaces.",
     useCases: [
@@ -76,6 +80,7 @@ const industriesData: IndustryItem[] = [
     id: "logistics",
     name: "Logistics & Warehousing",
     icon: Package,
+    imageSrc: "/images/Servicestailored/Logistics & Warehousing.jpg",
     description:
       "Large-span insulated roofing and wall paneling engineered to withstand high wind loads and maintain ambient thermal balance in massive distribution centers.",
     useCases: [
@@ -91,6 +96,7 @@ const industriesData: IndustryItem[] = [
     id: "agriculture",
     name: "Agriculture",
     icon: Sprout,
+    imageSrc: "/images/Servicestailored/Agriculture.jpg",
     description:
       "Climate-controlled agricultural storage panels preventing post-harvest decay and safeguarding grain, seeds, and produce freshness.",
     useCases: [
@@ -106,6 +112,7 @@ const industriesData: IndustryItem[] = [
     id: "technology",
     name: "Data & Technology",
     icon: Server,
+    imageSrc: "/images/Servicestailored/Data & Technology.jpg",
     description:
       "High-density PUF panels providing thermal isolation, sound dampening, and moisture prevention for critical server rooms and tech infrastructure.",
     useCases: [
@@ -121,6 +128,7 @@ const industriesData: IndustryItem[] = [
     id: "infrastructure",
     name: "Infrastructure & Utilities",
     icon: Zap,
+    imageSrc: "/images/Servicestailored/Infrastructure & Utilities.jpg",
     description:
       "Heavy-duty insulated enclosures and prefabricated modular structures designed for harsh ambient weather conditions and remote site deployments.",
     useCases: [
@@ -136,6 +144,7 @@ const industriesData: IndustryItem[] = [
     id: "hospitality",
     name: "Hospitality",
     icon: Building2,
+    imageSrc: "/images/Servicestailored/Hospitality.jpg",
     description:
       "Commercial kitchen walk-in coolers, acoustic isolation paneling, and aesthetic insulated facades for luxury hotel properties and resorts.",
     useCases: [
@@ -151,6 +160,7 @@ const industriesData: IndustryItem[] = [
     id: "commercial",
     name: "Commercial & Institutional",
     icon: Landmark,
+    imageSrc: "/images/Servicestailored/Shopping Centers.jpg",
     description:
       "Energy-efficient envelope solutions for shopping malls, sports arenas, educational campuses, and corporate headquarters.",
     useCases: [
@@ -174,12 +184,8 @@ export default function IndustriesWeServeSection() {
       <Container>
         {/* Section Header */}
         <div className="max-w-3xl mb-10 sm:mb-12">
-
-          
-
           <h2 className="mt-3 text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-[#18181b]">
-            Services tailored to every sector{" "}
-            
+            Services tailored to every sector
           </h2>
           <p className="mt-3.5 text-base sm:text-lg text-gray-500 leading-relaxed">
             Select an industry below to explore how our PUF panels are
@@ -201,14 +207,14 @@ export default function IndustriesWeServeSection() {
                   type="button"
                   onClick={() => setSelectedId(item.id)}
                   onMouseEnter={() => setSelectedId(item.id)}
-                  className={`group flex items-center gap-3.5 px-4 py-3 text-left transition-colors duration-200 ${
+                  className={`group flex items-center gap-3.5 px-4 py-3.5 text-left transition-all duration-200 rounded-none ${
                     isSelected
-                      ? "bg-purple-50/90 border border-purple-200/90 text-gray-900 font-bold "
-                      : "bg-transparent hover:bg-gray-50/90 text-gray-600 font-medium hover:text-gray-900"
+                      ? "bg-purple-50/90 border border-purple-200/90 text-gray-900 font-bold"
+                      : "bg-transparent hover:bg-gray-50/90 text-gray-600 font-medium hover:text-gray-900 border border-transparent"
                   }`}
                 >
                   <div
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center transition-colors duration-200 ${
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center transition-colors duration-200 ${
                       isSelected
                         ? "bg-purple-100 text-[#5b176e]"
                         : "bg-gray-100 text-gray-500 group-hover:bg-purple-100/70 group-hover:text-[#5b176e]"
@@ -216,68 +222,60 @@ export default function IndustriesWeServeSection() {
                   >
                     <Icon className="h-4 w-4" />
                   </div>
-                  <span className="text-sm tracking-tight">{item.name}</span>
+                  <span className="text-sm sm:text-base tracking-tight">{item.name}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* Right Selected Industry Detail Card (Completely Stable without shaking) */}
-          <div className="lg:col-span-8 bg-white border border-gray-100 p-6 sm:p-8  min-h-[390px] relative overflow-hidden flex flex-col justify-between">
+          {/* Right Selected Industry Image Stage (Displays Image corresponding to selected left-side text item) */}
+          <div className="lg:col-span-8 relative w-full h-[450px] sm:h-[520px] lg:h-[580px] overflow-hidden bg-gray-100 border border-gray-200/80">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndustry.id}
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -120 }}
-                transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full flex-1 flex flex-col justify-between"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1.0 }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 w-full h-full"
               >
-                <div>
-                  {/* Header Icon + Title */}
-                  <div className="flex items-center gap-3.5 mb-5">
-                    <div className="flex h-11 w-11 items-center justify-center bg-purple-50 text-[#5b176e]">
-                      <activeIndustry.icon className="h-5 w-5" />
+                <Image
+                  src={activeIndustry.imageSrc}
+                  alt={activeIndustry.name}
+                  fill
+                  priority
+                  className="object-cover object-center select-none"
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                />
+
+                {/* Gradient Mask Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                {/* Floating Industry Badge & CTA */}
+                <div className="absolute bottom-6 left-6 right-6 z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+                  <div className="flex flex-col gap-1.5 max-w-xl text-white">
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-7 w-7 items-center justify-center bg-white/20 backdrop-blur-md text-white">
+                        <activeIndustry.icon className="h-4 w-4" />
+                      </div>
+                      <span className="text-xs font-mono font-bold tracking-wider uppercase text-white/80">
+                        APPLICATION SECTOR
+                      </span>
                     </div>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
                       {activeIndustry.name}
                     </h3>
+                    <p className="text-xs sm:text-sm text-gray-200 line-clamp-2 leading-relaxed font-normal">
+                      {activeIndustry.description}
+                    </p>
                   </div>
 
-                  {/* Description */}
-                  <p className="text-sm sm:text-base leading-relaxed text-gray-600 mb-8">
-                    {activeIndustry.description}
-                  </p>
-
-                  {/* Use Cases Section */}
-                  <div>
-                    <span className="block text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4">
-                      Use Cases
-                    </span>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
-                      {activeIndustry.useCases.map((useCase) => (
-                        <div key={useCase} className="flex items-center gap-2.5">
-                          <div className="flex h-4 w-4 shrink-0 items-center justify-center text-[#5b176e]">
-                            <Check className="h-3.5 w-3.5 stroke-[2.5]" />
-                          </div>
-                          <span className="text-sm text-gray-700 font-medium">
-                            {useCase}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom Call to Action */}
-                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-start">
                   <Link
                     href="/quote"
-                    className="inline-flex items-center gap-2.5 rounded-none bg-[#5b176e] px-6 py-3 text-sm font-semibold text-white  hover:bg-[#461056] transition-all hover:gap-3"
+                    className="inline-flex items-center gap-2 shrink-0 bg-[#5b176e] hover:bg-[#461056] text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:gap-3"
                   >
-                    <span>Discuss your project</span>
-                    <ArrowRight className="h-4 w-4" />
+                    <span>EXPLORE SECTOR</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>
               </motion.div>
@@ -288,4 +286,3 @@ export default function IndustriesWeServeSection() {
     </section>
   );
 }
-
