@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const subscribeReducedMotion = (callback: () => void) => {
-  if (typeof window === "undefined") return () => { };
+  if (typeof window === "undefined") return () => {};
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   mediaQuery.addEventListener("change", callback);
   return () => mediaQuery.removeEventListener("change", callback);
@@ -20,6 +20,9 @@ const getReducedMotionSnapshot = () => {
 };
 
 const getReducedMotionServerSnapshot = () => false;
+
+const word1 = "Engineering";
+const word2 = "Insulation";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -41,11 +44,14 @@ export default function Hero() {
     if (!triggerEl || !scrollLayer) return;
 
     const ctx = gsap.context(() => {
+      const charNodes1 = triggerEl.querySelectorAll('[data-char="word-1"]');
+      const charNodes2 = triggerEl.querySelectorAll('[data-char="word-2"]');
       const line1 = triggerEl.querySelector('[data-element="headline-line-1"]');
       const line2 = triggerEl.querySelector('[data-element="headline-line-2"]');
       const heroPin = document.getElementById("home-hero") ?? sectionRef.current;
 
-      gsap.set([line1, line2], { y: "110%", opacity: 0 });
+      // Set initial state matching prompt exact requirement: opacity: 0; transform: translateY(100%);
+      gsap.set([charNodes1, charNodes2], { y: "100%", opacity: 0 });
       gsap.set(scrollLayer, {
         y: 0,
         opacity: 1,
@@ -54,13 +60,31 @@ export default function Hero() {
         force3D: true,
       });
 
-      // Smooth upward slide-reveal entrance on home page load
-      const headlineTl = gsap.timeline({ defaults: { ease: "power4.out" } });
+      // Staggered reveal timeline
+      const headlineTl = gsap.timeline({ defaults: { ease: "power3.out" } });
       headlineTl
-        .to(line1, { y: "0%", opacity: 1, duration: 1.25 }, 0.1)
-        .to(line2, { y: "0%", opacity: 1, duration: 1.25 }, 0.22);
+        .to(
+          charNodes1,
+          {
+            y: "0%",
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.03,
+          },
+          0.3
+        )
+        .to(
+          charNodes2,
+          {
+            y: "0%",
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.03,
+          },
+          0.5
+        );
 
-      // Scroll-linked exit — progress drives motion both ways
+      // Hero content scroll parallax movement
       const mm = gsap.matchMedia();
 
       mm.add(
@@ -75,7 +99,7 @@ export default function Hero() {
           const xDist = isDesktop ? 135 : isTablet ? 85 : 45;
           const yTravel = isDesktop ? -95 : isTablet ? -65 : -40;
           const fadeTo = isDesktop ? 0.12 : isTablet ? 0.18 : 0.25;
-          const scrub = 0.15; // Instantaneous pixel-perfect scroll response
+          const scrub = 0.15;
 
           const scrollTl = gsap.timeline({
             scrollTrigger: {
@@ -87,29 +111,30 @@ export default function Hero() {
             },
           });
 
-          // Engineering slides right towards center to meet Insulation
-          scrollTl.to(
-            line1,
-            {
-              x: xDist,
-              ease: "none",
-              force3D: true,
-            },
-            0
-          );
+          if (line1) {
+            scrollTl.to(
+              line1,
+              {
+                x: xDist,
+                ease: "none",
+                force3D: true,
+              },
+              0
+            );
+          }
 
-          // Insulation slides left towards center to meet Engineering
-          scrollTl.to(
-            line2,
-            {
-              x: -xDist,
-              ease: "none",
-              force3D: true,
-            },
-            0
-          );
+          if (line2) {
+            scrollTl.to(
+              line2,
+              {
+                x: -xDist,
+                ease: "none",
+                force3D: true,
+              },
+              0
+            );
+          }
 
-          // Whole hero container lifts & fades out smoothly
           scrollTl.to(
             scrollLayer,
             {
@@ -145,17 +170,33 @@ export default function Hero() {
               <span className="block overflow-hidden pb-[0.3em] pt-[0.05em] -mb-[0.22em]">
                 <span
                   data-element="headline-line-1"
-                  className="block will-change-transform"
+                  className="inline-flex will-change-transform"
                 >
-                  Engineering
+                  {word1.split("").map((char, index) => (
+                    <span
+                      key={`w1-${index}`}
+                      data-char="word-1"
+                      className="inline-block will-change-transform"
+                    >
+                      {char}
+                    </span>
+                  ))}
                 </span>
               </span>
               <span className="block overflow-hidden pb-[0.3em] pt-[0.05em] -mb-[0.22em] text-right w-full">
                 <span
                   data-element="headline-line-2"
-                  className="block will-change-transform text-right ml-auto"
+                  className="inline-flex will-change-transform text-right ml-auto"
                 >
-                  Insulation
+                  {word2.split("").map((char, index) => (
+                    <span
+                      key={`w2-${index}`}
+                      data-char="word-2"
+                      className="inline-block will-change-transform"
+                    >
+                      {char}
+                    </span>
+                  ))}
                 </span>
               </span>
             </h1>
@@ -165,3 +206,4 @@ export default function Hero() {
     </section>
   );
 }
+

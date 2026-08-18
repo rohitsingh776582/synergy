@@ -1,33 +1,70 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface HeroVideoBackgroundProps {
   src: string;
 }
 
 export default function HeroVideoBackground({ src }: HeroVideoBackgroundProps) {
-  return (
-    <motion.div
-      initial={{
-        clipPath: "circle(0% at 50% 50%)",
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    const ctx = gsap.context(() => {
+      // Set initial state matching prompt exact requirements:
+      // opacity: 0; scale: 1.08; clip-path: inset(0 100% 0 0);
+      gsap.set(container, {
         opacity: 0,
-        scale: 0.9,
-      }}
-      animate={{
-        clipPath: "circle(150% at 50% 50%)",
+        scale: 1.08,
+        clipPath: "inset(0 100% 0 0)",
+        force3D: true,
+      });
+
+      // Animate to: opacity: 1; scale: 1; clip-path: inset(0 0% 0 0); with smooth cinematic easing
+      gsap.to(container, {
         opacity: 1,
         scale: 1,
-      }}
-      transition={{
-        duration: 3.2,
-        ease: [0.25, 1, 0.5, 1],
-      }}
-      className="pointer-events-none fixed inset-0 -z-10 h-full w-full overflow-hidden"
+        clipPath: "inset(0 0% 0 0)",
+        duration: 1.8,
+        ease: "power3.inOut",
+        delay: 0.2,
+      });
+
+      // Hero image/video subtle scroll parallax movement (small translate movement)
+      const heroPin = document.getElementById("home-hero");
+      gsap.to(container, {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroPin ?? document.body,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="pointer-events-none fixed inset-0 -z-10 h-full w-full overflow-hidden will-change-transform"
       aria-hidden
     >
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
@@ -36,6 +73,7 @@ export default function HeroVideoBackground({ src }: HeroVideoBackgroundProps) {
       >
         <source src={src} type="video/mp4" />
       </video>
-    </motion.div>
+    </div>
   );
 }
+

@@ -98,41 +98,27 @@ export default function ApplicationsImageSlider() {
         </div>
 
         {/* Main Current Active Image Stage */}
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           <motion.div
             key={currentSlide.id}
-            initial={
-              currentIndex === 0
-                ? {
-                    clipPath: "inset(50% 0% 50% 0%)", // 1st image opens from center horizontal line expanding upward and downward
-                    opacity: 0,
-                    scale: 1.1,
-                  }
-                : {
-                    clipPath: "inset(0% 0% 0% 0%)",
-                    opacity: 1,
-                    scale: 1.0,
-                  }
-            }
+            initial={{
+              clipPath: "inset(0% 100% 0% 0%)",
+              opacity: 0,
+              scale: 1.08,
+            }}
             animate={{
-              clipPath: "inset(0% 0% 0% 0%)", // Full expansion upward and downward
+              clipPath: "inset(0% 0% 0% 0%)",
               opacity: 1,
               scale: 1.0,
             }}
-            exit={
-              currentIndex === 0
-                ? {
-                    clipPath: "inset(50% 0% 50% 0%)",
-                    opacity: 0,
-                  }
-                : {
-                    clipPath: "inset(0% 100% 0% 0%)", // Remaining images collapse/wipe from RIGHT side to LEFT side
-                    opacity: 1,
-                  }
-            }
+            exit={{
+              clipPath: "inset(0% 0% 0% 100%)",
+              opacity: 0,
+              scale: 0.96,
+            }}
             transition={{
-              duration: currentIndex === 0 ? 1.25 : 0.15, // 1.25s smooth center expansion for 1st image, 0.15s fast wipe for remaining
-              ease: currentIndex === 0 ? [0.16, 1, 0.3, 1] : "easeInOut",
+              duration: 0.85,
+              ease: [0.25, 1, 0.5, 1],
             }}
             className="absolute inset-0 w-full h-full z-20 transform-gpu will-change-transform"
           >
