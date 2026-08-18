@@ -88,7 +88,7 @@ export default function PUFLabels({ isReducedMotion = false }: PUFLabelsProps) {
 
             {/* Connecting Guide Line */}
             <div className="flex items-center gap-1 opacity-80">
-              <div className="w-2 h-2 rounded-full bg-[#1d4ed8] border-2 border-white shadow-xs" />
+              <div className="w-2 h-2 rounded-full bg-[#1d4ed8] border-2 border-white " />
               <div className="w-10 lg:w-16 h-px bg-gradient-to-r from-[#1d4ed8] to-slate-300 stroke-dasharray-2" />
             </div>
           </div>

@@ -97,66 +97,134 @@ export default function PanelRequirements() {
   const cards = panelCards[activePanel];
 
   const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const trackContainerRef = useRef<HTMLDivElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    const header = headerRef.current;
+    const heading = headingRef.current;
+    const text = textRef.current;
+    const trackContainer = trackContainerRef.current;
+    const buttons = buttonsRef.current;
     const track = trackRef.current;
-    if (!section || !header || !track) return;
+
+    if (!section) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        header,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      // 100% Seamless Infinite Step-and-Pause Carousel
-      const numSets = 3;
-      const totalCards = cards.length * numSets;
-      const oneCardStepPercent = -100 / totalCards;
-
-      const slideTl = gsap.timeline({ repeat: -1 });
-
-      for (let i = 1; i <= cards.length; i++) {
-        slideTl
-          .to(track, {
-            xPercent: oneCardStepPercent * i,
-            duration: 0.65,
-            ease: "power3.inOut",
-          })
-          .to({}, { duration: 1.4 }); // Fast, punchy pause duration
+      // 1. Heading slide up from bottom on scroll
+      if (heading) {
+        gsap.fromTo(
+          heading,
+          { opacity: 0, y: 70 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: heading,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
       }
 
-      // Instant seamless reset to 0% after 1 full set cycle (0ms jump, 0 blank space)
-      slideTl.set(track, { xPercent: 0 });
+      // 2. Subtext slide up from bottom on scroll
+      if (text) {
+        gsap.fromTo(
+          text,
+          { opacity: 0, y: 60 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: text,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
 
-      const handleMouseEnter = () => slideTl.pause();
-      const handleMouseLeave = () => slideTl.play();
+      // 3. Carousel Track Container slide up from bottom on scroll
+      if (trackContainer) {
+        gsap.fromTo(
+          trackContainer,
+          { opacity: 0, y: 70 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: trackContainer,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
 
-      track.addEventListener("mouseenter", handleMouseEnter);
-      track.addEventListener("mouseleave", handleMouseLeave);
+      // 4. Buttons slide up from bottom on scroll
+      if (buttons) {
+        gsap.fromTo(
+          buttons,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: buttons,
+              start: "top 92%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
 
-      return () => {
-        track.removeEventListener("mouseenter", handleMouseEnter);
-        track.removeEventListener("mouseleave", handleMouseLeave);
-      };
+      // 5. Infinite Carousel loop on track
+      if (track) {
+        const numSets = 3;
+        const totalCards = cards.length * numSets;
+        const oneCardStepPercent = -100 / totalCards;
+
+        const slideTl = gsap.timeline({ repeat: -1 });
+
+        for (let i = 1; i <= cards.length; i++) {
+          slideTl
+            .to(track, {
+              xPercent: oneCardStepPercent * i,
+              duration: 0.65,
+              ease: "power3.inOut",
+            })
+            .to({}, { duration: 1.4 });
+        }
+
+        slideTl.set(track, { xPercent: 0 });
+
+        const handleMouseEnter = () => slideTl.pause();
+        const handleMouseLeave = () => slideTl.play();
+
+        track.addEventListener("mouseenter", handleMouseEnter);
+        track.addEventListener("mouseleave", handleMouseLeave);
+
+        return () => {
+          track.removeEventListener("mouseenter", handleMouseEnter);
+          track.removeEventListener("mouseleave", handleMouseLeave);
+        };
+      }
     }, section);
 
     return () => ctx.revert();
-  }, [activePanel]);
+  }, [activePanel, cards.length]);
 
   // Triple cards array to ensure continuous fill with zero empty space
   const displayCards = [...cards, ...cards, ...cards];
@@ -167,8 +235,9 @@ export default function PanelRequirements() {
       className="w-full bg-white overflow-hidden py-16"
     >
       <Container>
-        <div ref={headerRef} className="max-w-[680px]">
+        <div className="max-w-[680px]">
           <h2
+            ref={headingRef}
             className="
               text-3xl
               sm:text-4xl
@@ -177,6 +246,7 @@ export default function PanelRequirements() {
               text-[#111827]
               leading-[1.15]
               tracking-[-0.02em]
+              will-change-transform
             "
           >
             One partner for every panel
@@ -185,6 +255,7 @@ export default function PanelRequirements() {
           </h2>
 
           <p
+            ref={textRef}
             className="
               mt-6
               max-w-[650px]
@@ -193,6 +264,7 @@ export default function PanelRequirements() {
               font-light
               text-[#64748b]
               leading-[1.9]
+              will-change-transform
             "
           >
             From cold rooms to clean rooms, warehouse roofing to modular
@@ -202,7 +274,10 @@ export default function PanelRequirements() {
         </div>
       </Container>
 
-      <div className="mt-12 w-full overflow-hidden">
+      <div
+        ref={trackContainerRef}
+        className="mt-12 w-full overflow-hidden will-change-transform"
+      >
         <div
           ref={trackRef}
           key={activePanel}
@@ -226,8 +301,6 @@ export default function PanelRequirements() {
                 flex
                 flex-col
                 justify-between
-                shadow-sm
-                hover:shadow-md
               "
             >
               {item.isTextOnly ? (
@@ -301,7 +374,10 @@ export default function PanelRequirements() {
       </div>
 
       <Container>
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div
+          ref={buttonsRef}
+          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 will-change-transform"
+        >
           <button
             type="button"
             onClick={() => setActivePanel("roof")}
@@ -346,3 +422,4 @@ export default function PanelRequirements() {
     </section>
   );
 }
+

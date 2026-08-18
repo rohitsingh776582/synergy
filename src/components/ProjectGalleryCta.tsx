@@ -125,28 +125,9 @@ export default function ProjectGalleryCta() {
         {/* Hero Section Container inside Frame */}
         <div className="relative pt-4 sm:pt-6 pb-6 sm:pb-8 px-4 sm:px-8 text-center">
           
-          {/* Hand-drawn SVG Curved Arrow Annotation */}
-          <div className="hidden lg:block absolute right-16 top-16 pointer-events-none z-30">
-            <div className="relative">
-              <span className="text-xs font-serif italic text-gray-600 tracking-wide block -rotate-6">
-                Elevate your brand
-              </span>
-              <svg
-                className="w-16 h-12 text-gray-400 -mt-1 ml-4"
-                viewBox="0 0 100 60"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              >
-                <path d="M10,10 Q60,5 85,45" />
-                <path d="M75,40 L85,45 L88,32" />
-              </svg>
-            </div>
-          </div>
 
           {/* Pill Badge */}
-          <div className="inline-flex items-center  bg-[#EEEEF1] border border-gray-200/90 px-4 py-1.5 text-xs font-medium text-gray-700 shadow-sm mb-4">
+          <div className="inline-flex items-center  bg-[#EEEEF1] border border-gray-200/90 px-4 py-1.5 text-xs font-medium text-gray-700  mb-4">
             Join over 100,000 happy clients
           </div>
 
@@ -232,7 +213,7 @@ function FlowingRightToLeftCard({
         transformStyle: "preserve-3d",
         backfaceVisibility: "hidden",
       }}
-      className="absolute aspect-[3/4] w-[130px] sm:w-[170px] md:w-[200px] lg:w-[230px] overflow-hidden rounded-[22px] sm:rounded-[26px] bg-gray-900 border border-gray-200/80 shadow-[0_20px_45px_rgba(0,0,0,0.18)] will-change-transform transform-gpu group"
+      className="absolute aspect-[3/4] w-[130px] sm:w-[170px] md:w-[200px] lg:w-[230px] overflow-hidden rounded-[22px] sm:rounded-[26px] bg-gray-900 border border-gray-200/80  will-change-transform transform-gpu group"
     >
       <Image
         src={card.src}

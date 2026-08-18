@@ -88,8 +88,8 @@ export default function MissionVisionPromise() {
                 }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
-                className={`relative border border-gray-200 bg-white p-6 transition-[transform,box-shadow] duration-300 ease-out will-change-transform ${
-                  isActive ? "z-20 shadow-md" : "z-0 shadow-none"
+                className={`relative border border-gray-200 bg-white p-6 transition-[transform] duration-300 ease-out will-change-transform ${
+                  isActive ? "z-20 " : "z-0 "
                 }`}
                 style={{
                   transformStyle: "preserve-3d",

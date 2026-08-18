@@ -67,7 +67,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 </p>
 
                 {/* Key Metadata Stats */}
-                <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-white border border-gray-200 shadow-sm">
+                <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-white border border-gray-200 ">
                   <div>
                     <span className="text-xs font-semibold text-gray-500 block">Client</span>
                     <span className="font-bold text-gray-900 text-xs sm:text-sm">{project.client}</span>
@@ -89,7 +89,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 <div className="mt-8">
                   <Link
                     href="/quote"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white shadow-lg hover:bg-[#461056] transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white hover:bg-[#461056] transition-all hover:scale-105"
                   >
                     <span>Request Similar Project Quote</span>
                     <ArrowRight className="w-5 h-5" />
@@ -98,7 +98,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               </div>
 
               <div className="lg:col-span-6">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-gray-900 shadow-2xl border border-gray-200">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-gray-900  border border-gray-200">
                   <Image
                     src={project.image}
                     alt={project.name}

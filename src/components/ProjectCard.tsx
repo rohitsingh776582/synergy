@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="group flex flex-col justify-between overflow-hidden bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300">
+    <div className="group flex flex-col justify-between overflow-hidden bg-white border border-gray-200  transition-all duration-300">
       <div>
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-900">
           <Image
@@ -48,7 +48,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div className="p-6 pt-0">
         <Link
           href={`/projects/${project.slug}`}
-          className="inline-flex items-center justify-between w-full bg-purple-50 px-5 py-3 text-xs font-bold text-[#5b176e] hover:bg-[#5b176e] hover:text-white transition-all group-hover:shadow-md"
+          className="inline-flex items-center justify-between w-full bg-purple-50 px-5 py-3 text-xs font-bold text-[#5b176e] hover:bg-[#5b176e] hover:text-white transition-all "
         >
           <span>View Project Case Study</span>
           <ArrowRight className="w-4 h-4" />

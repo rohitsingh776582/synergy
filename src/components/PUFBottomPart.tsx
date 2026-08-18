@@ -18,7 +18,7 @@ export default function PUFBottomPart({ isReducedMotion = false }: PUFBottomPart
     >
       <svg
         viewBox="0 0 500 220"
-        className="w-full h-full drop-shadow-md overflow-visible"
+        className="w-full h-full  overflow-visible"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

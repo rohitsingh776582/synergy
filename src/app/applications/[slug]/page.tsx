@@ -69,7 +69,7 @@ export default async function ApplicationDetailPage({ params }: Props) {
                 <div className="mt-8">
                   <Link
                     href="/quote"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white shadow-lg hover:bg-[#461056] transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white  hover:bg-[#461056] transition-all hover:scale-105"
                   >
                     <span>Request Application Quote</span>
                     <ArrowRight className="w-5 h-5" />
@@ -78,7 +78,7 @@ export default async function ApplicationDetailPage({ params }: Props) {
               </div>
 
               <div className="lg:col-span-6">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-gray-900 shadow-2xl border border-gray-200">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-gray-900  border border-gray-200">
                   <Image
                     src={application.image}
                     alt={application.title}

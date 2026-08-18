@@ -77,7 +77,7 @@ function JointBoxItem({
   return (
     <motion.div
       style={{ x, y, opacity }}
-      className={`${joint.col} ${joint.row} bg-black aspect-square p-4 sm:p-6 flex flex-col items-center justify-center text-center border border-black shadow-md transition-transform duration-300 hover:z-10 hover:scale-105`}
+      className={`${joint.col} ${joint.row} bg-black aspect-square p-4 sm:p-6 flex flex-col items-center justify-center text-center border border-black  transition-transform duration-300 hover:z-10 hover:scale-105`}
     >
       <StackedDiamondIcon />
       <h3 className="text-xs sm:text-sm md:text-base font-normal text-white leading-snug whitespace-pre-line">

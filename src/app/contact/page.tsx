@@ -14,7 +14,7 @@ export default function ContactPage() {
   return (
     <div className="relative min-h-screen bg-white font-sans text-gray-900 overflow-x-clip">
       {/* Main page content layer - covers footer while scrolling top/middle */}
-      <div className="relative z-10 bg-white shadow-2xl">
+      <div className="relative z-10 bg-white">
         <main className="flex-1">
           {/* Hero */}
           <section className="bg-gradient-to-b from-purple-50/60 via-white to-gray-50 py-16 text-center border-b border-gray-100">

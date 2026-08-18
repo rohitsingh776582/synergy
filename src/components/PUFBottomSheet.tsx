@@ -20,7 +20,7 @@ export default function PUFBottomSheet({ isReducedMotion = false }: PUFBottomShe
     >
       <svg
         viewBox="0 0 500 180"
-        className="w-full h-full drop-shadow-md overflow-visible"
+        className="w-full h-full  overflow-visible"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -55,7 +55,7 @@ export default function PUFBottomSheet({ isReducedMotion = false }: PUFBottomShe
       </svg>
 
       {/* Technical Spec Tag for Bottom Sheet */}
-      <div className="absolute bottom-2 right-4 flex items-center gap-1.5 bg-slate-900/90 backdrop-blur-xs px-2.5 py-1 rounded border border-slate-400/40 shadow-xs">
+      <div className="absolute bottom-2 right-4 flex items-center gap-1.5 bg-slate-900/90 backdrop-blur-xs px-2.5 py-1 rounded border border-slate-400/40">
         <span className="w-2 h-2 rounded-full bg-slate-400" />
         <span className="text-[10px] font-mono font-medium text-slate-200 uppercase tracking-wider">
           0.5mm Bottom Galvanized Steel Liner Sheet

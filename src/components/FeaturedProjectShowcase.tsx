@@ -34,7 +34,7 @@ function ProjectShowcase({ project }: { project: Project }) {
     <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2 lg:gap-10">
       <div>
         {/* Main Showcase Image */}
-        <div className="relative aspect-[16/9.5] overflow-hidden bg-gray-200 shadow-md">
+        <div className="relative aspect-[16/9.5] overflow-hidden bg-gray-200 ">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeImage}

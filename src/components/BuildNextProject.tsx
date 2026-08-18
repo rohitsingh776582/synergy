@@ -64,26 +64,46 @@ export default function BuildNextProject() {
         content.querySelectorAll("[data-reveal]")
       );
 
-      gsap.set(items, {
-        y: 160,
-        opacity: 0,
-        force3D: true,
-      });
+      if (items.length) {
+        gsap.fromTo(
+          items,
+          { opacity: 0, y: 60 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            stagger: 0.12,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: content,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+              onEnter: () => playCountAnimation(),
+            },
+          }
+        );
+      }
 
-      gsap.to(items, {
-        y: 0,
-        opacity: 1,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 95%",
-          end: "top 30%",
-          scrub: 0.8,
-          invalidateOnRefresh: true,
-          onEnter: () => playCountAnimation(),
-        },
-      });
+      // Stats row reveal animation
+      const statsRow = content.querySelector("[data-stats-reveal]");
+      if (statsRow) {
+        gsap.fromTo(
+          statsRow,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: statsRow,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+              onEnter: () => playCountAnimation(),
+            },
+          }
+        );
+      }
 
       // Start: only 10% visible; scroll → slowly full open
       gsap.set(imageEl, { clipPath: "inset(0 90% 0 0)" });
@@ -95,7 +115,7 @@ export default function BuildNextProject() {
           trigger: section,
           start: "top 75%",
           end: "center 35%",
-          scrub: 1.4,
+          scrub: 1.2,
           invalidateOnRefresh: true,
         },
       });
@@ -171,7 +191,8 @@ export default function BuildNextProject() {
             </div>
 
             <div
-              className="mt-10 border-t border-gray-200 pt-8"
+              data-stats-reveal
+              className="mt-10 border-t border-gray-200 pt-8 will-change-transform"
               onMouseEnter={playCountAnimation}
             >
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6">
@@ -216,3 +237,4 @@ export default function BuildNextProject() {
     </section>
   );
 }
+

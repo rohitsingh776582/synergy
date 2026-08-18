@@ -52,22 +52,22 @@ const rows = [
   {
     title: (
       <>
-        Unmatched Speed & Timely <br />
-        Delivery
+        Unmatched Speed & Timely
         <br />
-        strong network
+        Delivery
       </>
     ),
     description:
       "A 48-hour record on dispatch because a delayed panel means a delayed project. Speed built into every order, from factory floor to site, pan-India.",
     image: "/puf_factory.png",
-    alt: "Pan India Presence and strong network",
+    alt: "Unmatched Speed & Timely Delivery",
   },
 ] as const;
 
 export default function WhyChooseUs() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const isReducedMotion = useSyncExternalStore(
@@ -79,40 +79,76 @@ export default function WhyChooseUs() {
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const heading = headingRef.current;
+    const divider = dividerRef.current;
     if (!section || isReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      const activeRows = rowRefs.current.filter(Boolean) as HTMLDivElement[];
-
-      if (heading) gsap.set(heading, { opacity: 0, y: 160, force3D: true });
-      if (activeRows.length) gsap.set(activeRows, { opacity: 0, y: 160, force3D: true });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 95%",
-          end: "top 28%",
-          scrub: 0.8,
-          invalidateOnRefresh: true,
-        },
-      });
-
+      // Main Heading slide up from bottom on scroll
       if (heading) {
-        tl.to(heading, { opacity: 1, y: 0, ease: "power2.out" }, 0);
-      }
-
-      if (activeRows.length) {
-        tl.to(
-          activeRows,
+        gsap.fromTo(
+          heading,
+          { opacity: 0, y: 70 },
           {
             opacity: 1,
             y: 0,
-            stagger: 0.1,
+            duration: 0.9,
             ease: "power2.out",
-          },
-          0.08
+            scrollTrigger: {
+              trigger: heading,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          }
         );
       }
+
+      // Divider line animation
+      if (divider) {
+        gsap.fromTo(
+          divider,
+          { scaleX: 0, opacity: 0 },
+          {
+            scaleX: 1,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: divider,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
+
+      // Stacked rows text & images slide up from bottom on scroll into each row
+      const activeRows = rowRefs.current.filter(Boolean) as HTMLDivElement[];
+      activeRows.forEach((row) => {
+        const titleEl = row.querySelector(".row-title");
+        const descEl = row.querySelector(".row-desc");
+        const imgEl = row.querySelector(".row-img");
+
+        const targets = [titleEl, descEl, imgEl].filter(Boolean);
+
+        if (targets.length) {
+          gsap.fromTo(
+            targets,
+            { opacity: 0, y: 60 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.12,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: row,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        }
+      });
     }, section);
 
     return () => ctx.revert();
@@ -122,7 +158,7 @@ export default function WhyChooseUs() {
     <section ref={sectionRef} className="relative z-10 w-full bg-white">
       <Container>
         {/* Main Title — stays outside the stacked panels */}
-        <div className="pb-10 pt-20 sm:pb-10 sm:pt-24">
+        <div className="pb-10 pt-20 sm:pb-10 sm:pt-24 overflow-hidden">
           <h2
             ref={headingRef}
             className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 leading-[1.15] tracking-[-0.02em] will-change-transform"
@@ -132,7 +168,10 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Divider */}
-        <div className="h-[1px] w-full bg-[#9c84a7]" />
+        <div
+          ref={dividerRef}
+          className="h-[1px] w-full bg-[#9c84a7] origin-left will-change-transform"
+        />
 
         {/* Stacked rows — CSS sticky avoids GSAP pin / React DOM conflicts */}
         <div className="relative">
@@ -156,21 +195,21 @@ export default function WhyChooseUs() {
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left Title */}
-                <div className="lg:col-span-4">
+                <div className="lg:col-span-4 row-title will-change-transform">
                   <h3 className="text-xl sm:text-2xl font-normal text-gray-900 leading-snug">
                     {row.title}
                   </h3>
                 </div>
 
                 {/* Center Description */}
-                <div className="lg:col-span-4 flex justify-center">
+                <div className="lg:col-span-4 flex justify-center row-desc will-change-transform">
                   <p className="text-sm sm:text-base font-light text-gray-600 leading-relaxed max-w-md">
                     {row.description}
                   </p>
                 </div>
 
                 {/* Right Image */}
-                <div className="lg:col-span-4 flex justify-end">
+                <div className="lg:col-span-4 flex justify-end row-img will-change-transform">
                   <div className="aspect-[4/3] w-full max-w-xs sm:max-w-sm bg-black relative overflow-hidden group">
                     <Image
                       src={row.image}
@@ -189,3 +228,4 @@ export default function WhyChooseUs() {
     </section>
   );
 }
+

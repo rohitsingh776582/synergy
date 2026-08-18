@@ -203,7 +203,7 @@ export default function IndustriesWeServeSection() {
                   onMouseEnter={() => setSelectedId(item.id)}
                   className={`group flex items-center gap-3.5 px-4 py-3 text-left transition-colors duration-200 ${
                     isSelected
-                      ? "bg-purple-50/90 border border-purple-200/90 text-gray-900 font-bold shadow-sm"
+                      ? "bg-purple-50/90 border border-purple-200/90 text-gray-900 font-bold "
                       : "bg-transparent hover:bg-gray-50/90 text-gray-600 font-medium hover:text-gray-900"
                   }`}
                 >
@@ -223,7 +223,7 @@ export default function IndustriesWeServeSection() {
           </div>
 
           {/* Right Selected Industry Detail Card (Completely Stable without shaking) */}
-          <div className="lg:col-span-8 bg-white border border-gray-100 p-6 sm:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.04)] min-h-[390px] relative overflow-hidden flex flex-col justify-between">
+          <div className="lg:col-span-8 bg-white border border-gray-100 p-6 sm:p-8  min-h-[390px] relative overflow-hidden flex flex-col justify-between">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndustry.id}
@@ -274,7 +274,7 @@ export default function IndustriesWeServeSection() {
                 <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-start">
                   <Link
                     href="/quote"
-                    className="inline-flex items-center gap-2.5 rounded-none bg-[#5b176e] px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#461056] transition-all hover:gap-3"
+                    className="inline-flex items-center gap-2.5 rounded-none bg-[#5b176e] px-6 py-3 text-sm font-semibold text-white  hover:bg-[#461056] transition-all hover:gap-3"
                   >
                     <span>Discuss your project</span>
                     <ArrowRight className="h-4 w-4" />

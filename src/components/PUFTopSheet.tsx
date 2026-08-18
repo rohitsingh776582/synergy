@@ -21,7 +21,7 @@ export default function PUFTopSheet({ isReducedMotion = false }: PUFTopSheetProp
       {/* 3D Profiled Blue Metal Top Sheet SVG */}
       <svg
         viewBox="0 0 500 200"
-        className="w-full h-full drop-shadow-xl overflow-visible"
+        className="w-full h-full  overflow-visible"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

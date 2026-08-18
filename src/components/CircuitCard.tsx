@@ -25,7 +25,7 @@ export default function CircuitCard({
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`group relative w-full h-[380px] sm:h-[420px] rounded-3xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden cursor-pointer bg-gradient-to-br from-[#061142] via-[#0a1a5c] to-[#1a3688] border border-blue-500/20 shadow-xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 hover:border-blue-400/50 hover:shadow-2xl hover:shadow-blue-600/25 ${className}`}
+      className={`group relative w-full h-[380px] sm:h-[420px] rounded-3xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden cursor-pointer bg-gradient-to-br from-[#061142] via-[#0a1a5c] to-[#1a3688] border border-blue-500/20 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 hover:border-blue-400/50  hover:shadow-blue-600/25 ${className}`}
     >
       {/* Self-contained CSS Animation styles */}
       <style jsx>{`

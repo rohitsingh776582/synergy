@@ -75,7 +75,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link
                     href="/quote"
-                    className="inline-flex items-center gap-2 bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white shadow-lg hover:bg-[#461056] transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white  hover:bg-[#461056] transition-all hover:scale-105"
                   >
                     <span>Get Instant Quote</span>
                     <ArrowRight className="w-5 h-5" />
@@ -90,7 +90,7 @@ export default async function ProductDetailPage({ params }: Props) {
               </div>
 
               <div className="lg:col-span-6">
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-900 shadow-2xl border border-gray-200">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-900  border border-gray-200">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -111,7 +111,7 @@ export default async function ProductDetailPage({ params }: Props) {
               
               {/* Left Column: Tech Specs */}
               <div className="lg:col-span-6">
-                <div className="bg-[#f8f8fa] p-8 border border-gray-200 shadow-sm">
+                <div className="bg-[#f8f8fa] p-8 border border-gray-200 ">
                   <div className="flex items-center gap-3 pb-6 border-b border-gray-200">
                     <div className="p-2.5 bg-purple-100 text-[#5b176e]">
                       <FileText className="w-6 h-6" />

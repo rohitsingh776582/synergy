@@ -110,7 +110,7 @@ export default function ProductSeriesSpecifications({
               progress={smoothProgress}
               index={idx}
               total={totalItems}
-              className="bg-[#f2f2f4] p-5 border border-gray-200/80 shadow-sm flex flex-col justify-center"
+              className="bg-[#f2f2f4] p-5 border border-gray-200/80  flex flex-col justify-center"
             >
               <span className="text-xs font-semibold text-gray-500 tracking-wider uppercase">
                 {box.label}
@@ -130,7 +130,7 @@ export default function ProductSeriesSpecifications({
           >
             <Link
               href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-[#5b176e] px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-[#461056] transition-colors text-center"
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-[#5b176e] px-8 py-3.5 text-sm font-bold text-white  hover:bg-[#461056] transition-colors text-center"
             >
               Building something custom?
             </Link>

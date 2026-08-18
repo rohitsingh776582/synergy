@@ -77,7 +77,7 @@ export default async function BlogDetailPage({ params }: Props) {
               </span>
             </div>
 
-            <div className="relative aspect-[16/9] w-full my-8 overflow-hidden rounded-3xl bg-gray-900 shadow-xl">
+            <div className="relative aspect-[16/9] w-full my-8 overflow-hidden rounded-3xl bg-gray-900 ">
               <Image
                 src={blog.image}
                 alt={blog.title}

@@ -56,7 +56,7 @@ function SidePreviewSlider() {
   return (
     <div
       ref={viewportRef}
-      className="relative h-36 w-full shrink-0 overflow-hidden  border border-gray-200 shadow-lg sm:h-auto sm:w-36 sm:self-stretch"
+      className="relative h-36 w-full shrink-0 overflow-hidden  border border-gray-200  sm:h-auto sm:w-36 sm:self-stretch"
     >
       <div ref={trackRef} className="flex h-full will-change-transform">
         {previewImages.map((img) => (
@@ -293,7 +293,7 @@ export default function AboutHero() {
           <div className="lg:col-span-6 lg:justify-self-end w-full max-w-lg">
             <div
               data-hero-element="card"
-              className="will-change-transform relative flex flex-col sm:flex-row items-stretch bg-white/95 backdrop-blur-md  p-6 sm:p-7 shadow-2xl border border-white/40 text-gray-900 gap-6"
+              className="will-change-transform relative flex flex-col sm:flex-row items-stretch bg-white/95 backdrop-blur-md  p-6 sm:p-7  border border-white/40 text-gray-900 gap-6"
             >
               {/* Card Text & Tags */}
               <div className="flex-1 flex flex-col justify-between gap-4">

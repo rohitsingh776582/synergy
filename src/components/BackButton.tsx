@@ -16,7 +16,7 @@ export default function BackButton() {
           router.push("/");
         }
       }}
-      className="inline-flex items-center gap-2.5 text-sm font-medium text-gray-700 hover:text-[#5b176e] bg-white border border-gray-200 shadow-sm px-4.5 py-2.5 rounded-none transition-all hover:-translate-x-1.5 hover:border-[#5b176e]/40 hover:shadow-md cursor-pointer mb-6 group"
+      className="inline-flex items-center gap-2.5 text-sm font-medium text-gray-700 hover:text-[#5b176e] bg-white border border-gray-200 px-4.5 py-2.5 rounded-none transition-all hover:-translate-x-1.5 hover:border-[#5b176e]/40 cursor-pointer mb-6 group"
     >
       <ArrowLeft className="w-4 h-4 text-[#5b176e] transition-transform group-hover:-translate-x-1" />
       <span>Back to Previous Page</span>

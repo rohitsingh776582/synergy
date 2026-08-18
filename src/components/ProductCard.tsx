@@ -9,7 +9,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="group flex flex-col justify-between overflow-hidden bg-white border border-gray-200/80 shadow-md hover:shadow-xl transition-all duration-300">
+    <div className="group flex flex-col justify-between overflow-hidden bg-white border border-gray-200/80 transition-all duration-300">
       <div>
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-900">
           <Image
@@ -19,7 +19,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-90"
           />
-          <span className="absolute top-4 left-4 bg-[#5b176e] px-3.5 py-1 text-xs font-bold text-white shadow-md">
+          <span className="absolute top-4 left-4 bg-[#5b176e] px-3.5 py-1 text-xs font-bold text-white ">
             {product.category}
           </span>
         </div>
@@ -59,7 +59,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </Link>
         <Link
           href="/quote"
-          className="bg-[#5b176e] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#461056] transition-colors shadow-sm"
+          className="bg-[#5b176e] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#461056] transition-colors"
         >
           Get Quote
         </Link>
