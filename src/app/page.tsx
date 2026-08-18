@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Hero from "@/components/Hero";
+import HeroVideoBackground from "@/components/HeroVideoBackground";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import WhatsInsideMatters from "@/components/WhatsInsideMatters";
 import TrustedBy from "@/components/TrustedBy";
@@ -10,27 +10,13 @@ import Testimonials from "@/components/Testimonials";
 import BuildNextProject from "@/components/BuildNextProject";
 import Footer from "@/components/Footer";
 
-const HERO_BG = "/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg";
+const HERO_VIDEO = "/video/PUF.mp4";
 
 export default function Home() {
   return (
     <div className="relative bg-white font-sans text-gray-900 antialiased selection:bg-[#5b176e] selection:text-white">
       <div className="relative z-0">
-        <div
-          className="pointer-events-none fixed inset-0 -z-10 h-full w-full"
-          aria-hidden
-        >
-          <Image
-            src={HERO_BG}
-            alt=""
-            fill
-            priority
-            unoptimized
-            sizes="100vw"
-            className="object-cover"
-            style={{ objectFit: "cover", objectPosition: "center bottom" }}
-          />
-        </div>
+        <HeroVideoBackground src={HERO_VIDEO} />
 
         <div className="flex min-h-[96dvh] flex-col">
           <div
