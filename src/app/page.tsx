@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import WhatsInsideMatters from "@/components/WhatsInsideMatters";
 import TrustedBy from "@/components/TrustedBy";
 import Stats from "@/components/Stats";
 import PanelRequirements from "@/components/PanelRequirements";
@@ -41,6 +42,7 @@ export default function Home() {
         </div>
 
         <main className="relative z-10 -mt-4 bg-white sm:-mt-6">
+          <WhatsInsideMatters />
           <WhyChooseUs />
           {/* <TrustedBy /> */}
           <Stats />
