@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Target, Eye, Award } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,18 +14,21 @@ const items = [
     title: "Our Mission",
     icon: Target,
     body: "To engineer energy-efficient PUF insulation systems that help businesses reduce thermal loss, lower carbon footprint, and cut operational energy costs across India.",
+    image: "/images/MissionVisionPromise/WhatsApp Image 2026-08-18 at 17.24.42.jpeg",
   },
   {
     title: "Our Vision",
     icon: Eye,
     body: "To be the most trusted name in thermal insulation and modular panel engineering, built on zero-defect manufacturing and dispatch you can set a schedule around.",
+    image: "/images/MissionVisionPromise/WhatsApp Image 2026-08-18 at 17.32.53.jpeg",
   },
   {
     title: "Our Promise",
     icon: Award,
     body: "To deliver consistent quality, on-time delivery, and engineering support on every project, insulated, efficient, built to last.",
+    image: "/images/MissionVisionPromise/WhatsApp Image 2026-08-18 at 17.33.35.jpeg",
   },
-] as const;
+];
 
 export default function MissionVisionPromise() {
   const [hovered, setHovered] = useState<number | null>(null);
@@ -38,7 +42,7 @@ export default function MissionVisionPromise() {
     const ctx = gsap.context(() => {
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
-      gsap.set(cards, { opacity: 0, y: 35 });
+      gsap.set(cards, { opacity: 0, y: 40 });
 
       let maxProgress = 0;
       const tl = gsap.timeline({ paused: true });
@@ -46,15 +50,15 @@ export default function MissionVisionPromise() {
       tl.to(cards, {
         opacity: 1,
         y: 0,
-        stagger: 0.12,
+        stagger: 0.18,
         duration: 1,
-        ease: "none",
+        ease: "power2.out",
       });
 
       ScrollTrigger.create({
         trigger: section,
-        start: "top 90%",
-        end: "top 45%",
+        start: "top 85%",
+        end: "top 35%",
         scrub: 0.6,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
@@ -70,15 +74,23 @@ export default function MissionVisionPromise() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#f4f4f7] py-14 md:py-16">
+    <section ref={sectionRef} className="bg-[#f4f4f7] py-14 sm:py-18 md:py-22 font-sans text-gray-900">
       <Container>
-        <div
-          className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5"
-          style={{ perspective: "900px" }}
-        >
-          {items.map(({ title, icon: Icon, body }, index) => {
+        {/* Section Title */}
+        <div className="max-w-2xl mb-10 sm:mb-12">
+          <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#5b176e]">
+            CORE VALUES & COMMITMENT
+          </span>
+          <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900">
+            Engineered with Purpose & Precision
+          </h2>
+        </div>
+
+        {/* 50% Image / 50% Text Cards Stack */}
+        <div className="flex flex-col gap-6 sm:gap-8">
+          {items.map(({ title, icon: Icon, body, image }, index) => {
             const isActive = hovered === index;
-            const isDimmed = hovered !== null && !isActive;
+            const isEven = index % 2 === 0;
 
             return (
               <div
@@ -88,25 +100,41 @@ export default function MissionVisionPromise() {
                 }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
-                className={`relative border border-gray-200 bg-white p-6 transition-[transform] duration-300 ease-out will-change-transform ${
-                  isActive ? "z-20 " : "z-0 "
+                className={`grid grid-cols-1 lg:grid-cols-2 border border-gray-200/90 bg-white overflow-hidden transition-all duration-300 ${
+                  isActive ? "border-[#5b176e]/50" : "border-gray-200/90"
                 }`}
-                style={{
-                  transformStyle: "preserve-3d",
-                  transform: isActive
-                    ? "translateZ(24px) scale(1.03)"
-                    : isDimmed
-                      ? "translateZ(-36px) scale(0.96)"
-                      : "translateZ(0) scale(1)",
-                }}
               >
-                <div className="mb-4 inline-flex bg-purple-100 p-2.5 text-[#5b176e]">
-                  <Icon className="h-6 w-6" />
+                {/* 50% Image Side */}
+                <div
+                  className={`relative w-full h-[260px] sm:h-[320px] lg:h-auto min-h-[280px] overflow-hidden bg-gray-100 ${
+                    isEven ? "lg:order-1" : "lg:order-2"
+                  }`}
+                >
+                  <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                  />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-gray-600">
-                  {body}
-                </p>
+
+                {/* 50% Text Side */}
+                <div
+                  className={`p-6 sm:p-10 lg:p-12 flex flex-col justify-center ${
+                    isEven ? "lg:order-2" : "lg:order-1"
+                  }`}
+                >
+                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center bg-purple-50 text-[#5b176e]">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+                    {title}
+                  </h3>
+                  <p className="mt-3.5 text-base sm:text-lg leading-relaxed text-gray-600">
+                    {body}
+                  </p>
+                </div>
               </div>
             );
           })}
