@@ -15,7 +15,7 @@ export default function ProjectsPage() {
   return (
     <div className="relative min-h-screen bg-white font-sans text-gray-900 overflow-x-clip">
       {/* Main page content layer - covers footer while scrolling top/middle */}
-      <div className="relative z-10 bg-white shadow-2xl">
+      <div className="relative z-10 bg-white shadow-none">
         <main className="flex-1">
           <ProjectsHero />
 

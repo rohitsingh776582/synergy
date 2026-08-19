@@ -70,7 +70,7 @@ export default function SynergyHeroComponent() {
   });
 
   return (
-    <section className="w-full bg-[#f8f6f9] py-16 md:py-20">
+    <section className="w-full bg-[#f8f6f9] py-16 md:py-20 shadow-none">
       <Container className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
         {/* Left Column: Heading and Subtext */}

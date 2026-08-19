@@ -69,7 +69,7 @@ export default function FeatureHighlightCards() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full border-t border-gray-200/80 bg-[#f7f5f8] py-6 md:py-8">
+    <section ref={sectionRef} className="w-full border-t border-gray-200/80 bg-[#f7f5f8] py-6 md:py-8 shadow-none">
       <Container>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
           {features.map(({ icon: Icon, title, subtitle }, index) => (
