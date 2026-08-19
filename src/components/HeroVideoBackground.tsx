@@ -63,6 +63,9 @@ export default function HeroVideoBackground({ src }: HeroVideoBackgroundProps) {
       className="pointer-events-none fixed inset-0 -z-10 h-full w-full overflow-hidden will-change-transform"
       aria-hidden
     >
+      {/* Dark overlay for contrast */}
+      <div className="absolute inset-0 bg-black/45 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10" />
+
       <video
         ref={videoRef}
         autoPlay
