@@ -1,9 +1,10 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Layers } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
@@ -19,6 +20,53 @@ interface CardItem {
   shortDescription: string;
   image?: string;
   isTextOnly?: boolean;
+}
+
+const PANEL_REQ_LINES = [
+  ["One", "partner", "for", "every", "panel"],
+  ["requirement"],
+];
+
+let panelReqCounter = 0;
+const PREPROCESSED_PANEL_REQ = PANEL_REQ_LINES.map((line) =>
+  line.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: panelReqCounter++,
+    }))
+  )
+);
+const TOTAL_PANEL_REQ_CHARS = panelReqCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.40;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
 }
 
 const panelCards: Record<PanelType, CardItem[]> = {
@@ -97,15 +145,25 @@ export default function PanelRequirements() {
   const cards = panelCards[activePanel];
 
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
+  const titleContainerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const trackContainerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
+  const { scrollYProgress } = useScroll({
+    target: titleContainerRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    const heading = headingRef.current;
     const text = textRef.current;
     const trackContainer = trackContainerRef.current;
     const buttons = buttonsRef.current;
@@ -114,25 +172,6 @@ export default function PanelRequirements() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      // 1. Heading slide up from bottom on scroll
-      if (heading) {
-        gsap.fromTo(
-          heading,
-          { opacity: 0, y: 70 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: heading,
-              start: "top 90%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-
       // 2. Subtext slide up from bottom on scroll
       if (text) {
         gsap.fromTo(
@@ -235,9 +274,8 @@ export default function PanelRequirements() {
       className="w-full bg-white overflow-hidden py-16"
     >
       <Container>
-        <div className="max-w-[680px]">
+        <div ref={titleContainerRef} className="max-w-[680px]">
           <h2
-            ref={headingRef}
             className="
               text-3xl
               sm:text-4xl
@@ -246,12 +284,29 @@ export default function PanelRequirements() {
               text-[#111827]
               leading-[1.15]
               tracking-[-0.02em]
-              will-change-transform
             "
           >
-            One partner for every panel
-            <br />
-            requirement.
+            {PREPROCESSED_PANEL_REQ.map((line, lineIdx) => (
+              <React.Fragment key={lineIdx}>
+                {lineIdx > 0 && <br />}
+                {line.map((word, wordIdx) => (
+                  <span
+                    key={wordIdx}
+                    className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                  >
+                    {word.map((item) => (
+                      <ScrollLetter
+                        key={item.index}
+                        char={item.char}
+                        index={item.index}
+                        total={TOTAL_PANEL_REQ_CHARS}
+                        progress={smoothProgress}
+                      />
+                    ))}
+                  </span>
+                ))}
+              </React.Fragment>
+            ))}
           </h2>
 
           <p
@@ -269,7 +324,7 @@ export default function PanelRequirements() {
           >
             From cold rooms to clean rooms, warehouse roofing to modular
             cabins, Synergy PUF delivers high-performance insulation
-            tailored to your exact specifications.
+            tailored to your exact specifications
           </p>
         </div>
       </Container>

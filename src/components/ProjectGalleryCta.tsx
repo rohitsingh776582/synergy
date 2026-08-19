@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -21,6 +21,60 @@ interface GalleryCard {
   category: string;
   src: string;
   isCenter?: boolean;
+}
+
+const PROVEN_LINES = [
+  {
+    words: ["Proven", "installations"],
+    isSub: false,
+  },
+  {
+    words: ["across", "diverse", "industries"],
+    isSub: true,
+  },
+];
+
+let provenCounter = 0;
+const PREPROCESSED_PROVEN = PROVEN_LINES.map((lineObj) => ({
+  isSub: lineObj.isSub,
+  words: lineObj.words.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: provenCounter++,
+    }))
+  ),
+}));
+const TOTAL_PROVEN_CHARS = provenCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.40;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
 }
 
 const galleryCards: GalleryCard[] = [
@@ -85,7 +139,34 @@ const galleryCards: GalleryCard[] = [
 
 export default function ProjectGalleryCta() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtextRef = useRef<HTMLParagraphElement>(null);
   const autoDrift = useMotionValue(0);
+
+  const { scrollYProgress: titleScrollProgress } = useScroll({
+    target: titleRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothTitleProgress = useSpring(titleScrollProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
+  const { scrollYProgress: subtextScrollProgress } = useScroll({
+    target: subtextRef,
+    offset: ["start 90%", "center 50%"],
+  });
+
+  const smoothSubtextProgress = useSpring(subtextScrollProgress, {
+    stiffness: 70,
+    damping: 26,
+    restDelta: 0.001,
+  });
+
+  const subtextY = useTransform(smoothSubtextProgress, [0, 0.45], [50, 0]);
+  const subtextOpacity = useTransform(smoothSubtextProgress, [0, 0.40], [0, 1]);
 
   // Continuous subtle auto-drift (Right to Left horizontal flow: -18px per second)
   useAnimationFrame((_, delta) => {
@@ -132,17 +213,61 @@ export default function ProjectGalleryCta() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.12] max-w-3xl mx-auto">
-            Proven installations
-            <span className="block text-gray-400 font-semibold mt-1">
-              across diverse industries
-            </span>
+          <h2 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.12] max-w-3xl mx-auto">
+            {PREPROCESSED_PROVEN.map((lineObj, lineIdx) => {
+              if (lineObj.isSub) {
+                return (
+                  <span key={lineIdx} className="block text-gray-400 font-semibold mt-1">
+                    {lineObj.words.map((word, wordIdx) => (
+                      <span
+                        key={wordIdx}
+                        className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                      >
+                        {word.map((item) => (
+                          <ScrollLetter
+                            key={item.index}
+                            char={item.char}
+                            index={item.index}
+                            total={TOTAL_PROVEN_CHARS}
+                            progress={smoothTitleProgress}
+                          />
+                        ))}
+                      </span>
+                    ))}
+                  </span>
+                );
+              }
+              return (
+                <React.Fragment key={lineIdx}>
+                  {lineObj.words.map((word, wordIdx) => (
+                    <span
+                      key={wordIdx}
+                      className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                    >
+                      {word.map((item) => (
+                        <ScrollLetter
+                          key={item.index}
+                          char={item.char}
+                          index={item.index}
+                          total={TOTAL_PROVEN_CHARS}
+                          progress={smoothTitleProgress}
+                        />
+                      ))}
+                    </span>
+                  ))}
+                </React.Fragment>
+              );
+            })}
           </h2>
 
           {/* Subtitle */}
-          <p className="mt-4 text-sm sm:text-base text-gray-500 max-w-lg mx-auto leading-relaxed">
+          <motion.p
+            ref={subtextRef}
+            style={{ y: subtextY, opacity: subtextOpacity }}
+            className="mt-4 text-sm sm:text-base text-gray-500 max-w-lg mx-auto leading-relaxed transform-gpu will-change-transform"
+          >
             Explore our pan-India installations — cold storage logistics, pharma cleanrooms, food processing plants & manufacturing facilities.
-          </p>
+          </motion.p>
 
           {/* 3D Arc Right-to-Left Moving Stage */}
           <div

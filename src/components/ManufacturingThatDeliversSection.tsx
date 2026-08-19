@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import Container from "./Container";
 
 export const manufacturingSteps = [
@@ -26,19 +27,117 @@ export const manufacturingSteps = [
   },
 ];
 
+const MFG_LINES = [
+  ["Manufacturing"],
+  ["that", "delivers."],
+];
+
+let mfgCounter = 0;
+const PREPROCESSED_MFG = MFG_LINES.map((line) =>
+  line.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: mfgCounter++,
+    }))
+  )
+);
+const TOTAL_MFG_CHARS = mfgCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.40;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
+
 export default function ManufacturingThatDeliversSection() {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtextRef = useRef<HTMLParagraphElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: titleRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
+  const { scrollYProgress: subtextScrollProgress } = useScroll({
+    target: subtextRef,
+    offset: ["start 90%", "center 50%"],
+  });
+
+  const smoothSubtextProgress = useSpring(subtextScrollProgress, {
+    stiffness: 70,
+    damping: 26,
+    restDelta: 0.001,
+  });
+
+  const subtextY = useTransform(smoothSubtextProgress, [0, 0.45], [50, 0]);
+  const subtextOpacity = useTransform(smoothSubtextProgress, [0, 0.40], [0, 1]);
+
   return (
     <section className="py-20 bg-white">
       <Container className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Left Column: Heading & Paragraph */}
         <div className="lg:col-span-5 pt-4">
-          <h2 className="text-3xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight">
-            Manufacturing <br />
-            that delivers.
+          <h2 ref={titleRef} className="text-3xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight">
+            {PREPROCESSED_MFG.map((line, lineIdx) => (
+              <React.Fragment key={lineIdx}>
+                {lineIdx > 0 && <br />}
+                {line.map((word, wordIdx) => (
+                  <span
+                    key={wordIdx}
+                    className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                  >
+                    {word.map((item) => (
+                      <ScrollLetter
+                        key={item.index}
+                        char={item.char}
+                        index={item.index}
+                        total={TOTAL_MFG_CHARS}
+                        progress={smoothProgress}
+                      />
+                    ))}
+                  </span>
+                ))}
+              </React.Fragment>
+            ))}
           </h2>
-          <p className="mt-6 text-base sm:text-lg text-gray-600 font-light leading-relaxed">
+          <motion.p
+            ref={subtextRef}
+            style={{ y: subtextY, opacity: subtextOpacity }}
+            className="mt-6 text-base sm:text-lg text-gray-600 font-light leading-relaxed transform-gpu will-change-transform"
+          >
             From high-volume runs to custom, project-tailored solutions, our facilities combine modern machinery, precise process control, and rigorous testing for high quality results.
-          </p>
+          </motion.p>
         </div>
 
         {/* Right Column: Vertical Timeline */}

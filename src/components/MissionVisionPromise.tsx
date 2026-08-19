@@ -1,13 +1,56 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Target, Eye, Award } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const ENGINEERED_WORDS = ["Engineered", "with", "Purpose", "&", "Precision"];
+
+let engineeredCounter = 0;
+const PREPROCESSED_ENGINEERED = ENGINEERED_WORDS.map((word) =>
+  word.split("").map((char) => ({
+    char,
+    index: engineeredCounter++,
+  }))
+);
+const TOTAL_ENGINEERED_CHARS = engineeredCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.40;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
 
 const items = [
   {
@@ -33,7 +76,19 @@ const items = [
 export default function MissionVisionPromise() {
   const [hovered, setHovered] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const { scrollYProgress } = useScroll({
+    target: titleRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -81,8 +136,23 @@ export default function MissionVisionPromise() {
           <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#5b176e]">
             CORE VALUES & COMMITMENT
           </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900">
-            Engineered with Purpose & Precision
+          <h2 ref={titleRef} className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900">
+            {PREPROCESSED_ENGINEERED.map((word, wordIdx) => (
+              <span
+                key={wordIdx}
+                className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+              >
+                {word.map((item) => (
+                  <ScrollLetter
+                    key={item.index}
+                    char={item.char}
+                    index={item.index}
+                    total={TOTAL_ENGINEERED_CHARS}
+                    progress={smoothProgress}
+                  />
+                ))}
+              </span>
+            ))}
           </h2>
         </div>
 

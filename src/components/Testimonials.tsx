@@ -1,12 +1,55 @@
 "use client";
 
-import { useLayoutEffect, useRef, useSyncExternalStore } from "react";
+import React, { useLayoutEffect, useRef, useSyncExternalStore } from "react";
 import { Star } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const TESTIMONIALS_WORDS = ["What", "Our", "Clients", "Are", "Saying"];
+
+let testimonialsCounter = 0;
+const PREPROCESSED_TESTIMONIALS_HEADING = TESTIMONIALS_WORDS.map((word) =>
+  word.split("").map((char) => ({
+    char,
+    index: testimonialsCounter++,
+  }))
+);
+const TOTAL_TESTIMONIALS_CHARS = testimonialsCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.40;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
 
 const subscribeReducedMotion = (callback: () => void) => {
   if (typeof window === "undefined") return () => { };
@@ -47,6 +90,18 @@ export default function Testimonials() {
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  const { scrollYProgress: titleScrollProgress } = useScroll({
+    target: titleRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothTitleProgress = useSpring(titleScrollProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
 
   const isReducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -68,22 +123,24 @@ export default function Testimonials() {
     const ctx = gsap.context(() => {
       // Header text bottom-to-top reveal animation
       if (header) {
-        const headerChildren = header.children;
-        gsap.set(headerChildren, { opacity: 0, y: 160, force3D: true });
+        const headerChildren = Array.from(header.children).filter((el) => el.tagName !== "H2");
+        if (headerChildren.length) {
+          gsap.set(headerChildren, { opacity: 0, y: 160, force3D: true });
 
-        gsap.to(headerChildren, {
-          opacity: 1,
-          y: 0,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: header,
-            start: "top 95%",
-            end: "top 30%",
-            scrub: 0.8,
-            invalidateOnRefresh: true,
-          },
-        });
+          gsap.to(headerChildren, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: header,
+              start: "top 95%",
+              end: "top 30%",
+              scrub: 0.8,
+              invalidateOnRefresh: true,
+            },
+          });
+        }
       }
 
       gsap.set(stage, { perspective: 1400, transformStyle: "preserve-3d" });
@@ -129,8 +186,23 @@ export default function Testimonials() {
           <p className="font-sans text-xs font-normal uppercase tracking-[0.2em] text-[#5b176e] sm:text-sm">
             Testimonials
           </p>
-          <h2 className="mt-3 text-3xl font-normal leading-tight text-gray-900 sm:text-4xl md:text-5xl">
-            What Our Clients Are Saying
+          <h2 ref={titleRef} className="mt-3 text-3xl font-normal leading-tight text-gray-900 sm:text-4xl md:text-5xl">
+            {PREPROCESSED_TESTIMONIALS_HEADING.map((word, wordIdx) => (
+              <span
+                key={wordIdx}
+                className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+              >
+                {word.map((item) => (
+                  <ScrollLetter
+                    key={item.index}
+                    char={item.char}
+                    index={item.index}
+                    total={TOTAL_TESTIMONIALS_CHARS}
+                    progress={smoothTitleProgress}
+                  />
+                ))}
+              </span>
+            ))}
           </h2>
           <p className="mt-4 text-sm font-light leading-relaxed text-gray-600 sm:text-base md:text-lg">
             Pan-India installations. Zero compromise on quality.

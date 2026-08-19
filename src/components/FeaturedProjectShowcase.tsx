@@ -1,16 +1,84 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import Container from "./Container";
 import { projects, type Project } from "@/data/projects";
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.40;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
 
 function ProjectShowcase({ project }: { project: Project }) {
   const gallery = project.gallery.length ? project.gallery : [project.image];
   const [active, setActive] = useState(0);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtextRef = useRef<HTMLParagraphElement>(null);
+
+  const { scrollYProgress: titleScrollProgress } = useScroll({
+    target: titleRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothTitleProgress = useSpring(titleScrollProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
+  const { scrollYProgress: subtextScrollProgress } = useScroll({
+    target: subtextRef,
+    offset: ["start 90%", "center 50%"],
+  });
+
+  const smoothSubtextProgress = useSpring(subtextScrollProgress, {
+    stiffness: 70,
+    damping: 26,
+    restDelta: 0.001,
+  });
+
+  const subtextY = useTransform(smoothSubtextProgress, [0, 0.45], [50, 0]);
+  const subtextOpacity = useTransform(smoothSubtextProgress, [0, 0.40], [0, 1]);
+
+  const words = project.name.split(" ");
+  let charCounter = 0;
+  const preprocessedWords = words.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: charCounter++,
+    }))
+  );
+  const totalChars = charCounter;
 
   // Automatic image sliding every 5 seconds (slower & calmer)
   useEffect(() => {
@@ -108,8 +176,23 @@ function ProjectShowcase({ project }: { project: Project }) {
           {project.productBadge}
         </span>
 
-        <h2 className="mt-2.5 text-2xl font-extrabold tracking-tight text-black sm:text-3xl md:text-4xl">
-          {project.name}
+        <h2 ref={titleRef} className="mt-2.5 text-2xl font-extrabold tracking-tight text-black sm:text-3xl md:text-4xl">
+          {preprocessedWords.map((word, wordIdx) => (
+            <span
+              key={wordIdx}
+              className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+            >
+              {word.map((item) => (
+                <ScrollLetter
+                  key={item.index}
+                  char={item.char}
+                  index={item.index}
+                  total={totalChars}
+                  progress={smoothTitleProgress}
+                />
+              ))}
+            </span>
+          ))}
         </h2>
 
         <p className="mt-1.5 flex items-center gap-1.5 text-xs text-gray-500 sm:text-sm">
@@ -117,9 +200,13 @@ function ProjectShowcase({ project }: { project: Project }) {
           {project.location}
         </p>
 
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-[15px]">
+        <motion.p
+          ref={subtextRef}
+          style={{ y: subtextY, opacity: subtextOpacity }}
+          className="mt-3 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-[15px] transform-gpu will-change-transform"
+        >
           {project.description}
-        </p>
+        </motion.p>
 
         <div className="mt-4 grid grid-cols-2 gap-2.5">
           {specs.map((spec) => (

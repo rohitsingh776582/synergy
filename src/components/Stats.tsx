@@ -183,7 +183,7 @@ export default function Stats() {
 
               <div className="mt-4 h-[2px] w-full bg-[#c9c9c9]" />
 
-              <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+              <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
                 <p className="pt-6 text-sm font-light leading-relaxed text-gray-600 sm:text-base">
                   The year the two founders
                   <br />
@@ -194,11 +194,11 @@ export default function Stats() {
                   startup.
                 </p>
 
-                <div className="flex flex-col items-start gap-4 sm:items-end">
+                <div className="flex flex-col items-start gap-4 pt-6 sm:items-end">
                   <div className="overflow-hidden">
                     <div
                       ref={yearWrapRef}
-                      className={`${numberClass} mt-6 origin-top will-change-transform`}
+                      className={`${numberClass} origin-top will-change-transform`}
                     >
                       <span ref={yearRef}>2001</span>
                     </div>

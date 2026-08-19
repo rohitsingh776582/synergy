@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import Container from "./Container";
 
 interface LayerInfo {
@@ -37,23 +37,98 @@ const LAYERS_DATA: LayerInfo[] = [
   },
 ];
 
+const HEADING_DATA = [
+  ["WHAT'S", "INSIDE"],
+  ["MATTERS"],
+];
+
+let globalCounter = 0;
+const PREPROCESSED_HEADING = HEADING_DATA.map((line) =>
+  line.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: globalCounter++,
+    }))
+  )
+);
+const TOTAL_CHARS = globalCounter;
+
+const BOTTOM_BANNER_LINES = [
+  ["THREE", "LAYERS."],
+  ["ONE", "ENGINEERED", "PANEL"],
+];
+
+let bottomBannerCounter = 0;
+const PREPROCESSED_BOTTOM_BANNER = BOTTOM_BANNER_LINES.map((line) =>
+  line.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: bottomBannerCounter++,
+    }))
+  )
+);
+const TOTAL_BOTTOM_BANNER_CHARS = bottomBannerCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.40;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
+
 export default function WhatsInsideMatters() {
   const [activeLayer, setActiveLayer] = useState<
     "all" | "top-steel" | "puf-core" | "bottom-steel"
   >("all");
 
   const sectionRef = useRef<HTMLDivElement>(null);
+  const bottomHeadingRef = useRef<HTMLHeadingElement>(null);
 
   // Track scroll progress through the section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"],
+    offset: ["start 85%", "center 40%"],
   });
 
   // Spring physics for ultra-smooth, fluid motion without sudden jumps
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 26,
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
+  const { scrollYProgress: bottomHeadingScrollProgress } = useScroll({
+    target: bottomHeadingRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothBottomHeadingProgress = useSpring(bottomHeadingScrollProgress, {
+    stiffness: 90,
+    damping: 24,
     restDelta: 0.001,
   });
 
@@ -66,10 +141,7 @@ export default function WhatsInsideMatters() {
   // 3. Forward 3D tilt: Smoothly levels straight into front-facing view as user scrolls
   const rotateX = useTransform(smoothProgress, [0, 0.5, 1], [14, 0, -5]);
 
-  // 4. Left Column Text bottom-to-top slide reveal on scroll (bottom se top ki or)
-  const titleY = useTransform(smoothProgress, [0, 0.42], [110, 0]);
-  const titleOpacity = useTransform(smoothProgress, [0, 0.38], [0, 1]);
-
+  // Left Column Description slide reveal on scroll
   const descY = useTransform(smoothProgress, [0.06, 0.48], [90, 0]);
   const descOpacity = useTransform(smoothProgress, [0.06, 0.42], [0, 1]);
 
@@ -83,19 +155,31 @@ export default function WhatsInsideMatters() {
 
       <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          {/* Left Column - Bottom to Top slide reveal on scroll */}
+          {/* Left Column - Scroll-driven letter by letter reveal from left side */}
           <div className="lg:col-span-4 flex flex-col justify-center text-left relative z-20">
-            <motion.h2
-              style={{
-                y: titleY,
-                opacity: titleOpacity,
-              }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-gray-900 leading-[1.08] transform-gpu will-change-transform"
-            >
-              WHAT&apos;S INSIDE
-              <br />
-              MATTERS
-            </motion.h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-gray-900 leading-[1.08]">
+              {PREPROCESSED_HEADING.map((line, lineIdx) => (
+                <React.Fragment key={lineIdx}>
+                  {lineIdx > 0 && <br />}
+                  {line.map((word, wordIdx) => (
+                    <span
+                      key={wordIdx}
+                      className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                    >
+                      {word.map((item) => (
+                        <ScrollLetter
+                          key={item.index}
+                          char={item.char}
+                          index={item.index}
+                          total={TOTAL_CHARS}
+                          progress={smoothProgress}
+                        />
+                      ))}
+                    </span>
+                  ))}
+                </React.Fragment>
+              ))}
+            </h2>
 
             <motion.p
               style={{
@@ -203,9 +287,28 @@ export default function WhatsInsideMatters() {
         {/* Bottom Banner Accent */}
         <div className="mt-8 sm:mt-10 pt-4 border-t border-gray-100 text-center">
           <div className="w-12 h-[3px] bg-gray-900 mx-auto mb-3 rounded-full" />
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold uppercase tracking-tight text-gray-900">
-            THREE LAYERS. <br />
-            ONE ENGINEERED PANEL.
+          <h3 ref={bottomHeadingRef} className="text-xl sm:text-2xl lg:text-3xl font-extrabold uppercase tracking-tight text-gray-900">
+            {PREPROCESSED_BOTTOM_BANNER.map((line, lineIdx) => (
+              <React.Fragment key={lineIdx}>
+                {lineIdx > 0 && <br />}
+                {line.map((word, wordIdx) => (
+                  <span
+                    key={wordIdx}
+                    className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                  >
+                    {word.map((item) => (
+                      <ScrollLetter
+                        key={item.index}
+                        char={item.char}
+                        index={item.index}
+                        total={TOTAL_BOTTOM_BANNER_CHARS}
+                        progress={smoothBottomHeadingProgress}
+                      />
+                    ))}
+                  </span>
+                ))}
+              </React.Fragment>
+            ))}
           </h3>
         </div>
       </Container>

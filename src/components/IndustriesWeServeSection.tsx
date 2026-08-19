@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -15,7 +15,7 @@ import {
   Landmark,
   ArrowRight,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import Container from "./Container";
 
 interface IndustryItem {
@@ -25,6 +25,48 @@ interface IndustryItem {
   description: string;
   useCases: string[];
   imageSrc: string;
+}
+
+const SERVICES_WORDS = ["Services", "tailored", "to", "every", "sector"];
+
+let servicesCounter = 0;
+const PREPROCESSED_SERVICES = SERVICES_WORDS.map((word) =>
+  word.split("").map((char) => ({
+    char,
+    index: servicesCounter++,
+  }))
+);
+const TOTAL_SERVICES_CHARS = servicesCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.40;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
 }
 
 const industriesData: IndustryItem[] = [
@@ -179,18 +221,65 @@ export default function IndustriesWeServeSection() {
   const activeIndustry =
     industriesData.find((item) => item.id === selectedId) ?? industriesData[0]!;
 
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtextRef = useRef<HTMLParagraphElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: titleRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
+  const { scrollYProgress: subtextScrollProgress } = useScroll({
+    target: subtextRef,
+    offset: ["start 90%", "center 50%"],
+  });
+
+  const smoothSubtextProgress = useSpring(subtextScrollProgress, {
+    stiffness: 70,
+    damping: 26,
+    restDelta: 0.001,
+  });
+
+  const subtextY = useTransform(smoothSubtextProgress, [0, 0.45], [50, 0]);
+  const subtextOpacity = useTransform(smoothSubtextProgress, [0, 0.40], [0, 1]);
+
   return (
     <section className="w-full bg-white py-14 sm:py-18 md:py-22 font-sans text-gray-900">
       <Container>
         {/* Section Header */}
         <div className="max-w-3xl mb-10 sm:mb-12">
-          <h2 className="mt-3 text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-[#18181b]">
-            Services tailored to every sector
+          <h2 ref={titleRef} className="mt-3 text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-[#18181b]">
+            {PREPROCESSED_SERVICES.map((word, wordIdx) => (
+              <span
+                key={wordIdx}
+                className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+              >
+                {word.map((item) => (
+                  <ScrollLetter
+                    key={item.index}
+                    char={item.char}
+                    index={item.index}
+                    total={TOTAL_SERVICES_CHARS}
+                    progress={smoothProgress}
+                  />
+                ))}
+              </span>
+            ))}
           </h2>
-          <p className="mt-3.5 text-base sm:text-lg text-gray-500 leading-relaxed">
+          <motion.p
+            ref={subtextRef}
+            style={{ y: subtextY, opacity: subtextOpacity }}
+            className="mt-3.5 text-base sm:text-lg text-gray-500 leading-relaxed transform-gpu will-change-transform"
+          >
             Select an industry below to explore how our PUF panels are
             engineered for its specific requirements.
-          </p>
+          </motion.p>
         </div>
 
         {/* Tabbed Interactive Grid */}

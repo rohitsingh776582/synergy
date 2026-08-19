@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
-import SectionHeading from "@/components/SectionHeading";
+import ContactHero from "@/components/ContactHero";
 import Container from "@/components/Container";
 import { MapPin, Phone, Mail, Clock, Building2, Factory } from "lucide-react";
 
@@ -17,20 +17,7 @@ export default function ContactPage() {
       <div className="relative z-10 bg-white">
         <main className="flex-1">
           {/* Hero */}
-          <section className="bg-gradient-to-b from-purple-50/60 via-white to-gray-50 py-16 text-center border-b border-gray-100">
-            <Container>
-              <span className="rounded-none bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
-                Connect With Us
-              </span>
-              <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
-                Contact Synergy PUF <br />
-                Engineering Team
-              </h1>
-              <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                Have a technical query or require site inspection? Our insulation specialists are ready to assist you.
-              </p>
-            </Container>
-          </section>
+          <ContactHero />
 
           {/* Contact Info & Form */}
           <section className="py-20 bg-[#f8f8fa]">

@@ -1,9 +1,10 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
@@ -18,13 +19,88 @@ const stats = [
   { target: 12, suffix: "+", label: "States served" },
 ] as const;
 
+const BUILD_PROJECT_LINES = [
+  ["Build", "your", "next"],
+  ["project", "with"],
+  ["Synergy", "PUF."],
+];
+
+let buildCounter = 0;
+const PREPROCESSED_BUILD_PROJECT = BUILD_PROJECT_LINES.map((line) =>
+  line.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: buildCounter++,
+    }))
+  )
+);
+const TOTAL_BUILD_CHARS = buildCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.40;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
+
 export default function BuildNextProject() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRevealRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtextRef = useRef<HTMLParagraphElement>(null);
   const valueRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const tweensRef = useRef<gsap.core.Tween[]>([]);
 
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: titleRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
+  const { scrollYProgress: subtextScrollProgress } = useScroll({
+    target: subtextRef,
+    offset: ["start 90%", "center 50%"],
+  });
+
+  const smoothSubtextProgress = useSpring(subtextScrollProgress, {
+    stiffness: 70,
+    damping: 26,
+    restDelta: 0.001,
+  });
+
+  const subtextY = useTransform(smoothSubtextProgress, [0, 0.45], [50, 0]);
+  const subtextOpacity = useTransform(smoothSubtextProgress, [0, 0.40], [0, 1]);
 
   const playCountAnimation = () => {
     tweensRef.current.forEach((tween) => tween.kill());
@@ -60,9 +136,9 @@ export default function BuildNextProject() {
     if (!section || !imageEl || !content) return;
 
     const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray<HTMLElement>(
-        content.querySelectorAll("[data-reveal]")
-      );
+      const items = gsap.utils
+        .toArray<HTMLElement>(content.querySelectorAll("[data-reveal]"))
+        .filter((el) => el.tagName !== "H2");
 
       if (items.length) {
         gsap.fromTo(
@@ -137,19 +213,39 @@ export default function BuildNextProject() {
             style={{ perspective: 1000 }}
           >
             <h2
-              data-reveal
-              className="relative text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-black leading-[1.15] will-change-transform"
+              ref={titleRef}
+              className="relative text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-black leading-[1.15]"
             >
-              Build your next project with Synergy PUF.
+              {PREPROCESSED_BUILD_PROJECT.map((line, lineIdx) => (
+                <React.Fragment key={lineIdx}>
+                  {lineIdx > 0 && <br />}
+                  {line.map((word, wordIdx) => (
+                    <span
+                      key={wordIdx}
+                      className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                    >
+                      {word.map((item) => (
+                        <ScrollLetter
+                          key={item.index}
+                          char={item.char}
+                          index={item.index}
+                          total={TOTAL_BUILD_CHARS}
+                          progress={smoothProgress}
+                        />
+                      ))}
+                    </span>
+                  ))}
+                </React.Fragment>
+              ))}
             </h2>
 
-            <p
-              data-reveal
-              className="relative mt-4 text-sm sm:text-base font-light text-gray-600 leading-relaxed will-change-transform"
+            <motion.p
+              ref={subtextRef}
+              style={{ y: subtextY, opacity: subtextOpacity }}
+              className="relative mt-4 text-sm sm:text-base font-light text-gray-600 leading-relaxed transform-gpu will-change-transform"
             >
-              BIS certified. FM approved. Delivered pan-India in{" "}
-              30 days
-            </p>
+              BIS certified. FM approved. Delivered pan-India in 30 days
+            </motion.p>
 
             <div
               data-reveal

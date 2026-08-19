@@ -1,12 +1,55 @@
 "use client";
 
-import { useLayoutEffect, useRef, useSyncExternalStore } from "react";
+import React, { useLayoutEffect, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const WHY_CHOOSE_US_WORDS = ["Why", "Choose", "Us?"];
+
+let whyChooseCounter = 0;
+const PREPROCESSED_WHY_CHOOSE_US = WHY_CHOOSE_US_WORDS.map((word) =>
+  word.split("").map((char) => ({
+    char,
+    index: whyChooseCounter++,
+  }))
+);
+const TOTAL_WHY_CHOOSE_CHARS = whyChooseCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.02;
+  const endScroll = 0.38;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.3;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
 
 const subscribeReducedMotion = (callback: () => void) => {
   if (typeof window === "undefined") return () => {};
@@ -24,39 +67,21 @@ const getReducedMotionServerSnapshot = () => false;
 
 const rows = [
   {
-    title: (
-      <>
-        40+ years old
-        <br />
-        credible excellence
-      </>
-    ),
+    titleLines: ["40+ years old", "credible excellence"],
     description:
       "From insulated wall and roof panels to specialized cold storage applications, Synergy PUF offers a complete range of high-performance sandwich panels engineered for every industrial, commercial, and infrastructure requirement.",
     image: "/cold_storage.png",
     alt: "40+ years of credible excellence",
   },
   {
-    title: (
-      <>
-        Pan India Presence and
-        <br />
-        strong network
-      </>
-    ),
+    titleLines: ["Pan India Presence and", "strong network"],
     description:
       "From Kashmir to Kanyakumari our distribution and installation network covers every corner of India, backed by regional warehouses and a dedicated project execution team.",
     image: "/puf_factory.png",
     alt: "Pan India Presence and strong network",
   },
   {
-    title: (
-      <>
-        Unmatched Speed & Timely
-        <br />
-        Delivery
-      </>
-    ),
+    titleLines: ["Unmatched Speed & Timely", "Delivery"],
     description:
       "A 48-hour record on dispatch because a delayed panel means a delayed project. Speed built into every order, from factory floor to site, pan-India.",
     image: "/puf_factory.png",
@@ -64,11 +89,80 @@ const rows = [
   },
 ] as const;
 
+function ScrollAnimatedText({
+  lines,
+  className = "",
+}: {
+  lines: string[];
+  className?: string;
+}) {
+  const containerRef = useRef<HTMLSpanElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 90%", "center 50%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
+  let charCounter = 0;
+  const preprocessed = lines.map((line) =>
+    line.split(" ").map((word) =>
+      word.split("").map((char) => ({
+        char,
+        index: charCounter++,
+      }))
+    )
+  );
+  const totalChars = charCounter;
+
+  return (
+    <span ref={containerRef} className={className}>
+      {preprocessed.map((line, lineIdx) => (
+        <React.Fragment key={lineIdx}>
+          {lineIdx > 0 && <br />}
+          {line.map((word, wordIdx) => (
+            <span
+              key={wordIdx}
+              className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+            >
+              {word.map((item) => (
+                <ScrollLetter
+                  key={item.index}
+                  char={item.char}
+                  index={item.index}
+                  total={totalChars}
+                  progress={smoothProgress}
+                />
+              ))}
+            </span>
+          ))}
+        </React.Fragment>
+      ))}
+    </span>
+  );
+}
+
 export default function WhyChooseUs() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const { scrollYProgress } = useScroll({
+    target: titleRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
 
   const isReducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -78,30 +172,10 @@ export default function WhyChooseUs() {
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    const heading = headingRef.current;
     const divider = dividerRef.current;
     if (!section || isReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // Main Heading slide up from bottom on scroll
-      if (heading) {
-        gsap.fromTo(
-          heading,
-          { opacity: 0, y: 70 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: heading,
-              start: "top 90%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-
       // Divider line animation
       if (divider) {
         gsap.fromTo(
@@ -158,12 +232,24 @@ export default function WhyChooseUs() {
     <section ref={sectionRef} className="relative z-10 w-full bg-white">
       <Container>
         {/* Main Title — stays outside the stacked panels */}
-        <div className="pb-10 pt-20 sm:pb-10 sm:pt-24 overflow-hidden">
-          <h2
-            ref={headingRef}
-            className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 leading-[1.15] tracking-[-0.02em] will-change-transform"
-          >
-            Why Choose Us?
+        <div ref={titleRef} className="pb-10 pt-20 sm:pb-10 sm:pt-24 overflow-hidden">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 leading-[1.15] tracking-[-0.02em]">
+            {PREPROCESSED_WHY_CHOOSE_US.map((word, wordIdx) => (
+              <span
+                key={wordIdx}
+                className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+              >
+                {word.map((item) => (
+                  <ScrollLetter
+                    key={item.index}
+                    char={item.char}
+                    index={item.index}
+                    total={TOTAL_WHY_CHOOSE_CHARS}
+                    progress={smoothProgress}
+                  />
+                ))}
+              </span>
+            ))}
           </h2>
         </div>
 
@@ -197,7 +283,7 @@ export default function WhyChooseUs() {
                 {/* Left Title */}
                 <div className="lg:col-span-4 row-title will-change-transform">
                   <h3 className="text-xl sm:text-2xl font-normal text-gray-900 leading-snug">
-                    {row.title}
+                    <ScrollAnimatedText lines={Array.from(row.titleLines)} />
                   </h3>
                 </div>
 
