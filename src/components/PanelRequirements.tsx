@@ -3,7 +3,7 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Layers } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -375,13 +375,7 @@ export default function PanelRequirements() {
                     overflow-hidden
                   "
                 >
-                  <div className="w-10 h-10 rounded-full bg-[#5b176e]/10 flex items-center justify-center mb-3">
-                    <Layers className="w-5 h-5 text-[#5b176e]" />
-                  </div>
 
-                  <span className="text-xs uppercase tracking-[2px] text-[#7b3f8f] font-light mb-2">
-                    {item.category}
-                  </span>
 
                   <h3 className="text-xl sm:text-2xl font-normal text-[#111827] leading-tight mb-4">
                     {item.name}
