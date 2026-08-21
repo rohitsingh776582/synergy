@@ -34,7 +34,8 @@ export default function Navbar() {
   const isHome = rawPathname === "/";
   const isAbout = rawPathname === "/about";
   const isProjects = rawPathname === "/projects";
-  const isHeroPage = isHome || isAbout || isProjects;
+  const isContact = rawPathname === "/contact";
+  const isHeroPage = isHome || isAbout || isProjects || isContact;
 
   useLayoutEffect(() => {
     const update = () => {
@@ -62,7 +63,7 @@ export default function Navbar() {
     };
   }, []);
 
-  // Home, About & Projects hero images => white text; white page sections => black text
+  // Home, About, Projects & Contact hero images => white text; white page sections => black text
   useLayoutEffect(() => {
     if (!isHeroPage) {
       setOnWhiteBg(true);
@@ -235,7 +236,7 @@ export default function Navbar() {
         />
       </header>
 
-      {!isAbout && !isProjects && <div className="w-full shrink-0" style={{ height: headerHeight }} aria-hidden />}
+      {!isAbout && !isProjects && !isContact && <div className="w-full shrink-0" style={{ height: headerHeight }} aria-hidden />}
     </>
   );
 }
