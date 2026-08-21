@@ -10,6 +10,7 @@ import Container from "./Container";
 gsap.registerPlugin(ScrollTrigger);
 
 const previewImages = [
+  { src: "/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg", alt: "Synergy PUF Site" },
   { src: "/puf_factory.png", alt: "Synergy PUF Factory" },
   { src: "/puf_panel_stack.png", alt: "PUF Panel Stack" },
   { src: "/puf_roof_panel.png", alt: "PUF Roof Panel" },
@@ -237,15 +238,15 @@ export default function AboutHero() {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div data-hero-element="bg" className="relative h-full w-full will-change-transform">
           <Image
-            src="/hero_futuristic_architecture.png"
-            alt="Synergy Futuristic Architecture Building Envelope"
+            src="/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg"
+            alt="Synergy PUF Industrial Site"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_35%] brightness-[0.82] contrast-[1.05]"
+            className="object-cover object-center brightness-100"
           />
-          {/* Subtle dark gradient overlays for cinematic mood */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/60" />
+          {/* Subtle dark gradient overlay for text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/40" />
         </div>
       </div>
 
@@ -254,7 +255,7 @@ export default function AboutHero() {
         data-hero-element="watermark"
         className="absolute top-2 left-1/2 z-10 w-full -translate-x-1/2 overflow-hidden text-center select-none pointer-events-none opacity-0"
       >
-    
+
       </div>
 
       {/* Foreground Content */}
@@ -293,44 +294,36 @@ export default function AboutHero() {
           <div className="lg:col-span-6 lg:justify-self-end w-full max-w-lg">
             <div
               data-hero-element="card"
-              className="will-change-transform relative flex flex-col sm:flex-row items-stretch bg-white/95 backdrop-blur-md  p-6 sm:p-7  border border-white/40 text-gray-900 gap-6"
+              className="will-change-transform relative flex flex-col sm:flex-row items-stretch bg-white/20 backdrop-blur-lg p-6 sm:p-7 border border-white/30 text-white gap-6 shadow-2xl"
             >
               {/* Card Text & Tags */}
               <div className="flex-1 flex flex-col justify-between gap-4">
                 {/* Category Pills */}
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide">
+                  <span className="bg-white/20 border border-white/30 text-white px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide">
                     PUF
                   </span>
-                  <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide">
+                  <span className="bg-white/20 border border-white/30 text-white px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide">
                     PIR
                   </span>
-                  <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide">
+                  <span className="bg-white/20 border border-white/30 text-white px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide">
                     Rockwool
                   </span>
                 </div>
 
                 {/* Card Title & Description */}
                 <div>
-                  <h3 className="text-xl font-serif font-normal text-gray-900 leading-snug">
+                  <h3 className="text-xl font-serif font-normal text-white leading-snug">
                     Crafted with Precision
                   </h3>
-                  <p className="mt-1.5 text-xs sm:text-sm font-light leading-relaxed text-gray-600">
+                  <p className="mt-1.5 text-xs sm:text-sm font-light leading-relaxed text-gray-200">
                     From PUF and PIR to Rockwool panels, we engineer building envelopes that perform for decades.
                   </p>
                 </div>
 
-                {/* Bottom Avatar / Stat Badge */}
-                <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
-                  <div className="flex -space-x-2 overflow-hidden">
-                    <div className="inline-block h-7 w-7 rounded-full ring-2 ring-white bg-purple-700 text-white font-bold text-[10px] flex items-center justify-center">
-                      SP
-                    </div>
-                    <div className="inline-block h-7 w-7 rounded-full ring-2 ring-white bg-amber-600 text-white font-bold text-[10px] flex items-center justify-center">
-                      98%
-                    </div>
-                  </div>
-                  <span className="text-xs font-semibold text-gray-800">
+                {/* Bottom Stat Badge */}
+                <div className="flex items-center gap-3 pt-2 border-t border-white/20">
+                  <span className="text-xs font-semibold text-gray-200">
                     100+ Projects &amp; Growing
                   </span>
                 </div>

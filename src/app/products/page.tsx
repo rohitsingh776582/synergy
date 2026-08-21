@@ -54,9 +54,10 @@ export default function ProductsPage() {
           {/* <ProductSeriesSpecifications currentProduct={currentProduct} /> */}
 
           {/* AVAILABLE PANEL JOINTS SECTION */}
-          {/*<AvailablePanelJointsSection />*/}
 
           <ProductsGridShowcase />
+          <AvailablePanelJointsSection />
+
 
           {/* MANUFACTURING THAT DELIVERS SECTION */}
           <ManufacturingThatDeliversSection />

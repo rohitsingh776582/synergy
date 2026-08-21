@@ -66,7 +66,7 @@ export default function ProjectsHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white max-w-3xl leading-[1.08] font-sans"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-serif leading-[1.1] text-white tracking-tight max-w-4xl"
           >
             Design spaces people love
           </motion.h1>

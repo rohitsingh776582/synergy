@@ -98,7 +98,7 @@ export default function ContactHero() {
       </div>
 
       <Container className="relative z-10 w-full flex flex-col items-start text-left">
-        <h1 ref={titleRef} className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
+        <h1 ref={titleRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-extrabold leading-[1.1] text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
           {PREPROCESSED_CONTACT_HEADING.map((line, lineIdx) => (
             <React.Fragment key={lineIdx}>
               {lineIdx > 0 && <br />}
@@ -124,7 +124,7 @@ export default function ContactHero() {
         <motion.p
           ref={subtextRef}
           style={{ y: subtextY, opacity: subtextOpacity }}
-          className="mt-4 text-base sm:text-lg text-white font-medium leading-relaxed max-w-2xl transform-gpu will-change-transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
+          className="mt-5 text-base sm:text-lg md:text-xl text-white font-medium leading-relaxed max-w-2xl transform-gpu will-change-transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
         >
           Have a technical query or require site inspection? Our insulation specialists are ready to assist you.
         </motion.p>
