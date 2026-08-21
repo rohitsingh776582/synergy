@@ -54,7 +54,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative z-10 flex min-h-[90dvh] w-full flex-col justify-center items-center text-center text-white py-16">
+    <section className="relative z-10 flex w-full flex-col justify-center items-center text-center text-white pt-4 pb-12 sm:pt-8 sm:pb-16 -mt-8 sm:-mt-12 md:-mt-16">
       <Container>
         <div ref={heroRef} className="max-w-4xl mx-auto flex flex-col items-center justify-center">
 
@@ -66,7 +66,7 @@ export default function Hero() {
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.1]">
             High Density <br />
-            PUFInsulated<br />
+            PUF Insulated <br />
             Panels
 
           </h1>
@@ -77,21 +77,7 @@ export default function Hero() {
           </p>
 
           {/* Action Buttons */}
-          <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/products"
-              className="bg-white text-gray-900 text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-3.5 hover:bg-gray-100 transition-all shadow-md"
-            >
-              Explore Products
-            </Link>
-
-            <Link
-              href="/quote"
-              className="border border-white/70 text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-3.5 hover:bg-white/15 transition-all"
-            >
-              Request Quote
-            </Link>
-          </div>
+       
 
           {/* Bottom Badges Bar */}
           <div className="mt-14 sm:mt-16 flex items-center justify-center gap-3 sm:gap-6 text-[11px] sm:text-xs font-semibold tracking-[0.2em] text-white/80 uppercase flex-wrap">

@@ -33,7 +33,8 @@ export default function Navbar() {
   const pathname = mounted ? rawPathname : "";
   const isHome = rawPathname === "/";
   const isAbout = rawPathname === "/about";
-  const isHeroPage = isHome || isAbout;
+  const isProjects = rawPathname === "/projects";
+  const isHeroPage = isHome || isAbout || isProjects;
 
   useLayoutEffect(() => {
     const update = () => {
@@ -61,7 +62,7 @@ export default function Navbar() {
     };
   }, []);
 
-  // Home & About hero images => white text; white page sections => black text
+  // Home, About & Projects hero images => white text; white page sections => black text
   useLayoutEffect(() => {
     if (!isHeroPage) {
       setOnWhiteBg(true);
@@ -74,6 +75,8 @@ export default function Navbar() {
       ? document.getElementById("home-hero")
       : isAbout
       ? document.getElementById("about-hero") || document.querySelector("section")
+      : isProjects
+      ? document.getElementById("projects-hero") || document.querySelector("section")
       : document.querySelector("section");
     if (!hero) return;
 
@@ -232,7 +235,7 @@ export default function Navbar() {
         />
       </header>
 
-      {!isAbout && <div className="w-full shrink-0" style={{ height: headerHeight }} aria-hidden />}
+      {!isAbout && !isProjects && <div className="w-full shrink-0" style={{ height: headerHeight }} aria-hidden />}
     </>
   );
 }

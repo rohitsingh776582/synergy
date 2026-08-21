@@ -198,13 +198,13 @@ export default function ProjectGalleryCta() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#FAF8F5] py-8 sm:py-12 md:py-16 px-3 sm:px-6 md:px-8 font-sans overflow-hidden"
+      className="bg-[#FAF8F5] pt-1 sm:pt-2 md:pt-3 pb-2 sm:pb-3 md:pb-4 px-3 sm:px-6 md:px-8 font-sans overflow-hidden"
     >
       {/* Outer Container */}
       <div className="mx-auto max-w-7xl relative bg-[#FAF8F5] overflow-hidden">
         
         {/* Hero Section Container inside Frame */}
-        <div className="relative pt-4 sm:pt-6 pb-6 sm:pb-8 px-4 sm:px-8 text-center">
+        <div className="relative pt-2 sm:pt-3 pb-0 px-4 sm:px-8 text-center">
           
 
           {/* Pill Badge */}
@@ -266,13 +266,13 @@ export default function ProjectGalleryCta() {
             style={{ y: subtextY, opacity: subtextOpacity }}
             className="mt-4 text-sm sm:text-base text-gray-500 max-w-lg mx-auto leading-relaxed transform-gpu will-change-transform"
           >
-            Explore our pan-India installations — cold storage logistics, pharma cleanrooms, food processing plants & manufacturing facilities.
+            Explore our pan-India installations  cold storage logistics, pharma cleanrooms, food processing plants & manufacturing facilities.
           </motion.p>
 
           {/* 3D Arc Right-to-Left Moving Stage */}
           <div
             style={{ perspective: "1300px", perspectiveOrigin: "50% 50%" }}
-            className="relative z-10 flex justify-center items-center h-[340px] sm:h-[400px] md:h-[430px] overflow-hidden my-4"
+            className="relative z-10 flex justify-center items-center h-[340px] sm:h-[400px] md:h-[430px] overflow-hidden mt-4 mb-0"
           >
             {/* Render Cards moving Right to Left */}
             <div

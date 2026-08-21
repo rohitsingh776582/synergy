@@ -38,7 +38,8 @@ export default function ProductsPage() {
       <div className="relative z-10 bg-white shadow-none">
         <main className="flex-1">
           {/* HERO SECTION */}
-          <ProductsHero
+
+          {/* <ProductsHero
             activeTab={activeTab}
             activeSlide={activeSlide}
             onTabChange={handleTabChange}
@@ -47,13 +48,13 @@ export default function ProductsPage() {
             onSlideSelect={setActiveSlide}
             currentProduct={currentProduct}
             currentProducts={currentProducts}
-          />
+          /> */}
 
           {/* PRODUCT SERIES SPECIFICATIONS */}
-          <ProductSeriesSpecifications currentProduct={currentProduct} />
+          {/* <ProductSeriesSpecifications currentProduct={currentProduct} /> */}
 
           {/* AVAILABLE PANEL JOINTS SECTION */}
-          <AvailablePanelJointsSection />
+          {/*<AvailablePanelJointsSection />*/}
 
           <ProductsGridShowcase />
 
