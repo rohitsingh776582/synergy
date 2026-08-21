@@ -8,6 +8,8 @@ import AvailablePanelJointsSection from "@/components/AvailablePanelJointsSectio
 import ManufacturingThatDeliversSection from "@/components/ManufacturingThatDeliversSection";
 import SynergyHeroComponent from "@/components/SynergyHeroComponent";
 import FeatureHighlightCards from "@/components/FeatureHighlightCards";
+import ProductsGridShowcase from "@/components/ProductsGridShowcase";
+
 
 
 export default function ProductsPage() {
@@ -53,14 +55,16 @@ export default function ProductsPage() {
           {/* AVAILABLE PANEL JOINTS SECTION */}
           <AvailablePanelJointsSection />
 
+          <ProductsGridShowcase />
+
           {/* MANUFACTURING THAT DELIVERS SECTION */}
           <ManufacturingThatDeliversSection />
 
           {/* BUILD YOUR NEXT PROJECT CTA SECTION */}
-          <SynergyHeroComponent />  
-           
-           
-          
+          <SynergyHeroComponent />
+
+
+
         </main>
       </div>
 
