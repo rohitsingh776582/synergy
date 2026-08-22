@@ -78,6 +78,8 @@ export default function MissionVisionPromise() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const textRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const { scrollYProgress } = useScroll({
     target: titleRef,
@@ -97,31 +99,75 @@ export default function MissionVisionPromise() {
     const ctx = gsap.context(() => {
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
-      gsap.set(cards, { opacity: 0, y: 40 });
+      cards.forEach((card, index) => {
+        const imgWrapper = imageRefs.current[index];
+        const imgInner = imgWrapper?.querySelector(".js-image-inner");
+        const textWrapper = textRefs.current[index];
+        const isEven = index % 2 === 0;
+        // Left-side images (isEven) reveal left-to-right: inset(0% 100% 0% 0%)
+        // Right-side images (!isEven) reveal right-to-left: inset(0% 0% 0% 100%)
+        const startClipPath = isEven ? "inset(0% 100% 0% 0%)" : "inset(0% 0% 0% 100%)";
 
-      let maxProgress = 0;
-      const tl = gsap.timeline({ paused: true });
+        gsap.set(card, { opacity: 0, y: 40 });
+        if (imgWrapper) {
+          gsap.set(imgWrapper, { clipPath: startClipPath });
+        }
+        if (imgInner) {
+          gsap.set(imgInner, { scale: 1.15 });
+        }
+        if (textWrapper) {
+          gsap.set(textWrapper, { y: 60, opacity: 0 });
+        }
 
-      tl.to(cards, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.18,
-        duration: 1,
-        ease: "power2.out",
-      });
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            end: "center 45%",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 85%",
-        end: "top 35%",
-        scrub: 0.6,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          if (self.progress > maxProgress) {
-            maxProgress = self.progress;
-            tl.progress(maxProgress);
-          }
-        },
+        tl.to(card, {
+          opacity: 1,
+          y: 0,
+          ease: "none",
+        });
+
+        if (imgWrapper) {
+          tl.to(
+            imgWrapper,
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              ease: "none",
+            },
+            0
+          );
+        }
+
+        if (imgInner) {
+          tl.to(
+            imgInner,
+            {
+              scale: 1,
+              ease: "none",
+            },
+            0
+          );
+        }
+
+        if (textWrapper) {
+          tl.to(
+            textWrapper,
+            {
+              y: 0,
+              opacity: 1,
+              ease: "none",
+            },
+            0
+          );
+        }
       });
     }, section);
 
@@ -176,22 +222,30 @@ export default function MissionVisionPromise() {
               >
                 {/* 50% Image Side */}
                 <div
-                  className={`relative w-full h-[260px] sm:h-[320px] lg:h-auto min-h-[280px] overflow-hidden bg-gray-100 ${
+                  ref={(el) => {
+                    imageRefs.current[index] = el;
+                  }}
+                  className={`relative w-full h-[260px] sm:h-[320px] lg:h-auto min-h-[280px] overflow-hidden bg-gray-100 transform-gpu will-change-[clip-path] ${
                     isEven ? "lg:order-1" : "lg:order-2"
                   }`}
                 >
-                  <Image
-                    src={image}
-                    alt={title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-center transition-transform duration-700 hover:scale-105"
-                  />
+                  <div className="js-image-inner relative w-full h-full transform-gpu will-change-transform">
+                    <Image
+                      src={image}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
                 </div>
 
                 {/* 50% Text Side */}
                 <div
-                  className={`p-6 sm:p-10 lg:p-12 flex flex-col justify-center ${
+                  ref={(el) => {
+                    textRefs.current[index] = el;
+                  }}
+                  className={`p-6 sm:p-10 lg:p-12 flex flex-col justify-center transform-gpu will-change-transform ${
                     isEven ? "lg:order-2" : "lg:order-1"
                   }`}
                 >
