@@ -5,10 +5,10 @@ import Footer from "@/components/Footer";
 import ProductsHero, { panelProducts } from "@/components/ProductsHero";
 import ProductSeriesSpecifications from "@/components/ProductSeriesSpecifications";
 import AvailablePanelJointsSection from "@/components/AvailablePanelJointsSection";
-import ManufacturingThatDeliversSection from "@/components/ManufacturingThatDeliversSection";
 import SynergyHeroComponent from "@/components/SynergyHeroComponent";
 import FeatureHighlightCards from "@/components/FeatureHighlightCards";
 import ProductsGridShowcase from "@/components/ProductsGridShowcase";
+import ProductShowcaseBoxSection from "@/components/ProductShowcaseBoxSection";
 
 
 
@@ -59,8 +59,8 @@ export default function ProductsPage() {
           <AvailablePanelJointsSection />
 
 
-          {/* MANUFACTURING THAT DELIVERS SECTION */}
-          <ManufacturingThatDeliversSection />
+          {/* FEATURED PRODUCT SHOWCASE BANNER SECTION */}
+          <ProductShowcaseBoxSection />
 
           {/* BUILD YOUR NEXT PROJECT CTA SECTION */}
           <SynergyHeroComponent />

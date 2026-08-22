@@ -193,8 +193,8 @@ export default function AvailablePanelJointsSection() {
         </motion.p>
 
         {/* Staggered 5-Box Interlocking Grid */}
-        <div className="mt-14 max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-0 max-w-4xl mx-auto">
+        <div className="mt-14 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-0 max-w-6xl mx-auto">
             {jointProfiles.map((joint) => (
               <JointBoxItem
                 key={joint.id}

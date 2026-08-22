@@ -32,7 +32,7 @@ const cards = [
     title: "Cold Storage Insulation Panel",
     description:
       "Cam-lock interlocking joint system ensuring sub-zero thermal retention down to -40°C in food & pharma logistics.",
-    image: "/cold_storage.png",
+    image: "/images/products/cold_storage_1786340194998.png",
     width: "w-[429px]",
     height: "h-[497px]",
     top: "top-[100px]",
@@ -43,7 +43,7 @@ const cards = [
     title: "Sterile Cleanroom Modular Panel",
     description:
       "ISO Class cleanroom modular joint profile providing flush surface sterility, antimicrobial seal and airtight containment.",
-    image: "/Panels/Generate_clean_room_image_2K_202608181422.jpeg",
+    image: "/images/products/cleanroom_panel.png",
     width: "w-[503px]",
     height: "h-[582px]",
     top: "top-[300px]",
@@ -54,7 +54,7 @@ const cards = [
     title: "PIR Fire-Rated Thermal Barrier",
     description:
       "FM-approved polyisocyanurate thermal barrier joint tested for 120-minute structural fire endurance and extreme heat protection.",
-    image: "/Panels/Generating_fire_insulation_image_2K_202608181424.jpeg",
+    image: "/images/products/puf_panel_stack_1786340168248.png",
     width: "w-[479px]",
     height: "h-[556px]",
     top: "top-[200px]",
@@ -65,7 +65,7 @@ const cards = [
     title: "Heat Insulation Roof System",
     description:
       "Energy-efficient sandwich roofing joint minimizing solar heat gain and thermal conductivity for commercial facilities.",
-    image: "/Panels/Heat insulation.png",
+    image: "/images/products/puf_roof_panel.png",
     width: "w-[429px]",
     height: "h-[497px]",
     top: "top-[100px]",
