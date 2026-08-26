@@ -74,7 +74,7 @@ export default function ProductShowcaseBoxSection() {
           </div>
 
           {/* Staggered Cards Grid */}
-          <div className="relative z-10 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-stretch justify-center">
+          <div data-stagger className="relative z-10 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-stretch justify-center">
             {topFeatureCards.map((card, idx) => {
               const Icon = card.icon;
               return (
@@ -129,7 +129,7 @@ export default function ProductShowcaseBoxSection() {
                   <span>Quality Assured</span>
                 </div>
 
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-black leading-tight">
+                <h2 data-lines-reveal className="text-2xl sm:text-3xl font-extrabold text-black leading-tight">
                   Stringent Quality Control
                 </h2>
 
@@ -170,7 +170,7 @@ export default function ProductShowcaseBoxSection() {
                   <span>Nationwide Reach</span>
                 </div>
 
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-black leading-tight">
+                <h2 data-lines-reveal className="text-2xl sm:text-3xl font-extrabold text-black leading-tight">
                   Pan-India Supply & Support
                 </h2>
 

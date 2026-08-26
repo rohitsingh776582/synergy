@@ -105,10 +105,10 @@ export default function SynergyHeroComponent() {
 
         {/* Right Column: Staggered Layout & Action Buttons */}
         <div className="flex justify-center lg:justify-end">
-          <div className="grid grid-cols-2 gap-4 w-full max-w-[460px]">
-            
+          <div data-stagger className="grid grid-cols-2 gap-4 w-full max-w-[460px]">
+
             {/* Top-Left Image: PUF Wall Panel */}
-            <div className="relative aspect-square w-full overflow-hidden bg-white border border-purple-100 p-3 group transition-all duration-300">
+            <div data-hover-image className="relative aspect-square w-full overflow-hidden bg-white border border-purple-100 p-3 group transition-all duration-300">
               <Image
                 src="/images/products/wall_panel_hero.png"
                 alt="Synergy PUF Wall Panel"
@@ -135,7 +135,7 @@ export default function SynergyHeroComponent() {
             </div>
 
             {/* Bottom-Right Image: PUF Roof Panel */}
-            <div className="relative aspect-square w-full overflow-hidden bg-white border border-purple-100 p-3 group transition-all duration-300">
+            <div data-hover-image className="relative aspect-square w-full overflow-hidden bg-white border border-purple-100 p-3 group transition-all duration-300">
               <Image
                 src="/images/products/roof_panel_hero.png"
                 alt="Synergy PUF Roof Panel"

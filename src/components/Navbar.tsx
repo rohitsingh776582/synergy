@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -23,6 +23,16 @@ const navItems = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [burgerOpen, setBurgerOpen] = useState(false);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      setBurgerOpen(true);
+    } else {
+      const timer = setTimeout(() => setBurgerOpen(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [mobileMenuOpen]);
   const [topOffset, setTopOffset] = useState(0);
   const [headerHeight, setHeaderHeight] = useState(112);
   const [onWhiteBg, setOnWhiteBg] = useState(false);
@@ -114,7 +124,7 @@ export default function Navbar() {
           <Container className="flex h-full items-center justify-between">
             <Link
               href="/"
-              className={`relative z-10 flex shrink-0 items-center ${
+              className={`relative z-10 flex shrink-0 items-center ${burgerOpen ? "burger-open" : ""} ${
                 light
                   ? "h-10 w-[148px] overflow-hidden sm:h-11 sm:w-[168px]"
                   : "h-11 w-[200px] overflow-visible sm:w-[230px]"
@@ -152,6 +162,7 @@ export default function Navbar() {
                       key={item.name}
                       href={item.href}
                       className={`
+                        group
                         relative
                         px-[17px]
                         py-[18px]
@@ -175,7 +186,17 @@ export default function Navbar() {
                         ${isActive ? "after:opacity-100" : "after:opacity-0"}
                       `}
                     >
-                      {item.name}
+                      <span className="relative inline-block overflow-hidden align-top h-[1em]">
+                        <span className="block transition-transform duration-400 ease-[cubic-bezier(.21,1,.34,1)] group-hover:-translate-y-full">
+                          {item.name}
+                        </span>
+                        <span
+                          aria-hidden
+                          className="absolute left-0 top-full block transition-transform duration-400 ease-[cubic-bezier(.21,1,.34,1)] group-hover:-translate-y-full"
+                        >
+                          {item.name}
+                        </span>
+                      </span>
                     </Link>
                   );
                 })}

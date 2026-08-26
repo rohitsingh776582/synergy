@@ -208,7 +208,7 @@ function ProjectShowcase({ project }: { project: Project }) {
           {project.description}
         </motion.p>
 
-        <div className="mt-4 grid grid-cols-2 gap-2.5">
+        <div data-stagger className="mt-4 grid grid-cols-2 gap-2.5">
           {specs.map((spec) => (
             <div
               key={spec.label}

@@ -11,7 +11,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
   return (
     <div className="group flex flex-col justify-between overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300">
       <div>
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-900">
+        <div data-scale-up className="relative aspect-[16/10] w-full overflow-hidden bg-gray-900">
           <Image
             src={blog.image}
             alt={blog.title}

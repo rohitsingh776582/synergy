@@ -218,7 +218,7 @@ export default function WhatsInsideMatters() {
           </div>
 
           {/* Right Column - Layer Details Cards */}
-          <div className="lg:col-span-3 flex flex-col gap-3.5 justify-center relative z-20">
+          <div data-stagger className="lg:col-span-3 flex flex-col gap-3.5 justify-center relative z-20">
             {LAYERS_DATA.map((layer) => {
               const isActive =
                 activeLayer === "all" || activeLayer === layer.id;

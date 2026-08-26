@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import SmoothScroll from "@/components/SmoothScroll";
 import SiteHeader from "@/components/SiteHeader";
+import ScrollAnimations from "@/components/ScrollAnimations";
 import "./globals.css";
 
 const inter = localFont({
@@ -53,6 +54,7 @@ export default function RootLayout({
           <SiteHeader />
           {children}
         </SmoothScroll>
+        <ScrollAnimations />
       </body>
     </html>
   );

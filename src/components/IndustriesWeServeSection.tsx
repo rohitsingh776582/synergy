@@ -285,7 +285,7 @@ export default function IndustriesWeServeSection() {
         {/* Tabbed Interactive Grid */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start lg:gap-10">
           {/* Left Vertical Industry Tab List with Hover Effect */}
-          <div className="lg:col-span-4 flex flex-col gap-1.5">
+          <div data-stagger="0.05" className="lg:col-span-4 flex flex-col gap-1.5">
             {industriesData.map((item) => {
               const Icon = item.icon;
               const isSelected = selectedId === item.id;

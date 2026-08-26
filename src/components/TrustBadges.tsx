@@ -20,7 +20,7 @@ export default function TrustBadges() {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 py-8 text-center max-w-4xl mx-auto">
+    <div data-stagger className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 py-8 text-center max-w-4xl mx-auto">
       {badges.map((badge, idx) => {
         const Icon = badge.icon;
         return (

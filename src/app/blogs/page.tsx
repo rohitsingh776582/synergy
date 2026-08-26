@@ -22,11 +22,11 @@ export default function BlogsPage() {
             <span className="rounded-full bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
               Technical Knowledge Hub
             </span>
-            <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
+            <h1 data-lines-reveal className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
               Insulation Engineering <br />
               <span className="text-[#5b176e]">Blogs & Guides</span>
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            <p data-fade-in data-delay="0.15" className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
               Expert insights, thermal calculation guides, and maintenance best practices for polyurethane sandwich panels.
             </p>
           </Container>
@@ -40,7 +40,7 @@ export default function BlogsPage() {
               subtitle="Written by our senior thermal insulation engineers."
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            <div data-stagger className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
               {blogs.map((blog) => (
                 <BlogCard key={blog.slug} blog={blog} />
               ))}

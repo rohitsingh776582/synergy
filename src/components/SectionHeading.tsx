@@ -14,6 +14,7 @@ export default function SectionHeading({
   return (
     <div className={`mb-12 ${centered ? "text-center mx-auto max-w-3xl" : "max-w-3xl"}`}>
       <h2
+        data-lines-reveal
         className={`text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 tracking-tight leading-tight ${
           purpleUnderline ? "relative pb-4 border-b-2 border-[#5b176e]" : ""
         }`}
@@ -21,7 +22,7 @@ export default function SectionHeading({
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-4 text-base sm:text-lg text-gray-600 font-light leading-relaxed">
+        <p data-fade-in data-delay="0.15" className="mt-4 text-base sm:text-lg text-gray-600 font-light leading-relaxed">
           {subtitle}
         </p>
       )}

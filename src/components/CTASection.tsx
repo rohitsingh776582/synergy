@@ -15,7 +15,7 @@ export default function CTASection() {
           
           {/* Left Column: Heading & Side-by-Side Action Buttons */}
           <div className="lg:col-span-6 space-y-8">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#111111] leading-[1.1]">
+            <h2 data-lines-reveal className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#111111] leading-[1.1]">
               Build your next <br />
               project with <br />
               Synergy PUF.
@@ -47,7 +47,7 @@ export default function CTASection() {
 
           {/* Right Column: Stacked Metallic Panel Graphic */}
           <div className="lg:col-span-6">
-            <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full max-w-xl mx-auto lg:ml-auto">
+            <div data-scale-up className="relative aspect-[16/10] sm:aspect-[16/9] w-full max-w-xl mx-auto lg:ml-auto">
               <Image
                 src="/images/products/roof_panel_hero.png"
                 alt="Synergy PUF Stacked Insulated Sandwich Panels"
@@ -61,7 +61,7 @@ export default function CTASection() {
         </div>
 
         {/* Bottom Feature Bar: 3 Columns */}
-        <div className="mt-16 sm:mt-24 pt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        <div data-stagger className="mt-16 sm:mt-24 pt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           
           {/* Feature 1: Multi-Certified */}
           <div className="flex flex-col items-center">

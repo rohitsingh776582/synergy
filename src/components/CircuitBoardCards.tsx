@@ -40,17 +40,17 @@ export default function CircuitBoardCards() {
           <span className="text-xs font-bold tracking-widest text-blue-400 uppercase">
             Infrastructure Layer
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4">
+          <h2 data-lines-reveal className="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4">
             Next-Gen Microchip Architecture
           </h2>
-          <p className="text-blue-200/70 max-w-2xl text-sm sm:text-base">
+          <p data-fade-in data-delay="0.15" className="text-blue-200/70 max-w-2xl text-sm sm:text-base">
             High-performance crypto infrastructure powered by custom PCB trace circuits
             and real-time hardware telemetry.
           </p>
         </div>
 
         {/* Horizontal Row / Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <div data-stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {sampleCards.map((card, idx) => (
             <CircuitCard
               key={idx}
