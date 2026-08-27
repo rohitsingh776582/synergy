@@ -9,6 +9,8 @@ import SynergyHeroComponent from "@/components/SynergyHeroComponent";
 import FeatureHighlightCards from "@/components/FeatureHighlightCards";
 import ProductsGridShowcase from "@/components/ProductsGridShowcase";
 import ProductShowcaseBoxSection from "@/components/ProductShowcaseBoxSection";
+import AlethiaEcosystemShowcase from "@/components/AlethiaEcosystemShowcase";
+import DestinationCarousel from "@/components/DestinationCarousel";
 
 
 
@@ -56,8 +58,9 @@ export default function ProductsPage() {
           {/* AVAILABLE PANEL JOINTS SECTION */}
 
           <ProductsGridShowcase />
-          <AvailablePanelJointsSection />
+          <DestinationCarousel/>
 
+          {/* <AlethiaEcosystemShowcase /> */}
 
           {/* FEATURED PRODUCT SHOWCASE BANNER SECTION */}
           <ProductShowcaseBoxSection />
