@@ -192,8 +192,8 @@ export default function Hero() {
 
           {/* Right Column: Glassmorphic Core Pillars Navigation Card */}
           <div className="lg:col-span-4 flex justify-center lg:justify-end order-1 lg:order-2">
-            <div className="w-full max-w-sm lg:w-80 bg-black/40 backdrop-blur-xl border border-white/20 p-5 sm:p-6">
-              <div className="text-[11px] sm:text-xs font-mono font-bold tracking-[0.25em] text-[#d8b4fe] uppercase mb-4 px-2">
+            <div className="w-full max-w-sm lg:w-80 bg-white/15 backdrop-blur-md border border-white/30 p-5 sm:p-6 shadow-xl rounded-xl">
+              <div className="text-[11px] sm:text-xs font-mono font-bold tracking-[0.25em] text-[#e9d5ff] uppercase mb-4 px-2">
                 CORE PILLARS
               </div>
               <div className="flex flex-col gap-2">
@@ -203,9 +203,9 @@ export default function Hero() {
                     <button
                       key={pillar.id}
                       onClick={() => setActivePillarIndex(idx)}
-                      className={`relative w-full text-left px-5 py-3.5 text-base font-medium transition-all duration-300 flex items-center justify-between cursor-pointer ${isActive
-                          ? "bg-[#58166A] text-white font-semibold scale-[1.02]"
-                          : "text-white/80 hover:text-white hover:bg-white/10"
+                      className={`relative w-full text-left px-5 py-3.5 text-base font-medium transition-all duration-300 flex items-center justify-between cursor-pointer rounded-lg ${isActive
+                          ? "bg-[#58166A] text-white font-semibold scale-[1.02] shadow-md"
+                          : "text-white/90 hover:text-white hover:bg-white/20"
                         }`}
                     >
                       <span>{pillar.name}</span>

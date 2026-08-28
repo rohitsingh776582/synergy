@@ -123,8 +123,40 @@ export default function DestinationCarousel({
     <div
       className={`relative min-h-screen w-full overflow-hidden bg-white font-sans text-gray-900 select-none flex flex-col justify-between p-4 sm:p-8 ${className}`}
     >
-      {/* 1. Light Ambient Background Layer */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-gradient-to-b from-slate-50 via-white to-purple-50/20" />
+      {/* 1. Cinematic Ambient Background Layer showing active card image/video */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeDestination.id}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1.04 }}
+            exit={{ opacity: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="absolute inset-0 h-full w-full"
+          >
+            {activeDestination.videoUrl ? (
+              <video
+                src={activeDestination.videoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="h-full w-full object-cover filter brightness-[0.85] blur-md"
+              />
+            ) : activeDestination.imageUrl ? (
+              <Image
+                src={activeDestination.imageUrl}
+                alt={activeDestination.name}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center filter brightness-[0.85] blur-md"
+              />
+            ) : null}
+            <div className="absolute inset-0 bg-black/15" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* 3. Main 3D Card Carousel Stage */}
       <div className="relative z-20 flex-1 flex items-center justify-center my-auto min-h-[560px] sm:min-h-[640px]">
