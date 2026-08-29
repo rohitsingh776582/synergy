@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, RotateCcw, Smartphone } from "lucide-react";
+import Container from "./Container";
 
 // Accent color constant: #FF6542
 const ACCENT_COLOR = "#FF6542";
@@ -179,7 +180,7 @@ export default function ApplicationsHeroAnimation() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
 
                 {/* Sub-label during flash reveal */}
-                <div className="absolute bottom-12 left-10 text-mono text-xs font-mono tracking-widest text-white/90 uppercase">
+                <div className="absolute bottom-12 left-5 md:left-10 lg:left-[50px] text-mono text-xs font-mono tracking-widest text-white/90 uppercase">
                   <span className="mr-3" style={{ color: ACCENT_COLOR }}>
                     [{img.num}]
                   </span>
@@ -193,7 +194,7 @@ export default function ApplicationsHeroAnimation() {
 
       {/* STAGE 3, 4 & 5 — Main Editorial Hero Layout (Cards, Split Text, Controls) */}
       {stage >= 3 && (
-        <div className="relative w-full h-full z-30 flex flex-col justify-between p-6 sm:p-8 lg:p-10">
+        <Container className="relative w-full min-h-screen z-30 flex flex-col justify-between pt-20 md:pt-24 pb-8">
           {/* TOP BAR / NAVIGATION ACCENTS */}
           <div className="flex justify-between items-start z-40">
             {/* Top Left Space */}
@@ -240,14 +241,14 @@ export default function ApplicationsHeroAnimation() {
           </div>
 
           {/* MAIN CONTENT CENTER / GRID */}
-          <div className="my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-7xl mx-auto pt-2 pb-4">
+          <div className="my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full pt-2 pb-4">
             {/* LEFT COLUMN: Stage 4 Character-by-Character Split Text Reveal */}
             <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
 
               {/* Headline Split-Text Character Reveal */}
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.08] font-sans text-gray-900">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.15] font-sans text-gray-900">
                 {HEADLINE_LINES.map((line, lineIdx) => (
-                  <div key={lineIdx} className="overflow-hidden flex flex-wrap">
+                  <div key={lineIdx} className="overflow-hidden flex flex-wrap pb-3 -mb-3">
                     {line.split("").map((char, charIdx) => {
                       const totalIndex = lineIdx * 20 + charIdx;
                       return (
@@ -426,7 +427,7 @@ export default function ApplicationsHeroAnimation() {
               </a>
             </div>
           </motion.div>
-        </div>
+        </Container>
       )}
     </section>
   );
