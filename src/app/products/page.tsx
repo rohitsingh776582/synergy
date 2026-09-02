@@ -12,6 +12,7 @@ import Rotating3DCardDeckShowcase from "@/components/Rotating3DCardDeckShowcase"
 import DestinationCarousel from "@/components/DestinationCarousel";
 import ProductShowcaseBoxSection from "@/components/ProductShowcaseBoxSection";
 import BuildProjectBanner from "@/components/BuildProjectBanner";
+import ProductsHeroSection from "@/components/ProductsHeroSection";
 
 
 
@@ -57,6 +58,7 @@ export default function ProductsPage() {
           {/* <ProductSeriesSpecifications currentProduct={currentProduct} /> */}
 
           {/* AVAILABLE PANEL JOINTS SECTION */}
+          <ProductsHeroSection />
 
           <ProductsGridShowcase />
           <DestinationCarousel />

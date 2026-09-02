@@ -3,6 +3,10 @@ import Footer from "@/components/Footer";
 import ApplicationsHeroAnimation from "@/components/ApplicationsHeroAnimation";
 import IndustriesWeServeSection from "@/components/IndustriesWeServeSection";
 import BuildProjectBanner from "@/components/BuildProjectBanner";
+import ByApplicationSection from "@/components/ByApplicationSection";
+import ProjectConditionsSection from "@/components/ProjectConditionsSection";
+import PanelFitsYourUseBanner from "@/components/PanelFitsYourUseBanner";
+import ApplicationsHeroSection from "@/components/ApplicationsHeroSection";
 
 export const metadata: Metadata = {
   title: "Industry Applications | Synergy PUF Insulation Solutions",
@@ -16,14 +20,18 @@ export default function ApplicationsPage() {
       <div className="relative z-10 bg-[#F7F7F9]">
         <main className="flex-1">
           {/* Animated Editorial Hero Section */}
+          <ApplicationsHeroSection />
+
           <ApplicationsHeroAnimation />
 
-
+          <ByApplicationSection />
 
           {/* Industries We Serve Interactive Section */}
           <IndustriesWeServeSection />
 
-          <BuildProjectBanner />
+          <ProjectConditionsSection />
+
+          <PanelFitsYourUseBanner />
 
         </main>
       </div>
