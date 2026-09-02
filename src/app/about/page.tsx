@@ -5,8 +5,6 @@ import AchievementCards from "@/components/AchievementCards";
 import FeatureHighlightCards from "@/components/FeatureHighlightCards";
 import AboutHero from "@/components/AboutHero";
 import MissionVisionPromise from "@/components/MissionVisionPromise";
-import PromoPhotoGrid from "@/components/PromoPhotoGrid";
-
 
 export const metadata: Metadata = {
   title: "About Us | Synergy PUF - Engineering Insulation Solutions",
@@ -23,8 +21,6 @@ export default function AboutPage() {
           <AboutHero />
 
           <AchievementCards />
-
-           <PromoPhotoGrid />
 
           <MissionVisionPromise />
 

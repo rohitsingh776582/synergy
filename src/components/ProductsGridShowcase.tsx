@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 
 const cards = [
   {
@@ -11,9 +11,9 @@ const cards = [
     description:
       "Innovative joinery for seamless connections, structural integrity and ease of industrial roof installation.",
     image: "/images/products/roof_panel_hero.png",
-    width: "w-[503px]",
-    height: "h-[582px]",
-    top: "top-[300px]",
+    width: "w-[330px] sm:w-[365px]",
+    height: "h-[450px] sm:h-[480px]",
+    top: "top-[140px]",
     left: "left-[40px]",
   },
   {
@@ -22,10 +22,10 @@ const cards = [
     description:
       "Modular wall panel joint profile engineered for zero thermal leak, air-tight interlocking and flush hygienic finish.",
     image: "/images/products/wall_panel_hero.png",
-    width: "w-[479px]",
-    height: "h-[556px]",
-    top: "top-[200px]",
-    left: "left-[580px]",
+    width: "w-[320px] sm:w-[350px]",
+    height: "h-[430px] sm:h-[460px]",
+    top: "top-[90px]",
+    left: "left-[440px]",
   },
   {
     tag: "SINGLE TONGUE & GROOVE",
@@ -33,10 +33,10 @@ const cards = [
     description:
       "Cam-lock interlocking joint system ensuring sub-zero thermal retention down to -40°C in food & pharma logistics.",
     image: "/images/products/cold_storage_1786340194998.png",
-    width: "w-[429px]",
-    height: "h-[497px]",
-    top: "top-[100px]",
-    left: "left-[1100px]",
+    width: "w-[300px] sm:w-[330px]",
+    height: "h-[410px] sm:h-[440px]",
+    top: "top-[40px]",
+    left: "left-[830px]",
   },
   {
     tag: "DOUBLE TONGUE & GROOVE",
@@ -44,10 +44,10 @@ const cards = [
     description:
       "ISO Class cleanroom modular joint profile providing flush surface sterility, antimicrobial seal and airtight containment.",
     image: "/images/products/cleanroom_panel.png",
-    width: "w-[503px]",
-    height: "h-[582px]",
-    top: "top-[300px]",
-    left: "left-[1580px]",
+    width: "w-[330px] sm:w-[365px]",
+    height: "h-[450px] sm:h-[480px]",
+    top: "top-[140px]",
+    left: "left-[1200px]",
   },
   {
     tag: "M-SECTION PROFILE",
@@ -55,10 +55,10 @@ const cards = [
     description:
       "FM-approved polyisocyanurate thermal barrier joint tested for 120-minute structural fire endurance and extreme heat protection.",
     image: "/images/products/puf_panel_stack_1786340168248.png",
-    width: "w-[479px]",
-    height: "h-[556px]",
-    top: "top-[200px]",
-    left: "left-[2120px]",
+    width: "w-[320px] sm:w-[350px]",
+    height: "h-[430px] sm:h-[460px]",
+    top: "top-[90px]",
+    left: "left-[1600px]",
   },
   {
     tag: "THERMAL SANDWICH JOINT",
@@ -66,12 +66,90 @@ const cards = [
     description:
       "Energy-efficient sandwich roofing joint minimizing solar heat gain and thermal conductivity for commercial facilities.",
     image: "/images/products/puf_roof_panel.png",
-    width: "w-[429px]",
-    height: "h-[497px]",
-    top: "top-[100px]",
-    left: "left-[2640px]",
+    width: "w-[300px] sm:w-[330px]",
+    height: "h-[410px] sm:h-[440px]",
+    top: "top-[40px]",
+    left: "left-[1990px]",
   },
 ];
+
+function ShowcaseAnimatedCard({
+  card,
+  idx,
+  totalCards,
+  scrollYProgress,
+}: {
+  card: (typeof cards)[0];
+  idx: number;
+  totalCards: number;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const step = 1 / Math.max(1, totalCards - 1);
+  const startProgress = Math.max(0, (idx - 1) * step);
+  const centerProgress = idx * step;
+  const endProgress = Math.min(1, (idx + 1) * step);
+
+  const scale = useTransform(
+    scrollYProgress,
+    [startProgress, centerProgress, endProgress],
+    [0.9, 1.02, 0.95]
+  );
+
+  const opacity = useTransform(
+    scrollYProgress,
+    [startProgress, centerProgress, endProgress],
+    [0.8, 1, 0.9]
+  );
+
+  return (
+    <motion.div
+      style={{ scale, opacity, willChange: "transform, opacity" }}
+      className={`
+        group
+        absolute
+        ${card.left}
+        ${card.top}
+        ${card.width}
+        ${card.height}
+        rounded-[12px]
+        bg-white
+        overflow-hidden
+        hover:shadow-2xl
+        flex flex-col
+        border border-gray-200/90
+        shadow-[0_15px_45px_rgba(0,0,0,0.08)]
+      `}
+    >
+      {/* TOP 52%: Product Image */}
+      <div className="relative w-full h-[52%] overflow-hidden bg-gray-100">
+        <Image
+          src={card.image}
+          alt={card.title}
+          fill
+          className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+          sizes="400px"
+        />
+
+        {/* Arrow Icon Button Overlaid on Image Top Right */}
+        <button className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-[6px] bg-white text-[#0752b8] font-bold shadow-md hover:scale-105 transition-transform text-sm">
+          ↗
+        </button>
+      </div>
+
+      {/* BOTTOM 48%: Product Text & Details */}
+      <div className="w-full h-[48%] p-4 sm:p-5 flex flex-col justify-between bg-white text-gray-900 overflow-hidden">
+        <div>
+          <h2 className="mb-1.5 text-[17px] sm:text-[19.5px] font-medium leading-snug font-sans text-gray-900 tracking-tight">
+            {card.title}
+          </h2>
+          <p className="text-[12px] sm:text-[13px] font-normal leading-relaxed text-gray-600">
+            {card.description}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function ProductsGridShowcase() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -81,75 +159,34 @@ export default function ProductsGridShowcase() {
     offset: ["start start", "end end"],
   });
 
-  // Smooth horizontal scroll animation: slides track left so right cards move in on the same line alignment
+  // Smooth horizontal scroll animation: slides track left as user scrolls down page
   const x = useTransform(scrollYProgress, [0, 1], ["0px", "-1550px"]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-[220vh] w-full bg-[#F2F2F4] select-none"
+      className="relative h-[260vh] w-full bg-[#F2F2F4] select-none"
     >
-      {/* PINNED STICKY VIEWPORT CONTAINER (With top padding to clear fixed navbar) */}
-      <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden bg-[#F2F2F4] pt-16 sm:pt-20">
-        
-        {/* CARDS TRACK (ALL CARDS ALIGNED IN SAME STAGGERED HORIZONTAL LINE) */}
+      {/* PINNED STICKY VIEWPORT CONTAINER WITH FULL CLEARANCE */}
+      <div className="sticky top-[80px] flex h-[calc(100vh-80px)] w-full items-center overflow-hidden bg-[#F2F2F4] pt-8 pb-12">
+        {/* CARDS TRACK */}
         <motion.div
           style={{ x }}
-          className="relative flex w-[3100px] h-[900px] items-center"
+          className="relative flex w-[2500px] h-[700px] items-center"
         >
           {cards.map((card, idx) => (
-            <div
+            <ShowcaseAnimatedCard
               key={idx}
-              className={`
-                group
-                absolute
-                ${card.left}
-                ${card.top}
-                ${card.width}
-                ${card.height}
-                rounded-[8px]
-                bg-white
-                overflow-hidden
-                transition-transform
-                duration-300
-                hover:scale-[1.02]
-                flex flex-col
-                border border-gray-200/80
-              `}
-            >
-              {/* TOP 50%: Product Image */}
-              <div className="relative w-full h-1/2 overflow-hidden bg-black/30">
-                <Image
-                  src={card.image}
-                  alt={card.title}
-                  fill
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  sizes="500px"
-                />
-
-                {/* Arrow Icon Button Overlaid on Image Top Right */}
-                <button className="absolute right-[10px] top-[10px] z-10 flex h-[42px] w-[42px] items-center justify-center rounded-[4px] bg-white text-[#0752b8] font-bold group-hover:scale-105 transition-transform">
-                  ↗
-                </button>
-              </div>
-
-              {/* BOTTOM 50%: Product Text & Details (White background with black text) */}
-              <div className="w-full h-1/2 p-6 flex flex-col justify-between bg-white text-gray-900">
-                <div>
-                  <h2 className="mb-2.5 text-[22px] sm:text-[25px] font-medium leading-tight font-sans text-gray-900">
-                    {card.title}
-                  </h2>
-                  <p className="text-[14px] sm:text-[15px] font-normal leading-[1.45] text-gray-600">
-                    {card.description}
-                  </p>
-                </div>
-              </div>
-            </div>
+              card={card}
+              idx={idx}
+              totalCards={cards.length}
+              scrollYProgress={scrollYProgress}
+            />
           ))}
         </motion.div>
 
         {/* SCROLL INDICATOR */}
-        <div className="absolute bottom-6 right-[3.2%] z-20 flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-gray-500">
+        <div className="absolute bottom-4 right-[3.2%] z-20 flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-gray-500">
           <span>Scroll down to reveal cards</span>
           <span className="animate-pulse">→</span>
         </div>

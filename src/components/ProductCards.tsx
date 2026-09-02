@@ -116,8 +116,8 @@ export default function ProductCards() {
                 border border-gray-200/80
               `}
             >
-              {/* TOP 50%: Product Image */}
-              <div className="relative w-full h-1/2 overflow-hidden bg-black/30">
+              {/* TOP 68%: Product Image */}
+              <div className="relative w-full h-[68%] overflow-hidden bg-black/30">
                 <Image
                   src={card.image}
                   alt={card.title}
@@ -132,13 +132,13 @@ export default function ProductCards() {
                 </button>
               </div>
 
-              {/* BOTTOM 50%: Product Text & Details (White background with black text) */}
-              <div className="w-full h-1/2 p-6 flex flex-col justify-between bg-white text-gray-900">
+              {/* BOTTOM 32%: Product Text & Details */}
+              <div className="w-full h-[32%] p-5 sm:p-6 flex flex-col justify-start bg-white text-gray-900">
                 <div>
-                  <h2 className="mb-2.5 text-[22px] sm:text-[25px] font-medium leading-tight font-sans text-gray-900">
+                  <h2 className="mb-2 text-[20px] sm:text-[23px] font-medium leading-tight font-sans text-gray-900">
                     {card.title}
                   </h2>
-                  <p className="text-[14px] sm:text-[15px] font-normal leading-[1.45] text-gray-600">
+                  <p className="text-[13px] sm:text-[14px] font-normal leading-[1.45] text-gray-600 line-clamp-3">
                     {card.description}
                   </p>
                 </div>
