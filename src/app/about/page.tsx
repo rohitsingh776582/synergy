@@ -5,6 +5,10 @@ import AchievementCards from "@/components/AchievementCards";
 import FeatureHighlightCards from "@/components/FeatureHighlightCards";
 import AboutHero from "@/components/AboutHero";
 import MissionVisionPromise from "@/components/MissionVisionPromise";
+import BuildProjectBanner from "@/components/BuildProjectBanner";
+import BuildingStorySection from "@/components/BuildingStorySection";
+import MilestonesTimelineSection from "@/components/MilestonesTimelineSection";
+import ManufacturingCapabilitySection from "@/components/ManufacturingCapabilitySection";
 
 export const metadata: Metadata = {
   title: "About Us | Synergy PUF - Engineering Insulation Solutions",
@@ -20,11 +24,16 @@ export default function AboutPage() {
         <main className="flex-1">
           <AboutHero />
 
+          <BuildingStorySection />
+          <MilestonesTimelineSection />
+          <ManufacturingCapabilitySection />
+
           <AchievementCards />
 
           <MissionVisionPromise />
 
-          <BuildProjectCTA />
+
+          <BuildProjectBanner />
         </main>
 
         <FeatureHighlightCards />

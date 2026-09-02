@@ -6,6 +6,7 @@ import ProjectGalleryCta from "@/components/ProjectGalleryCta";
 import BuildProjectCTA from "@/components/BuildProjectCTA";
 import FeatureHighlightCards from "@/components/FeatureHighlightCards";
 import Rotating3DCardDeckShowcase from "@/components/Rotating3DCardDeckShowcase";
+import BuildProjectBanner from "@/components/BuildProjectBanner";
 
 export const metadata: Metadata = {
   title: "Projects Portfolio | Synergy PUF - Proven Case Studies",
@@ -27,7 +28,8 @@ export default function ProjectsPage() {
 
         <Rotating3DCardDeckShowcase />
 
-         <BuildProjectCTA /> 
+        <BuildProjectBanner />
+
 
         <FeatureHighlightCards />
       </div>

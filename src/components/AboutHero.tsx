@@ -1,345 +1,85 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useSyncExternalStore } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Container from "./Container";
-
-gsap.registerPlugin(ScrollTrigger);
-
-const previewImages = [
-  { src: "/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg", alt: "Synergy PUF Site" },
-  { src: "/puf_factory.png", alt: "Synergy PUF Factory" },
-  { src: "/puf_panel_stack.png", alt: "PUF Panel Stack" },
-  { src: "/puf_roof_panel.png", alt: "PUF Roof Panel" },
-] as const;
-
-function SidePreviewSlider() {
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const viewport = viewportRef.current;
-    const track = trackRef.current;
-    if (!viewport || !track) return;
-
-    const total = previewImages.length;
-    const tl = gsap.timeline({ repeat: -1, defaults: { ease: "power2.inOut" } });
-
-    for (let i = 1; i <= total; i++) {
-      const next = i % total;
-      tl.to(
-        track,
-        {
-          x: () => -next * viewport.offsetWidth,
-          duration: 0.9,
-        },
-        "+=2.5"
-      );
-    }
-
-    const onResize = () => {
-      const current = Number(gsap.getProperty(track, "x")) || 0;
-      const width = viewport.offsetWidth || 1;
-      const index = Math.round(Math.abs(current) / width) % total;
-      gsap.set(track, { x: -index * width });
-    };
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      tl.kill();
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
-
-  return (
-    <div
-      ref={viewportRef}
-      className="relative h-36 w-full shrink-0 overflow-hidden  border border-gray-200  sm:h-auto sm:w-36 sm:self-stretch"
-    >
-      <div ref={trackRef} className="flex h-full will-change-transform">
-        {previewImages.map((img) => (
-          <div
-            key={img.src}
-            className="relative h-full w-full min-w-full shrink-0"
-          >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              sizes="(max-width: 640px) 100vw, 150px"
-              className="object-cover object-center"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-gsap.registerPlugin(ScrollTrigger);
-
-const subscribeReducedMotion = (callback: () => void) => {
-  if (typeof window === "undefined") return () => { };
-  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  mediaQuery.addEventListener("change", callback);
-  return () => mediaQuery.removeEventListener("change", callback);
-};
-
-const getReducedMotionSnapshot = () => {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-};
-
-const getReducedMotionServerSnapshot = () => false;
 
 export default function AboutHero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isReducedMotion = useSyncExternalStore(
-    subscribeReducedMotion,
-    getReducedMotionSnapshot,
-    getReducedMotionServerSnapshot
-  );
-
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const watermark = section.querySelector<HTMLElement>(
-      '[data-hero-element="watermark"]'
-    );
-
-    if (isReducedMotion) {
-      if (watermark) gsap.set(watermark, { opacity: 0.32, y: 0 });
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      const bgImage = section.querySelector('[data-hero-element="bg"]');
-      const headingLines = section.querySelectorAll('[data-hero-element="heading"]');
-      const cta = section.querySelector('[data-hero-element="cta"]');
-      const floatCard = section.querySelector('[data-hero-element="card"]');
-
-      // Initial state setup for smooth reveal on page load
-      if (bgImage) {
-        gsap.set(bgImage, {
-          scale: 1.08,
-          y: 25,
-          opacity: 0,
-          transformOrigin: "center center",
-          force3D: true,
-        });
-      }
-      if (watermark) {
-        gsap.set(watermark, { opacity: 0, y: -20 });
-      }
-      if (headingLines.length) {
-        gsap.set(headingLines, { y: "100%", opacity: 0, force3D: true });
-      }
-      if (cta) {
-        gsap.set(cta, { y: 40, opacity: 0, force3D: true });
-      }
-      if (floatCard) {
-        gsap.set(floatCard, { y: 50, scale: 0.95, opacity: 0, force3D: true });
-      }
-
-      // Page load entrance timeline: triggers automatically on page open
-      const tl = gsap.timeline({
-        defaults: {
-          ease: "power4.out",
-          duration: 1.25,
-        },
-      });
-
-      // 1. Background image settle & reveal
-      if (bgImage) {
-        tl.to(
-          bgImage,
-          {
-            scale: 1,
-            y: 0,
-            opacity: 1,
-            duration: 1.4,
-            ease: "power3.out",
-          },
-          0
-        );
-      }
-
-      // 2. Giant Watermark text reveal
-      if (watermark) {
-        tl.to(
-          watermark,
-          {
-            opacity: 0.32,
-            y: 0,
-            duration: 1.2,
-          },
-          0.1
-        );
-      }
-
-      // 3. Main heading lines upward reveal ("Engineering Insulation Solutions")
-      if (headingLines.length) {
-        tl.to(
-          headingLines,
-          {
-            y: "0%",
-            opacity: 1,
-            stagger: 0.15,
-            duration: 1.2,
-            ease: "power4.out",
-          },
-          0.15
-        );
-      }
-
-      // 4. CTA button reveal
-      if (cta) {
-        tl.to(
-          cta,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.95,
-            ease: "power3.out",
-          },
-          0.45
-        );
-      }
-
-      // 5. Floating card reveal on bottom-right
-      if (floatCard) {
-        tl.to(
-          floatCard,
-          {
-            y: 0,
-            scale: 1,
-            opacity: 1,
-            duration: 1.1,
-            ease: "power3.out",
-          },
-          0.35
-        );
-      }
-    }, section);
-
-    return () => ctx.revert();
-  }, [isReducedMotion]);
-
   return (
     <section
       id="about-hero"
-      ref={sectionRef}
-      className="relative min-h-[640px] md:min-h-[720px] lg:min-h-[780px] w-full overflow-hidden bg-gray-950 text-white flex flex-col justify-between py-10 md:py-16"
+      className="w-full bg-[#3c094c] font-sans text-white overflow-hidden"
     >
-      {/* Background Image Layer */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div data-hero-element="bg" className="relative h-full w-full will-change-transform">
+      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px] lg:min-h-[580px]">
+        {/* Left Column: Dark Purple Content - Left padding matches Navbar Container alignment (px-5 md:px-10 lg:px-[50px]) */}
+        <div className="lg:col-span-5 bg-[#3c094c] py-12 sm:py-16 lg:py-20 pl-5 md:pl-10 lg:pl-[50px] pr-8 sm:pr-12 lg:pr-16 flex flex-col justify-center items-start text-left z-10">
+          {/* Gold Tag */}
+          <span className="text-[#e8b030] text-xs sm:text-sm font-semibold tracking-wide uppercase mb-4">
+            About Synergy PUF
+          </span>
+
+          {/* Heading */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] font-bold text-white leading-[1.15] tracking-tight">
+            The people and <br className="hidden sm:inline" />
+            process behind <br className="hidden sm:inline" />
+            the panels.
+          </h1>
+
+          {/* Subtitle */}
+          <p className="mt-6 text-sm sm:text-base text-purple-100 font-light leading-relaxed max-w-md">
+            Industrial insulation expertise. <br />
+            A company built around your project.
+          </p>
+
+          {/* Action Buttons Row */}
+          <div className="mt-8 flex items-center gap-6">
+            <Link
+              href="/quote"
+              className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#48115b] text-white px-6 py-3 rounded-none text-sm font-semibold shadow-sm transition-all duration-200 active:scale-95"
+            >
+              Get a quote
+            </Link>
+
+            <Link
+              href="/projects"
+              className="text-white hover:text-purple-200 text-sm font-semibold underline underline-offset-4 transition-colors"
+            >
+              View projects
+            </Link>
+          </div>
+        </div>
+
+        {/* Right Column: Hero Image with Floating White Card */}
+        <div className="lg:col-span-7 relative min-h-[380px] lg:min-h-full w-full bg-gray-900">
           <Image
             src="/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg"
-            alt="Synergy PUF Industrial Site"
+            alt="Synergy PUF Industrial Facility"
             fill
             priority
-            sizes="100vw"
-            className="object-cover object-center brightness-100"
+            sizes="(max-width: 1024px) 100vw, 60vw"
+            className="object-cover object-center"
           />
-          {/* Subtle dark gradient overlay for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/40" />
-        </div>
-      </div>
 
-      {/* Giant Typography Watermark Background */}
-      <div
-        data-hero-element="watermark"
-        className="absolute top-2 left-1/2 z-10 w-full -translate-x-1/2 overflow-hidden text-center select-none pointer-events-none opacity-0"
-      >
+          {/* Top-Right Floating White Card */}
+          <div className="absolute top-28 sm:top-32 lg:top-36 right-5 md:right-10 lg:right-[50px] z-20 bg-white rounded-none shadow-2xl p-5 border border-white/40 max-w-xs text-gray-900 animate-in fade-in slide-in-from-top-4 duration-500">
+            <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-3">
+              Crafted with precision
+            </h3>
 
-      </div>
-
-      {/* Foreground Content */}
-      <Container className="relative z-20 my-auto w-full h-full flex flex-col justify-between pt-12 md:pt-16">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-end lg:gap-8">
-
-          {/* Bottom Left Content */}
-          <div className="lg:col-span-6 flex flex-col items-start gap-6 pt-12 md:pt-20">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-serif leading-[1.1] text-white tracking-tight">
-              <span className="block overflow-hidden pb-[0.06em]">
-                <span data-hero-element="heading" className="block will-change-transform">
-                  Engineering
-                </span>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="bg-[#e8b030] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
+                PUF
               </span>
-              <span className="block overflow-hidden pb-[0.06em]">
-                <span data-hero-element="heading" className="block will-change-transform">
-                  Insulation Solutions
-                </span>
+              <span className="bg-[#e8b030] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
+                PIR
               </span>
-            </h1>
-
-            {/* Vibrant Orange Pill Button */}
-            <div className="overflow-hidden pt-2">
-              <div data-hero-element="cta" className="will-change-transform">
-                <Link
-                  href="/projects"
-                  className="inline-flex items-center gap-2 bg-[#58166A] hover:bg-[#461056] text-white px-8 py-4  text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95"
-                >
-                  View Projects
-                </Link>
-              </div>
+              <span className="bg-[#e8b030] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
+                Rockwool
+              </span>
             </div>
           </div>
-
-          {/* Bottom Right Floating Card */}
-          <div className="lg:col-span-6 lg:justify-self-end w-full max-w-lg">
-            <div
-              data-hero-element="card"
-              className="will-change-transform relative flex flex-col sm:flex-row items-stretch bg-white/20 backdrop-blur-lg p-6 sm:p-7 border border-white/30 text-white gap-6 shadow-2xl"
-            >
-              {/* Card Text & Tags */}
-              <div className="flex-1 flex flex-col justify-between gap-4">
-                {/* Category Pills */}
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="bg-white/20 border border-white/30 text-white px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide">
-                    PUF
-                  </span>
-                  <span className="bg-white/20 border border-white/30 text-white px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide">
-                    PIR
-                  </span>
-                  <span className="bg-white/20 border border-white/30 text-white px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide">
-                    Rockwool
-                  </span>
-                </div>
-
-                {/* Card Title & Description */}
-                <div>
-                  <h3 className="text-xl font-serif font-normal text-white leading-snug">
-                    Crafted with Precision
-                  </h3>
-                  <p className="mt-1.5 text-xs sm:text-sm font-light leading-relaxed text-gray-200">
-                    From PUF and PIR to Rockwool panels, we engineer building envelopes that perform for decades.
-                  </p>
-                </div>
-
-                {/* Bottom Stat Badge */}
-                <div className="flex items-center gap-3 pt-2 border-t border-white/20">
-                  <span className="text-xs font-semibold text-gray-200">
-                    100+ Projects &amp; Growing
-                  </span>
-                </div>
-              </div>
-
-              {/* Side Floating Preview Image — auto slide */}
-              <SidePreviewSlider />
-            </div>
-          </div>
-
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
-
-
-
-

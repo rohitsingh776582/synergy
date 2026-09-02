@@ -263,14 +263,13 @@ export default function BuildNextProject() {
 
             <div
               data-reveal
-              className="relative mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 will-change-transform"
+              className="relative mt-6 flex flex-wrap items-center gap-3 will-change-transform"
             >
               <Link
                 href="/quote"
-                className="inline-flex items-center justify-between gap-4 rounded-none bg-[#511663] px-5 py-3.5 text-sm font-normal text-white transition-colors hover:bg-[#3e0f4d] sm:min-w-[200px]"
+                className="inline-flex items-center justify-center rounded-none bg-[#58166e] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#461058] transition-all duration-200 active:scale-95"
               >
-                <span>Get instant quote</span>
-                <ArrowUpRight size={18} strokeWidth={1.8} />
+                Get a quote
               </Link>
 
               <a
@@ -279,10 +278,9 @@ export default function BuildNextProject() {
                   e.preventDefault();
                   alert("Downloading Synergy PUF Product Catalog PDF...");
                 }}
-                className="inline-flex items-center justify-between gap-4 rounded-none bg-[#e8dff0] px-5 py-3.5 text-sm font-normal text-[#511663] transition-colors hover:bg-[#ddd0e8] sm:min-w-[200px]"
+                className="inline-flex items-center justify-center rounded-none bg-white border border-[#58166e] px-6 py-3 text-sm font-semibold text-[#58166e] hover:bg-purple-50 transition-all duration-200 active:scale-95"
               >
-                <span>Download brochure</span>
-                <ArrowUpRight size={18} strokeWidth={1.8} />
+                Download brochure
               </a>
             </div>
 

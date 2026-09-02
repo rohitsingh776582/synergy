@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import ApplicationsHeroAnimation from "@/components/ApplicationsHeroAnimation";
 import IndustriesWeServeSection from "@/components/IndustriesWeServeSection";
-import BuildProjectCTA from "@/components/BuildProjectCTA";
+import BuildProjectBanner from "@/components/BuildProjectBanner";
+
 export const metadata: Metadata = {
   title: "Industry Applications | Synergy PUF Insulation Solutions",
   description: "Thermal insulation applications for Cold Storage, Pharmaceutical Cleanrooms, Industrial Warehouses, and Food Processing Facilities.",
@@ -22,7 +23,8 @@ export default function ApplicationsPage() {
           {/* Industries We Serve Interactive Section */}
           <IndustriesWeServeSection />
 
-          <BuildProjectCTA />
+          <BuildProjectBanner />
+
         </main>
       </div>
 

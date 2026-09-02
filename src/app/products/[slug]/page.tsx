@@ -108,7 +108,7 @@ export default async function ProductDetailPage({ params }: Props) {
         <section className="py-20 bg-white">
           <Container>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              
+
               {/* Left Column: Tech Specs */}
               <div className="lg:col-span-6">
                 <div className="bg-[#f8f8fa] p-8 border border-gray-200 ">

@@ -11,6 +11,7 @@ import ProductsGridShowcase from "@/components/ProductsGridShowcase";
 import Rotating3DCardDeckShowcase from "@/components/Rotating3DCardDeckShowcase";
 import DestinationCarousel from "@/components/DestinationCarousel";
 import ProductShowcaseBoxSection from "@/components/ProductShowcaseBoxSection";
+import BuildProjectBanner from "@/components/BuildProjectBanner";
 
 
 
@@ -66,7 +67,9 @@ export default function ProductsPage() {
           {/* FEATURED PRODUCT SHOWCASE BANNER SECTION */}
 
           {/* BUILD YOUR NEXT PROJECT CTA SECTION */}
-          <SynergyHeroComponent />
+          {/* <SynergyHeroComponent /> */}
+
+          <BuildProjectBanner />
 
 
 
