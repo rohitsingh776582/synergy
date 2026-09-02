@@ -319,7 +319,7 @@ export default function BuildNextProject() {
               style={{ clipPath: "inset(0 90% 0 0)" }}
             >
               <Image
-                src="/images/products/roof_panel_hero.png"
+                src="/images/products/roof_panel_hero copy.png"
                 alt="Synergy PUF roof panel"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
