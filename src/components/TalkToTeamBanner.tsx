@@ -9,15 +9,8 @@ export default function TalkToTeamBanner() {
     <section className="w-full bg-[#3c094c] py-12 md:py-16 font-sans text-white border-t border-purple-900/40 select-none">
       <Container>
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
-          {/* Left Column: Badge, Title & Subtitle aligned with Navbar Logo */}
-          <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 flex-1">
-            {/* White Square Badge with Number 12 (ZERO border radius) */}
-            <span className="bg-white text-[#3c094c] font-bold text-sm sm:text-base px-3 py-1.5 rounded-none shrink-0 shadow-none">
-              12
-            </span>
-
-            {/* Content Text */}
-            <div className="flex flex-col items-start text-left max-w-xl">
+          {/* Left Column: Title & Subtitle aligned with Navbar Logo */}
+          <div className="flex flex-col items-start text-left flex-1 max-w-xl">
               {/* Title with subtle gold accent line */}
               <h2 className="text-2xl sm:text-3xl lg:text-[2.2rem] font-bold text-white tracking-tight leading-[1.18] mb-2">
                 Talk to the team <br className="hidden sm:inline" />
@@ -32,7 +25,6 @@ export default function TalkToTeamBanner() {
                 Discuss your requirements with our engineering and sales team.
               </p>
             </div>
-          </div>
 
           {/* Vertical Separator Line (visible on desktop) */}
           <div className="hidden lg:block h-16 w-[1px] bg-[#e8b030]/50 shrink-0 mx-2" />
