@@ -9,6 +9,7 @@ import BuildProjectBanner from "@/components/BuildProjectBanner";
 import BuildingStorySection from "@/components/BuildingStorySection";
 import MilestonesTimelineSection from "@/components/MilestonesTimelineSection";
 import ManufacturingCapabilitySection from "@/components/ManufacturingCapabilitySection";
+import TalkToTeamBanner from "@/components/TalkToTeamBanner";
 
 export const metadata: Metadata = {
   title: "About Us | Synergy PUF - Engineering Insulation Solutions",
@@ -32,8 +33,8 @@ export default function AboutPage() {
 
           <MissionVisionPromise />
 
+          <TalkToTeamBanner />
 
-          <BuildProjectBanner />
         </main>
 
         <FeatureHighlightCards />

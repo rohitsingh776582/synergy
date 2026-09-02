@@ -57,7 +57,7 @@ export default function ManufacturingCapabilitySection() {
 
               <div className="relative w-full aspect-[16/11] overflow-hidden rounded-none border border-gray-200/90 bg-gray-100 shadow-none">
                 <Image
-                  src="/Panels/Generate_clean_room_image_2K_202608181422.jpeg"
+                  src="/images/factory_quality_inspection.jpg"
                   alt="Quality Check Inspection"
                   fill
                   sizes="(max-width: 1024px) 50vw, 28vw"
