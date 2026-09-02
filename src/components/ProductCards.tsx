@@ -11,9 +11,9 @@ const cards = [
     description:
       "Innovative joinery for seamless connections, structural integrity and ease of industrial roof installation.",
     image: "/images/products/roof_panel_hero.png",
-    width: "w-[503px]",
-    height: "h-[582px]",
-    top: "top-[300px]",
+    width: "w-[480px]",
+    height: "h-[560px]",
+    top: "top-0",
     left: "left-[40px]",
   },
   {
@@ -22,10 +22,10 @@ const cards = [
     description:
       "Modular wall panel joint profile engineered for zero thermal leak, air-tight interlocking and flush hygienic finish.",
     image: "/images/products/wall_panel_hero.png",
-    width: "w-[479px]",
-    height: "h-[556px]",
-    top: "top-[200px]",
-    left: "left-[580px]",
+    width: "w-[480px]",
+    height: "h-[560px]",
+    top: "top-0",
+    left: "left-[560px]",
   },
   {
     tag: "SINGLE TONGUE & GROOVE",
@@ -33,10 +33,10 @@ const cards = [
     description:
       "Cam-lock interlocking joint system ensuring sub-zero thermal retention down to -40°C in food & pharma logistics.",
     image: "/cold_storage.png",
-    width: "w-[429px]",
-    height: "h-[497px]",
-    top: "top-[100px]",
-    left: "left-[1100px]",
+    width: "w-[480px]",
+    height: "h-[560px]",
+    top: "top-0",
+    left: "left-[1080px]",
   },
   {
     tag: "DOUBLE TONGUE & GROOVE",
@@ -44,10 +44,10 @@ const cards = [
     description:
       "ISO Class cleanroom modular joint profile providing flush surface sterility, antimicrobial seal and airtight containment.",
     image: "/Panels/Generate_clean_room_image_2K_202608181422.jpeg",
-    width: "w-[503px]",
-    height: "h-[582px]",
-    top: "top-[300px]",
-    left: "left-[1580px]",
+    width: "w-[480px]",
+    height: "h-[560px]",
+    top: "top-0",
+    left: "left-[1600px]",
   },
   {
     tag: "M-SECTION PROFILE",
@@ -55,9 +55,9 @@ const cards = [
     description:
       "FM-approved polyisocyanurate thermal barrier joint tested for 120-minute structural fire endurance and extreme heat protection.",
     image: "/Panels/Generating_fire_insulation_image_2K_202608181424.jpeg",
-    width: "w-[479px]",
-    height: "h-[556px]",
-    top: "top-[200px]",
+    width: "w-[480px]",
+    height: "h-[560px]",
+    top: "top-0",
     left: "left-[2120px]",
   },
   {
@@ -66,9 +66,9 @@ const cards = [
     description:
       "Energy-efficient sandwich roofing joint minimizing solar heat gain and thermal conductivity for commercial facilities.",
     image: "/Panels/Heat insulation.png",
-    width: "w-[429px]",
-    height: "h-[497px]",
-    top: "top-[100px]",
+    width: "w-[480px]",
+    height: "h-[560px]",
+    top: "top-0",
     left: "left-[2640px]",
   },
 ];

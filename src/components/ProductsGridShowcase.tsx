@@ -13,7 +13,7 @@ const cards = [
     image: "/images/products/roof_panel_hero.png",
     width: "w-[330px] sm:w-[365px]",
     height: "h-[450px] sm:h-[480px]",
-    top: "top-[140px]",
+    top: "top-0",
     left: "left-[40px]",
   },
   {
@@ -22,10 +22,10 @@ const cards = [
     description:
       "Modular wall panel joint profile engineered for zero thermal leak, air-tight interlocking and flush hygienic finish.",
     image: "/images/products/wall_panel_hero.png",
-    width: "w-[320px] sm:w-[350px]",
-    height: "h-[430px] sm:h-[460px]",
-    top: "top-[90px]",
-    left: "left-[440px]",
+    width: "w-[330px] sm:w-[365px]",
+    height: "h-[450px] sm:h-[480px]",
+    top: "top-0",
+    left: "left-[445px]",
   },
   {
     tag: "SINGLE TONGUE & GROOVE",
@@ -33,10 +33,10 @@ const cards = [
     description:
       "Cam-lock interlocking joint system ensuring sub-zero thermal retention down to -40°C in food & pharma logistics.",
     image: "/images/products/cold_storage_1786340194998.png",
-    width: "w-[300px] sm:w-[330px]",
-    height: "h-[410px] sm:h-[440px]",
-    top: "top-[40px]",
-    left: "left-[830px]",
+    width: "w-[330px] sm:w-[365px]",
+    height: "h-[450px] sm:h-[480px]",
+    top: "top-0",
+    left: "left-[850px]",
   },
   {
     tag: "DOUBLE TONGUE & GROOVE",
@@ -46,8 +46,8 @@ const cards = [
     image: "/images/products/cleanroom_panel.png",
     width: "w-[330px] sm:w-[365px]",
     height: "h-[450px] sm:h-[480px]",
-    top: "top-[140px]",
-    left: "left-[1200px]",
+    top: "top-0",
+    left: "left-[1255px]",
   },
   {
     tag: "M-SECTION PROFILE",
@@ -55,10 +55,10 @@ const cards = [
     description:
       "FM-approved polyisocyanurate thermal barrier joint tested for 120-minute structural fire endurance and extreme heat protection.",
     image: "/images/products/puf_panel_stack_1786340168248.png",
-    width: "w-[320px] sm:w-[350px]",
-    height: "h-[430px] sm:h-[460px]",
-    top: "top-[90px]",
-    left: "left-[1600px]",
+    width: "w-[330px] sm:w-[365px]",
+    height: "h-[450px] sm:h-[480px]",
+    top: "top-0",
+    left: "left-[1660px]",
   },
   {
     tag: "THERMAL SANDWICH JOINT",
@@ -66,10 +66,10 @@ const cards = [
     description:
       "Energy-efficient sandwich roofing joint minimizing solar heat gain and thermal conductivity for commercial facilities.",
     image: "/images/products/puf_roof_panel.png",
-    width: "w-[300px] sm:w-[330px]",
-    height: "h-[410px] sm:h-[440px]",
-    top: "top-[40px]",
-    left: "left-[1990px]",
+    width: "w-[330px] sm:w-[365px]",
+    height: "h-[450px] sm:h-[480px]",
+    top: "top-0",
+    left: "left-[2065px]",
   },
 ];
 
