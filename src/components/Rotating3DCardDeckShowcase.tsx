@@ -25,7 +25,7 @@ const CARDS_DATA = [
     title: "High-Bay Manufacturing Unit",
     location: "Manufacturing Hub",
     tagline: "ADVANCED THERMAL ENVELOPE",
-    image: "/Rotating3DCardDeckShowcase/DJI_20260729142356_0322_D.JPG.jpeg",
+    image: "/Rotating3DCardDeckShowcase/ChatGPT Image Aug 27, 2026, 04_36_06 PM.png",
     description:
       "High R-value insulated roof and wall panel system designed for severe climate endurance and structural stability.",
   },
@@ -35,7 +35,7 @@ const CARDS_DATA = [
     title: "Cold Chain Storage Complex",
     location: "Sub-Zero Vault Facility",
     tagline: "CONTROLLED ATMOSPHERE ENCLOSURE",
-    image: "/Rotating3DCardDeckShowcase/DJI_20260729151448_0337_D.JPG.jpeg",
+    image: "/Rotating3DCardDeckShowcase/ChatGPT Image Aug 27, 2026, 04_34_43 PM.png",
     description:
       "Custom tongue-and-groove insulated panels providing continuous vapor barriers and precision temperature control.",
   },
@@ -115,7 +115,7 @@ export default function Rotating3DCardDeckShowcase() {
       ref={sectionRef}
       className="relative w-full h-screen py-5 px-5 md:px-10 lg:px-[50px] flex items-center justify-center font-sans select-none"
     >
-      <div className="relative w-full h-full rounded-3xl overflow-hidden flex items-center justify-center bg-black">
+      <div className="relative w-full h-full rounded-none overflow-hidden flex items-center justify-center bg-black">
         {/* Background Fullscreen Image Layers (Both text and image change together cleanly) */}
         {CARDS_DATA.map((card, idx) => {
           const isActive = idx === activeStepIndex;
@@ -123,9 +123,8 @@ export default function Rotating3DCardDeckShowcase() {
             <div
               key={card.id}
               style={{ zIndex: idx + 1 }}
-              className={`absolute inset-0 pointer-events-none transition-all duration-700 ease-in-out ${
-                isActive ? "opacity-100 scale-100" : "opacity-0 scale-105"
-              }`}
+              className={`absolute inset-0 pointer-events-none transition-all duration-700 ease-in-out ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-105"
+                }`}
             >
               <Image
                 src={card.image}
@@ -147,18 +146,17 @@ export default function Rotating3DCardDeckShowcase() {
 
           {/* 1. TOP NAVIGATION BAR */}
           <div className="relative z-30 flex items-center justify-between sm:justify-end w-full gap-4">
-            
+
             {/* Step Dots indicator */}
             <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/15">
               {CARDS_DATA.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveStepIndex(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    idx === activeStepIndex
+                  className={`h-2 rounded-full transition-all duration-300 ${idx === activeStepIndex
                       ? "w-6 bg-emerald-400"
                       : "w-2 bg-white/40 hover:bg-white/70"
-                  }`}
+                    }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
               ))}
@@ -198,11 +196,10 @@ export default function Rotating3DCardDeckShowcase() {
               return (
                 <div
                   key={card.id}
-                  className={`absolute flex flex-col items-start text-left transition-all duration-700 ease-out ${
-                    isActive
+                  className={`absolute flex flex-col items-start text-left transition-all duration-700 ease-out ${isActive
                       ? "opacity-100 translate-y-0 pointer-events-auto"
                       : "opacity-0 translate-y-8 pointer-events-none"
-                  }`}
+                    }`}
                 >
                   <span className="text-xs font-mono font-bold tracking-[0.25em] text-emerald-300 uppercase mb-2">
                     {card.tagline}

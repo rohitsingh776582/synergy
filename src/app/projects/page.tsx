@@ -7,6 +7,9 @@ import BuildProjectCTA from "@/components/BuildProjectCTA";
 import FeatureHighlightCards from "@/components/FeatureHighlightCards";
 import Rotating3DCardDeckShowcase from "@/components/Rotating3DCardDeckShowcase";
 import BuildProjectBanner from "@/components/BuildProjectBanner";
+import WherePanelsWorkSection from "@/components/WherePanelsWorkSection";
+
+import HaveBuildInMindBanner from "@/components/HaveBuildInMindBanner";
 
 export const metadata: Metadata = {
   title: "Projects Portfolio | Synergy PUF - Proven Case Studies",
@@ -19,7 +22,11 @@ export default function ProjectsPage() {
       {/* Main page content layer - covers footer while scrolling top/middle */}
       <div className="relative z-10 bg-white shadow-none">
         <main className="flex-1">
-          <ProjectsHero />
+          {/* <ProjectsHero /> */}
+
+          <WherePanelsWorkSection />
+
+
 
           <FeaturedProjectShowcase />
 
@@ -28,8 +35,9 @@ export default function ProjectsPage() {
 
         <Rotating3DCardDeckShowcase />
 
-        <BuildProjectBanner />
+        {/* <BuildProjectBanner /> */}
 
+        <HaveBuildInMindBanner />
 
         <FeatureHighlightCards />
       </div>
