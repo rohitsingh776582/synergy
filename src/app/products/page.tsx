@@ -64,7 +64,6 @@ export default function ProductsPage() {
           {/* <AlethiaEcosystemShowcase /> */}
 
           {/* FEATURED PRODUCT SHOWCASE BANNER SECTION */}
-          <ProductShowcaseBoxSection />
 
           {/* BUILD YOUR NEXT PROJECT CTA SECTION */}
           <SynergyHeroComponent />

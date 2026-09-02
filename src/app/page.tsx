@@ -10,6 +10,7 @@ import IndustryShowcase from "@/components/IndustryShowcase";
 import Testimonials from "@/components/Testimonials";
 import BuildNextProject from "@/components/BuildNextProject";
 import Footer from "@/components/Footer";
+import ProductShowcaseBoxSection from "@/components/ProductShowcaseBoxSection";
 
 const HERO_VIDEO = "/video/PUF.mp4";
 
@@ -36,7 +37,9 @@ export default function Home() {
           <Stats />
           <PanelRequirements />
           <IndustryShowcase />
-          <Testimonials />
+          {/* <Testimonials /> */}
+          <ProductShowcaseBoxSection />
+
           <BuildNextProject />
         </main>
 
