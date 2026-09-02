@@ -70,7 +70,7 @@ const rows = [
     titleLines: ["40+ years old", "credible excellence"],
     description:
       "From insulated wall and roof panels to specialized cold storage applications, Synergy PUF offers a complete range of high-performance sandwich panels engineered for every industrial, commercial, and infrastructure requirement.",
-    image: "/cold_storage.png",
+    image: "/WhyChooseUs/one stops solution.png",
     alt: "40+ years of credible excellence",
   },
   {
@@ -84,7 +84,7 @@ const rows = [
     titleLines: ["Unmatched Speed & Timely", "Delivery"],
     description:
       "A 48-hour record on dispatch because a delayed panel means a delayed project. Speed built into every order, from factory floor to site, pan-India.",
-    image: "/puf_factory.png",
+    image: "/WhyChooseUs/9.png",
     alt: "Unmatched Speed & Timely Delivery",
   },
 ] as const;

@@ -83,18 +83,39 @@ export default function Footer() {
               <div className="pt-2 flex items-center gap-2.5">
                 {/* Instagram */}
                 <a
-                  href="#"
+                  href="https://www.instagram.com/synergypuf/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity"
                   aria-label="Instagram"
                 >
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden>
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M8 2h8a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H8a6 6 0 0 1-6-6V8a6 6 0 0 1 6-6Zm4 5.25a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5ZM16.75 6a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"
+                    />
+                  </svg>
+                </a>
+
+                {/* YouTube */}
+                <a
+                  href="https://www.youtube.com/@Synergypuf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity"
+                  aria-label="YouTube"
+                >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z" />
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                   </svg>
                 </a>
 
                 {/* LinkedIn */}
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/synergy-puf/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity"
                   aria-label="LinkedIn"
                 >
@@ -105,7 +126,9 @@ export default function Footer() {
 
                 {/* Facebook */}
                 <a
-                  href="#"
+                  href="https://www.facebook.com/people/Synergy-PUF/61593245264043/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity"
                   aria-label="Facebook"
                 >

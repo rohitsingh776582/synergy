@@ -24,9 +24,11 @@ export default function TopBar() {
 
         {/* Social Icons on Right */}
         <div className="flex items-center gap-3">
-          {/* Instagram — solid filled (same weight as YouTube) */}
+          {/* Instagram */}
           <a
-            href="#"
+            href="https://www.instagram.com/synergypuf/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white hover:opacity-80 transition-opacity"
             aria-label="Instagram"
           >
@@ -41,7 +43,9 @@ export default function TopBar() {
 
           {/* YouTube */}
           <a
-            href="#"
+            href="https://www.youtube.com/@Synergypuf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white hover:opacity-80 transition-opacity"
             aria-label="YouTube"
           >
@@ -52,7 +56,9 @@ export default function TopBar() {
 
           {/* Facebook */}
           <a
-            href="#"
+            href="https://www.facebook.com/people/Synergy-PUF/61593245264043/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white hover:opacity-80 transition-opacity"
             aria-label="Facebook"
           >
