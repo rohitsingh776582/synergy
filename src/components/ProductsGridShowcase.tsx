@@ -111,17 +111,16 @@ function ShowcaseAnimatedCard({
         ${card.top}
         ${card.width}
         ${card.height}
-        rounded-[12px]
+        rounded-none
         bg-white
         overflow-hidden
-        hover:shadow-2xl
         flex flex-col
-        border border-gray-200/90
-        shadow-[0_15px_45px_rgba(0,0,0,0.08)]
+        border border-gray-200
+        shadow-none
       `}
     >
       {/* TOP 52%: Product Image */}
-      <div className="relative w-full h-[52%] overflow-hidden bg-gray-100">
+      <div className="relative w-full h-[52%] overflow-hidden bg-gray-100 rounded-none">
         <Image
           src={card.image}
           alt={card.title}
@@ -131,7 +130,7 @@ function ShowcaseAnimatedCard({
         />
 
         {/* Arrow Icon Button Overlaid on Image Top Right */}
-        <button className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-[6px] bg-white text-[#0752b8] font-bold shadow-md hover:scale-105 transition-transform text-sm">
+        <button className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-none bg-white text-[#0752b8] font-bold shadow-none hover:scale-105 transition-transform text-sm border border-gray-100">
           ↗
         </button>
       </div>

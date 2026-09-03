@@ -208,7 +208,7 @@ export default function DestinationCarousel({
                   transformStyle: "preserve-3d",
                   willChange: "transform, opacity",
                 }}
-                className={`absolute w-[310px] sm:w-[350px] md:w-[370px] h-[480px] sm:h-[530px] rounded-none overflow-hidden border border-gray-200 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.12)] cursor-pointer flex flex-col justify-between transition-shadow duration-300 hover:border-purple-200 ${isCenter ? "pointer-events-auto shadow-[0_25px_60px_rgba(88,22,106,0.18)]" : "hover:opacity-95"
+                className={`absolute w-[310px] sm:w-[350px] md:w-[370px] h-[480px] sm:h-[530px] rounded-none overflow-hidden border border-gray-200 bg-white shadow-none cursor-pointer flex flex-col justify-between transition-colors duration-300 hover:border-purple-300 ${isCenter ? "pointer-events-auto border-purple-400" : "hover:opacity-95"
                   }`}
               >
                 {/* Media Section: Video or Image */}
@@ -287,7 +287,7 @@ export default function DestinationCarousel({
         <button
           onClick={handlePrev}
           aria-label="Previous Destination"
-          className="p-3 rounded-none bg-white border border-gray-200 text-gray-800 hover:bg-purple-50 hover:text-[#58166A] hover:border-purple-200 transition-all duration-200 active:scale-95 shadow-md hover:scale-105"
+          className="p-3 rounded-none bg-white border border-gray-200 text-gray-800 hover:bg-purple-50 hover:text-[#58166A] hover:border-purple-200 transition-all duration-200 active:scale-95 shadow-none hover:scale-105"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -309,7 +309,7 @@ export default function DestinationCarousel({
         <button
           onClick={handleNext}
           aria-label="Next Destination"
-          className="p-3 rounded-none bg-white border border-gray-200 text-gray-800 hover:bg-purple-50 hover:text-[#58166A] hover:border-purple-200 transition-all duration-200 active:scale-95 shadow-md hover:scale-105"
+          className="p-3 rounded-none bg-white border border-gray-200 text-gray-800 hover:bg-purple-50 hover:text-[#58166A] hover:border-purple-200 transition-all duration-200 active:scale-95 shadow-none hover:scale-105"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
@@ -337,7 +337,7 @@ export default function DestinationCarousel({
             </div>
 
             <div className="w-full max-w-5xl mx-auto my-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-6">
-              <div className="relative aspect-[4/3] w-full rounded-none overflow-hidden border border-gray-200 shadow-2xl bg-black">
+              <div className="relative aspect-[4/3] w-full rounded-none overflow-hidden border border-gray-200 shadow-none bg-black">
                 {activeDestination.videoUrl ? (
                   <video
                     src={activeDestination.videoUrl}

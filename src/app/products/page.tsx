@@ -13,6 +13,7 @@ import DestinationCarousel from "@/components/DestinationCarousel";
 import ProductShowcaseBoxSection from "@/components/ProductShowcaseBoxSection";
 import BuildProjectBanner from "@/components/BuildProjectBanner";
 import ProductsHeroSection from "@/components/ProductsHeroSection";
+import SpecificationBanner from "@/components/SpecificationBanner";
 
 
 
@@ -71,7 +72,7 @@ export default function ProductsPage() {
           {/* BUILD YOUR NEXT PROJECT CTA SECTION */}
           {/* <SynergyHeroComponent /> */}
 
-          <BuildProjectBanner />
+          <SpecificationBanner />
 
 
 
