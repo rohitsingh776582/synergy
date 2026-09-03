@@ -37,31 +37,30 @@ export default function FeatureHighlightCards() {
     const ctx = gsap.context(() => {
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
-      gsap.set(cards, { opacity: 0, y: 30 });
-
-      let maxProgress = 0;
-      const tl = gsap.timeline({ paused: true });
-
-      tl.to(cards, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        duration: 1,
-        ease: "none",
+      // Initial state: Each box starts collapsed horizontally at its own position
+      gsap.set(cards, {
+        scaleX: 0,
+        opacity: 0,
+        transformOrigin: "center center",
+        willChange: "transform, opacity",
       });
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 92%",
-        end: "top 55%",
-        scrub: 0.6,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          if (self.progress > maxProgress) {
-            maxProgress = self.progress;
-            tl.progress(maxProgress);
-          }
+      // Timeline: Slower, ultra-smooth expansion to full width
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.out" },
+        scrollTrigger: {
+          trigger: section,
+          start: "top 88%",
+          toggleActions: "play none none reverse",
+          invalidateOnRefresh: true,
         },
+      });
+
+      tl.to(cards, {
+        scaleX: 1,
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.22,
       });
     }, section);
 
@@ -69,7 +68,7 @@ export default function FeatureHighlightCards() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full border-t border-gray-200/80 bg-[#f7f5f8] py-6 md:py-8 shadow-none">
+    <section ref={sectionRef} className="w-full border-t border-gray-200/80 bg-[#f7f5f8] py-6 md:py-8 shadow-none overflow-hidden">
       <Container>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
           {features.map(({ icon: Icon, title, subtitle }, index) => (
@@ -78,9 +77,9 @@ export default function FeatureHighlightCards() {
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
-              className="flex items-center gap-3.5 bg-[#efe6f4] px-4 py-3.5 md:px-5 md:py-4"
+              className="flex items-center gap-3.5 bg-[#efe6f4] px-4 py-3.5 md:px-5 md:py-4 rounded-none shadow-none transform-gpu"
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-white text-[#5b176e]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-white text-[#5b176e] rounded-none shadow-none">
                 <Icon className="h-5 w-5 stroke-[1.5]" aria-hidden />
               </div>
               <div className="min-w-0">

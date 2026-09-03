@@ -1,8 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
   {
@@ -32,24 +36,102 @@ const stats = [
 ];
 
 export default function WherePanelsWorkSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
+  const statsContainerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const textContainer = textContainerRef.current;
+    const statsContainer = statsContainerRef.current;
+    if (!section || !textContainer) return;
+
+    const ctx = gsap.context(() => {
+      const textElements = textContainer.querySelectorAll("[data-animate-up]");
+      const statElements = statsContainer ? statsContainer.children : [];
+
+      // Initial state: shifted downwards and transparent
+      gsap.set(textElements, {
+        opacity: 0,
+        y: 45,
+        willChange: "transform, opacity",
+      });
+
+      if (statElements.length) {
+        gsap.set(statElements, {
+          opacity: 0,
+          y: 35,
+          willChange: "transform, opacity",
+        });
+      }
+
+      // Smooth upward entrance timeline triggered on scroll/view
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      tl.to(textElements, {
+        opacity: 1,
+        y: 0,
+        duration: 1.05,
+        stagger: 0.12,
+      });
+
+      if (statElements.length) {
+        tl.to(
+          statElements,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            stagger: 0.1,
+          },
+          "-=0.4"
+        );
+      }
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="w-full bg-[#20092c] py-16 md:py-24 font-sans text-white border-t border-purple-950/60 select-none">
+    <section
+      ref={sectionRef}
+      className="w-full bg-[#20092c] py-16 md:py-24 font-sans text-white border-t border-purple-950/60 select-none overflow-hidden"
+    >
       <Container>
         {/* Main Heading & Subtitle aligned with Navbar Logo */}
-        <div className="max-w-3xl flex flex-col items-start text-left">
-          <h2 className="text-4xl sm:text-5xl lg:text-[4rem] font-bold text-white leading-[1.08] tracking-tight mb-6">
+        <div
+          ref={textContainerRef}
+          className="max-w-3xl flex flex-col items-start text-left"
+        >
+          <h2
+            data-animate-up
+            className="text-4xl sm:text-5xl lg:text-[4rem] font-bold text-white leading-[1.08] tracking-tight mb-6"
+          >
             Where our panels <br />
             go to work.
           </h2>
 
-          <p className="text-purple-100/90 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mb-8">
+          <p
+            data-animate-up
+            className="text-purple-100/90 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mb-8"
+          >
             A selection of facilities engineered and delivered across India —
             from -35°C blast freezers to large-scale warehouse envelopes with
             zero thermal loss.
           </p>
 
           {/* Action Buttons Row (ZERO border radius, ZERO shadow) */}
-          <div className="flex flex-wrap items-center gap-4 mb-16">
+          <div
+            data-animate-up
+            className="flex flex-wrap items-center gap-4 mb-16"
+          >
             <Link
               href="/quote"
               className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#461058] text-white px-6 py-3.5 rounded-none text-sm font-semibold shadow-none transition-all duration-200 active:scale-95"
@@ -68,12 +150,16 @@ export default function WherePanelsWorkSection() {
 
         {/* Bottom Stats Grid (4 Columns, NO border radius, NO grid background square boxes) */}
         <div className="pt-10 border-t border-purple-900/50">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
+          <div
+            ref={statsContainerRef}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6"
+          >
             {stats.map((item, idx) => (
               <div
                 key={idx}
-                className={`flex flex-col items-start text-left ${idx !== 0 ? "md:border-l md:border-purple-900/40 md:pl-6" : ""
-                  }`}
+                className={`flex flex-col items-start text-left ${
+                  idx !== 0 ? "md:border-l md:border-purple-900/40 md:pl-6" : ""
+                }`}
               >
                 <div className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-2">
                   {item.isGold ? (

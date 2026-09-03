@@ -101,30 +101,35 @@ export default function MissionVisionPromise() {
 
       cards.forEach((card, index) => {
         const imgWrapper = imageRefs.current[index];
-        const imgInner = imgWrapper?.querySelector(".js-image-inner");
         const textWrapper = textRefs.current[index];
         const isEven = index % 2 === 0;
-        // Left-side images (isEven) reveal left-to-right: inset(0% 100% 0% 0%)
-        // Right-side images (!isEven) reveal right-to-left: inset(0% 0% 0% 100%)
-        const startClipPath = isEven ? "inset(0% 100% 0% 0%)" : "inset(0% 0% 0% 100%)";
+        const startClipPath = isEven
+          ? "inset(0% 100% 0% 0%)"
+          : "inset(0% 0% 0% 100%)";
 
-        gsap.set(card, { opacity: 0, y: 40 });
+        // Initial stable state
+        gsap.set(card, { opacity: 0, y: 35 });
         if (imgWrapper) {
-          gsap.set(imgWrapper, { clipPath: startClipPath });
-        }
-        if (imgInner) {
-          gsap.set(imgInner, { scale: 1.15 });
+          gsap.set(imgWrapper, {
+            clipPath: startClipPath,
+            willChange: "clip-path",
+          });
         }
         if (textWrapper) {
-          gsap.set(textWrapper, { y: 60, opacity: 0 });
+          gsap.set(textWrapper, {
+            opacity: 0,
+            y: 25,
+            willChange: "transform, opacity",
+          });
         }
 
+        // Smooth viewport-triggered entrance animation with stable landing
         const tl = gsap.timeline({
+          defaults: { ease: "power3.out" },
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
-            end: "center 45%",
-            scrub: true,
+            toggleActions: "play none none reverse",
             invalidateOnRefresh: true,
           },
         });
@@ -132,7 +137,7 @@ export default function MissionVisionPromise() {
         tl.to(card, {
           opacity: 1,
           y: 0,
-          ease: "none",
+          duration: 0.85,
         });
 
         if (imgWrapper) {
@@ -140,20 +145,10 @@ export default function MissionVisionPromise() {
             imgWrapper,
             {
               clipPath: "inset(0% 0% 0% 0%)",
-              ease: "none",
+              duration: 1.05,
+              ease: "power2.out",
             },
-            0
-          );
-        }
-
-        if (imgInner) {
-          tl.to(
-            imgInner,
-            {
-              scale: 1,
-              ease: "none",
-            },
-            0
+            0.1
           );
         }
 
@@ -161,11 +156,12 @@ export default function MissionVisionPromise() {
           tl.to(
             textWrapper,
             {
-              y: 0,
               opacity: 1,
-              ease: "none",
+              y: 0,
+              duration: 0.9,
+              ease: "power3.out",
             },
-            0
+            0.15
           );
         }
       });
@@ -175,7 +171,7 @@ export default function MissionVisionPromise() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#f4f4f7] py-14 sm:py-18 md:py-22 font-sans text-gray-900">
+    <section ref={sectionRef} className="bg-[#f4f4f7] py-14 sm:py-18 md:py-22 font-sans text-gray-900 overflow-hidden">
       <Container>
         {/* Section Title */}
         <div className="max-w-2xl mb-10 sm:mb-12">
@@ -216,28 +212,24 @@ export default function MissionVisionPromise() {
                 }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
-                className={`grid grid-cols-1 lg:grid-cols-2 border border-gray-200/90 bg-white overflow-hidden transition-all duration-300 ${
-                  isActive ? "border-[#5b176e]/50" : "border-gray-200/90"
-                }`}
+                className={`grid grid-cols-1 lg:grid-cols-2 border border-gray-200/90 bg-white overflow-hidden transition-colors duration-300 rounded-none shadow-none ${isActive ? "border-[#5b176e]/50" : "border-gray-200/90"
+                  }`}
               >
                 {/* 50% Image Side */}
                 <div
                   ref={(el) => {
                     imageRefs.current[index] = el;
                   }}
-                  className={`relative w-full h-[260px] sm:h-[320px] lg:h-auto min-h-[280px] overflow-hidden bg-gray-100 transform-gpu will-change-[clip-path] ${
-                    isEven ? "lg:order-1" : "lg:order-2"
-                  }`}
+                  className={`relative w-full h-[260px] sm:h-[320px] lg:h-auto min-h-[280px] overflow-hidden bg-gray-100 rounded-none shadow-none ${isEven ? "lg:order-1" : "lg:order-2"
+                    }`}
                 >
-                  <div className="js-image-inner relative w-full h-full transform-gpu will-change-transform">
-                    <Image
-                      src={image}
-                      alt={title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover object-center transition-transform duration-700 hover:scale-105"
-                    />
-                  </div>
+                  <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover object-center rounded-none"
+                  />
                 </div>
 
                 {/* 50% Text Side */}
@@ -245,11 +237,10 @@ export default function MissionVisionPromise() {
                   ref={(el) => {
                     textRefs.current[index] = el;
                   }}
-                  className={`p-6 sm:p-10 lg:p-12 flex flex-col justify-center transform-gpu will-change-transform ${
-                    isEven ? "lg:order-2" : "lg:order-1"
-                  }`}
+                  className={`p-6 sm:p-10 lg:p-12 flex flex-col justify-center rounded-none shadow-none ${isEven ? "lg:order-2" : "lg:order-1"
+                    }`}
                 >
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center bg-purple-50 text-[#5b176e]">
+                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center bg-purple-50 text-[#5b176e] rounded-none">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">

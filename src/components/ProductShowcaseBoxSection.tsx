@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Container from "./Container";
 import { Star, ShieldCheck, Sparkles, Building2 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 interface Testimonial {
   id: string;
@@ -138,33 +138,148 @@ const rightColumnCards: Testimonial[] = [
   },
 ];
 
+function ScrollTypewriterText({
+  text,
+  progress,
+  start = 0.02,
+  end = 0.45,
+  className = "",
+}: {
+  text: string;
+  progress: any;
+  start?: number;
+  end?: number;
+  className?: string;
+}) {
+  const words = text.split(" ");
+  let counter = 0;
+  const processed = words.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: counter++,
+    }))
+  );
+  const totalChars = counter;
+
+  return (
+    <span className={className}>
+      {processed.map((word, wordIdx) => (
+        <span
+          key={wordIdx}
+          className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+        >
+          {word.map((item) => {
+            const step = (end - start) / Math.max(1, totalChars);
+            const letterStart = start + item.index * step;
+            const letterEnd = letterStart + step * 1.3;
+
+            return (
+              <LetterItem
+                key={item.index}
+                char={item.char}
+                progress={progress}
+                letterStart={letterStart}
+                letterEnd={letterEnd}
+              />
+            );
+          })}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function LetterItem({
+  char,
+  progress,
+  letterStart,
+  letterEnd,
+}: {
+  char: string;
+  progress: any;
+  letterStart: number;
+  letterEnd: number;
+}) {
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-14, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
+
 export default function ProductShowcaseBoxSection() {
+  const sectionRef = React.useRef<HTMLElement>(null);
+
+  // Track page scroll through the testimonials section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 92%", "center 45%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 70,
+    damping: 26,
+    restDelta: 0.0001,
+  });
+
+  // Top badge & marquee container scroll animation
+  const badgeY = useTransform(smoothProgress, [0.01, 0.30], [30, 0]);
+  const badgeOpacity = useTransform(smoothProgress, [0.01, 0.25], [0, 1]);
+
+  const marqueeY = useTransform(smoothProgress, [0.22, 0.65], [55, 0]);
+  const marqueeOpacity = useTransform(smoothProgress, [0.22, 0.58], [0, 1]);
+
   // Duplicate arrays to create a 100% seamless infinite marquee loop
   const leftItems = [...leftColumnCards, ...leftColumnCards];
   const centerItems = [...centerColumnCards, ...centerColumnCards];
   const rightItems = [...rightColumnCards, ...rightColumnCards];
 
   return (
-    <section className="relative w-full bg-[#FAFAFC] py-16 md:py-24 overflow-hidden font-sans">
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-[#FAFAFC] py-16 md:py-24 overflow-hidden font-sans select-none"
+    >
       <Container className="flex flex-col items-center">
-        {/* SECTION HEADER */}
+        {/* SECTION HEADER: Letter-by-letter writing animation from left to right */}
         <div className="text-center max-w-2xl mb-12 sm:mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 bg-purple-50 border border-purple-200/80 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#5b176e]">
+          <motion.div
+            style={{ y: badgeY, opacity: badgeOpacity }}
+            className="inline-flex items-center gap-2 bg-purple-50 border border-purple-200/80 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#5b176e] transform-gpu will-change-transform"
+          >
             <Sparkles className="w-3.5 h-3.5 text-[#5b176e]" />
             <span>Client Testimonials</span>
-          </div>
+          </motion.div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
-            Trusted by Leaders Across the Industry
+            <ScrollTypewriterText
+              text="Trusted by Leaders Across the Industry"
+              progress={smoothProgress}
+              start={0.02}
+              end={0.42}
+            />
           </h2>
 
           <p className="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
-            See how our high-performance PUF panel systems and operational software transform facility performance.
+            <ScrollTypewriterText
+              text="See how our high-performance PUF panel systems and operational software transform facility performance."
+              progress={smoothProgress}
+              start={0.16}
+              end={0.62}
+            />
           </p>
         </div>
 
         {/* 3-COLUMN INFINITE MARQUEE SHOWCASE CONTAINER */}
-        <div className="relative w-full max-w-6xl h-[620px] sm:h-[680px] md:h-[720px] overflow-hidden">
+        <motion.div
+          style={{ y: marqueeY, opacity: marqueeOpacity }}
+          className="relative w-full max-w-6xl h-[620px] sm:h-[680px] md:h-[720px] overflow-hidden transform-gpu will-change-transform"
+        >
           
           {/* Top & Bottom Gradient Fading Overlay Masks */}
           <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#FAFAFC] via-[#FAFAFC]/90 to-transparent z-20" />
@@ -308,7 +423,7 @@ export default function ProductShowcaseBoxSection() {
             </div>
 
           </div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );

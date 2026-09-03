@@ -1,9 +1,91 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  type MotionValue,
+} from "framer-motion";
 import Container from "./Container";
+
+function ScrollTypewriterText({
+  text,
+  progress,
+  start = 0.02,
+  end = 0.45,
+  className = "",
+}: {
+  text: string;
+  progress: MotionValue<number>;
+  start?: number;
+  end?: number;
+  className?: string;
+}) {
+  const words = text.split(" ");
+  let counter = 0;
+  const processed = words.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: counter++,
+    }))
+  );
+  const totalChars = counter;
+
+  return (
+    <span className={className}>
+      {processed.map((word, wordIdx) => (
+        <span
+          key={wordIdx}
+          className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+        >
+          {word.map((item) => {
+            const step = (end - start) / Math.max(1, totalChars);
+            const letterStart = start + item.index * step;
+            const letterEnd = letterStart + step * 1.3;
+
+            return (
+              <LetterItem
+                key={item.index}
+                char={item.char}
+                progress={progress}
+                letterStart={letterStart}
+                letterEnd={letterEnd}
+              />
+            );
+          })}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function LetterItem({
+  char,
+  progress,
+  letterStart,
+  letterEnd,
+}: {
+  char: string;
+  progress: MotionValue<number>;
+  letterStart: number;
+  letterEnd: number;
+}) {
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-14, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
 
 const applications = [
   {
@@ -44,16 +126,42 @@ const applications = [
 ];
 
 export default function ByApplicationSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 90%", "center 45%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
   return (
-    <section className="w-full bg-white py-16 md:py-24 font-sans text-gray-900 border-t border-gray-100 select-none">
+    <section
+      ref={sectionRef}
+      className="w-full bg-white py-16 md:py-24 font-sans text-gray-900 border-t border-gray-100 select-none overflow-hidden"
+    >
       <Container>
         {/* Header Row - Left aligned with Navbar Logo */}
         <div className="flex flex-col items-start text-left mb-10 md:mb-14">
           <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-gray-900 leading-[1.15] tracking-tight mb-2">
-            By application
+            <ScrollTypewriterText
+              text="By application"
+              progress={smoothProgress}
+              start={0.02}
+              end={0.40}
+            />
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 font-normal">
-            Start with what your panel needs to do.
+            <ScrollTypewriterText
+              text="Start with what your panel needs to do."
+              progress={smoothProgress}
+              start={0.18}
+              end={0.60}
+            />
           </p>
         </div>
 
@@ -105,3 +213,4 @@ export default function ByApplicationSection() {
     </section>
   );
 }
+

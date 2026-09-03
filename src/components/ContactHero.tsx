@@ -1,88 +1,59 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
-const CONTACT_HEADING_LINES = [
-  ["Contact", "Synergy", "PUF"],
-  ["Engineering", "Team"],
-];
-
-let contactCounter = 0;
-const PREPROCESSED_CONTACT_HEADING = CONTACT_HEADING_LINES.map((line) =>
-  line.map((word) =>
-    word.split("").map((char) => ({
-      char,
-      index: contactCounter++,
-    }))
-  )
-);
-const TOTAL_CONTACT_CHARS = contactCounter;
-
-function ScrollLetter({
-  char,
-  index,
-  total,
-  progress,
-}: {
-  char: string;
-  index: number;
-  total: number;
-  progress: MotionValue<number>;
-}) {
-  const startScroll = 0.02;
-  const endScroll = 0.40;
-  const step = (endScroll - startScroll) / total;
-
-  const letterStart = startScroll + index * step;
-  const letterEnd = letterStart + step * 1.3;
-
-  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
-  const x = useTransform(progress, [letterStart, letterEnd], [-20, 0]);
-
-  return (
-    <motion.span
-      style={{ opacity, x }}
-      className="inline-block transform-gpu will-change-transform"
-    >
-      {char}
-    </motion.span>
-  );
-}
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactHero() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtextRef = useRef<HTMLParagraphElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress: titleScrollProgress } = useScroll({
-    target: titleRef,
-    offset: ["start 90%", "center 45%"],
-  });
+  useLayoutEffect(() => {
+    const section = containerRef.current;
+    const content = contentRef.current;
+    if (!section || !content) return;
 
-  const smoothTitleProgress = useSpring(titleScrollProgress, {
-    stiffness: 90,
-    damping: 24,
-    restDelta: 0.001,
-  });
+    const ctx = gsap.context(() => {
+      const animElements = content.querySelectorAll("[data-animate-hero]");
 
-  const { scrollYProgress: subtextScrollProgress } = useScroll({
-    target: subtextRef,
-    offset: ["start 90%", "center 50%"],
-  });
+      // Initial state: shifted downwards and transparent
+      gsap.set(animElements, {
+        opacity: 0,
+        y: 45,
+        willChange: "transform, opacity",
+      });
 
-  const smoothSubtextProgress = useSpring(subtextScrollProgress, {
-    stiffness: 70,
-    damping: 26,
-    restDelta: 0.001,
-  });
+      // Smooth upward entrance timeline
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
 
-  const subtextY = useTransform(smoothSubtextProgress, [0, 0.45], [50, 0]);
-  const subtextOpacity = useTransform(smoothSubtextProgress, [0, 0.40], [0, 1]);
+      tl.to(animElements, {
+        opacity: 1,
+        y: 0,
+        duration: 1.05,
+        stagger: 0.14,
+        delay: 0.1,
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="relative flex min-h-[60vh] sm:min-h-[70vh] w-full flex-col justify-center overflow-hidden bg-gray-900 py-32 sm:py-40 md:py-48 text-left text-white">
+    <section
+      ref={containerRef}
+      className="relative flex min-h-[60vh] sm:min-h-[70vh] w-full flex-col justify-center overflow-hidden bg-gray-900 py-32 sm:py-40 md:py-48 text-left text-white"
+    >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -98,36 +69,22 @@ export default function ContactHero() {
       </div>
 
       <Container className="relative z-10 w-full flex flex-col items-start text-left">
-        <h1 ref={titleRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-extrabold leading-[1.1] text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
-          {PREPROCESSED_CONTACT_HEADING.map((line, lineIdx) => (
-            <React.Fragment key={lineIdx}>
-              {lineIdx > 0 && <br />}
-              {line.map((word, wordIdx) => (
-                <span
-                  key={wordIdx}
-                  className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
-                >
-                  {word.map((item) => (
-                    <ScrollLetter
-                      key={item.index}
-                      char={item.char}
-                      index={item.index}
-                      total={TOTAL_CONTACT_CHARS}
-                      progress={smoothTitleProgress}
-                    />
-                  ))}
-                </span>
-              ))}
-            </React.Fragment>
-          ))}
-        </h1>
-        <motion.p
-          ref={subtextRef}
-          style={{ y: subtextY, opacity: subtextOpacity }}
-          className="mt-5 text-base sm:text-lg md:text-xl text-white font-medium leading-relaxed max-w-2xl transform-gpu will-change-transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
-        >
-          Have a technical query or require site inspection? Our insulation specialists are ready to assist you.
-        </motion.p>
+        <div ref={contentRef} className="flex flex-col items-start text-left">
+          <h1
+            data-animate-hero
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-extrabold leading-[1.1] text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
+          >
+            Contact Synergy PUF <br />
+            Engineering Team
+          </h1>
+
+          <p
+            data-animate-hero
+            className="mt-5 text-base sm:text-lg md:text-xl text-white font-medium leading-relaxed max-w-2xl transform-gpu will-change-transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
+          >
+            Have a technical query or require site inspection? Our insulation specialists are ready to assist you.
+          </p>
+        </div>
       </Container>
     </section>
   );

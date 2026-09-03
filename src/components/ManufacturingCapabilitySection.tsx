@@ -1,9 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const specs = [
   { label: "Plant floor area", value: "To confirm" },
@@ -19,11 +23,51 @@ const processSteps = [
 ];
 
 export default function ManufacturingCapabilitySection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const title = titleRef.current;
+    if (!section || !title) return;
+
+    const ctx = gsap.context(() => {
+      // Initial state: Title shifted to the left and transparent
+      gsap.set(title, {
+        x: -70,
+        opacity: 0,
+        willChange: "transform, opacity",
+      });
+
+      // Smooth Left-to-Right scroll reveal animation (only on text)
+      gsap.to(title, {
+        x: 0,
+        opacity: 1,
+        duration: 1.05,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+          invalidateOnRefresh: true,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="w-full bg-white py-14 md:py-20 font-sans text-gray-900 border-t border-gray-200/70">
+    <section
+      ref={sectionRef}
+      className="w-full bg-white py-14 md:py-20 font-sans text-gray-900 border-t border-gray-200/70 overflow-hidden"
+    >
       <Container>
-        {/* Title - Left aligned with Navbar Logo */}
-        <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-gray-900 tracking-tight leading-tight mb-8">
+        {/* Title - Smooth Left-to-Right scroll reveal */}
+        <h2
+          ref={titleRef}
+          className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-gray-900 tracking-tight leading-tight mb-8"
+        >
           Manufacturing &amp; capability
         </h2>
 
