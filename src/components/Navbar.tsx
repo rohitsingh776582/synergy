@@ -8,7 +8,7 @@ import { Menu, ArrowUpRight } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import Container from "./Container";
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 const getMountedSnapshot = () => true;
 const getMountedServerSnapshot = () => false;
 
@@ -85,10 +85,10 @@ export default function Navbar() {
     const hero = isHome
       ? document.getElementById("home-hero")
       : isAbout
-      ? document.getElementById("about-hero") || document.querySelector("section")
-      : isProjects
-      ? document.getElementById("projects-hero") || document.querySelector("section")
-      : document.querySelector("section");
+        ? document.getElementById("about-hero") || document.querySelector("section")
+        : isProjects
+          ? document.getElementById("projects-hero") || document.querySelector("section")
+          : document.querySelector("section");
     if (!hero) return;
 
     const update = () => {
@@ -115,20 +115,18 @@ export default function Navbar() {
       <header
         ref={navRef}
         data-site-header
-        className={`fixed left-0 right-0 z-[9999] h-[72px] w-full transition-[background-color] duration-300 ${
-          light ? "overflow-hidden bg-white" : "overflow-visible bg-transparent"
-        }`}
+        className={`fixed left-0 right-0 z-[9999] h-[72px] w-full transition-[background-color] duration-300 ${light ? "overflow-hidden bg-white" : "overflow-visible bg-transparent"
+          }`}
         style={{ top: topOffset }}
       >
         <nav className="flex h-full w-full items-center bg-transparent">
           <Container className="flex h-full items-center justify-between">
             <Link
               href="/"
-              className={`relative z-10 flex shrink-0 items-center ${burgerOpen ? "burger-open" : ""} ${
-                light
+              className={`relative z-10 flex shrink-0 items-center ${burgerOpen ? "burger-open" : ""} ${light
                   ? "h-10 w-[148px] overflow-hidden sm:h-11 sm:w-[168px]"
                   : "h-11 w-[200px] overflow-visible sm:w-[230px]"
-              }`}
+                }`}
               aria-label="Synergy PUF Home"
             >
               <Image
@@ -178,10 +176,9 @@ export default function Navbar() {
                         after:h-[2px]
                         after:transition-all
                         after:duration-200
-                        ${
-                          light
-                            ? "text-black hover:text-[#3E0F4D] after:bg-[#3E0F4D]"
-                            : "text-white hover:text-white/80 after:bg-white"
+                        ${light
+                          ? "text-black hover:text-[#3E0F4D] after:bg-[#3E0F4D]"
+                          : "text-white hover:text-white/80 after:bg-white"
                         }
                         ${isActive ? "after:opacity-100" : "after:opacity-0"}
                       `}
@@ -216,10 +213,9 @@ export default function Navbar() {
                   font-medium
                   whitespace-nowrap
                   transition-colors duration-300
-                  ${
-                    light
-                      ? "bg-[#3E0F4D] text-white hover:bg-[#5b176e]"
-                      : "bg-white text-[#3E0F4D] hover:bg-white/90"
+                  ${light
+                    ? "bg-[#3E0F4D] text-white hover:bg-[#5b176e]"
+                    : "bg-white text-[#3E0F4D] hover:bg-white/90"
                   }
                 `}
               >
@@ -236,10 +232,9 @@ export default function Navbar() {
                 rounded-md
                 transition-colors duration-300
                 lg:hidden
-                ${
-                  light
-                    ? "text-[#5b176e] hover:bg-purple-50"
-                    : "text-white hover:bg-white/10"
+                ${light
+                  ? "text-[#5b176e] hover:bg-purple-50"
+                  : "text-white hover:bg-white/10"
                 }
               `}
               aria-label="Open menu"
