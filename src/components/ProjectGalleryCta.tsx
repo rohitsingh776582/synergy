@@ -208,16 +208,16 @@ export default function ProjectGalleryCta() {
           
 
           {/* Pill Badge */}
-          <div className="inline-flex items-center  bg-[#EEEEF1] border border-gray-200/90 px-4 py-1.5 text-xs font-medium text-gray-700  mb-4">
+          <div className="inline-flex items-center bg-[#EEEEF1] border border-gray-200/90 px-4 py-1.5 text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-gray-700 mb-4">
             Join over 100,000 happy clients
           </div>
 
           {/* Main Heading */}
-          <h2 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.12] max-w-3xl mx-auto">
+          <h2 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-[-0.02em] text-gray-900 leading-[1.12] max-w-3xl mx-auto">
             {PREPROCESSED_PROVEN.map((lineObj, lineIdx) => {
               if (lineObj.isSub) {
                 return (
-                  <span key={lineIdx} className="block text-gray-400 font-semibold mt-1">
+                  <span key={lineIdx} className="block text-gray-400 font-normal mt-1">
                     {lineObj.words.map((word, wordIdx) => (
                       <span
                         key={wordIdx}
@@ -264,9 +264,9 @@ export default function ProjectGalleryCta() {
           <motion.p
             ref={subtextRef}
             style={{ y: subtextY, opacity: subtextOpacity }}
-            className="mt-4 text-sm sm:text-base text-gray-500 max-w-lg mx-auto leading-relaxed transform-gpu will-change-transform"
+            className="mt-4 text-sm sm:text-base text-gray-500 font-light max-w-lg mx-auto leading-relaxed transform-gpu will-change-transform"
           >
-            Explore our pan-India installations  cold storage logistics, pharma cleanrooms, food processing plants & manufacturing facilities.
+            Explore our pan-India installations cold storage logistics, pharma cleanrooms, food processing plants & manufacturing facilities.
           </motion.p>
 
           {/* 3D Arc Right-to-Left Moving Stage */}

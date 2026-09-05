@@ -171,12 +171,12 @@ function ProjectShowcase({ project }: { project: Project }) {
       </div>
 
       <div className="flex flex-col">
-        <span className="inline-flex w-fit items-center gap-2 bg-[#5b176e]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5b176e]">
+        <span className="inline-flex w-fit items-center gap-2 bg-[#5b176e]/10 px-3 py-1 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#5b176e]">
           <span className="h-1.5 w-1.5 bg-[#5b176e]" />
           {project.productBadge}
         </span>
 
-        <h2 ref={titleRef} className="mt-2.5 text-2xl font-extrabold tracking-tight text-black sm:text-3xl md:text-4xl">
+        <h2 ref={titleRef} className="mt-2.5 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.15] tracking-[-0.02em] text-black">
           {preprocessedWords.map((word, wordIdx) => (
             <span
               key={wordIdx}
@@ -195,7 +195,7 @@ function ProjectShowcase({ project }: { project: Project }) {
           ))}
         </h2>
 
-        <p className="mt-1.5 flex items-center gap-1.5 text-xs text-gray-500 sm:text-sm">
+        <p className="mt-1.5 flex items-center gap-1.5 text-xs text-gray-500 sm:text-sm font-light">
           <MapPin className="h-3.5 w-3.5 text-gray-400" />
           {project.location}
         </p>
@@ -203,7 +203,7 @@ function ProjectShowcase({ project }: { project: Project }) {
         <motion.p
           ref={subtextRef}
           style={{ y: subtextY, opacity: subtextOpacity }}
-          className="mt-3 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-[15px] transform-gpu will-change-transform"
+          className="mt-3 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-base font-light transform-gpu will-change-transform"
         >
           {project.description}
         </motion.p>
@@ -214,10 +214,10 @@ function ProjectShowcase({ project }: { project: Project }) {
               key={spec.label}
               className="bg-[#ececf1] px-3.5 py-3 sm:px-4 sm:py-3.5"
             >
-              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-500">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">
                 {spec.label}
               </p>
-              <p className="mt-1 text-sm font-bold text-black sm:text-base">
+              <p className="mt-1 text-sm font-medium text-black sm:text-base">
                 {spec.value}
               </p>
             </div>
@@ -226,7 +226,7 @@ function ProjectShowcase({ project }: { project: Project }) {
 
         <Link
           href="/quote"
-          className="mt-4 inline-flex w-full items-center justify-center gap-2  bg-[#5b176e] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#461056]"
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 bg-[#5b176e] px-5 py-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#461056]"
         >
           Build something similar
           <ArrowRight className="h-4 w-4" />

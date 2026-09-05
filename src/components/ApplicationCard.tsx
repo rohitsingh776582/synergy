@@ -22,13 +22,13 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
         </div>
 
         <div className="p-6">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#5b176e]">
+          <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5b176e]">
             {application.category}
           </span>
-          <h3 className="mt-1 text-xl font-bold text-gray-900 group-hover:text-[#5b176e] transition-colors">
+          <h3 className="mt-1 text-xl font-normal text-gray-900 group-hover:text-[#5b176e] transition-colors">
             {application.title}
           </h3>
-          <p className="mt-2 text-sm text-gray-600 line-clamp-3 leading-relaxed">
+          <p className="mt-2 text-sm text-gray-600 font-light line-clamp-3 leading-relaxed">
             {application.shortDescription}
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
       <div className="p-6 pt-0">
         <Link
           href={`/applications/${application.slug}`}
-          className="inline-flex items-center gap-2 text-sm font-bold text-[#5b176e] hover:text-[#461056] group-hover:translate-x-1 transition-transform"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#5b176e] hover:text-[#461056] group-hover:translate-x-1 transition-transform"
         >
           <span>Learn More Solutions</span>
           <ArrowRight className="w-4 h-4" />

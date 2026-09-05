@@ -48,7 +48,7 @@ export default function MobileMenu({ isOpen, onClose, navItems, pathname }: Mobi
                   key={item.name}
                   href={item.href}
                   onClick={onClose}
-                  className={`rounded-2xl px-5 py-3.5 text-base font-semibold transition-colors ${
+                  className={`rounded-2xl px-5 py-3.5 text-sm font-semibold uppercase tracking-wider transition-colors ${
                     isActive
                       ? "bg-[#5b176e] text-white "
                       : "text-gray-700 hover:bg-purple-50 hover:text-[#5b176e]"
@@ -65,7 +65,7 @@ export default function MobileMenu({ isOpen, onClose, navItems, pathname }: Mobi
           <Link
             href="/quote"
             onClick={onClose}
-            className="flex items-center justify-center gap-2 w-full rounded-full bg-[#5b176e] py-4 text-base font-bold text-white  hover:bg-[#461056] transition-colors"
+            className="flex items-center justify-center gap-2 w-full rounded-full bg-[#5b176e] py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white hover:bg-[#461056] transition-colors"
           >
             <span>Get Instant Quote</span>
             <ArrowRight size={18} />

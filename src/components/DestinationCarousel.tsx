@@ -240,7 +240,7 @@ export default function DestinationCarousel({
                     <>
                       {/* Title & Counter Header */}
                       <div className="flex items-start justify-between gap-2">
-                        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight leading-snug">
+                        <h2 className="text-2xl sm:text-3xl font-normal text-gray-900 tracking-tight leading-snug">
                           {dest.name}
                         </h2>
                         <span className="text-xs font-mono text-gray-400 pt-1 shrink-0">
@@ -249,7 +249,7 @@ export default function DestinationCarousel({
                       </div>
 
                       {/* Description */}
-                      <p className="text-xs sm:text-sm font-normal text-gray-600 leading-relaxed my-2 line-clamp-2 sm:line-clamp-3">
+                      <p className="text-xs sm:text-sm font-light text-gray-600 leading-relaxed my-2 line-clamp-2 sm:line-clamp-3">
                         {dest.description}
                       </p>
 
@@ -267,10 +267,10 @@ export default function DestinationCarousel({
                   ) : (
                     /* Side Card Bottom Layout */
                     <div className="flex flex-col justify-end h-full">
-                      <h3 className="text-lg font-semibold text-gray-900 tracking-tight">
+                      <h3 className="text-lg font-normal text-gray-900 tracking-tight">
                         {dest.name}
                       </h3>
-                      <p className="text-xs font-medium text-gray-500 mt-1">
+                      <p className="text-xs font-light text-gray-500 mt-1">
                         {dest.location}
                       </p>
                     </div>
@@ -360,10 +360,10 @@ export default function DestinationCarousel({
                 <span className="text-xs font-mono text-[#58166A] uppercase tracking-widest">
                   {activeDestination.coordinates}
                 </span>
-                <h2 className="text-4xl sm:text-5xl font-serif text-gray-900">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal font-sans text-gray-900 tracking-tight">
                   {activeDestination.name}
                 </h2>
-                <p className="text-sm font-normal text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base font-light text-gray-600 leading-relaxed">
                   {activeDestination.description}
                 </p>
                 <div className="flex items-center gap-2 text-sm text-gray-800 font-medium pt-2 border-t border-gray-200">

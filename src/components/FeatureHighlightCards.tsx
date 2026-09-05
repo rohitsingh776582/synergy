@@ -83,10 +83,10 @@ export default function FeatureHighlightCards() {
                 <Icon className="h-5 w-5 stroke-[1.5]" aria-hidden />
               </div>
               <div className="min-w-0">
-                <h3 className="text-sm font-semibold text-[#2d1b3d]">
+                <h3 className="text-sm sm:text-base font-normal text-[#2d1b3d]">
                   {title}
                 </h3>
-                <p className="mt-0.5 text-xs font-light leading-snug text-[#7a6b88]">
+                <p className="mt-0.5 text-xs sm:text-sm font-light leading-relaxed text-[#7a6b88]">
                   {subtitle}
                 </p>
               </div>

@@ -279,13 +279,13 @@ export default function Rotating3DCardDeckShowcase() {
                 style={{ willChange: "transform, opacity" }}
                 className="absolute flex flex-col items-start text-left"
               >
-                <span className="text-xs font-mono font-bold tracking-[0.25em] text-emerald-300 uppercase mb-2">
+                <span className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-emerald-300 uppercase mb-2">
                   {card.tagline}
                 </span>
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight text-white leading-[1.12]">
                   {card.title}
-                </h1>
-                <div className="flex items-center gap-1.5 text-xs text-purple-200 mt-2 font-medium">
+                </h2>
+                <div className="flex items-center gap-1.5 text-xs text-purple-200 mt-2 font-light">
                   <MapPin className="w-3.5 h-3.5 text-purple-400" />
                   <span>{card.location}</span>
                 </div>

@@ -419,7 +419,7 @@ export default function ProductsHero({
             <div className="mt-6 relative z-20">
               <Link
                 href="/quote"
-                className="inline-flex items-center justify-center bg-[#5b176e] px-7 py-3 text-sm font-bold text-white hover:bg-[#461056] transition-all"
+                className="inline-flex items-center justify-center bg-[#5b176e] px-7 py-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white hover:bg-[#461056] transition-all"
               >
                 Get A Quote
               </Link>

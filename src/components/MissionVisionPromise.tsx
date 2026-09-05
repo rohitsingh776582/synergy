@@ -175,10 +175,10 @@ export default function MissionVisionPromise() {
       <Container>
         {/* Section Title */}
         <div className="max-w-2xl mb-10 sm:mb-12">
-          <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#5b176e]">
+          <span className="text-xs sm:text-sm font-semibold tracking-[0.12em] uppercase text-[#5b176e]">
             CORE VALUES & COMMITMENT
           </span>
-          <h2 ref={titleRef} className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900">
+          <h2 ref={titleRef} className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 leading-[1.15] tracking-[-0.02em]">
             {PREPROCESSED_ENGINEERED.map((word, wordIdx) => (
               <span
                 key={wordIdx}
@@ -243,10 +243,10 @@ export default function MissionVisionPromise() {
                   <div className="mb-4 inline-flex h-12 w-12 items-center justify-center bg-purple-50 text-[#5b176e] rounded-none">
                     <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-normal text-gray-900 leading-snug">
                     {title}
                   </h3>
-                  <p className="mt-3.5 text-base sm:text-lg leading-relaxed text-gray-600">
+                  <p className="mt-3 text-sm sm:text-base font-light text-gray-600 leading-relaxed max-w-md">
                     {body}
                   </p>
                 </div>

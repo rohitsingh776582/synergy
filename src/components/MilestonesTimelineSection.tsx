@@ -144,13 +144,13 @@ export default function MilestonesTimelineSection() {
               key={idx}
               className="inline-flex flex-col items-center mx-3 sm:mx-4 w-[240px] sm:w-[270px] shrink-0"
             >
-              {/* Gold Square Marker (ZERO border radius) */}
-              <div className="w-4 h-4 bg-[#e8b030] rounded-none mb-4 shrink-0" />
+              {/* Square Marker (ZERO border radius) */}
+              <div className="w-4 h-4 bg-[#3C094C] rounded-none mb-4 shrink-0" />
 
               {/* Milestone Card (ZERO border radius, ZERO shadow) */}
               <div className="w-full bg-white border border-gray-200/90 rounded-none shadow-none p-5 sm:p-6 flex flex-col items-center justify-center text-center min-h-[130px] sm:min-h-[145px] hover:border-purple-200 transition-colors">
                 {/* Year Sub-label */}
-                <span className="text-[11px] sm:text-xs font-semibold text-[#e8b030] tracking-wide mb-2">
+                <span className="text-[11px] sm:text-xs font-semibold text-[#3C094C] tracking-wide mb-2">
                   {item.year}
                 </span>
 

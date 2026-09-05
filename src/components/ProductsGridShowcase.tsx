@@ -138,10 +138,10 @@ function ShowcaseAnimatedCard({
       {/* BOTTOM 48%: Product Text & Details */}
       <div className="w-full h-[48%] p-4 sm:p-5 flex flex-col justify-between bg-white text-gray-900 overflow-hidden">
         <div>
-          <h2 className="mb-1.5 text-[17px] sm:text-[19.5px] font-medium leading-snug font-sans text-gray-900 tracking-tight">
+          <h2 className="mb-1.5 text-lg sm:text-xl font-normal leading-snug font-sans text-gray-900 tracking-tight">
             {card.title}
           </h2>
-          <p className="text-[12px] sm:text-[13px] font-normal leading-relaxed text-gray-600">
+          <p className="text-xs sm:text-sm font-light leading-relaxed text-gray-600">
             {card.description}
           </p>
         </div>

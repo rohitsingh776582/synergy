@@ -77,10 +77,10 @@ export default function AboutHero() {
           ref={leftColRef}
           className="lg:col-span-5 bg-[#3c094c] py-12 sm:py-16 lg:py-20 pl-5 md:pl-10 lg:pl-[50px] pr-8 sm:pr-12 lg:pr-16 flex flex-col justify-center items-start text-left z-10"
         >
-          {/* Gold Tag */}
+          {/* Tag */}
           <span
             data-animate-hero
-            className="text-[#e8b030] text-xs sm:text-sm font-semibold tracking-wide uppercase mb-4"
+            className="text-white text-xs sm:text-sm font-semibold tracking-wide uppercase mb-4"
           >
             About Synergy PUF
           </span>
@@ -146,13 +146,13 @@ export default function AboutHero() {
             </h3>
 
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="bg-[#e8b030] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
+              <span className="bg-[#000000] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
                 PUF
               </span>
-              <span className="bg-[#e8b030] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
+              <span className="bg-[#000000] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
                 PIR
               </span>
-              <span className="bg-[#e8b030] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
+              <span className="bg-[#000000] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
                 Rockwool
               </span>
             </div>

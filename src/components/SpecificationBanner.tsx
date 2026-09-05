@@ -137,7 +137,7 @@ export function LightPanelFitsBanner({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 md:gap-8 rounded-none shadow-none">
           {/* Left-side text: Writes from left to right on scroll */}
           <div className="flex flex-col items-start text-left max-w-2xl rounded-none shadow-none">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 leading-tight">
+            <h2 className="text-2xl sm:text-3xl font-normal tracking-tight text-gray-900 leading-tight">
               <ScrollTypewriterText
                 text={title}
                 progress={smoothProgress}
@@ -145,7 +145,7 @@ export function LightPanelFitsBanner({
                 end={0.45}
               />
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-gray-600 font-normal leading-relaxed">
+            <p className="mt-2 text-sm sm:text-base text-gray-600 font-light leading-relaxed">
               <ScrollTypewriterText
                 text={subtitle}
                 progress={smoothProgress}
@@ -166,7 +166,7 @@ export function LightPanelFitsBanner({
             {buttonHref && !onButtonClick ? (
               <Link
                 href={buttonHref}
-                className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-purple-900/30 text-purple-950 hover:border-purple-900 hover:bg-purple-50 text-sm font-medium rounded-none shadow-none transition-colors duration-200 active:scale-95"
+                className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-purple-900/30 text-purple-950 hover:border-purple-900 hover:bg-purple-50 text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-none shadow-none transition-colors duration-200 active:scale-95"
               >
                 {buttonText}
               </Link>
@@ -174,7 +174,7 @@ export function LightPanelFitsBanner({
               <button
                 type="button"
                 onClick={onButtonClick}
-                className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-purple-900/30 text-purple-950 hover:border-purple-900 hover:bg-purple-50 text-sm font-medium rounded-none shadow-none transition-colors duration-200 active:scale-95"
+                className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-purple-900/30 text-purple-950 hover:border-purple-900 hover:bg-purple-50 text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-none shadow-none transition-colors duration-200 active:scale-95"
               >
                 {buttonText}
               </button>
@@ -225,7 +225,7 @@ export function DarkSpecificationBanner({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 md:gap-8 rounded-none shadow-none">
           {/* Left-side text: Writes from left to right on scroll */}
           <div className="flex flex-col items-start text-left max-w-2xl rounded-none shadow-none">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">
+            <h2 className="text-2xl sm:text-3xl font-normal tracking-tight text-white leading-tight">
               <ScrollTypewriterText
                 text={title}
                 progress={smoothProgress}
@@ -254,7 +254,7 @@ export function DarkSpecificationBanner({
             {buttonHref && !onButtonClick ? (
               <Link
                 href={buttonHref}
-                className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-white/70 text-white hover:border-white hover:bg-white/10 text-sm font-medium rounded-none shadow-none transition-colors duration-200 active:scale-95"
+                className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-white/70 text-white hover:border-white hover:bg-white/10 text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-none shadow-none transition-colors duration-200 active:scale-95"
               >
                 {buttonText}
               </Link>
@@ -262,7 +262,7 @@ export function DarkSpecificationBanner({
               <button
                 type="button"
                 onClick={onButtonClick}
-                className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-white/70 text-white hover:border-white hover:bg-white/10 text-sm font-medium rounded-none shadow-none transition-colors duration-200 active:scale-95"
+                className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-white/70 text-white hover:border-white hover:bg-white/10 text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-none shadow-none transition-colors duration-200 active:scale-95"
               >
                 {buttonText}
               </button>

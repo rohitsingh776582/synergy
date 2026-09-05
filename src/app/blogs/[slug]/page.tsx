@@ -48,21 +48,21 @@ export default async function BlogDetailPage({ params }: Props) {
           <Container>
             <Link
               href="/blogs"
-              className="inline-flex items-center gap-2 text-xs font-bold text-[#5b176e] hover:underline mb-6"
+              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#5b176e] hover:underline mb-6"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to all blogs</span>
             </Link>
 
-            <span className="rounded-full bg-purple-100 px-3.5 py-1 text-xs font-bold text-[#5b176e]">
+            <span className="rounded-full bg-purple-100 px-3.5 py-1 text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#5b176e]">
               {blog.category}
             </span>
 
-            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
+            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 tracking-tight leading-[1.12]">
               {blog.title}
             </h1>
 
-            <div className="mt-6 flex flex-wrap items-center gap-6 text-sm font-medium text-gray-500 pb-8 border-b border-gray-200">
+            <div className="mt-6 flex flex-wrap items-center gap-6 text-sm font-light text-gray-500 pb-8 border-b border-gray-200">
               <span className="flex items-center gap-2">
                 <User className="w-4 h-4 text-[#5b176e]" />
                 {blog.author}
@@ -77,7 +77,7 @@ export default async function BlogDetailPage({ params }: Props) {
               </span>
             </div>
 
-            <div className="relative aspect-[16/9] w-full my-8 overflow-hidden rounded-3xl bg-gray-900 ">
+            <div className="relative aspect-[16/9] w-full my-8 overflow-hidden rounded-3xl bg-gray-900">
               <Image
                 src={blog.image}
                 alt={blog.title}
@@ -92,13 +92,13 @@ export default async function BlogDetailPage({ params }: Props) {
               {blog.content.split("\n\n").map((paragraph, idx) => {
                 if (paragraph.startsWith("### ")) {
                   return (
-                    <h3 key={idx} className="text-2xl font-bold text-gray-900 mt-8 mb-3">
+                    <h3 key={idx} className="text-2xl font-normal text-gray-900 mt-8 mb-3">
                       {paragraph.replace("### ", "")}
                     </h3>
                   );
                 }
                 return (
-                  <p key={idx} className="text-base sm:text-lg">
+                  <p key={idx} className="text-base sm:text-lg font-light">
                     {paragraph}
                   </p>
                 );

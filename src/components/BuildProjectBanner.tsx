@@ -15,13 +15,13 @@ export default function BuildProjectBanner() {
           {/* Left Column: Heading, Subheading, Buttons & Badges */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             {/* Title */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-gray-900 leading-[1.15]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-[1.15] tracking-[-0.02em] text-gray-900">
               Build your next project <br className="hidden sm:inline" />
               with Synergy PUF.
             </h2>
 
             {/* Subtitle */}
-            <p className="mt-3 text-base sm:text-lg text-gray-600 font-normal">
+            <p className="mt-3 text-base sm:text-lg text-gray-600 font-light">
               Tell us about your project requirements.
             </p>
 
@@ -29,7 +29,7 @@ export default function BuildProjectBanner() {
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <Link
                 href="/quote"
-                className="inline-flex items-center justify-center rounded-none bg-[#58166e] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#461058] transition-all duration-200 active:scale-95"
+                className="inline-flex items-center justify-center rounded-none bg-[#58166e] px-7 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white shadow-sm hover:bg-[#461058] transition-all duration-200 active:scale-95"
               >
                 Get a quote
               </Link>
@@ -40,7 +40,7 @@ export default function BuildProjectBanner() {
                   e.preventDefault();
                   alert("Downloading Synergy PUF Product Catalog PDF...");
                 }}
-                className="inline-flex items-center justify-center rounded-none bg-white border border-[#58166e] px-6 py-3 text-sm font-semibold text-[#58166e] hover:bg-purple-50 transition-all duration-200 active:scale-95"
+                className="inline-flex items-center justify-center rounded-none bg-white border border-[#58166e] px-7 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#58166e] hover:bg-purple-50 transition-all duration-200 active:scale-95"
               >
                 Download brochure
               </a>
@@ -51,7 +51,7 @@ export default function BuildProjectBanner() {
               {badges.map((badge) => (
                 <span
                   key={badge}
-                  className="rounded-md border border-gray-300 bg-gray-50/50 px-3.5 py-1.5 text-xs sm:text-sm font-medium text-gray-700"
+                  className="rounded-md border border-gray-300 bg-gray-50/50 px-3.5 py-1.5 text-xs sm:text-sm font-light text-gray-700"
                 >
                   {badge}
                 </span>

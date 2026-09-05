@@ -56,7 +56,7 @@ export default function ProjectsHero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex items-center gap-3"
           >
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/80 font-medium">
+            <span className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-white/80">
               BUILT TO INSPIRE
             </span>
           </motion.div>
@@ -66,7 +66,7 @@ export default function ProjectsHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-serif leading-[1.1] text-white tracking-tight max-w-4xl"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.12] text-white tracking-tight max-w-4xl"
           >
             Design spaces people love
           </motion.h1>
@@ -90,7 +90,7 @@ export default function ProjectsHero() {
           >
             <Link
               href="#projects-portfolio"
-              className="group flex items-center gap-3 bg-white text-black px-6 py-2.5 sm:py-3 rounded-full font-medium text-sm hover:bg-white/90 transition-all shadow-xl"
+              className="group flex items-center gap-3 bg-white text-black px-6 py-2.5 sm:py-3 rounded-full font-semibold uppercase tracking-wider text-xs sm:text-sm hover:bg-white/90 transition-all shadow-xl"
             >
               <span>Get started</span>
               <div className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -117,10 +117,10 @@ export default function ProjectsHero() {
                 idx < stats.length - 1 ? "md:border-r md:border-white/20 md:pr-8 md:mr-8" : ""
               }`}
             >
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
+              <span className="text-3xl sm:text-4xl lg:text-5xl stat-number font-bold text-white tracking-tight">
                 {stat.value}
               </span>
-              <span className="text-xs text-white/70 font-mono tracking-wider uppercase mt-1">
+              <span className="text-xs text-white/70 font-light tracking-wider uppercase mt-1">
                 {stat.label}
               </span>
             </div>

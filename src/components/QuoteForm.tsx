@@ -27,13 +27,13 @@ export default function QuoteForm() {
         <div className="mx-auto w-14 h-14 rounded-none bg-[#5b176e] text-white flex items-center justify-center mb-4">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-bold text-gray-900">Quote Request Submitted!</h3>
-        <p className="mt-2 text-gray-600 max-w-md mx-auto">
+        <h3 className="text-2xl font-normal text-gray-900">Quote Request Submitted!</h3>
+        <p className="mt-2 text-gray-600 font-light max-w-md mx-auto">
           Thank you for requesting an instant quote from Synergy PUF. Our estimation specialist will prepare a detailed commercial proposal for your project within 2 business hours.
         </p>
         <button
           onClick={() => setSubmitted(false)}
-          className="mt-6 rounded-none bg-[#5b176e] px-6 py-2.5 text-sm font-bold text-white hover:bg-[#461056] transition-colors"
+          className="mt-6 rounded-none bg-[#5b176e] px-7 py-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white hover:bg-[#461056] transition-colors"
         >
           Submit Another Request
         </button>
@@ -48,14 +48,14 @@ export default function QuoteForm() {
           <FileText className="w-6 h-6" />
         </div>
         <div>
-          <h3 className="text-xl font-bold text-gray-900">Request Technical & Price Quote</h3>
-          <p className="text-xs text-gray-500">Fill in your panel specifications for instant pricing</p>
+          <h3 className="text-xl font-normal text-gray-900">Request Technical & Price Quote</h3>
+          <p className="text-xs text-gray-500 font-light">Fill in your panel specifications for instant pricing</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Your Full Name *
           </label>
           <input
@@ -68,7 +68,7 @@ export default function QuoteForm() {
           />
         </div>
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Company / Organization *
           </label>
           <input
@@ -84,7 +84,7 @@ export default function QuoteForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Phone Number *
           </label>
           <input
@@ -97,7 +97,7 @@ export default function QuoteForm() {
           />
         </div>
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Email Address *
           </label>
           <input
@@ -113,7 +113,7 @@ export default function QuoteForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Select Product *
           </label>
           <select
@@ -129,7 +129,7 @@ export default function QuoteForm() {
           </select>
         </div>
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Estimated Area / Quantity *
           </label>
           <input
@@ -144,7 +144,7 @@ export default function QuoteForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
           Project Location / City *
         </label>
         <input
@@ -158,7 +158,7 @@ export default function QuoteForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
           Additional Requirements / Panel Thickness
         </label>
         <textarea
@@ -172,7 +172,7 @@ export default function QuoteForm() {
 
       <button
         type="submit"
-        className="w-full inline-flex items-center justify-center gap-2 rounded-none bg-[#5b176e] py-4 text-base font-bold text-white hover:bg-[#461056] transition-colors"
+        className="w-full inline-flex items-center justify-center gap-2 rounded-none bg-[#5b176e] py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white hover:bg-[#461056] transition-colors"
       >
         <span>Request Quote Now</span>
         <Send className="w-4 h-4" />

@@ -25,7 +25,7 @@ export default function CTASection() {
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href="/quote"
-                className="inline-flex items-center justify-between gap-4 bg-[#511663] hover:bg-[#3d0f4b] text-white px-6 py-3.5 text-xs sm:text-sm font-light  transition-colors"
+                className="inline-flex items-center justify-between gap-4 bg-[#511663] hover:bg-[#3d0f4b] text-white px-7 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors"
               >
                 <span>Get Instant Quote</span>
                 <ArrowRight className="w-4 h-4" />
@@ -37,7 +37,7 @@ export default function CTASection() {
                   e.preventDefault();
                   alert("Downloading Synergy PUF Product Catalog PDF...");
                 }}
-                className="inline-flex items-center justify-between gap-4 bg-[#ad96b6] hover:bg-[#9980a3] text-white px-6 py-3.5 text-xs sm:text-sm font-light  transition-colors"
+                className="inline-flex items-center justify-between gap-4 bg-[#ad96b6] hover:bg-[#9980a3] text-white px-7 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors"
               >
                 <span>Download Brochure</span>
                 <Download className="w-4 h-4" />

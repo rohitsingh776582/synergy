@@ -112,7 +112,7 @@ export default function WherePanelsWorkSection() {
         >
           <h2
             data-animate-up
-            className="text-4xl sm:text-5xl lg:text-[4rem] font-bold text-white leading-[1.08] tracking-tight mb-6"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.12] tracking-tight mb-6"
           >
             Where our panels <br />
             go to work.
@@ -134,14 +134,14 @@ export default function WherePanelsWorkSection() {
           >
             <Link
               href="/quote"
-              className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#461058] text-white px-6 py-3.5 rounded-none text-sm font-semibold shadow-none transition-all duration-200 active:scale-95"
+              className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#461058] text-white px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-all duration-200 active:scale-95"
             >
               Get a quote
             </Link>
 
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/40 px-6 py-3.5 rounded-none text-sm font-semibold shadow-none transition-all duration-200 active:scale-95"
+              className="inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/40 px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-all duration-200 active:scale-95"
             >
               Talk to an engineer
             </Link>
@@ -161,27 +161,16 @@ export default function WherePanelsWorkSection() {
                   idx !== 0 ? "md:border-l md:border-purple-900/40 md:pl-6" : ""
                 }`}
               >
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-2">
-                  {item.isGold ? (
-                    <span className="text-[#e8b030]">{item.num}</span>
-                  ) : (
-                    <>
-                      <span className="text-white">{item.num}</span>
-                      <span className="text-[#e8b030] ml-0.5">{item.plus}</span>
-                    </>
-                  )}
+                <div className="text-3xl sm:text-4xl lg:text-5xl stat-number font-bold tracking-tight mb-2">
+                  <span className="text-white">{item.num}</span>
+                  {item.plus && <span className="text-white ml-0.5">{item.plus}</span>}
                 </div>
-                <span className="text-xs sm:text-sm text-purple-200/80 font-normal leading-snug">
+                <span className="text-xs sm:text-sm text-purple-200/80 font-light leading-snug">
                   {item.label}
                 </span>
               </div>
             ))}
           </div>
-
-          {/* Bottom Footnote Note */}
-          <p className="mt-8 text-[11px] font-mono text-purple-300/50">
-            Placeholder figures — replace with your confirmed, single set of numbers (see spec).
-          </p>
         </div>
       </Container>
     </section>

@@ -139,15 +139,15 @@ function ConditionCardItem({
 
       {/* Card Content */}
       <div className="flex flex-col items-start text-left min-w-0">
-        <span className="text-xs sm:text-sm font-bold text-[#e8b030] tracking-wide mb-1">
+        <span className="text-xs sm:text-sm font-bold text-[#000000] tracking-wide mb-1">
           {item.num}
         </span>
 
-        <h3 className="text-base sm:text-lg font-bold text-gray-900 leading-snug mb-1">
+        <h3 className="text-base sm:text-lg font-normal text-gray-900 leading-snug mb-1">
           {item.title}
         </h3>
 
-        <p className="text-xs sm:text-sm text-gray-600 font-normal leading-relaxed">
+        <p className="text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
           {item.subtitle}
         </p>
       </div>
@@ -181,7 +181,7 @@ export default function ProjectConditionsSection() {
     >
       <Container>
         {/* Title with left-to-right scroll-driven letter typing */}
-        <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-gray-900 tracking-tight leading-tight mb-8 md:mb-10 text-left">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 tracking-tight leading-[1.15] mb-8 md:mb-10 text-left">
           <ScrollTypewriterText
             text="Start with your project conditions."
             progress={smoothProgress}

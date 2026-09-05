@@ -254,7 +254,7 @@ export default function IndustriesWeServeSection() {
       <Container>
         {/* Section Header */}
         <div className="max-w-3xl mb-10 sm:mb-12">
-          <h2 ref={titleRef} className="mt-3 text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-[#18181b]">
+          <h2 ref={titleRef} className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight leading-[1.15] text-[#18181b]">
             {PREPROCESSED_SERVICES.map((word, wordIdx) => (
               <span
                 key={wordIdx}
@@ -275,7 +275,7 @@ export default function IndustriesWeServeSection() {
           <motion.p
             ref={subtextRef}
             style={{ y: subtextY, opacity: subtextOpacity }}
-            className="mt-3.5 text-base sm:text-lg text-gray-500 leading-relaxed transform-gpu will-change-transform"
+            className="mt-3.5 text-sm sm:text-base text-gray-600 font-light leading-relaxed transform-gpu will-change-transform"
           >
             Select an industry below to explore how our PUF panels are
             engineered for its specific requirements.
@@ -298,8 +298,8 @@ export default function IndustriesWeServeSection() {
                   onMouseEnter={() => setSelectedId(item.id)}
                   className={`group flex items-center gap-3.5 px-4 py-3.5 text-left transition-all duration-200 rounded-none ${
                     isSelected
-                      ? "bg-purple-50/90 border border-purple-200/90 text-gray-900 font-bold"
-                      : "bg-transparent hover:bg-gray-50/90 text-gray-600 font-medium hover:text-gray-900 border border-transparent"
+                      ? "bg-purple-50/90 border border-purple-200/90 text-gray-900 font-semibold"
+                      : "bg-transparent hover:bg-gray-50/90 text-gray-600 font-normal hover:text-gray-900 border border-transparent"
                   }`}
                 >
                   <div
@@ -347,21 +347,21 @@ export default function IndustriesWeServeSection() {
                       <div className="flex h-7 w-7 items-center justify-center bg-white/20 backdrop-blur-md text-white">
                         <activeIndustry.icon className="h-4 w-4" />
                       </div>
-                      <span className="text-xs font-mono font-bold tracking-wider uppercase text-white/80">
+                      <span className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-white/80">
                         APPLICATION SECTOR
                       </span>
                     </div>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-white">
                       {activeIndustry.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-gray-200 line-clamp-2 leading-relaxed font-normal">
+                    <p className="text-xs sm:text-sm text-gray-200 line-clamp-2 leading-relaxed font-light">
                       {activeIndustry.description}
                     </p>
                   </div>
 
                   <Link
                     href="/quote"
-                    className="inline-flex items-center gap-2 shrink-0 bg-[#5b176e] hover:bg-[#461056] text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:gap-3"
+                    className="inline-flex items-center gap-2 shrink-0 bg-[#58166e] hover:bg-[#461056] text-white px-6 py-3 text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-200 hover:gap-3"
                   >
                     <span>EXPLORE SECTOR</span>
                     <ArrowRight className="h-3.5 w-3.5" />

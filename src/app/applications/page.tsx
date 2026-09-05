@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
-import ApplicationsHeroAnimation from "@/components/ApplicationsHeroAnimation";
 import IndustriesWeServeSection from "@/components/IndustriesWeServeSection";
 import BuildProjectBanner from "@/components/BuildProjectBanner";
 import ByApplicationSection from "@/components/ByApplicationSection";
@@ -21,8 +20,6 @@ export default function ApplicationsPage() {
         <main className="flex-1">
           {/* Animated Editorial Hero Section */}
           <ApplicationsHeroSection />
-
-          <ApplicationsHeroAnimation />
 
           <ByApplicationSection />
 

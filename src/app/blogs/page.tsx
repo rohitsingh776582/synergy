@@ -19,14 +19,14 @@ export default function BlogsPage() {
         {/* Hero */}
         <section className="bg-gradient-to-b from-purple-50/60 via-white to-gray-50 py-16 text-center border-b border-gray-100">
           <Container>
-            <span className="rounded-full bg-purple-100 px-4 py-1.5 text-xs font-extrabold text-[#5b176e] tracking-wider uppercase">
+            <span className="rounded-full bg-purple-100 px-4 py-1.5 text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#5b176e]">
               Technical Knowledge Hub
             </span>
-            <h1 data-lines-reveal className="mt-4 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
+            <h1 data-lines-reveal className="mt-4 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-gray-900 tracking-tight leading-[1.12]">
               Insulation Engineering <br />
               <span className="text-[#5b176e]">Blogs & Guides</span>
             </h1>
-            <p data-fade-in data-delay="0.15" className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            <p data-fade-in data-delay="0.15" className="mt-4 text-base sm:text-lg text-gray-600 font-light leading-relaxed max-w-2xl mx-auto">
               Expert insights, thermal calculation guides, and maintenance best practices for polyurethane sandwich panels.
             </p>
           </Container>

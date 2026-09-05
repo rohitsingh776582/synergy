@@ -87,7 +87,7 @@ export default function HaveBuildInMindBanner() {
           >
             <h2
               data-animate-left
-              className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-white tracking-tight leading-[1.15] mb-3"
+              className="text-3xl sm:text-4xl lg:text-[2.65rem] font-normal text-white tracking-[-0.02em] leading-[1.15] mb-3"
             >
               Have a build like <br className="hidden sm:inline" />
               these in mind?
@@ -107,11 +107,11 @@ export default function HaveBuildInMindBanner() {
             ref={rightColRef}
             className="flex flex-wrap items-center gap-3.5 shrink-0 w-full sm:w-auto"
           >
-            {/* Gold Solid Button (ZERO border radius, ZERO shadow) */}
+            {/* Solid Button (ZERO border radius, ZERO shadow) */}
             <Link
               data-animate-right
               href="/quote"
-              className="inline-flex items-center justify-center bg-[#e8b030] hover:bg-[#d49e25] text-gray-950 px-6 py-3.5 rounded-none text-sm font-bold shadow-none transition-colors active:scale-95"
+              className="inline-flex items-center justify-center bg-[#000000] hover:bg-black/80 text-white px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-colors active:scale-95"
             >
               Get a quote
             </Link>
@@ -124,7 +124,7 @@ export default function HaveBuildInMindBanner() {
                 e.preventDefault();
                 alert("Downloading Synergy PUF Product Catalog PDF...");
               }}
-              className="inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/60 px-6 py-3.5 rounded-none text-sm font-semibold shadow-none transition-colors active:scale-95"
+              className="inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/60 px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-colors active:scale-95"
             >
               Download brochure
             </a>

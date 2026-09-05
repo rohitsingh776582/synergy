@@ -72,7 +72,7 @@ export default function ContactHero() {
         <div ref={contentRef} className="flex flex-col items-start text-left">
           <h1
             data-animate-hero
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-extrabold leading-[1.1] text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.12] text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
           >
             Contact Synergy PUF <br />
             Engineering Team
@@ -80,7 +80,7 @@ export default function ContactHero() {
 
           <p
             data-animate-hero
-            className="mt-5 text-base sm:text-lg md:text-xl text-white font-medium leading-relaxed max-w-2xl transform-gpu will-change-transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
+            className="mt-5 text-base sm:text-lg md:text-xl text-white font-light leading-relaxed max-w-2xl transform-gpu will-change-transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
           >
             Have a technical query or require site inspection? Our insulation specialists are ready to assist you.
           </p>

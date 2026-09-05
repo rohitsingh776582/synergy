@@ -56,23 +56,23 @@ export default async function ApplicationDetailPage({ params }: Props) {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-6">
-                <span className="rounded-full bg-purple-100 px-3.5 py-1 text-xs font-bold text-[#5b176e]">
+                <span className="rounded-full bg-purple-100 px-3.5 py-1 text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#5b176e]">
                   {application.category}
                 </span>
-                <h1 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
+                <h1 className="mt-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 tracking-tight leading-[1.12]">
                   {application.title}
                 </h1>
-                <p className="mt-4 text-base md:text-lg text-gray-600 leading-relaxed">
+                <p className="mt-4 text-base md:text-lg text-gray-600 font-light leading-relaxed">
                   {application.description}
                 </p>
 
                 <div className="mt-8">
                   <Link
                     href="/quote"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white  hover:bg-[#461056] transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#5b176e] px-7 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white hover:bg-[#461056] transition-all hover:scale-105"
                   >
                     <span>Request Application Quote</span>
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
@@ -97,14 +97,14 @@ export default async function ApplicationDetailPage({ params }: Props) {
           <Container>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
               <div className="lg:col-span-6">
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Key Engineering Benefits</h2>
+                <h2 className="text-3xl sm:text-4xl font-normal leading-[1.15] text-gray-900 mb-6">Key Engineering Benefits</h2>
                 <div className="space-y-4">
                   {application.benefits.map((benefit, idx) => (
                     <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-purple-50/70 border border-purple-100">
                       <div className="p-1 rounded-full bg-[#5b176e] text-white mt-0.5">
                         <Check className="w-4 h-4" />
                       </div>
-                      <span className="text-gray-800 font-semibold text-base">{benefit}</span>
+                      <span className="text-gray-800 font-light text-base">{benefit}</span>
                     </div>
                   ))}
                 </div>
@@ -116,12 +116,12 @@ export default async function ApplicationDetailPage({ params }: Props) {
                     <div className="p-2.5 rounded-xl bg-purple-100 text-[#5b176e]">
                       <Layers className="w-6 h-6" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900">Recommended Panel Specifications</h3>
+                    <h3 className="text-2xl font-normal text-gray-900">Recommended Panel Specifications</h3>
                   </div>
 
                   <ul className="mt-6 space-y-3">
                     {application.recommendedPanels.map((rec, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-gray-700 font-bold text-sm sm:text-base">
+                      <li key={idx} className="flex items-center gap-3 text-gray-700 font-light text-sm sm:text-base">
                         <span className="h-2.5 w-2.5 rounded-full bg-[#5b176e]" />
                         <span>{rec}</span>
                       </li>

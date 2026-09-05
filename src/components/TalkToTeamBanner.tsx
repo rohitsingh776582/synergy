@@ -113,7 +113,7 @@ export default function TalkToTeamBanner() {
             {/* Title with subtle gold accent line */}
             <h2
               data-animate-text
-              className="text-2xl sm:text-3xl lg:text-[2.2rem] font-bold text-white tracking-tight leading-[1.18] mb-2"
+              className="text-3xl sm:text-4xl lg:text-5xl font-normal text-white tracking-tight leading-[1.15] mb-2"
             >
               Talk to the team <br className="hidden sm:inline" />
               behind the panels.
@@ -122,20 +122,20 @@ export default function TalkToTeamBanner() {
             {/* Gold Accent Underline */}
             <div
               ref={goldLineRef}
-              className="w-12 h-[3px] bg-[#e8b030] mb-3 rounded-none"
+              className="w-12 h-[3px] bg-[#000000] mb-3 rounded-none"
             />
 
             {/* Subtitle */}
             <p
               data-animate-text
-              className="text-sm sm:text-base text-purple-100 font-light leading-relaxed"
+              className="text-sm sm:text-base text-purple-100/90 font-light leading-relaxed"
             >
               Discuss your requirements with our engineering and sales team.
             </p>
           </div>
 
           {/* Vertical Separator Line (visible on desktop) */}
-          <div className="hidden lg:block h-16 w-[1px] bg-[#e8b030]/50 shrink-0 mx-2" />
+          <div className="hidden lg:block h-16 w-[1px] bg-[#000000]/50 shrink-0 mx-2" />
 
           {/* Right Column: Action Buttons aligned with Navbar Start Your Quote */}
           <div
@@ -145,7 +145,7 @@ export default function TalkToTeamBanner() {
             {/* Primary Solid Button (ZERO border radius, ZERO shadow) */}
             <Link
               href="/quote"
-              className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#471159] text-white border border-[#6b1e84] px-6 py-3.5 rounded-none text-sm font-semibold shadow-none transition-colors active:scale-95"
+              className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#471159] text-white border border-[#6b1e84] px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-colors active:scale-95"
             >
               Get a quote
             </Link>
@@ -157,7 +157,7 @@ export default function TalkToTeamBanner() {
                 e.preventDefault();
                 alert("Downloading Synergy PUF Product Catalog PDF...");
               }}
-              className="inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/60 px-6 py-3.5 rounded-none text-sm font-semibold shadow-none transition-colors active:scale-95"
+              className="inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/60 px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-colors active:scale-95"
             >
               Download brochure
             </a>

@@ -75,7 +75,7 @@ export default function PanelFitsYourUseBanner() {
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
           {/* Left Column: Heading & Subtitle with scroll-driven letter reveal */}
           <div className="flex flex-col items-start text-left max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-white tracking-tight leading-[1.18] mb-2">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-white tracking-tight leading-[1.15] mb-2">
               {PREPROCESSED_HEADING.map((word, wordIdx) => (
                 <span
                   key={wordIdx}
@@ -117,7 +117,7 @@ export default function PanelFitsYourUseBanner() {
             {/* Primary Solid Button (ZERO border radius, ZERO shadow) */}
             <Link
               href="/quote"
-              className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#471159] text-white border border-[#6b1e84] px-6 py-3.5 rounded-none text-sm font-semibold shadow-none transition-colors active:scale-95"
+              className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#471159] text-white border border-[#6b1e84] px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-colors active:scale-95"
             >
               Get a quote
             </Link>
@@ -129,7 +129,7 @@ export default function PanelFitsYourUseBanner() {
                 e.preventDefault();
                 alert("Downloading Synergy PUF Product Catalog PDF...");
               }}
-              className="inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/60 px-6 py-3.5 rounded-none text-sm font-semibold shadow-none transition-colors active:scale-95"
+              className="inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/60 px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-colors active:scale-95"
             >
               Download brochure
             </a>

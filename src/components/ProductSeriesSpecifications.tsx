@@ -92,7 +92,7 @@ export default function ProductSeriesSpecifications({
         {/* Section Badge with horizontal lines */}
         <div className="flex items-center justify-center gap-4 mb-6">
           <span className="h-[1.5px] w-12 sm:w-20 bg-gray-300" />
-          <span className="border border-purple-200 bg-purple-50/60 px-5 py-1.5 text-xs sm:text-sm font-bold text-[#5b176e] uppercase tracking-wider">
+          <span className="border border-purple-200 bg-purple-50/60 px-5 py-1.5 text-[11px] sm:text-xs font-semibold text-[#5b176e] uppercase tracking-[0.18em]">
             {currentProduct.series}
           </span>
           <span className="h-[1.5px] w-12 sm:w-20 bg-gray-300" />
@@ -112,10 +112,10 @@ export default function ProductSeriesSpecifications({
               total={totalItems}
               className="bg-[#f2f2f4] p-5 border border-gray-200/80  flex flex-col justify-center"
             >
-              <span className="text-xs font-semibold text-gray-500 tracking-wider uppercase">
+              <span className="text-xs font-semibold text-gray-500 tracking-[0.18em] uppercase">
                 {box.label}
               </span>
-              <span className="mt-1 text-lg sm:text-xl font-bold text-gray-900">
+              <span className="mt-1 text-lg sm:text-xl font-medium text-gray-900">
                 {box.value}
               </span>
             </DiagonalBox>
@@ -130,7 +130,7 @@ export default function ProductSeriesSpecifications({
           >
             <Link
               href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-[#5b176e] px-8 py-3.5 text-sm font-bold text-white  hover:bg-[#461056] transition-colors text-center"
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-[#5b176e] px-8 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white hover:bg-[#461056] transition-colors text-center"
             >
               Building something custom?
             </Link>

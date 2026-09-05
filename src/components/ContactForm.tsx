@@ -25,13 +25,13 @@ export default function ContactForm() {
         <div className="mx-auto w-14 h-14 rounded-none bg-[#5b176e] text-white flex items-center justify-center mb-4">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-bold text-gray-900">Message Received!</h3>
-        <p className="mt-2 text-gray-600 max-w-md mx-auto">
+        <h3 className="text-2xl font-normal text-gray-900">Message Received!</h3>
+        <p className="mt-2 text-gray-600 font-light max-w-md mx-auto">
           Thank you for reaching out to Synergy PUF. Our engineering team will review your inquiry and get back to you within 24 business hours.
         </p>
         <button
           onClick={() => setSubmitted(false)}
-          className="mt-6 rounded-none bg-[#5b176e] px-6 py-2.5 text-sm font-bold text-white hover:bg-[#461056] transition-colors"
+          className="mt-6 rounded-none bg-[#5b176e] px-7 py-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white hover:bg-[#461056] transition-colors"
         >
           Send Another Message
         </button>
@@ -43,7 +43,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Full Name *
           </label>
           <input
@@ -56,7 +56,7 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Email Address *
           </label>
           <input
@@ -72,7 +72,7 @@ export default function ContactForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Phone Number *
           </label>
           <input
@@ -85,7 +85,7 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
             Company Name
           </label>
           <input
@@ -99,7 +99,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
           Subject *
         </label>
         <input
@@ -113,7 +113,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-2">
           Your Message *
         </label>
         <textarea
@@ -128,7 +128,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full inline-flex items-center justify-center gap-2 rounded-none bg-[#5b176e] py-4 text-base font-bold text-white hover:bg-[#461056] transition-colors"
+        className="w-full inline-flex items-center justify-center gap-2 rounded-none bg-[#5b176e] py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white hover:bg-[#461056] transition-colors"
       >
         <span>Send Message</span>
         <Send className="w-4 h-4" />

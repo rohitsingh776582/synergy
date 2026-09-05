@@ -23,12 +23,12 @@ export default function Button({
   className = "",
 }: ButtonProps) {
   const baseClasses =
-    "group relative inline-flex items-center justify-center overflow-hidden font-bold rounded-none transition-transform duration-300 active:scale-95";
+    "group relative inline-flex items-center justify-center overflow-hidden font-semibold uppercase tracking-wider rounded-none transition-transform duration-300 active:scale-95";
 
   const sizeClasses = {
     sm: "px-4 py-2 text-xs",
-    md: "px-6 py-3 text-sm sm:text-base",
-    lg: "px-8 py-4 text-base sm:text-lg",
+    md: "px-6 py-3 text-xs sm:text-sm",
+    lg: "px-8 py-4 text-sm sm:text-base",
   };
 
   const variantClasses = {

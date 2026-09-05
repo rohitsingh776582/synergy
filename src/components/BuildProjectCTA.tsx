@@ -77,7 +77,7 @@ export default function BuildProjectCTA() {
       <Container className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left Column: Heading and Subtext */}
         <div ref={leftColRef} className="flex flex-col space-y-6">
-          <span className="inline-flex items-center gap-2 self-start bg-[#f3e8f7] px-4 py-1.5 text-xs font-medium text-[#5b176e] sm:text-sm">
+          <span className="inline-flex items-center gap-2 self-start bg-[#f3e8f7] px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#5b176e]">
             <span className="h-1.5 w-1.5 bg-[#5b176e]" aria-hidden />
             Even impossible is possible
           </span>
@@ -88,7 +88,7 @@ export default function BuildProjectCTA() {
             Synergy PUF.
           </h2>
 
-          <p className="text-[#686563] text-sm sm:text-base max-w-md leading-relaxed">
+          <p className="text-[#686563] text-sm sm:text-base font-light max-w-md leading-relaxed">
             High-performance insulated panel solutions delivered on time, every time, across India.
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function BuildProjectCTA() {
             <div className="flex flex-col justify-center gap-3">
               <Link
                 href="/quote"
-                className="inline-flex items-center justify-between gap-2 bg-[#532247] hover:bg-[#431b38] text-white px-5 py-3.5 text-sm font-medium transition-colors"
+                className="inline-flex items-center justify-between gap-2 bg-[#532247] hover:bg-[#431b38] text-white px-5 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors"
               >
                 <span>Get Instant Quote</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
@@ -123,7 +123,7 @@ export default function BuildProjectCTA() {
               <a
                 href="/brochure.pdf"
                 download
-                className="inline-flex items-center justify-between gap-2 bg-[#ab98a7] hover:bg-[#9c8798] text-[#2c1b29] px-5 py-3.5 text-sm font-medium transition-colors"
+                className="inline-flex items-center justify-between gap-2 bg-[#ab98a7] hover:bg-[#9c8798] text-[#2c1b29] px-5 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors"
               >
                 <span>Download Brochure</span>
                 <Download className="w-4 h-4 ml-1" />

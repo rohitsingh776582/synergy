@@ -170,11 +170,11 @@ export default function ApplicationsHeroAnimation() {
                       </div>
                     )}
 
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.15] mb-2 sm:mb-3 drop-shadow-md">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-[1.12] mb-2 sm:mb-3 drop-shadow-md">
                       {item.title}
                     </h2>
 
-                    <p className="text-sm sm:text-base text-gray-200 font-normal leading-relaxed max-w-xl mx-auto md:mx-0 drop-shadow-sm line-clamp-2 sm:line-clamp-3">
+                    <p className="text-sm sm:text-base text-gray-200 font-light leading-relaxed max-w-xl mx-auto md:mx-0 drop-shadow-sm line-clamp-2 sm:line-clamp-3">
                       {item.subtitle}
                     </p>
                   </motion.div>
@@ -186,7 +186,7 @@ export default function ApplicationsHeroAnimation() {
                     {/* Desktop / Tablet Vertical Text */}
                     <div className="hidden md:flex flex-col items-center justify-end h-full pb-8">
                       <span
-                        className="text-white text-base sm:text-lg lg:text-xl font-bold tracking-wide whitespace-nowrap drop-shadow-lg [writing-mode:vertical-rl] rotate-180"
+                        className="text-white text-base sm:text-lg lg:text-xl font-medium tracking-wide whitespace-nowrap drop-shadow-lg [writing-mode:vertical-rl] rotate-180"
                       >
                         {item.title}
                       </span>
@@ -194,7 +194,7 @@ export default function ApplicationsHeroAnimation() {
 
                     {/* Mobile Horizontal Text when collapsed */}
                     <div className="md:hidden flex items-center justify-between w-full">
-                      <span className="text-white text-sm font-semibold tracking-wide truncate">
+                      <span className="text-white text-sm font-medium tracking-wide truncate">
                         {item.title}
                       </span>
                       <span className="text-white/60 text-xs font-mono">

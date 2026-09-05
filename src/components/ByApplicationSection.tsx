@@ -147,7 +147,7 @@ export default function ByApplicationSection() {
       <Container>
         {/* Header Row - Left aligned with Navbar Logo */}
         <div className="flex flex-col items-start text-left mb-10 md:mb-14">
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-gray-900 leading-[1.15] tracking-tight mb-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 leading-[1.15] tracking-[-0.02em] mb-2">
             <ScrollTypewriterText
               text="By application"
               progress={smoothProgress}
@@ -155,7 +155,7 @@ export default function ByApplicationSection() {
               end={0.40}
             />
           </h2>
-          <p className="text-xs sm:text-sm text-gray-500 font-normal">
+          <p className="text-sm sm:text-base font-light text-gray-600 leading-relaxed">
             <ScrollTypewriterText
               text="Start with what your panel needs to do."
               progress={smoothProgress}
@@ -186,22 +186,22 @@ export default function ByApplicationSection() {
               {/* Card Content Body */}
               <div className="p-6 flex flex-col justify-between flex-1 bg-white">
                 <div>
-                  <span className="block text-base sm:text-lg font-bold text-[#e8b030] tracking-wide mb-1.5">
+                  <span className="block text-base sm:text-lg font-bold text-[#000000] tracking-wide mb-1.5">
                     {app.num}
                   </span>
 
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-snug mb-2">
+                  <h3 className="text-xl sm:text-2xl font-normal text-gray-900 leading-snug mb-2">
                     {app.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal mb-6">
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-light mb-6">
                     {app.description}
                   </p>
                 </div>
 
                 <Link
                   href={app.href}
-                  className="self-start text-xs font-bold text-[#58166e] hover:underline"
+                  className="self-start text-xs sm:text-sm font-light text-[#58166e] hover:underline"
                 >
                   View application
                 </Link>

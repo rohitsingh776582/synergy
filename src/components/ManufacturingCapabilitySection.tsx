@@ -144,7 +144,7 @@ export default function ManufacturingCapabilitySection() {
                   key={step.num}
                   className="bg-white border border-gray-200/90 rounded-none shadow-none p-4 flex flex-col justify-between min-h-[140px] sm:min-h-[155px]"
                 >
-                  <span className="text-xl sm:text-2xl font-bold text-[#e8b030] tracking-tight">
+                  <span className="text-xl sm:text-2xl font-bold text-[#000000] tracking-tight">
                     {step.num}
                   </span>
                   <h4 className="text-xs sm:text-sm font-bold text-gray-900 leading-snug">

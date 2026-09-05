@@ -56,43 +56,43 @@ export default async function ProjectDetailPage({ params }: Props) {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-6">
-                <span className="rounded-full bg-purple-100 px-3.5 py-1 text-xs font-bold text-[#5b176e]">
+                <span className="rounded-full bg-purple-100 px-3.5 py-1 text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#5b176e]">
                   {project.industry}
                 </span>
-                <h1 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
+                <h1 className="mt-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 tracking-tight leading-[1.12]">
                   {project.name}
                 </h1>
-                <p className="mt-4 text-base md:text-lg text-gray-600 leading-relaxed">
+                <p className="mt-4 text-base md:text-lg text-gray-600 font-light leading-relaxed">
                   {project.description}
                 </p>
 
                 {/* Key Metadata Stats */}
-                <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-white border border-gray-200 ">
+                <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-white border border-gray-200">
                   <div>
-                    <span className="text-xs font-semibold text-gray-500 block">Client</span>
-                    <span className="font-bold text-gray-900 text-xs sm:text-sm">{project.client}</span>
+                    <span className="text-xs font-light text-gray-500 block">Client</span>
+                    <span className="font-medium text-gray-900 text-xs sm:text-sm">{project.client}</span>
                   </div>
                   <div>
-                    <span className="text-xs font-semibold text-gray-500 block">Location</span>
-                    <span className="font-bold text-gray-900 text-xs sm:text-sm">{project.location}</span>
+                    <span className="text-xs font-light text-gray-500 block">Location</span>
+                    <span className="font-medium text-gray-900 text-xs sm:text-sm">{project.location}</span>
                   </div>
                   <div>
-                    <span className="text-xs font-semibold text-gray-500 block">Area Installed</span>
-                    <span className="font-bold text-gray-900 text-xs sm:text-sm">{project.areaInstalled}</span>
+                    <span className="text-xs font-light text-gray-500 block">Area Installed</span>
+                    <span className="font-medium text-gray-900 text-xs sm:text-sm">{project.areaInstalled}</span>
                   </div>
                   <div>
-                    <span className="text-xs font-semibold text-gray-500 block">Year</span>
-                    <span className="font-bold text-gray-900 text-xs sm:text-sm">{project.completionYear}</span>
+                    <span className="text-xs font-light text-gray-500 block">Year</span>
+                    <span className="font-medium text-gray-900 text-xs sm:text-sm">{project.completionYear}</span>
                   </div>
                 </div>
 
                 <div className="mt-8">
                   <Link
                     href="/quote"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#5b176e] px-7 py-3.5 text-base font-bold text-white hover:bg-[#461056] transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#5b176e] px-7 py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white hover:bg-[#461056] transition-all hover:scale-105"
                   >
                     <span>Request Similar Project Quote</span>
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
@@ -115,14 +115,14 @@ export default async function ProjectDetailPage({ params }: Props) {
         {/* Highlights */}
         <section className="py-20 bg-white">
           <Container>
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Key Engineering Highlights</h2>
+            <h2 className="text-3xl sm:text-4xl font-normal leading-[1.15] text-gray-900 mb-6">Key Engineering Highlights</h2>
             <div className="space-y-4">
               {project.highlights.map((highlight, idx) => (
                 <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-purple-50/70 border border-purple-100">
                   <div className="p-1 rounded-full bg-[#5b176e] text-white mt-0.5">
                     <Check className="w-4 h-4" />
                   </div>
-                  <span className="text-gray-800 font-semibold text-base">{highlight}</span>
+                  <span className="text-gray-800 font-light text-base">{highlight}</span>
                 </div>
               ))}
             </div>

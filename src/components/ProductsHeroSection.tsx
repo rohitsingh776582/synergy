@@ -90,7 +90,7 @@ export default function ProductsHeroSection() {
             {/* Tag */}
             <span
               data-animate-hero
-              className="text-[#58166e] text-xs sm:text-sm font-bold tracking-wide uppercase mb-4"
+              className="text-[#58166e] text-xs sm:text-sm font-semibold tracking-[0.12em] uppercase mb-3 sm:mb-4"
             >
               Our products
             </span>
@@ -98,7 +98,7 @@ export default function ProductsHeroSection() {
             {/* Heading */}
             <h1
               data-animate-hero
-              className="text-3xl sm:text-4xl lg:text-[3.2rem] font-bold text-gray-900 leading-[1.12] tracking-tight mb-5"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-gray-900 leading-[1.12] tracking-tight mb-5"
             >
               The right panel. <br className="hidden sm:inline" />
               A stronger build.
@@ -107,7 +107,7 @@ export default function ProductsHeroSection() {
             {/* Subtitle */}
             <p
               data-animate-hero
-              className="text-sm sm:text-base text-gray-600 font-normal leading-relaxed max-w-md mb-8"
+              className="mt-5 text-sm sm:text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md mb-8"
             >
               Roof, wall, cold storage and cleanroom panel systems.
             </p>
@@ -116,7 +116,7 @@ export default function ProductsHeroSection() {
             <div data-animate-hero>
               <Link
                 href="/quote"
-                className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#461058] text-white px-6 py-3 rounded-none text-sm font-semibold shadow-none transition-colors active:scale-95"
+                className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#461058] text-white px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-colors active:scale-95"
               >
                 Get a quote
               </Link>
