@@ -125,38 +125,49 @@ export default function Rotating3DCardDeckShowcase() {
 
       triggerRef.current = tl.scrollTrigger || null;
 
-      // Build sequential synchronous transitions between slides
+      // Build sequential synchronous transitions between slides (Zero ghosting / double-image overlap)
       for (let i = 0; i < totalSteps - 1; i++) {
         const currentImg = imgElements[i];
         const nextImg = imgElements[i + 1];
         const currentTxt = textElements[i];
         const nextTxt = textElements[i + 1];
+        const stepLabel = `step-${i}`;
 
-        // Fade out previous slide (image + text together)
-        if (currentImg && currentTxt) {
-          tl.to(
-            currentImg,
-            { opacity: 0, scale: 0.96, duration: 1 },
-            `step-${i}`
-          );
+        // Previous text fades out first
+        if (currentTxt) {
           tl.to(
             currentTxt,
-            { opacity: 0, y: -20, pointerEvents: "none", duration: 0.8 },
-            `step-${i}`
+            { opacity: 0, y: -18, pointerEvents: "none", duration: 0.35 },
+            stepLabel
           );
         }
 
-        // Fade in next slide immediately in lockstep
-        if (nextImg && nextTxt) {
-          tl.to(
-            nextImg,
-            { opacity: 1, scale: 1, duration: 1 },
-            `step-${i}`
-          );
-          tl.to(
+        // Next text fades in cleanly without overlapping
+        if (nextTxt) {
+          tl.fromTo(
             nextTxt,
-            { opacity: 1, y: 0, pointerEvents: "auto", duration: 1 },
-            `step-${i}`
+            { opacity: 0, y: 18, pointerEvents: "none" },
+            { opacity: 1, y: 0, pointerEvents: "auto", duration: 0.45 },
+            `${stepLabel}+=0.35`
+          );
+        }
+
+        // Next image fades in smoothly over solid current image (No transparency ghosting)
+        if (nextImg) {
+          tl.fromTo(
+            nextImg,
+            { opacity: 0, scale: 1.06 },
+            { opacity: 1, scale: 1, duration: 1 },
+            stepLabel
+          );
+        }
+
+        // Turn off previous image only after next image fully covers it
+        if (currentImg) {
+          tl.to(
+            currentImg,
+            { opacity: 0, duration: 0.01 },
+            `${stepLabel}+=0.99`
           );
         }
       }

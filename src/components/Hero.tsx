@@ -141,7 +141,7 @@ export default function Hero() {
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
         >
           {/* Left Column: Left-aligned Active Content Display */}
-          <div className="lg:col-span-8 flex flex-col items-start text-left min-h-[320px] justify-center order-2 lg:order-1">
+          <div className="lg:col-span-8 flex flex-col items-start text-left min-h-[320px] justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activePillar.id}
@@ -190,8 +190,8 @@ export default function Hero() {
             </AnimatePresence>
           </div>
 
-          {/* Right Column: Glassmorphic Core Pillars Navigation Card */}
-          <div className="lg:col-span-4 flex justify-center lg:justify-end order-1 lg:order-2">
+          {/* Right Column: Glassmorphic Core Pillars Navigation Card (Hidden on small screens, visible on desktop) */}
+          <div className="hidden lg:flex lg:col-span-4 justify-end">
             <div className="w-full max-w-sm lg:w-80 bg-white/15 backdrop-blur-md border border-white/30 p-5 sm:p-6 shadow-xl">
               <div className="text-[11px] sm:text-xs font-mono font-bold tracking-[0.25em] text-[#e9d5ff] uppercase mb-4 px-2">
                 CORE PILLARS

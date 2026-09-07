@@ -77,7 +77,7 @@ const rows = [
     titleLines: ["Pan India Presence and", "strong network"],
     description:
       "From Kashmir to Kanyakumari our distribution and installation network covers every corner of India, backed by regional warehouses and a dedicated project execution team.",
-    image: "/puf_factory.png",
+    image: "/WhyChooseUs/india.png",
     alt: "Pan India Presence and strong network",
   },
   {

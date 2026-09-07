@@ -11,11 +11,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function AboutHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const leftCol = leftColRef.current;
-    const card = cardRef.current;
     if (!leftCol) return;
 
     const ctx = gsap.context(() => {
@@ -27,14 +25,6 @@ export default function AboutHero() {
         y: 45,
         willChange: "transform, opacity",
       });
-
-      if (card) {
-        gsap.set(card, {
-          opacity: 0,
-          y: 30,
-          willChange: "transform, opacity",
-        });
-      }
 
       // Smooth upward entrance timeline
       const tl = gsap.timeline({
@@ -48,18 +38,6 @@ export default function AboutHero() {
         stagger: 0.12,
         delay: 0.1,
       });
-
-      if (card) {
-        tl.to(
-          card,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.85,
-          },
-          "-=0.5"
-        );
-      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -135,28 +113,6 @@ export default function AboutHero() {
             sizes="(max-width: 1024px) 100vw, 60vw"
             className="object-cover object-center"
           />
-
-          {/* Top-Right Floating White Card */}
-          <div
-            ref={cardRef}
-            className="absolute top-28 sm:top-32 lg:top-36 right-5 md:right-10 lg:right-[50px] z-20 bg-white rounded-none shadow-2xl p-5 border border-white/40 max-w-xs text-gray-900"
-          >
-            <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-3">
-              Crafted with precision
-            </h3>
-
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="bg-[#3C094C] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
-                PUF
-              </span>
-              <span className="bg-[#3C094C] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
-                PIR
-              </span>
-              <span className="bg-[#3C094C] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
-                Rockwool
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
