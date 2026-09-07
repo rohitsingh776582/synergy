@@ -53,7 +53,7 @@ export default function AboutHero() {
         {/* Left Column: Dark Purple Content - Left padding matches Navbar Container alignment (px-5 md:px-10 lg:px-[50px]) */}
         <div
           ref={leftColRef}
-          className="lg:col-span-5 bg-[#3c094c] py-12 sm:py-16 lg:py-20 pl-5 md:pl-10 lg:pl-[50px] pr-8 sm:pr-12 lg:pr-16 flex flex-col justify-center items-start text-left z-10"
+          className="lg:col-span-5 bg-[#3c094c] pt-28 pb-12 sm:pt-32 sm:pb-16 lg:py-20 pl-5 md:pl-10 lg:pl-[50px] pr-8 sm:pr-12 lg:pr-16 flex flex-col justify-center items-start text-left z-10"
         >
           {/* Tag */}
           <span
