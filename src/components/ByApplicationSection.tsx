@@ -106,7 +106,7 @@ const applications = [
     num: "03",
     title: "Fire insulation",
     description: "Specify a tested fire-rated panel assembly.",
-    image: "/Panels/Generating_fire_insulation_image_2K_202608181424.jpeg",
+    image: "/images/applications/fire_insulation.jpg",
     href: "/applications",
   },
   {

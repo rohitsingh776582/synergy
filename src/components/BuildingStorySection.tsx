@@ -2,7 +2,6 @@
 
 import React, { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
-import { Info } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
@@ -116,19 +115,6 @@ export default function BuildingStorySection() {
               This is where the verified story of our founding, growth and
               insulation business will appear.
             </p>
-
-            {/* Info Note Row */}
-            <div
-              data-animate-item
-              className="flex items-start gap-3 pt-2"
-            >
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[#d99e2b]">
-                <Info className="h-4 w-4" strokeWidth={1.8} />
-              </span>
-              <p className="text-xs sm:text-sm text-gray-600 font-medium leading-tight">
-                Founding details and group relationship to confirm.
-              </p>
-            </div>
           </div>
 
           {/* Right Column: Team Image (animates from bottom-right corner: transform-origin 100% 100%, scale 0 to 1) */}

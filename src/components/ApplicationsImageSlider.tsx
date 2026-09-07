@@ -43,7 +43,7 @@ const SLIDES: ApplicationSlide[] = [
     subtitle: "Certified Structural Safety & Thermal Barrier",
     description:
       "High-density fire-retardant insulation core designed to withstand extreme thermal exposure and satisfy stringent building safety codes.",
-    src: "/Panels/Generating_fire_insulation_image_2K_202608181424.jpeg",
+    src: "/images/applications/fire_insulation.jpg",
   },
   {
     id: 4,

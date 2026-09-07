@@ -54,7 +54,7 @@ const cards = [
     title: "PIR Fire-Rated Thermal Barrier",
     description:
       "FM-approved polyisocyanurate thermal barrier joint tested for 120-minute structural fire endurance and extreme heat protection.",
-    image: "/Panels/Generating_fire_insulation_image_2K_202608181424.jpeg",
+    image: "/images/applications/fire_insulation.jpg",
     width: "w-[479px]",
     height: "h-[556px]",
     top: "top-[200px]",

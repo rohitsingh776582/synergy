@@ -171,12 +171,7 @@ function ProjectShowcase({ project }: { project: Project }) {
       </div>
 
       <div className="flex flex-col">
-        <span className="inline-flex w-fit items-center gap-2 bg-[#5b176e]/10 px-3 py-1 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#5b176e]">
-          <span className="h-1.5 w-1.5 bg-[#5b176e]" />
-          {project.productBadge}
-        </span>
-
-        <h2 ref={titleRef} className="mt-2.5 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.15] tracking-[-0.02em] text-black">
+        <h2 ref={titleRef} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.15] tracking-[-0.02em] text-black">
           {preprocessedWords.map((word, wordIdx) => (
             <span
               key={wordIdx}

@@ -34,7 +34,7 @@ const INTRO_IMAGES = [
         num: "03",
         title: "Fire Insulation Shield",
         tag: "Thermal & Fire Barrier",
-        src: "/Panels/Generating_fire_insulation_image_2K_202608181424.jpeg",
+        src: "/images/applications/fire_insulation.jpg",
         link: "/applications/industrial",
     },
     {
@@ -247,7 +247,10 @@ export default function ApplicationsHeroAnimationss() {
                         <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
 
                             {/* Headline */}
-                            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-gray-900 leading-[1.12] tracking-tight mb-5">
+                            <h1
+                                style={{ color: "#0D1828" }}
+                                className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-normal font-[400] text-[#0D1828] leading-[1.12] tracking-normal mb-5"
+                            >
                                 {HEADLINE_LINES.map((line, lineIdx) => (
                                     <div key={lineIdx} className="overflow-hidden pb-1 sm:pb-2">
                                         <motion.span
@@ -261,7 +264,8 @@ export default function ApplicationsHeroAnimationss() {
                                                 delay: stage >= 4 ? lineIdx * 0.12 : 0,
                                                 ease: [0.215, 0.61, 0.355, 1],
                                             }}
-                                            className="block whitespace-nowrap"
+                                            style={{ color: "#0D1828" }}
+                                            className="block whitespace-nowrap text-[#0D1828]"
                                         >
                                             {line}
                                         </motion.span>

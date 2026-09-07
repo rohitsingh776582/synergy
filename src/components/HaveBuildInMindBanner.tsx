@@ -111,7 +111,7 @@ export default function HaveBuildInMindBanner() {
             <Link
               data-animate-right
               href="/quote"
-              className="inline-flex items-center justify-center bg-[#000000] hover:bg-black/80 text-white px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-colors active:scale-95"
+              className="inline-flex items-center justify-center bg-[#58166e] hover:bg-[#471159] text-white border border-[#6b1e84] px-7 py-3.5 rounded-none text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-none transition-colors active:scale-95"
             >
               Get a quote
             </Link>

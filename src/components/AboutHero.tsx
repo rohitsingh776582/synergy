@@ -146,13 +146,13 @@ export default function AboutHero() {
             </h3>
 
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="bg-[#000000] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
+              <span className="bg-[#3C094C] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
                 PUF
               </span>
-              <span className="bg-[#000000] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
+              <span className="bg-[#3C094C] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
                 PIR
               </span>
-              <span className="bg-[#000000] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
+              <span className="bg-[#3C094C] text-white px-3.5 py-1.5 rounded-none text-xs font-bold tracking-wide">
                 Rockwool
               </span>
             </div>

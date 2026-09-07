@@ -11,13 +11,11 @@ gsap.registerPlugin(ScrollTrigger);
 export default function TalkToTeamBanner() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
-  const goldLineRef = useRef<HTMLDivElement>(null);
   const rightColRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const leftCol = leftColRef.current;
-    const goldLine = goldLineRef.current;
     const rightCol = rightColRef.current;
     if (!section || !leftCol) return;
 
@@ -30,15 +28,6 @@ export default function TalkToTeamBanner() {
         opacity: 0,
         willChange: "transform, opacity",
       });
-
-      if (goldLine) {
-        gsap.set(goldLine, {
-          scaleX: 0,
-          transformOrigin: "left center",
-          opacity: 0,
-          willChange: "transform, opacity",
-        });
-      }
 
       if (rightCol) {
         gsap.set(rightCol, {
@@ -67,21 +56,7 @@ export default function TalkToTeamBanner() {
         stagger: 0.12,
       });
 
-      // 2. Gold line expands left-to-right
-      if (goldLine) {
-        tl.to(
-          goldLine,
-          {
-            scaleX: 1,
-            opacity: 1,
-            duration: 0.85,
-            ease: "power2.out",
-          },
-          "-=0.6"
-        );
-      }
-
-      // 3. Action buttons fade in
+      // 2. Action buttons fade in
       if (rightCol) {
         tl.to(
           rightCol,
@@ -119,12 +94,6 @@ export default function TalkToTeamBanner() {
               behind the panels.
             </h2>
 
-            {/* Gold Accent Underline */}
-            <div
-              ref={goldLineRef}
-              className="w-12 h-[3px] bg-[#000000] mb-3 rounded-none"
-            />
-
             {/* Subtitle */}
             <p
               data-animate-text
@@ -133,9 +102,6 @@ export default function TalkToTeamBanner() {
               Discuss your requirements with our engineering and sales team.
             </p>
           </div>
-
-          {/* Vertical Separator Line (visible on desktop) */}
-          <div className="hidden lg:block h-16 w-[1px] bg-[#000000]/50 shrink-0 mx-2" />
 
           {/* Right Column: Action Buttons aligned with Navbar Start Your Quote */}
           <div
