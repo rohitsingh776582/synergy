@@ -370,7 +370,7 @@ export default function ApplicationsHeroAnimationss() {
                         {/* Bottom Left: Copyright */}
                         <div className="flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
-                            <span>© 2026 SYNERGY PUF INSULATION </span>
+                            <span>© 2026 SYNERGY PUF INSULATION</span>
                         </div>
 
                         {/* Bottom Center: Address */}
