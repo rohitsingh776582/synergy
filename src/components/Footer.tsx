@@ -46,11 +46,11 @@ export default function Footer() {
           {/* Upper Footer Grid */}
 
 
-          {/* Upper Footer Grid - 5 Equal Spaced Columns */}
-          <div className="flex flex-col sm:flex-row flex-wrap md:flex-nowrap justify-between items-start gap-6 lg:gap-8 pb-16">
+          {/* Upper Footer Grid - 2 columns on mobile, 5 columns on desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-row md:justify-between md:items-start gap-x-6 gap-y-10 lg:gap-8 pb-16 pr-2 md:pr-0">
 
             {/* Column 1 - Contact Info & Socials */}
-            <div className="space-y-4 shrink-0">
+            <div className="col-span-2 sm:col-span-3 md:col-span-1 md:shrink-0 space-y-4">
               {/* Email */}
               <div className="flex items-center gap-3">
                 <div className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center shrink-0">
@@ -140,7 +140,7 @@ export default function Footer() {
             </div>
 
             {/* Column 2 - Popular Searches */}
-            <div>
+            <div className="col-span-1">
               <h3 className="text-xs font-extrabold uppercase tracking-wider text-gray-800 mb-4">
                 POPULAR SEARCHES
               </h3>
@@ -194,7 +194,7 @@ export default function Footer() {
             </div>
 
             {/* Column 3 - Group Companies */}
-            <div>
+            <div className="col-span-1 justify-self-end md:justify-self-auto">
               <h3 className="text-xs font-extrabold uppercase tracking-wider text-gray-800 mb-4">
                 GROUP COMPANIES
               </h3>
@@ -227,7 +227,7 @@ export default function Footer() {
             </div>
 
             {/* Column 4 - Quick Links */}
-            <div>
+            <div className="col-span-1">
               <h3 className="text-xs font-extrabold uppercase tracking-wider text-gray-800 mb-4">
                 QUICK LINKS
               </h3>
@@ -257,9 +257,8 @@ export default function Footer() {
             </div>
 
             {/* Column 5 - A Venture By */}
-            <div className="flex flex-col items-start shrink-0">
+            <div className="col-span-1 justify-self-end md:justify-self-auto flex flex-col items-start shrink-0">
               <div className="w-fit">
-
                 <h3 className="text-xs font-extrabold uppercase tracking-wider text-gray-800 mb-3">
                   A VENTURE BY
                 </h3>
@@ -271,7 +270,6 @@ export default function Footer() {
                   height={40}
                   className="h-7 w-auto object-contain object-left sm:h-8"
                 />
-
               </div>
             </div>
 
@@ -293,18 +291,17 @@ export default function Footer() {
             </div>
 
             {/* RIGHT SIDE */}
-            {/* Right edge is aligned with the right edge of Start your quote */}
-            <div className="md:col-span-7 flex justify-end">
-              <div className="w-full flex flex-col sm:flex-row justify-end items-start gap-8 sm:gap-12">
+            {/* Right edge is aligned with the right edge of Start your quote on desktop, 2 columns on mobile */}
+            <div className="md:col-span-7 flex justify-start md:justify-end">
+              <div className="w-full flex flex-row justify-between items-start gap-3 sm:gap-8 md:justify-end md:gap-12 pr-2 md:pr-0">
 
                 {/* Corporate Office */}
-
                 <div className="text-xs sm:text-sm font-medium text-gray-600">
-                  <div className="flex items-start gap-2.5">
-                    <MapPin className="w-5 h-5 text-gray-900 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-1.5 sm:gap-2.5">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900 shrink-0 mt-0.5" />
 
                     <div>
-                      <span className="font-bold text-gray-900 block text-base mb-1">
+                      <span className="font-bold text-gray-900 block text-sm sm:text-base mb-1 whitespace-nowrap">
                         Corporate Office
                       </span>
 
@@ -319,14 +316,13 @@ export default function Footer() {
                   </div>
                 </div>
 
-
                 {/* Manufacturing Unit */}
                 <div className="text-xs sm:text-sm font-medium text-gray-600">
-                  <div className="flex items-start gap-2.5">
-                    <MapPin className="w-5 h-5 text-gray-900 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-1.5 sm:gap-2.5">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900 shrink-0 mt-0.5" />
 
                     <div>
-                      <span className="font-bold text-gray-900 block text-base mb-1">
+                      <span className="font-bold text-gray-900 block text-sm sm:text-base mb-1 whitespace-nowrap">
                         Manufacturing Unit
                       </span>
 

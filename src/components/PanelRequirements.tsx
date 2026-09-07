@@ -425,15 +425,18 @@ export default function PanelRequirements() {
       <Container>
         <div
           ref={buttonsRef}
-          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 will-change-transform"
+          className="mt-12 flex flex-row items-center justify-center gap-3 sm:gap-4 will-change-transform"
         >
           <button
             type="button"
             onClick={() => setActivePanel("roof")}
             className={`
-              px-8
-              py-3.5
-              text-base
+              px-5
+              sm:px-8
+              py-3
+              sm:py-3.5
+              text-sm
+              sm:text-base
               font-light
               transition-all
               duration-300
@@ -451,9 +454,12 @@ export default function PanelRequirements() {
             type="button"
             onClick={() => setActivePanel("wall")}
             className={`
-              px-8
-              py-3.5
-              text-base
+              px-5
+              sm:px-8
+              py-3
+              sm:py-3.5
+              text-sm
+              sm:text-base
               font-light
               transition-all
               duration-300

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, RotateCcw, Smartphone } from "lucide-react";
+import { ArrowUpRight, RotateCcw } from "lucide-react";
 import Container from "./Container";
 
 // Accent color constant: #FF6542
@@ -75,21 +75,6 @@ export default function ApplicationsHeroAnimationss() {
     const [stage, setStage] = useState<2 | 3 | 4 | 5>(2);
     const [activeSlideIndex, setActiveSlideIndex] = useState(0);
     const [layoutMode, setLayoutMode] = useState<"1" | "2">("1");
-    const [isPortraitMobile, setIsPortraitMobile] = useState(false);
-
-    // Screen orientation detection
-    useEffect(() => {
-        const checkOrientation = () => {
-            if (typeof window !== "undefined") {
-                setIsPortraitMobile(
-                    window.innerWidth < 768 && window.innerHeight > window.innerWidth
-                );
-            }
-        };
-        checkOrientation();
-        window.addEventListener("resize", checkOrientation);
-        return () => window.removeEventListener("resize", checkOrientation);
-    }, []);
 
     // Stage 2: Rapid Flash Slideshow Intro (Slower & smoother speed)
     useEffect(() => {
@@ -132,22 +117,6 @@ export default function ApplicationsHeroAnimationss() {
 
     return (
         <section className="relative w-full min-h-[600px] bg-[#F7F7F9] text-gray-900 overflow-hidden font-sans select-none">
-            {/* Mobile Orientation Alert */}
-            {isPortraitMobile && (
-                <div className="absolute top-4 inset-x-4 z-50 bg-white/95 border border-[#FF6542]/40 rounded-lg p-3 backdrop-blur-md flex items-center justify-between text-xs text-gray-700 shadow-xl">
-                    <div className="flex items-center gap-2">
-                        <Smartphone className="w-4 h-4 text-[#FF6542] animate-bounce" />
-                        <span>Optimal experience in landscape orientation</span>
-                    </div>
-                    <button
-                        onClick={() => setIsPortraitMobile(false)}
-                        className="text-[10px] uppercase tracking-wider text-gray-500 hover:text-black px-2 py-1 bg-gray-100 rounded"
-                    >
-                        Dismiss
-                    </button>
-                </div>
-            )}
-
             {/* STAGE 2 — Fullscreen Rapid Flash Intro */}
             <AnimatePresence mode="wait">
                 {stage === 2 && (

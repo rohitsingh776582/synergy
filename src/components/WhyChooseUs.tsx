@@ -52,7 +52,7 @@ function ScrollLetter({
 }
 
 const subscribeReducedMotion = (callback: () => void) => {
-  if (typeof window === "undefined") return () => {};
+  if (typeof window === "undefined") return () => { };
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   mediaQuery.addEventListener("change", callback);
   return () => mediaQuery.removeEventListener("change", callback);
@@ -268,9 +268,8 @@ export default function WhyChooseUs() {
                 rowRefs.current[index] = el;
               }}
               data-stack-row
-              className={`bg-white py-12 will-change-transform ${
-                index === rows.length - 1 ? "" : "border-b border-[#9c84a7]"
-              }`}
+              className={`bg-white py-12 will-change-transform ${index === rows.length - 1 ? "" : "border-b border-[#9c84a7]"
+                }`}
               style={{
                 position: isReducedMotion ? "relative" : "sticky",
                 top: isReducedMotion
@@ -288,15 +287,15 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Center Description */}
-                <div className="lg:col-span-4 flex justify-center row-desc will-change-transform">
-                  <p className="text-sm sm:text-base font-light text-gray-600 leading-relaxed max-w-md">
+                <div className="lg:col-span-4 flex lg:justify-center row-desc will-change-transform">
+                  <p className="w-full text-sm sm:text-base font-light text-gray-600 leading-relaxed max-w-md">
                     {row.description}
                   </p>
                 </div>
 
                 {/* Right Image */}
-                <div className="lg:col-span-4 flex justify-end row-img will-change-transform">
-                  <div className="aspect-[4/3] w-full max-w-xs sm:max-w-sm bg-black relative overflow-hidden group">
+                <div className="lg:col-span-4 flex lg:justify-end row-img will-change-transform">
+                  <div className="aspect-[4/3] w-full max-w-md lg:max-w-sm bg-black relative overflow-hidden group">
                     <Image
                       src={row.image}
                       alt={row.alt}

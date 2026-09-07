@@ -284,41 +284,96 @@ export default function IndustriesWeServeSection() {
 
         {/* Tabbed Interactive Grid */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start lg:gap-10">
-          {/* Left Vertical Industry Tab List with Hover Effect */}
-          <div data-stagger="0.05" className="lg:col-span-4 flex flex-col gap-1.5">
+          {/* Left Vertical Industry Tab List with Hover Effect & Mobile Inline Image */}
+          <div data-stagger="0.05" className="lg:col-span-4 flex flex-col gap-2 lg:gap-1.5">
             {industriesData.map((item) => {
               const Icon = item.icon;
               const isSelected = selectedId === item.id;
 
               return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setSelectedId(item.id)}
-                  onMouseEnter={() => setSelectedId(item.id)}
-                  className={`group flex items-center gap-3.5 px-4 py-3.5 text-left transition-all duration-200 rounded-none ${
-                    isSelected
-                      ? "bg-purple-50/90 border border-purple-200/90 text-gray-900 font-semibold"
-                      : "bg-transparent hover:bg-gray-50/90 text-gray-600 font-normal hover:text-gray-900 border border-transparent"
-                  }`}
-                >
-                  <div
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center transition-colors duration-200 ${
+                <div key={item.id} className="flex flex-col">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedId(item.id)}
+                    onMouseEnter={() => setSelectedId(item.id)}
+                    className={`group flex items-center gap-3.5 px-4 py-3.5 text-left transition-all duration-200 rounded-none w-full ${
                       isSelected
-                        ? "bg-purple-100 text-[#5b176e]"
-                        : "bg-gray-100 text-gray-500 group-hover:bg-purple-100/70 group-hover:text-[#5b176e]"
+                        ? "bg-purple-50/90 border border-purple-200/90 text-gray-900 font-semibold"
+                        : "bg-transparent hover:bg-gray-50/90 text-gray-600 font-normal hover:text-gray-900 border border-transparent"
                     }`}
                   >
-                    <Icon className="h-4 w-4" />
-                  </div>
-                  <span className="text-sm sm:text-base tracking-tight">{item.name}</span>
-                </button>
+                    <div
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center transition-colors duration-200 ${
+                        isSelected
+                          ? "bg-purple-100 text-[#5b176e]"
+                          : "bg-gray-100 text-gray-500 group-hover:bg-purple-100/70 group-hover:text-[#5b176e]"
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <span className="text-sm sm:text-base tracking-tight">{item.name}</span>
+                  </button>
+
+                  {/* Small Screen: Image appears directly under the selected text */}
+                  <AnimatePresence>
+                    {isSelected && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.35, ease: "easeInOut" }}
+                        className="lg:hidden overflow-hidden w-full"
+                      >
+                        <div className="relative w-full h-[280px] sm:h-[340px] overflow-hidden bg-gray-100 border border-gray-200/80 my-2">
+                          <Image
+                            src={item.imageSrc}
+                            alt={item.name}
+                            fill
+                            className="object-cover object-center select-none"
+                            sizes="100vw"
+                          />
+
+                          {/* Gradient Mask Overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+
+                          {/* Floating Industry Badge & CTA */}
+                          <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-col items-start gap-3">
+                            <div className="flex flex-col gap-1 text-white">
+                              <div className="flex items-center gap-2">
+                                <div className="flex h-6 w-6 items-center justify-center bg-white/20 backdrop-blur-md text-white">
+                                  <Icon className="h-3.5 w-3.5" />
+                                </div>
+                                <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-white/80">
+                                  APPLICATION SECTOR
+                                </span>
+                              </div>
+                              <h3 className="text-lg sm:text-xl font-normal tracking-tight text-white">
+                                {item.name}
+                              </h3>
+                              <p className="text-xs text-gray-200 line-clamp-2 leading-relaxed font-light">
+                                {item.description}
+                              </p>
+                            </div>
+
+                            <Link
+                              href="/quote"
+                              className="inline-flex items-center gap-2 shrink-0 bg-[#58166e] hover:bg-[#461056] text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:gap-3"
+                            >
+                              <span>EXPLORE SECTOR</span>
+                              <ArrowRight className="h-3 w-3" />
+                            </Link>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               );
             })}
           </div>
 
-          {/* Right Selected Industry Image Stage (Displays Image corresponding to selected left-side text item) */}
-          <div className="lg:col-span-8 relative w-full h-[450px] sm:h-[520px] lg:h-[580px] overflow-hidden bg-gray-100 border border-gray-200/80">
+          {/* Right Selected Industry Image Stage (Desktop only) */}
+          <div className="hidden lg:block lg:col-span-8 relative w-full h-[450px] sm:h-[520px] lg:h-[580px] overflow-hidden bg-gray-100 border border-gray-200/80">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndustry.id}
