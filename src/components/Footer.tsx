@@ -38,10 +38,11 @@ export default function Footer() {
       className="relative w-full overflow-hidden bg-[#e6e6e8] pt-16 sm:pt-24 lg:pt-32"
     >
       <motion.footer
-        style={{ y, opacity }}
-        className="bg-[#e6e6e8] pt-12 text-gray-700 font-sans md:pt-14 will-change-transform transform-gpu"
+        style={{ opacity }}
+        className="bg-[#e6e6e8] pt-12 text-gray-700 font-sans md:pt-14"
       >
-        <Container>
+        <motion.div style={{ y }}>
+          <Container>
 
           {/* Upper Footer Grid */}
 
@@ -342,9 +343,10 @@ export default function Footer() {
           </div>
 
         </Container>
+        </motion.div>
 
         {/* Copyright Bar */}
-        <div className="bg-[#4d135d] text-white py-3.5 text-xs font-medium">
+        <div className="relative bg-[#4d135d] text-white py-3.5 text-xs font-medium shadow-[0_20px_0_0_#4d135d]">
           <Container className="flex flex-col sm:flex-row justify-between items-center gap-2">
 
             <div>
