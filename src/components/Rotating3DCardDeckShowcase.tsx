@@ -246,7 +246,7 @@ export default function Rotating3DCardDeckShowcase() {
                   key={idx}
                   onClick={() => goToSlide(idx)}
                   className={`h-2 rounded-full transition-all duration-200 cursor-pointer ${idx === activeStepIndex
-                    ? "w-6 bg-emerald-400"
+                    ? "w-6 bg-[#3C094C]"
                     : "w-2 bg-white/40 hover:bg-white/70"
                     }`}
                   aria-label={`Go to slide ${idx + 1}`}
@@ -257,7 +257,7 @@ export default function Rotating3DCardDeckShowcase() {
             {/* Top Right Controls & Arrows */}
             <div className="flex items-center gap-3">
               <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-gray-200 bg-black/50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20">
-                <Globe className="w-3.5 h-3.5 text-emerald-400" />
+                <Globe className="w-3.5 h-3.5 text-purple-300" />
                 <span className="uppercase font-semibold">{activeCard.step} / 05</span>
               </div>
 
@@ -290,9 +290,6 @@ export default function Rotating3DCardDeckShowcase() {
                 style={{ willChange: "transform, opacity" }}
                 className="absolute flex flex-col items-start text-left"
               >
-                <span className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-emerald-300 uppercase mb-2">
-                  {card.tagline}
-                </span>
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight text-white leading-[1.12]">
                   {card.title}
                 </h2>

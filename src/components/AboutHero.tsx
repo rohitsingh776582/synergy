@@ -47,13 +47,13 @@ export default function AboutHero() {
     <section
       id="about-hero"
       ref={containerRef}
-      className="w-full bg-[#3c094c] font-sans text-white overflow-hidden"
+      className="w-full min-h-screen min-h-[100dvh] lg:h-screen bg-[#3c094c] font-sans text-white overflow-hidden flex flex-col"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px] lg:min-h-[580px]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 min-h-screen min-h-[100dvh] lg:min-h-0 lg:h-full w-full">
         {/* Left Column: Dark Purple Content - Left padding matches Navbar Container alignment (px-5 md:px-10 lg:px-[50px]) */}
         <div
           ref={leftColRef}
-          className="lg:col-span-5 bg-[#3c094c] pt-28 pb-12 sm:pt-32 sm:pb-16 lg:py-20 pl-5 md:pl-10 lg:pl-[50px] pr-8 sm:pr-12 lg:pr-16 flex flex-col justify-center items-start text-left z-10"
+          className="lg:col-span-5 bg-[#3c094c] pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-24 lg:pb-12 pl-5 md:pl-10 lg:pl-[50px] pr-8 sm:pr-12 lg:pr-16 flex flex-col justify-center items-start text-left z-10 h-full"
         >
           {/* Tag */}
           <span
@@ -104,7 +104,7 @@ export default function AboutHero() {
         </div>
 
         {/* Right Column: Hero Image with Floating White Card */}
-        <div className="lg:col-span-7 relative min-h-[380px] lg:min-h-full w-full bg-gray-900">
+        <div className="lg:col-span-7 relative min-h-[380px] lg:min-h-0 w-full h-full bg-gray-900">
           <Image
             src="/images/HeroSection/DJI_20260729155134_0345_D.JPG.jpeg"
             alt="Synergy PUF Industrial Facility"

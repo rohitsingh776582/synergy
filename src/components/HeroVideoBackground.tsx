@@ -21,25 +21,6 @@ export default function HeroVideoBackground({ src }: HeroVideoBackgroundProps) {
     if (!container) return;
 
     const ctx = gsap.context(() => {
-      // Set initial state matching prompt exact requirements:
-      // opacity: 0; scale: 1.08; clip-path: inset(0 100% 0 0);
-      gsap.set(container, {
-        opacity: 0,
-        scale: 1.08,
-        clipPath: "inset(0 100% 0 0)",
-        force3D: true,
-      });
-
-      // Animate to: opacity: 1; scale: 1; clip-path: inset(0 0% 0 0); with smooth cinematic easing
-      gsap.to(container, {
-        opacity: 1,
-        scale: 1,
-        clipPath: "inset(0 0% 0 0)",
-        duration: 1.8,
-        ease: "power3.inOut",
-        delay: 0.2,
-      });
-
       // Hero image/video subtle scroll parallax movement (small translate movement)
       const heroPin = document.getElementById("home-hero");
       gsap.to(container, {

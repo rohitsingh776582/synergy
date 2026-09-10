@@ -51,8 +51,9 @@ export default function ContactHero() {
 
   return (
     <section
+      id="contact-hero"
       ref={containerRef}
-      className="relative flex min-h-[60vh] sm:min-h-[70vh] w-full flex-col justify-center overflow-hidden bg-gray-900 py-32 sm:py-40 md:py-48 text-left text-white"
+      className="relative flex min-h-screen min-h-[100dvh] lg:h-screen w-full flex-col justify-center overflow-hidden bg-gray-900 pt-28 pb-16 sm:pt-36 sm:pb-20 text-left text-white"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">

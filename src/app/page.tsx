@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero";
 import HeroVideoBackground from "@/components/HeroVideoBackground";
-import IntroLoader from "@/components/IntroLoader";
+import PUFLoader from "@/components/PUFLoader";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import WhatsInsideMatters from "@/components/WhatsInsideMatters";
 import TrustedBy from "@/components/TrustedBy";
@@ -17,7 +17,7 @@ const HERO_VIDEO = "/video/PUF.mp4";
 export default function Home() {
   return (
     <div className="relative bg-white font-sans text-gray-900 antialiased selection:bg-[#5b176e] selection:text-white">
-      <IntroLoader />
+      <PUFLoader />
       <div className="relative z-0">
         <HeroVideoBackground src={HERO_VIDEO} />
 

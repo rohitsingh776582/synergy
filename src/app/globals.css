@@ -130,3 +130,172 @@ body {
 nextjs-portal {
   display: none !important;
 }
+
+/* PUF Loader */
+.puf-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  overflow: hidden;
+}
+
+/* Subtle brand glow */
+.puf-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: rgba(86, 26, 98, 0.08);
+
+  filter: blur(100px);
+
+  animation: pufGlow 3s ease-in-out infinite;
+}
+
+@keyframes pufGlow {
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+.puf-loader-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(360px, 75vw);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo */
+.puf-logo-wrapper {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  animation: logoReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.puf-logo {
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  filter: drop-shadow(
+    0 12px 30px rgba(86, 26, 98, 0.12)
+  );
+}
+
+@keyframes logoReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Progress */
+.puf-progress-container {
+  width: 100%;
+  height: 3px;
+
+  margin-top: 42px;
+
+  background: rgba(126, 127, 128, 0.25);
+
+  overflow: hidden;
+}
+
+.puf-progress {
+  height: 100%;
+
+  background: #561a62;
+
+  position: relative;
+
+  transition: width 0.05s linear;
+}
+
+.puf-progress::after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  top: 50%;
+
+  width: 90px;
+  height: 3px;
+
+  transform: translateY(-50%);
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.9)
+  );
+
+  filter: blur(2px);
+}
+
+/* Loading text */
+.puf-loading-text {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 12px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 3px;
+
+  color: #7e7f80;
+}
+
+.puf-loading-text span:last-child {
+  color: #561a62;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .puf-loader-content {
+    width: 82vw;
+  }
+
+  .puf-progress-container {
+    margin-top: 28px;
+  }
+
+  .puf-loading-text {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+}
