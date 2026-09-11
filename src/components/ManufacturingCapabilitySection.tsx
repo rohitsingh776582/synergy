@@ -1,13 +1,52 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import Container from "./Container";
 
-gsap.registerPlugin(ScrollTrigger);
+const MANUFACTURING_WORDS = ["Manufacturing", "&", "capability"];
+
+let manufacturingCounter = 0;
+const PREPROCESSED_MANUFACTURING = MANUFACTURING_WORDS.map((word) =>
+  word.split("").map((char) => ({
+    char,
+    index: manufacturingCounter++,
+  }))
+);
+const TOTAL_MANUFACTURING_CHARS = manufacturingCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.05;
+  const endScroll = 0.85;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.5;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-16, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
 
 const specs = [
   { label: "Plant floor area", value: "To confirm" },
@@ -24,38 +63,17 @@ const processSteps = [
 
 export default function ManufacturingCapabilitySection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
 
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    const title = titleRef.current;
-    if (!section || !title) return;
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 92%", "start 32%"],
+  });
 
-    const ctx = gsap.context(() => {
-      // Initial state: Title shifted to the left and transparent
-      gsap.set(title, {
-        x: -70,
-        opacity: 0,
-        willChange: "transform, opacity",
-      });
-
-      // Smooth Left-to-Right scroll reveal animation (only on text)
-      gsap.to(title, {
-        x: 0,
-        opacity: 1,
-        duration: 1.05,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-          invalidateOnRefresh: true,
-        },
-      });
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 65,
+    damping: 25,
+    restDelta: 0.001,
+  });
 
   return (
     <section
@@ -63,12 +81,24 @@ export default function ManufacturingCapabilitySection() {
       className="w-full bg-white py-14 md:py-20 font-sans text-gray-900 border-t border-gray-200/70 overflow-hidden"
     >
       <Container>
-        {/* Title - Smooth Left-to-Right scroll reveal */}
-        <h2
-          ref={titleRef}
-          className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-gray-900 tracking-tight leading-tight mb-8"
-        >
-          Manufacturing &amp; capability
+        {/* Title - Smooth Left-to-Right scroll letter-by-letter reveal */}
+        <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-gray-900 tracking-tight leading-tight mb-8">
+          {PREPROCESSED_MANUFACTURING.map((word, wordIdx) => (
+            <span
+              key={wordIdx}
+              className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+            >
+              {word.map((item) => (
+                <ScrollLetter
+                  key={item.index}
+                  char={item.char}
+                  index={item.index}
+                  total={TOTAL_MANUFACTURING_CHARS}
+                  progress={smoothProgress}
+                />
+              ))}
+            </span>
+          ))}
         </h2>
 
         {/* Main 2-Column Grid */}

@@ -69,6 +69,65 @@ function ScrollLetter({
   );
 }
 
+const SUBTITLE_WORDS = [
+  "Select",
+  "an",
+  "industry",
+  "below",
+  "to",
+  "explore",
+  "how",
+  "our",
+  "PUF",
+  "panels",
+  "are",
+  "engineered",
+  "for",
+  "its",
+  "specific",
+  "requirements.",
+];
+
+let subtitleCounter = 0;
+const PREPROCESSED_SUBTITLE = SUBTITLE_WORDS.map((word) =>
+  word.split("").map((char) => ({
+    char,
+    index: subtitleCounter++,
+  }))
+);
+const TOTAL_SUBTITLE_CHARS = subtitleCounter;
+
+function SubtitleScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.05;
+  const endScroll = 0.80;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.5;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-12, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
+
 const industriesData: IndustryItem[] = [
   {
     id: "industrial",
@@ -237,17 +296,14 @@ export default function IndustriesWeServeSection() {
 
   const { scrollYProgress: subtextScrollProgress } = useScroll({
     target: subtextRef,
-    offset: ["start 90%", "center 50%"],
+    offset: ["start 92%", "start 45%"],
   });
 
   const smoothSubtextProgress = useSpring(subtextScrollProgress, {
-    stiffness: 70,
-    damping: 26,
+    stiffness: 65,
+    damping: 25,
     restDelta: 0.001,
   });
-
-  const subtextY = useTransform(smoothSubtextProgress, [0, 0.45], [50, 0]);
-  const subtextOpacity = useTransform(smoothSubtextProgress, [0, 0.40], [0, 1]);
 
   return (
     <section className="w-full bg-white py-14 sm:py-18 md:py-22 font-sans text-gray-900">
@@ -272,14 +328,27 @@ export default function IndustriesWeServeSection() {
               </span>
             ))}
           </h2>
-          <motion.p
+          <p
             ref={subtextRef}
-            style={{ y: subtextY, opacity: subtextOpacity }}
-            className="mt-3.5 text-sm sm:text-base text-gray-600 font-light leading-relaxed transform-gpu will-change-transform"
+            className="mt-3.5 text-sm sm:text-base text-gray-600 font-light leading-relaxed"
           >
-            Select an industry below to explore how our PUF panels are
-            engineered for its specific requirements.
-          </motion.p>
+            {PREPROCESSED_SUBTITLE.map((word, wordIdx) => (
+              <span
+                key={wordIdx}
+                className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+              >
+                {word.map((item) => (
+                  <SubtitleScrollLetter
+                    key={item.index}
+                    char={item.char}
+                    index={item.index}
+                    total={TOTAL_SUBTITLE_CHARS}
+                    progress={smoothSubtextProgress}
+                  />
+                ))}
+              </span>
+            ))}
+          </p>
         </div>
 
         {/* Tabbed Interactive Grid */}

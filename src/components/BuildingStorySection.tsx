@@ -2,16 +2,75 @@
 
 import React, { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const STORY_LINES = [
+  ["Part", "of", "a", "bigger"],
+  ["building", "story."],
+];
+
+let storyCounter = 0;
+const PREPROCESSED_STORY = STORY_LINES.map((line) =>
+  line.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: storyCounter++,
+    }))
+  )
+);
+const TOTAL_STORY_CHARS = storyCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.05;
+  const endScroll = 0.85;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.5;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-16, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
+
 export default function BuildingStorySection() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightColRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 92%", "start 32%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 65,
+    damping: 25,
+    restDelta: 0.001,
+  });
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -90,12 +149,30 @@ export default function BuildingStorySection() {
             className="lg:col-span-5 flex flex-col items-start text-left"
           >
             {/* Title */}
-            <h2
-              data-animate-item
-              className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-gray-900 leading-[1.15] tracking-tight mb-6"
-            >
-              Part of a bigger <br className="hidden sm:inline" />
-              building story.
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-gray-900 leading-[1.15] tracking-tight mb-6">
+              {PREPROCESSED_STORY.map((line, lineIdx) => (
+                <React.Fragment key={lineIdx}>
+                  {line.map((word, wordIdx) => (
+                    <span
+                      key={wordIdx}
+                      className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                    >
+                      {word.map((item) => (
+                        <ScrollLetter
+                          key={item.index}
+                          char={item.char}
+                          index={item.index}
+                          total={TOTAL_STORY_CHARS}
+                          progress={smoothProgress}
+                        />
+                      ))}
+                    </span>
+                  ))}
+                  {lineIdx < PREPROCESSED_STORY.length - 1 && (
+                    <br className="hidden sm:inline" />
+                  )}
+                </React.Fragment>
+              ))}
             </h2>
 
             {/* Paragraph 1 */}

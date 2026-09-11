@@ -2,16 +2,75 @@
 
 import React, { useLayoutEffect, useRef } from "react";
 import Link from "next/link";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const TALK_TEAM_LINES = [
+  ["Talk", "to", "the", "team"],
+  ["behind", "the", "panels."],
+];
+
+let talkTeamCounter = 0;
+const PREPROCESSED_TALK_TEAM = TALK_TEAM_LINES.map((line) =>
+  line.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: talkTeamCounter++,
+    }))
+  )
+);
+const TOTAL_TALK_TEAM_CHARS = talkTeamCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.05;
+  const endScroll = 0.85;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.5;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-16, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
+
 export default function TalkToTeamBanner() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightColRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 92%", "start 32%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 65,
+    damping: 25,
+    restDelta: 0.001,
+  });
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -20,14 +79,15 @@ export default function TalkToTeamBanner() {
     if (!section || !leftCol) return;
 
     const ctx = gsap.context(() => {
-      const textElements = leftCol.querySelectorAll("[data-animate-text]");
+      const subtitle = leftCol.querySelector("p");
 
-      // Initial state: Shifted to the left and transparent
-      gsap.set(textElements, {
-        x: -60,
-        opacity: 0,
-        willChange: "transform, opacity",
-      });
+      if (subtitle) {
+        gsap.set(subtitle, {
+          x: -40,
+          opacity: 0,
+          willChange: "transform, opacity",
+        });
+      }
 
       if (rightCol) {
         gsap.set(rightCol, {
@@ -48,13 +108,14 @@ export default function TalkToTeamBanner() {
         },
       });
 
-      // 1. Text elements reveal smoothly from left to right
-      tl.to(textElements, {
-        x: 0,
-        opacity: 1,
-        duration: 0.95,
-        stagger: 0.12,
-      });
+      // 1. Subtitle reveals smoothly
+      if (subtitle) {
+        tl.to(subtitle, {
+          x: 0,
+          opacity: 1,
+          duration: 0.85,
+        });
+      }
 
       // 2. Action buttons fade in
       if (rightCol) {
@@ -65,7 +126,7 @@ export default function TalkToTeamBanner() {
             x: 0,
             duration: 0.9,
           },
-          "-=0.7"
+          "-=0.6"
         );
       }
     }, section);
@@ -85,20 +146,35 @@ export default function TalkToTeamBanner() {
             ref={leftColRef}
             className="flex flex-col items-start text-left flex-1 max-w-xl"
           >
-            {/* Title with subtle gold accent line */}
-            <h2
-              data-animate-text
-              className="text-3xl sm:text-4xl lg:text-5xl font-normal text-white tracking-tight leading-[1.15] mb-2"
-            >
-              Talk to the team <br className="hidden sm:inline" />
-              behind the panels.
+            {/* Title */}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-white tracking-tight leading-[1.15] mb-2">
+              {PREPROCESSED_TALK_TEAM.map((line, lineIdx) => (
+                <React.Fragment key={lineIdx}>
+                  {line.map((word, wordIdx) => (
+                    <span
+                      key={wordIdx}
+                      className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                    >
+                      {word.map((item) => (
+                        <ScrollLetter
+                          key={item.index}
+                          char={item.char}
+                          index={item.index}
+                          total={TOTAL_TALK_TEAM_CHARS}
+                          progress={smoothProgress}
+                        />
+                      ))}
+                    </span>
+                  ))}
+                  {lineIdx < PREPROCESSED_TALK_TEAM.length - 1 && (
+                    <br className="hidden sm:inline" />
+                  )}
+                </React.Fragment>
+              ))}
             </h2>
 
             {/* Subtitle */}
-            <p
-              data-animate-text
-              className="text-sm sm:text-base text-purple-100/90 font-light leading-relaxed"
-            >
+            <p className="text-sm sm:text-base text-purple-100/90 font-light leading-relaxed">
               Discuss your requirements with our engineering and sales team.
             </p>
           </div>

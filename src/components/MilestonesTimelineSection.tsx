@@ -1,11 +1,54 @@
 "use client";
 
 import React, { useLayoutEffect, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const MILESTONES_WORDS = ["The", "milestones", "behind", "our", "growth"];
+
+let milestonesCounter = 0;
+const PREPROCESSED_MILESTONES = MILESTONES_WORDS.map((word) =>
+  word.split("").map((char) => ({
+    char,
+    index: milestonesCounter++,
+  }))
+);
+const TOTAL_MILESTONES_CHARS = milestonesCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.05;
+  const endScroll = 0.85;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.5;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-16, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
 
 const milestones = [
   {
@@ -38,6 +81,17 @@ export default function MilestonesTimelineSection() {
   const posRef = useRef(0);
   const isHoveredRef = useRef(false);
 
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 92%", "start 32%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 65,
+    damping: 25,
+    restDelta: 0.001,
+  });
+
   // 1. Text entrance animation: slides smoothly from Left to Right when scrolling into view
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -45,29 +99,27 @@ export default function MilestonesTimelineSection() {
     if (!section || !header) return;
 
     const ctx = gsap.context(() => {
-      const headerElements = header.children;
+      const subtext = header.querySelector("p");
+      if (subtext) {
+        gsap.set(subtext, {
+          x: -40,
+          opacity: 0,
+          willChange: "transform, opacity",
+        });
 
-      // Initial state: shifted to the left and transparent
-      gsap.set(headerElements, {
-        x: -70,
-        opacity: 0,
-        willChange: "transform, opacity",
-      });
-
-      // Smooth Left-to-Right entrance
-      gsap.to(headerElements, {
-        x: 0,
-        opacity: 1,
-        duration: 1.05,
-        ease: "power3.out",
-        stagger: 0.14,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-          invalidateOnRefresh: true,
-        },
-      });
+        gsap.to(subtext, {
+          x: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+            invalidateOnRefresh: true,
+          },
+        });
+      }
     }, section);
 
     return () => ctx.revert();
@@ -117,7 +169,22 @@ export default function MilestonesTimelineSection() {
           className="flex flex-col items-start text-left mb-10 md:mb-12"
         >
           <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-gray-900 tracking-tight leading-tight mb-2">
-            The milestones behind our growth
+            {PREPROCESSED_MILESTONES.map((word, wordIdx) => (
+              <span
+                key={wordIdx}
+                className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+              >
+                {word.map((item) => (
+                  <ScrollLetter
+                    key={item.index}
+                    char={item.char}
+                    index={item.index}
+                    total={TOTAL_MILESTONES_CHARS}
+                    progress={smoothProgress}
+                  />
+                ))}
+              </span>
+            ))}
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 font-normal">
             Timeline structure. Years and events to confirm.

@@ -2,16 +2,75 @@
 
 import React, { useLayoutEffect, useRef } from "react";
 import Link from "next/link";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Container from "./Container";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const BUILD_MIND_LINES = [
+  ["Have", "a", "build", "like"],
+  ["these", "in", "mind?"],
+];
+
+let buildMindCounter = 0;
+const PREPROCESSED_BUILD_MIND = BUILD_MIND_LINES.map((line) =>
+  line.map((word) =>
+    word.split("").map((char) => ({
+      char,
+      index: buildMindCounter++,
+    }))
+  )
+);
+const TOTAL_BUILD_MIND_CHARS = buildMindCounter;
+
+function ScrollLetter({
+  char,
+  index,
+  total,
+  progress,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const startScroll = 0.05;
+  const endScroll = 0.85;
+  const step = (endScroll - startScroll) / total;
+
+  const letterStart = startScroll + index * step;
+  const letterEnd = letterStart + step * 1.5;
+
+  const opacity = useTransform(progress, [letterStart, letterEnd], [0, 1]);
+  const x = useTransform(progress, [letterStart, letterEnd], [-16, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, x }}
+      className="inline-block transform-gpu will-change-transform"
+    >
+      {char}
+    </motion.span>
+  );
+}
+
 export default function HaveBuildInMindBanner() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightColRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 92%", "start 32%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 65,
+    damping: 25,
+    restDelta: 0.001,
+  });
 
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
@@ -22,15 +81,16 @@ export default function HaveBuildInMindBanner() {
     if (!section || !leftCol || !rightCol) return;
 
     const ctx = gsap.context(() => {
-      const leftElements = leftCol.querySelectorAll("[data-animate-left]");
+      const subtitle = leftCol.querySelector("p");
       const rightElements = rightCol.querySelectorAll("[data-animate-right]");
 
-      // Initial state: transform: translateX(-60px); opacity: 0
-      gsap.set(leftElements, {
-        x: -60,
-        opacity: 0,
-        willChange: "transform, opacity",
-      });
+      if (subtitle) {
+        gsap.set(subtitle, {
+          x: -50,
+          opacity: 0,
+          willChange: "transform, opacity",
+        });
+      }
 
       // Right buttons initial state
       gsap.set(rightElements, {
@@ -40,19 +100,20 @@ export default function HaveBuildInMindBanner() {
       });
 
       // Scroll-triggered entrance animation (fires when user scrolls section into viewport)
-      gsap.to(leftElements, {
-        x: 0,
-        opacity: 1,
-        duration: 0.75,
-        ease: "power3.out",
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          toggleActions: "play none none none",
-          invalidateOnRefresh: true,
-        },
-      });
+      if (subtitle) {
+        gsap.to(subtitle, {
+          x: 0,
+          opacity: 1,
+          duration: 0.85,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+            invalidateOnRefresh: true,
+          },
+        });
+      }
 
       gsap.to(rightElements, {
         x: 0,
@@ -63,7 +124,7 @@ export default function HaveBuildInMindBanner() {
         scrollTrigger: {
           trigger: section,
           start: "top 85%",
-          toggleActions: "play none none none",
+          toggleActions: "play none none reverse",
           invalidateOnRefresh: true,
         },
       });
@@ -85,18 +146,33 @@ export default function HaveBuildInMindBanner() {
             ref={leftColRef}
             className="flex flex-col items-start text-left max-w-xl"
           >
-            <h2
-              data-animate-left
-              className="text-3xl sm:text-4xl lg:text-[2.65rem] font-normal text-white tracking-[-0.02em] leading-[1.15] mb-3"
-            >
-              Have a build like <br className="hidden sm:inline" />
-              these in mind?
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-normal text-white tracking-[-0.02em] leading-[1.15] mb-3">
+              {PREPROCESSED_BUILD_MIND.map((line, lineIdx) => (
+                <React.Fragment key={lineIdx}>
+                  {line.map((word, wordIdx) => (
+                    <span
+                      key={wordIdx}
+                      className="inline-block whitespace-nowrap mr-[0.28em] last:mr-0"
+                    >
+                      {word.map((item) => (
+                        <ScrollLetter
+                          key={item.index}
+                          char={item.char}
+                          index={item.index}
+                          total={TOTAL_BUILD_MIND_CHARS}
+                          progress={smoothProgress}
+                        />
+                      ))}
+                    </span>
+                  ))}
+                  {lineIdx < PREPROCESSED_BUILD_MIND.length - 1 && (
+                    <br className="hidden sm:inline" />
+                  )}
+                </React.Fragment>
+              ))}
             </h2>
 
-            <p
-              data-animate-left
-              className="text-sm sm:text-base text-purple-100/90 font-light leading-relaxed"
-            >
+            <p className="text-sm sm:text-base text-purple-100/90 font-light leading-relaxed">
               Send us the temperature range, area and timeline. Our
               engineering team will spec the panels and quote it.
             </p>
