@@ -8,17 +8,25 @@ interface PUFLoaderProps {
   onComplete?: () => void;
 }
 
+let hasInitiallyLoaded = false;
+
 const RADIUS = 90;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS; // ~565.487
 
 export default function PUFLoader({ onComplete }: PUFLoaderProps) {
-  const [isDone, setIsDone] = useState(false);
+  const [isDone, setIsDone] = useState(hasInitiallyLoaded);
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<SVGCircleElement>(null);
   const circleGroupRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    if (hasInitiallyLoaded) {
+      setIsDone(true);
+      if (onComplete) onComplete();
+      return;
+    }
+
     // Prevent background scrolling during initial entrance loading
     document.body.style.overflow = "hidden";
 
@@ -47,6 +55,7 @@ export default function PUFLoader({ onComplete }: PUFLoaderProps) {
       // 2. Timeline with premium natural easing
       const tl = gsap.timeline({
         onComplete: () => {
+          hasInitiallyLoaded = true;
           document.body.style.overflow = "";
           setIsDone(true);
           if (onComplete) onComplete();
