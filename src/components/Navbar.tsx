@@ -252,7 +252,7 @@ export default function Navbar() {
         />
       </header>
 
-      {!isAbout && !isProjects && !isContact && <div className="w-full shrink-0" style={{ height: headerHeight }} aria-hidden />}
+      {!isHeroPage && <div className="w-full shrink-0" style={{ height: headerHeight }} aria-hidden />}
     </>
   );
 }

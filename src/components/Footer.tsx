@@ -84,7 +84,7 @@ export default function Footer() {
               <div className="pt-2 flex items-center gap-2.5">
                 {/* Instagram */}
                 <a
-                  href="https://www.instagram.com/synergypuf/"
+                  href="https://www.instagram.com/synergypuf?igsi=dW80Z2k5dDZlOTZy&utm_source=qr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity"
@@ -101,9 +101,7 @@ export default function Footer() {
 
                 {/* YouTube */}
                 <a
-                  href="https://www.youtube.com/@Synergypuf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
                   className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity"
                   aria-label="YouTube"
                 >
@@ -114,7 +112,7 @@ export default function Footer() {
 
                 {/* LinkedIn */}
                 <a
-                  href="https://www.linkedin.com/company/synergy-puf/"
+                  href="https://www.linkedin.com/posts/synergypuf-pufpanels-insulatedpanels-share-7503790976856133632-AcNp/?utm_source=social_share_send&utm_medium=ios_app&rcm=ACoAAFfGTboBkjOh_pA-foMZTXSlvywtL7Bs6pY"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity"
@@ -127,7 +125,7 @@ export default function Footer() {
 
                 {/* Facebook */}
                 <a
-                  href="https://www.facebook.com/people/Synergy-PUF/61593245264043/"
+                  href="https://www.facebook.com/profile.php?id=61593245264043"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity"
@@ -214,13 +212,23 @@ export default function Footer() {
                 </li>
 
                 <li>
-                  <a href="#" className="hover:text-[#5b176e] transition-colors">
+                  <a
+                    href="https://www.synergypeb.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#5b176e] transition-colors"
+                  >
                     Synergy PEB
                   </a>
                 </li>
 
                 <li>
-                  <a href="#" className="hover:text-[#5b176e] transition-colors">
+                  <a
+                    href="https://www.synergyconstruction.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#5b176e] transition-colors"
+                  >
                     Synergy Construction
                   </a>
                 </li>

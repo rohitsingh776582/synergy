@@ -1,10 +1,6 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useRef } from "react";
 
 interface HeroVideoBackgroundProps {
   src: string;
@@ -13,30 +9,6 @@ interface HeroVideoBackgroundProps {
 export default function HeroVideoBackground({ src }: HeroVideoBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useLayoutEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const container = containerRef.current;
-    if (!container) return;
-
-    const ctx = gsap.context(() => {
-      // Hero image/video subtle scroll parallax movement (small translate movement)
-      const heroPin = document.getElementById("home-hero");
-      gsap.to(container, {
-        yPercent: 12,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroPin ?? document.body,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <div
