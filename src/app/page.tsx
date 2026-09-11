@@ -21,16 +21,14 @@ export default function Home() {
       <div className="relative z-0">
         <HeroVideoBackground src={HERO_VIDEO} />
 
-        <div className="flex min-h-[96dvh] flex-col">
-          <div
-            id="home-hero"
-            className="flex flex-1 flex-col justify-center py-9 sm:py-12"
-          >
-            <Hero />
-          </div>
+        <div
+          id="home-hero"
+          className="relative flex min-h-screen min-h-[100dvh] h-screen w-full flex-col justify-center overflow-hidden"
+        >
+          <Hero />
         </div>
 
-        <main className="relative z-10 -mt-4 bg-white sm:-mt-6">
+        <main className="relative z-10 bg-white">
           <WhatsInsideMatters />
           <WhyChooseUs />
           {/* <TrustedBy /> */}

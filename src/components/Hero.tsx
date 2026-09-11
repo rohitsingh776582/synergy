@@ -134,7 +134,7 @@ export default function Hero() {
   const activePillar = PILLARS[activePillarIndex];
 
   return (
-    <section className="relative z-10 flex w-full flex-col justify-center text-white pt-4 pb-8 sm:pt-6 sm:pb-12 -mt-4 sm:-mt-8 md:-mt-10">
+    <section className="relative z-10 flex w-full flex-col justify-center text-white pt-20 sm:pt-24 lg:pt-8 pb-8 sm:pb-12">
       <Container>
         <div
           ref={heroRef}
