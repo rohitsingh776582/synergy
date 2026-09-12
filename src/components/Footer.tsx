@@ -200,7 +200,12 @@ export default function Footer() {
 
               <ul className="space-y-2 text-xs sm:text-sm font-medium text-gray-600">
                 <li>
-                  <a href="#" className="hover:text-[#5b176e] transition-colors">
+                  <a
+                    href="https://www.synergythrislington.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#5b176e] transition-colors"
+                  >
                     Synergy Thrislington
                   </a>
                 </li>
@@ -272,13 +277,21 @@ export default function Footer() {
                   A VENTURE BY
                 </h3>
 
-                <Image
-                  src="/images/logo/Group-Logo.png"
-                  alt="Synergy Group"
-                  width={140}
-                  height={40}
-                  className="h-7 w-auto object-contain object-left sm:h-8"
-                />
+                <a
+                  href="https://www.thesynergygroup.co.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block hover:opacity-85 transition-opacity"
+                  aria-label="Synergy Group"
+                >
+                  <Image
+                    src="/images/logo/Group-Logo.png"
+                    alt="Synergy Group"
+                    width={140}
+                    height={40}
+                    className="h-7 w-auto object-contain object-left sm:h-8"
+                  />
+                </a>
               </div>
             </div>
 
