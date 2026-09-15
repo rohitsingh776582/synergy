@@ -202,8 +202,8 @@ export default function BuildingStorySection() {
             {/* Image Box with ZERO border radius */}
             <div className="relative w-full aspect-[16/10] overflow-hidden rounded-none border border-gray-200/80 bg-gray-100">
               <Image
-                src="/images/team_building_story.jpg"
-                alt="Synergy Group Team"
+                src="/Partofabigger/ChatGPT Image Sep 15, 2026, 10_49_43 AM.png"
+                alt="Synergy Group Facility & Logistics"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 55vw"
