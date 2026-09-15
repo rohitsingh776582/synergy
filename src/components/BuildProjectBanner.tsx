@@ -11,7 +11,7 @@ export default function BuildProjectBanner() {
   return (
     <section className="w-full bg-white py-12 md:py-16 lg:py-20 font-sans border-t border-gray-100">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Heading, Subheading, Buttons & Badges */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             {/* Title */}
@@ -63,8 +63,8 @@ export default function BuildProjectBanner() {
           <div className="lg:col-span-6 flex justify-center lg:justify-end w-full">
             <div className="relative w-full aspect-[16/9] max-w-xl">
               <Image
-                src="/images/products/roof_panel_hero copy.png"
-                alt="Synergy PUF Roof Panel"
+                src="/Buildyournext/ChatGPT Image Sep 15, 2026, 10_27_26 AM.png"
+                alt="Synergy PUF Panel"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"

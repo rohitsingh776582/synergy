@@ -206,7 +206,7 @@ export default function BuildNextProject() {
       className="w-full bg-white py-16 sm:py-20 lg:py-24 font-sans"
     >
       <Container>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <div
             ref={contentRef}
             className="relative isolate text-left"
@@ -317,11 +317,11 @@ export default function BuildNextProject() {
               style={{ clipPath: "inset(0 90% 0 0)" }}
             >
               <Image
-                src="/images/products/roof_panel_hero copy.png"
-                alt="Synergy PUF roof panel"
+                src="/Buildyournext/ChatGPT Image Sep 15, 2026, 10_27_26 AM.png"
+                alt="Synergy PUF panel"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-contain object-left"
+                className="object-contain object-center"
                 priority
               />
             </div>

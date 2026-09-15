@@ -162,6 +162,7 @@ nextjs-portal {
 }
 
 @keyframes pufGlow {
+
   0%,
   100% {
     transform: scale(0.85);
@@ -201,9 +202,7 @@ nextjs-portal {
 
   object-fit: contain;
 
-  filter: drop-shadow(
-    0 12px 30px rgba(86, 26, 98, 0.12)
-  );
+  filter: drop-shadow(0 12px 30px rgba(86, 26, 98, 0.12));
 }
 
 @keyframes logoReveal {
@@ -252,11 +251,9 @@ nextjs-portal {
 
   transform: translateY(-50%);
 
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.9)
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.9));
 
   filter: blur(2px);
 }
